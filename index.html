@@ -4,67 +4,85 @@
 <meta charset="utf-8">
 <title>The 24/7 Handover</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Read-only. Open from file://. Data: handover/site.js + handover/heartbeat.js, written by `python run.py` every tick. Refreshes every 3 s. -->
+<!-- Read-only. Open from file://. Data: handover/site.js + handover/heartbeat.js, rewritten by `python run.py` every tick; this page re-reads them every 3 s. -->
 <style>
-:root{--bg:#0b0e14;--panel:#121722;--line:#222b3a;--fg:#eef2f8;--dim:#98a4b8;--owed:#f5c451;--wait:#ff7ab8;--hand:#6cc4ff;--done:#5fd38d;--sup:#b79cff;--bad:#ff6b6b}
+:root{--bg:#0a0d13;--panel:#111620;--line:#1f2736;--fg:#e8edf6;--body:#c4cddc;--dim:#7d889c;--amber:#ffc53d;--red:#ff5c5c;--green:#37c871;--violet:#b79cff;
+--sam:#ff9f43;--weilin:#4dabf7;--dana:#e599f7;--priya:#63e6be;--system:#9aa5b8}
 *{box-sizing:border-box;margin:0}
-html,body{height:100%;background:var(--bg);color:var(--fg);font:18px/1.28 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow:hidden}
-body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding:10px 14px}
-header{display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding-bottom:6px}
-h1{font-size:28px;letter-spacing:.2px;white-space:nowrap}
-#banner{min-width:0;font:600 17px ui-monospace,SFMono-Regular,Menlo,monospace;color:#7ee0ff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#tick{font:600 18px ui-monospace,Menlo,monospace;color:var(--dim);white-space:nowrap}
-#tick.stale{color:var(--bad)}
+html,body{height:100%;background:var(--bg);color:var(--body);font:18px/1.28 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding:8px 14px}
+header{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:14px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:5px}
+h1{font-size:26px;font-weight:700;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+h1 span{color:var(--dim);font-weight:400}
+#banner{grid-column:1;font:15px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.right{grid-column:2;grid-row:1/3;display:flex;align-items:center;gap:10px}
+#pill{font-size:24px;font-weight:800;border-radius:999px;padding:7px 20px;color:#06210f;background:var(--green);white-space:nowrap;display:flex;align-items:center;gap:10px}
+#pill i{width:14px;height:14px;border-radius:50%;background:#06210f;display:inline-block;animation:pulse 1.6s infinite}
+#pill.off{background:var(--red);color:#2a0606}#pill.off i{animation:none;background:#2a0606}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 nav{display:flex;gap:6px}
-nav button{font-weight:700;font-size:18px;font-family:inherit;color:var(--dim);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px 14px;cursor:pointer}
+nav button{font-weight:700;font-size:18px;font-family:inherit;color:var(--dim);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 14px;cursor:pointer}
 nav button.on{color:var(--bg);background:var(--fg)}
 main{min-height:0}
-.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 350px;gap:10px;height:100%}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 410px;gap:10px;height:100%}
 .col,.rail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:4px}
-.who{font-size:28px;font-weight:700;line-height:1.1}.who small{font-weight:400;color:var(--dim);font-size:18px;margin-left:8px}
-.sec{min-height:0;display:flex;flex-direction:column;gap:2px;overflow:hidden}
-.sec h3{font-size:18px;letter-spacing:1.2px;text-transform:uppercase;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:4px}
-.owed h3{color:var(--owed)}.wait h3{color:var(--wait)}.hand h3{color:var(--hand)}.done h3{color:var(--done)}
-.it{padding:2px 0 2px 8px;border-left:4px solid var(--line);overflow:hidden}
-.owed .it{border-color:var(--owed)}.wait .it{border-color:var(--wait)}.hand .it{border-color:var(--hand)}.done .it{border-color:var(--done)}
+.badge{align-self:flex-start;font-size:28px;font-weight:800;line-height:1.1;color:#10141c;border-radius:10px;padding:2px 14px}
+.badge small{font-size:17px;font-weight:600;margin-left:8px;opacity:.75}
+.b-sam{background:var(--sam)}.b-weilin{background:var(--weilin)}.b-dana{background:var(--dana)}.b-priya{background:var(--priya)}.b-system{background:var(--system)}
+.pb{font-size:14px;font-weight:800;color:#10141c;border-radius:5px;padding:0 6px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.sec{min-height:0;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.sec h3{font-size:16px;letter-spacing:1.4px;text-transform:uppercase;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:4px;color:var(--dim);font-weight:700}
+.it{padding:3px 6px 3px 8px;border-left:4px solid #2a3447;border-radius:4px;overflow:hidden;color:var(--body)}
 .it .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .wait .it .t,.hand .it .t{-webkit-line-clamp:3}
-.meta{font-size:15px;color:var(--dim);margin-top:1px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;max-height:44px;overflow:hidden}
-.c{font:14px ui-monospace,Menlo,monospace;background:#1b2332;border-radius:4px;padding:0 5px;color:#c6d1e4}
-.tag{font-size:13px;font-weight:800;border-radius:4px;padding:0 6px;color:#0b0e14;white-space:nowrap}
-.tag.upd{background:var(--sup)}.tag.over{background:var(--bad)}.tag.sent{background:var(--done)}.tag.due{background:var(--owed)}.tag.draft{background:#7d8aa3}.tag.prog{background:#5ac8e8}.tag.bad{background:var(--bad)}
-.sup-it{border-color:var(--sup)!important;color:var(--sup)}
-.sup-it .t{text-decoration:line-through;text-decoration-color:#7a6aa8}
-.more{font-size:15px;color:var(--dim);padding-left:8px}
-.rail h2{font-size:18px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim)}
+.meta{font-size:16px;color:var(--dim);margin-top:2px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;max-height:48px;overflow:hidden}
+.c{font:16px ui-monospace,Menlo,monospace;background:#1b2436;border-radius:5px;padding:0 6px;color:#e3ebfa}
+.tag{font-size:14px;font-weight:800;border-radius:5px;padding:0 6px;color:#10141c;white-space:nowrap;background:#7d889c}
+.tag.due{font-size:16px;background:var(--amber)}.tag.over{font-size:16px;background:var(--red);color:#2a0606}
+.tag.upd{background:var(--violet)}.tag.sent{background:var(--green)}.tag.prog{background:#5ac8e8}.tag.bad{background:var(--red)}
+.sup-it{border-left-color:var(--violet)!important;color:var(--violet)}
+.sup-it .t{text-decoration:line-through;text-decoration-color:#8a77c4}
+.more{font-size:16px;color:var(--dim);padding-left:8px}
+.rail h2{font-size:16px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim);font-weight:700}
 .rail .box{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:4px}
-.ob{border-left:4px solid #7d8aa3;padding-left:7px}.ob.sent{border-color:var(--done)}.ob.ics{border-color:var(--sup)}
-.ob .tt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ob .f{font:13px ui-monospace,Menlo,monospace;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.caught{border-left:4px solid var(--bad);padding-left:7px}
-.caught .tt{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.zero{color:var(--done);font-weight:700;padding-left:4px}
-.flash{animation:fl 2.5s ease-out}@keyframes fl{from{background:#2a2245}to{background:var(--panel)}}
-footer{font:600 17px ui-monospace,Menlo,monospace;color:var(--dim);border-top:1px solid var(--line);padding-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* audit tab */
+.feed{flex:1}
+.fl{border-left:4px solid var(--system);padding:1px 4px 1px 8px;border-radius:4px}
+.fl .h{display:flex;align-items:center;gap:7px;font-size:15px;color:var(--dim)}
+.fl .tx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--body)}
+.fl.k-caught{background:#2b1212}.fl.k-sup .tx{color:var(--violet)}.fl.k-sent .tx{color:var(--green)}
+.ob{border-left:4px solid #44506a;padding-left:7px}.ob.sent{border-color:var(--green)}.ob.ics{border-color:var(--violet)}
+.ob .tt{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.caught{border-left:4px solid var(--red);padding-left:7px}
+.caught .tt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.zero{color:var(--green);font-weight:700;padding-left:4px}
+footer{font:600 18px ui-monospace,Menlo,monospace;color:var(--dim);border-top:1px solid var(--line);padding-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+footer b{color:var(--green)}footer b.bad{color:var(--red)}
+/* change animation */
+@keyframes slide{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes glow{0%,35%{box-shadow:0 0 0 2px #ffd43b,0 0 20px #ffd43b99;background:#3a3216}100%{box-shadow:none;background:transparent}}
+.new{animation:slide .45s ease-out,glow 2s ease-out}
+@keyframes strike{from{background-size:0 3px}to{background-size:100% 3px}}
+.newsup .t{text-decoration:none;background:linear-gradient(#b79cff,#b79cff) no-repeat 0 58%/0 3px;animation:strike .9s ease-out forwards}
+.newsup{animation:glow 2s ease-out}
+/* audit + caught tabs */
 .audit{height:100%;display:flex;flex-direction:column;gap:8px;min-height:0}
-.big{font-size:28px;font-weight:800}.big b{color:var(--done)}.big b.bad{color:var(--bad)}.big small{font-size:18px;font-weight:400;color:var(--dim);margin-left:10px}
+.big{font-size:28px;font-weight:800;color:var(--fg)}.big b{color:var(--green)}.big b.bad{color:var(--red)}.big small{font-size:17px;font-weight:400;color:var(--dim);margin-left:10px}
 .agrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;flex:1;min-height:0}
 .acol{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;overflow:auto;min-height:0}
-.acol h2{font-size:28px}.acol h2 small{font-size:18px;color:var(--dim);font-weight:400;margin-left:6px}
-.afile{margin-top:8px;font:14px ui-monospace,Menlo,monospace;color:var(--dim);word-break:break-all}
-.afile b{color:var(--fg)}
-.fact{font-size:18px;margin-top:4px;padding-left:8px;border-left:4px solid var(--done)}
-.fact.un{border-color:var(--bad)}.fact.unc{border-color:var(--owed)}
-.fact .q{display:block;font-size:15px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.afile{margin-top:8px;font:15px ui-monospace,Menlo,monospace;color:var(--dim);word-break:break-all}.afile b{color:var(--fg)}
+.fact{font-size:18px;margin-top:4px;padding-left:8px;border-left:4px solid var(--green)}
+.fact.un{border-color:var(--red)}.fact.unc{border-color:var(--amber)}
+.fact .q{display:block;font-size:16px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cwrap{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;overflow:auto;height:100%;display:flex;flex-direction:column;gap:10px}
+.cwrap .caught{font-size:20px}.cwrap .ex{font-size:16px;color:var(--dim);margin-top:2px}
 </style>
 </head>
 <body>
 <header>
-  <h1>The 24/7 Handover</h1>
+  <h1 id="h1">Zapdemo</h1>
   <div id="banner">waiting for the first tick…</div>
-  <div id="tick"></div>
-  <nav><button id="tab-board" onclick="tab('board')">Board</button><button id="tab-audit" onclick="tab('audit')">Audit</button></nav>
+  <div class="right"><div id="pill" class="off"><i></i><span>NOT RUNNING</span></div>
+    <nav><button id="tab-board" onclick="tab('board')">Board</button><button id="tab-audit" onclick="tab('audit')">Audit</button><button id="tab-caught" onclick="tab('caught')">Caught itself</button></nav></div>
 </header>
 <main id="main"></main>
 <footer id="footer"></footer>
@@ -73,68 +91,81 @@ footer{font:600 17px ui-monospace,Menlo,monospace;color:var(--dim);border-top:1p
 <script>
 "use strict";
 var LIM = {owed: 3, wait: 2, hand: 1, done: 3};
-var seen = {}, TAB = (location.hash || "#board").slice(1);
+var TAB = (location.hash || "#board").slice(1), prev = null, lastSig = "";
+var ctx = {cur: {}, curSup: {}, curFeed: {}};
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function chips(a,n){return (a||[]).slice(0,n||5).map(function(x){return '<span class="c">'+esc(x)+'</span>'}).join("")}
 function more(n){return n>0?'<div class="more">+'+n+' more in HANDOVER-*.md</div>':""}
+function isNew(id){ctx.cur[id]=1;return prev&&!prev.ids[id]?" new":""}
+function pb(who){return '<span class="pb b-'+esc(who)+'">'+esc(who)+'</span>'}
 function sec(cls,label,items,lim,render){
   var shown=items.slice(0,lim).map(render).join("");
   return '<div class="sec '+cls+'"><h3><span>'+label+'</span><b>'+items.length+'</b></h3>'+(shown||'<div class="more">none</div>')+more(items.length-lim)+'</div>';
 }
 function owed(p){
-  var t=(p.updated?'<span class="tag upd">UPDATED</span> ':'')+(p.overdue?'<span class="tag over">OVERDUE</span> ':'')+(p.status==="in_progress"?'<span class="tag prog">IN PROGRESS</span> ':'');
-  var due=p.due?'<span class="tag due">due '+esc(p.due)+'</span>'+(p.due_src?'<span class="c">'+esc(p.due_src)+'</span>':''):'';
-  return '<div class="it"><div class="t">'+t+esc(p.title)+'</div><div class="meta">'+due+chips(p.sources,4)+'</div></div>';
+  var t=(p.updated?'<span class="tag upd">UPDATED</span> ':'')+(p.status==="in_progress"?'<span class="tag prog">IN PROGRESS</span> ':'');
+  var due=p.due?'<span class="tag '+(p.overdue?'over':'due')+'">'+(p.overdue?'OVERDUE ':'due ')+esc(p.due)+'</span>'+(p.due_src?'<span class="c">'+esc(p.due_src)+'</span>':''):'';
+  return '<div class="it'+isNew(p.id)+'"><div class="t">'+t+esc(p.title)+'</div><div class="meta">'+due+chips(p.sources,p.due?2:4)+'</div></div>';
 }
 function wait(q){
   var due=q.due?'<span class="tag due">due '+esc(q.due)+'</span>'+(q.due_src?'<span class="c">'+esc(q.due_src)+'</span>':''):'';
-  return '<div class="it"><div class="t">'+esc(q.text.replace(/ _\(.*$/,""))+'</div><div class="meta">'+due+'<span>from '+esc(q["from"])+"'s AI</span></div></div>";
+  return '<div class="it'+isNew(q.id)+'"><div class="t">'+esc(q.text.replace(/ _\(.*$/,""))+'</div><div class="meta">'+due+'<span>from '+esc(q["from"])+"'s AI</span></div></div>";
 }
 function hand(h){
-  if(h.text) return '<div class="it"><div class="t">'+esc(h.text)+'</div><div class="meta">'+chips(h.cite,4)+'</div></div>';
-  return '<div class="it"><div class="t">'+esc(h.title)+'</div><div class="meta"><span class="tag draft">DEPENDENCY</span>'+chips(h.sources,4)+'</div></div>';
+  var id="h:"+(h.text||h.title).slice(0,60);
+  if(h.text) return '<div class="it'+isNew(id)+'"><div class="t">'+esc(h.text)+'</div><div class="meta">'+chips(h.cite,4)+'</div></div>';
+  return '<div class="it'+isNew(id)+'"><div class="t">'+esc(h.title)+'</div><div class="meta"><span class="tag">DEPENDENCY</span>'+chips(h.sources,4)+'</div></div>';
 }
 function done(p){
   var sent=p.status==="sent";
-  return '<div class="it"><div class="t">'+(sent?'<span class="tag sent">SENT BY AI</span> ':"")+esc(p.title.replace(/^SENT: /,""))+'</div><div class="meta">'+(sent?esc(((p.notes||[""])[0]||"").split("  ·  ")[0])+" ":"")+chips(p.sources,4)+'</div></div>';
+  return '<div class="it'+isNew(p.id)+'"><div class="t">'+(sent?'<span class="tag sent">SENT BY AI</span> ':"")+esc(p.title.replace(/^SENT: /,""))+'</div><div class="meta">'+(sent?esc(((p.notes||[""])[0]||"").split("  ·  ")[0])+" ":"")+chips(p.sources,sent?2:4)+'</div></div>';
 }
 function supIt(s){
-  return '<div class="it sup-it"><div class="t">'+esc(s.title)+'</div><div class="meta"><span class="tag upd">SUPERSEDED</span> by '+esc(s.by)+(s.fact?': “'+esc(s.fact)+'”':"")+'</div></div>';
+  ctx.curSup[s.id]=1;
+  var fresh=prev&&!prev.sup[s.id]?" newsup":"";
+  return '<div class="it sup-it'+fresh+'"><div class="t">'+esc(s.title)+'</div><div class="meta"><span class="tag upd">SUPERSEDED</span> by '+esc(s.by)+(s.fact?': “'+esc(s.fact)+'”':"")+'</div></div>';
+}
+function feedLine(f){
+  ctx.curFeed[f.key]=1;
+  var fresh=prev&&!prev.feed[f.key]?" new":"";
+  return '<div class="fl k-'+esc(f.kind)+fresh+'" style="border-left-color:var(--'+esc(f.persona)+')"><div class="h">'+esc(f.time||"earlier")+pb(f.persona)+'</div><div class="tx">'+esc(f.text)+'</div>'+
+    (f.cites&&f.cites.length?'<div class="meta">'+chips(f.cites,3)+'</div>':"")+'</div>';
 }
 function board(S){
   var html='<div class="board">';
   S.people.forEach(function(p){
     var sup=(p.superseded||[]).map(supIt).join("");
-    html+='<div class="col" id="col-'+p.id+'"><div class="who">'+esc(p.name.split(" ").slice(0,-1).join(" "))+'<small>'+esc(p.role)+'</small></div>'+
+    html+='<div class="col"><div class="badge b-'+esc(p.id)+'">'+esc(p.name.split(" ").slice(0,-1).join(" "))+'<small>'+esc(p.role)+'</small></div>'+
       sec("owed","Owed",p.owed,LIM.owed,owed)+
       sec("wait","Waiting on me",p.waiting,LIM.wait,wait)+
       sec("hand","Handed to me",p.handed,LIM.hand,hand)+
       '<div class="sec done"><h3><span>Done</span><b>'+p.done.length+'</b></h3>'+sup+
       p.done.slice().reverse().slice(0,LIM.done).map(done).join("")+more(p.done.length-LIM.done)+'</div></div>';
   });
-  var ob=S.outbox.slice(0,5).map(function(o){
-    var tag=o.kind==="ics"?'<span class="tag upd">.ICS</span> ':o.sent?'<span class="tag sent">SENT</span> ':'<span class="tag draft">DRAFT</span> ';
-    return '<div class="ob '+(o.kind==="ics"?"ics":o.sent?"sent":"")+'"><div class="tt">'+tag+esc(o.subject||o.file)+'</div><div class="f">'+esc(o.file.replace("outbox/",""))+'</div></div>';
+  var ob=S.outbox.slice(0,3).map(function(o){
+    var tag=o.kind==="ics"?'<span class="tag upd">.ICS</span> ':o.sent?'<span class="tag sent">SENT</span> ':'<span class="tag">DRAFT</span> ';
+    return '<div class="ob '+(o.kind==="ics"?"ics":o.sent?"sent":"")+'"><div class="tt">'+tag+esc(o.subject||o.file)+'</div></div>';
   }).join("");
-  var rj=(S.rejected||[]).slice(0,3).map(function(r){
-    return '<div class="caught"><div class="tt"><span class="tag bad">'+esc(r.persona.toUpperCase())+'</span> '+esc(r.reason)+'</div><div class="meta">'+chips(r.offending,4)+'</div></div>';
+  var rj=(S.rejected||[]).slice(0,2).map(function(r){
+    return '<div class="caught"><div class="tt">'+pb(r.persona)+' '+esc(r.reason)+'</div></div>';
   }).join("");
-  html+='<div class="rail"><h2>Latest outbox · '+S.outbox.length+'</h2><div class="box">'+ob+'</div>'+
-    '<h2 style="margin-top:6px">Caught itself · '+(S.rejected_total||0)+'</h2><div class="box">'+(rj||'<div class="zero">0 — nothing rejected yet</div>')+'</div></div></div>';
+  html+='<div class="rail"><h2>Live activity</h2><div class="box feed">'+(S.feed||[]).slice(0,8).map(feedLine).join("")+'</div>'+
+    '<h2>Outbox · '+S.outbox.length+' files</h2><div class="box">'+ob+'</div>'+
+    '<h2>Caught itself · '+(S.rejected_total||0)+'</h2><div class="box">'+(rj||'<div class="zero">0 — nothing rejected yet</div>')+'</div></div></div>';
   return html;
 }
 function auditView(S){
   var A=S.audit||{groups:[],checked:0,unsourced:0,uncited:0};
   var html='<div class="audit"><div class="big"><b'+(A.unsourced?' class="bad"':'')+'>'+A.checked+' facts checked · '+A.unsourced+' unsourced</b>'+
     (A.uncited?'<small>'+A.uncited+' found in the pack but not in a cited source</small>':'')+
-    '<small>every number, date, $ and name in outbox/, outbox/sent/ and Linear changes → source id + verbatim line. CLI: python run.py --audit</small></div><div class="agrid">';
+    '<small>every number, date, $ and name in outbox/, outbox/sent/ and Linear changes → source id + verbatim line · python run.py --audit</small></div><div class="agrid">';
   A.groups.forEach(function(g){
     var n=g.files.reduce(function(a,f){return a+f.facts.length},0);
-    html+='<div class="acol"><h2>'+esc(g.name.split(" ").slice(0,-1).join(" "))+'<small>'+n+' facts</small></h2>';
+    html+='<div class="acol"><div class="badge b-'+esc(g.persona)+'">'+esc(g.name.split(" ").slice(0,-1).join(" "))+'<small>'+n+' facts</small></div>';
     g.files.forEach(function(f){
       var key=f.facts.filter(function(x){return /[\d$]/.test(x.fact)||!x.src||x.uncited}).slice(0,4);
       var rest=f.facts.length-key.length;
-      html+='<div class="afile"><b>'+esc(f.file.replace("outbox/","").replace(/^sent\//,"sent/").replace(/^\d{8}-\d{4}-/,"").replace(/^sent\/\d{8}-\d{4}-/,"sent/"))+'</b> · '+f.facts.length+' facts</div>';
+      html+='<div class="afile"><b>'+esc(f.file.replace("outbox/","").replace(/\d{8}-\d{4}-/,""))+'</b> · '+f.facts.length+' facts</div>';
       key.forEach(function(x){
         html+='<div class="fact'+(x.src?(x.uncited?' unc':''):' un')+'">'+esc(x.fact)+' <span class="c">'+esc(x.src||"NOT FOUND")+'</span><span class="q">'+esc(x.line||"")+'</span></div>';
       });
@@ -144,45 +175,62 @@ function auditView(S){
   });
   return html+'</div></div>';
 }
-function render(){
-  var S=window.SITE; if(!S) return;
-  var h=window.HEARTBEAT||{};
-  document.getElementById("banner").textContent=h.banner||"RESUMED";
-  var main=document.getElementById("main"), keep=[];
-  [].forEach.call(main.querySelectorAll(".acol"),function(e){keep.push(e.scrollTop)});
-  main.innerHTML=TAB==="audit"?auditView(S):board(S);
-  [].forEach.call(main.querySelectorAll(".acol"),function(e,i){e.scrollTop=keep[i]||0});
-  ["board","audit"].forEach(function(t){document.getElementById("tab-"+t).className=t===TAB?"on":""});
-  S.people.forEach(function(p){
-    var sig=JSON.stringify([p.owed.length,p.waiting.length,p.handed.length,p.done.length,p.superseded.length]);
-    var el=document.getElementById("col-"+p.id);
-    if(el&&seen[p.id]&&seen[p.id]!==sig) el.classList.add("flash");
-    seen[p.id]=sig;
-  });
-  tickAge();
+function caughtView(S){
+  var rj=S.rejected||[];
+  var body=rj.length?rj.map(function(r){
+    return '<div class="caught"><div>'+pb(r.persona)+' '+esc(r.reason)+'</div><div class="meta">'+chips(r.offending,8)+'<span>'+esc((r.at||"").slice(0,16))+'</span></div><div class="ex">'+esc(r.excerpt||"")+'</div></div>';
+  }).join(""):'<div class="zero" style="font-size:34px">0 — nothing rejected yet</div>';
+  return '<div class="cwrap"><div class="big">Caught itself · '+(S.rejected_total||0)+'<small>drafts the fact check rejected and questions that replaced a guess · python run.py --rejections</small></div>'+body+'</div>';
 }
-function tab(t){TAB=t;location.hash=t;render()}
+function clocks(iso){
+  var d=new Date(iso);
+  function f(tz,full){
+    var o={timeZone:tz,weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"};
+    if(full){o.day="2-digit";o.month="short"}
+    var p={};new Intl.DateTimeFormat("en-GB",o).formatToParts(d).forEach(function(x){p[x.type]=x.value});
+    return p.weekday+(full?" "+p.day+" "+p.month:"")+" "+p.hour+":"+p.minute;
+  }
+  return f("America/Chicago",true)+" Austin / "+f("Asia/Singapore",false)+" Singapore";
+}
+function render(force){
+  var S=window.SITE; if(!S) return;
+  var sig=JSON.stringify(S)+TAB;
+  if(sig===lastSig&&!force) return;           // nothing changed: leave the DOM (and any running animation) alone
+  document.getElementById("h1").innerHTML='Zapdemo <span>· '+esc(clocks(S.clock))+' · 4 AIs · promise ledger</span>';
+  var main=document.getElementById("main"), keep=[];
+  [].forEach.call(main.querySelectorAll(".acol,.cwrap"),function(e){keep.push(e.scrollTop)});
+  ctx={cur:{},curSup:{},curFeed:{}};
+  main.innerHTML=TAB==="audit"?auditView(S):TAB==="caught"?caughtView(S):board(S);
+  [].forEach.call(main.querySelectorAll(".acol,.cwrap"),function(e,i){e.scrollTop=keep[i]||0});
+  if(TAB==="board"){ prev={ids:ctx.cur,sup:ctx.curSup,feed:ctx.curFeed}; }
+  lastSig=sig;
+  ["board","audit","caught"].forEach(function(t){document.getElementById("tab-"+t).className=t===TAB?"on":""});
+}
+function tab(t){TAB=t;location.hash=t;render(true)}
 function tickAge(){
-  var h=window.HEARTBEAT, el=document.getElementById("tick"), S=window.SITE;
-  if(!h||!h.tick_at){el.textContent="";return}
-  var p=h.tick_at.split(":"), d=new Date(); d.setHours(+p[0],+p[1],+p[2],0);
-  var age=Math.round((Date.now()-d.getTime())/1000); if(age<0) age+=86400;
-  el.textContent="tick "+h.tick_at+" ("+age+"s ago)"; el.className=age>45?"stale":"";
-  if(age>45) el.textContent+=" · NOT RUNNING";
+  var h=window.HEARTBEAT, S=window.SITE, pill=document.getElementById("pill");
+  document.getElementById("banner").textContent=(h&&h.banner)||"waiting for the first tick…";
+  if(h&&h.tick_at){
+    var p=h.tick_at.split(":"), d=new Date(); d.setHours(+p[0],+p[1],+p[2],0);
+    var age=Math.round((Date.now()-d.getTime())/1000); if(age<0) age+=86400;
+    var ok=age<=60;
+    pill.className=ok?"":"off";
+    pill.innerHTML="<i></i><span>"+(ok?"RUNNING · tick "+age+"s ago":"NOT RUNNING")+"</span>";
+  }
   if(S&&S.footer){
-    var f=S.footer,l=h.llm||{calls:0,tokens:0,cost:0},up=h.boot?Math.max(0,Math.round(Date.now()/1000-h.boot)):0;
-    document.getElementById("footer").textContent=f.sources+" sources · "+f.promises+" promises · "+f.sent+" sent · "+f.asked+" asked · LLM "+l.calls+" calls "+
-      l.tokens.toLocaleString()+" tokens $"+l.cost.toFixed(2)+" · up "+Math.floor(up/3600)+"h"+("0"+Math.floor(up%3600/60)).slice(-2)+"m"+("0"+(up%60)).slice(-2)+"s";
+    var f=S.footer,l=(h&&h.llm)||{calls:0,tokens:0,cost:0},up=h&&h.boot?Math.max(0,Math.round(Date.now()/1000-h.boot)):0,A=S.audit||{checked:0,unsourced:0};
+    document.getElementById("footer").innerHTML=f.sources+" sources · "+f.promises+" promises · "+f.sent+" sent · "+f.asked+" asked · LLM "+l.calls+" calls $"+l.cost.toFixed(2)+
+      " · up "+Math.floor(up/3600)+"h"+("0"+Math.floor(up%3600/60)).slice(-2)+"m · <b"+(A.unsourced?' class="bad"':'')+">"+A.checked+" facts · "+A.unsourced+" unsourced</b>";
   }
 }
 function reload(){
   ["handover/site.js","handover/heartbeat.js"].forEach(function(src,i){
     var s=document.createElement("script"); s.src=src+"?t="+Date.now();
-    s.onload=function(){ if(i===1){ render(); } s.remove(); }; s.onerror=function(){ s.remove(); };
+    s.onload=function(){ if(i===1){ render(); tickAge(); } s.remove(); }; s.onerror=function(){ s.remove(); };
     document.body.appendChild(s);
   });
 }
-render();
+render(true); tickAge();
 setInterval(reload,3000);
 setInterval(tickAge,1000);
 </script>

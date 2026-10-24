@@ -190,3 +190,44 @@ def render_text(res: dict, delay: float = 0.0) -> list[str]:
     out.append(f"\n{res['checked']} facts checked · {res['unsourced']} unsourced"
                + (f" · {res['uncited']} found in the pack but not in the cited sources" if res.get("uncited") else ""))
     return out
+
+
+def check_text(text: str, ids: list[str], srcmap: dict) -> list[str]:
+    """Draft-time gate: facts (numbers, dates, names) with no hit in the CITED sources (+ team.json). Strict: citations must be honest."""
+    cited = [i for i in ids if i in srcmap] + ["T"]
+    out = []
+    for kind, tok in facts_in(text, srcmap, srcmap):
+        if _find(tok, cited, srcmap, "num" if kind == "num" else "name") is None:
+            out.append(f"unsourced {tok}")
+    return sorted(set(out))
+
+
+def gate(st: dict, now_iso: str, srcmap: dict) -> int:
+    """Runtime audit, every tick. A fact with NO source anywhere in the pack is a finding: it goes to rejected.jsonl at once; an unsent
+    draft is withheld (moved to outbox/withheld/ and the owner is asked); an already-sent file is flagged (it cannot be unsent)."""
+    from . import acts
+    res = run(srcmap, st)
+    acts_ = ledger.read_jsonl(ledger.ACTIONS)
+    n = 0
+    for g in res["groups"]:
+        for f in g["files"]:
+            bad = [x["fact"] for x in f["facts"] if x["src"] is None]
+            if not bad:
+                continue
+            rel = f["file"]
+            if not rel.startswith("outbox/"):
+                n += ledger.reject(g["persona"], None, f"audit: Linear change has unsourced fact(s): {rel[:70]}", bad, now_iso)
+                continue
+            name = rel.rsplit("/", 1)[-1]
+            a = next((x for x in acts_ if (x.get("path") or "").rsplit("/", 1)[-1] == name and x["type"] in ("email", "brief", "doc")), None)
+            pid = a["promise_id"] if a else None
+            if f["state"] == "draft":
+                acts.withhold(rel)
+                reason = f"audit: unsourced fact(s) in draft {name}; draft withheld (moved to outbox/withheld/)"
+            else:
+                reason = f"audit: unsourced fact(s) in already-sent {name}; flagged, a sent file cannot be unsent"
+            n += ledger.reject(g["persona"], pid, reason, bad, now_iso, name)
+            if pid and f["state"] == "draft":
+                ledger.add_question(st, pid, g["persona"], g["persona"], "audit-withheld",
+                                    f"Draft '{name}' was withheld: it contains facts with no source ({', '.join(bad)}). Please review.", now_iso)
+    return n

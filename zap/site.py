@@ -10,6 +10,54 @@ from .render import LIVE, _due_label, _overdue, _sorted
 from .route import team
 
 
+VERB = {"email": "drafted", "send": "sent", "brief": "wrote brief", "doc": "wrote document", "ics": "drafted calendar proposal",
+        "dependency": "handed off dependency", "slack-handover": "posted handover to #sales"}
+
+
+def slug(path: str | None, fallback: str) -> str:
+    import re
+    m = re.match(r"^\d{8}-\d{4}-[a-z]+-(.+?)\.(?:md|ics)$", (path or "").rsplit("/", 1)[-1])
+    return m.group(1) if m else (path.rsplit("/", 1)[-1] if path else fallback)
+
+
+def describe(a: dict, st: dict) -> tuple[str, str, list[str]]:
+    """(persona, one-line text, cited source ids) for an action record. Used by the terminal narration and the page's live feed."""
+    t, p = a["type"], st["promises"].get(a["promise_id"], {})
+    cites = list((a.get("cite") or p.get("sources") or [])[:3])
+    if t == "drop":
+        return "system", "drop landed: " + (a.get("path") or "").rsplit("/", 1)[-1], []
+    if t.startswith("inform-"):
+        return a["persona"], f"told {a.get('to')}: heads-up", cites
+    if t.startswith("linear-"):
+        return a["persona"], f"updated Linear {t.split('linear-note-')[-1].split('linear-')[-1]}", cites
+    return a["persona"], f"{VERB.get(t, t)} {slug(a.get('path'), p.get('deliverable', ''))[:48]}", cites
+
+
+def _feed(st: dict, acts_: list, qs: list, rej: list) -> list[dict]:
+    items = []
+    for a in acts_:
+        who, text, cites = describe(a, st)
+        items.append((a.get("ts") or "", who, "sent" if a["type"] == "send" else "act", text, cites, "a:" + a["key"]))
+    for q in qs:
+        p = st["promises"].get(q.get("promise_id"), {})
+        items.append((q.get("ts") or "", q["from"], "asked", f"asked {q['to']}: {q['question'][:84]}", list(p.get("sources", []))[:3], "q:" + q["id"]))
+    for ev in ledger.read_jsonl(ledger.PROMISES):
+        if ev["op"] == "supersede":
+            old = st["promises"].get(ev["id"], {})
+            items.append((ev.get("ts") or "", old.get("owner", "system"), "sup", f"superseded: {old.get('deliverable', ev['id'])[:70]}",
+                          [ev.get("source")] if ev.get("source") else [], "s:" + ev["id"] + str(ev.get("by"))))
+        elif ev["op"] == "ingest" and str(ev.get("source", "")).startswith("D-"):
+            items.append((ev.get("ts") or "", "system", "drop", "ingested a new drop", [ev["source"]], "i:" + ev["source"]))
+    for r in rej:
+        items.append((r.get("ts") or "", r["persona"], "caught", "caught itself: " + r["reason"][:90], [], "r:" + r["key"]))
+    order = sorted(range(len(items)), key=lambda i: (items[i][0], i))
+    out = []
+    for i in order[-18:][::-1]:
+        ts, who, kind, text, cites, key = items[i]
+        out.append({"key": key, "time": ts[11:19], "persona": who, "kind": kind, "text": text, "cites": cites})
+    return out
+
+
 def _w(path, text: str) -> bool:
     if path.exists() and path.read_text() == text:
         return False
@@ -85,7 +133,7 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
     au = audit.run(srcmap, st) if srcmap else {"groups": [], "checked": 0, "unsourced": 0, "uncited": 0}
     rej = ledger.read_jsonl(ledger.REJECTED)
     sent_n = sum(a["type"] == "send" for a in acts_)
-    site = {"audit": au, "rejected": rej[-12:][::-1], "rejected_total": len(rej),
+    site = {"feed": _feed(st, acts_, qs, rej), "audit": au, "rejected": rej[-14:][::-1], "rejected_total": len(rej),
             "footer": {"sources": len(srcmap or {}), "promises": len(st["promises"]), "sent": sent_n, "asked": len(qs)},
             "stats": {k: v for k, v in s.items() if k != "last_action"},
             "last_action": s["last_action"] and {k: s["last_action"].get(k) for k in ("type", "persona", "at", "path")},

@@ -107,28 +107,11 @@ def demo_drop_check(after: float):
 
 
 # ---- narration: one line per action ----
-VERB = {"email": "drafted", "send": "sent", "brief": "wrote brief", "doc": "wrote document", "ics": "drafted calendar proposal",
-        "dependency": "handed off dependency", "slack-handover": "posted handover to #sales"}
-
-
-def _slug(path: str | None, fallback: str) -> str:
-    import re
-    m = re.match(r"^\d{8}-\d{4}-[a-z]+-(.+?)\.(?:md|ics)$", (path or "").rsplit("/", 1)[-1])
-    return m.group(1) if m else (path.rsplit("/", 1)[-1] if path else fallback)
-
-
 def narrate(st: dict, a0: int, q0: set, ev0: int):
     for a in ledger.read_jsonl(ledger.ACTIONS)[a0:]:
-        t, p = a["type"], st["promises"].get(a["promise_id"], {})
-        cites = ",".join((a.get("cite") or p.get("sources") or [])[:3])
-        if t == "drop":
-            continue
-        if t.startswith("inform-"):
-            say(f"{a['persona']}-ai told {a.get('to')}: heads-up ({cites})")
-        elif t.startswith("linear-"):
-            say(f"{a['persona']}-ai updated Linear {t.split('linear-note-')[-1].split('linear-')[-1]} ({cites})")
-        else:
-            say(f"{a['persona']}-ai {VERB.get(t, t)} {_slug(a.get('path'), p.get('deliverable', ''))[:48]} ({cites})")
+        who, text, cites = site.describe(a, st)
+        if a["type"] != "drop":  # the 'drop landed' line is printed where the drop is copied
+            say(f"{who}-ai {text} ({','.join(cites)})")
     for q in ledger.questions():
         if q["id"] not in q0:
             say(f"{q['from']}-ai asked {q['to']}: {q['question'][:90]}")
@@ -170,6 +153,8 @@ def tick(first: bool, table: bool = False) -> None:
         persona.Persona(who["id"], st, now, srcmap).tick()
     persona.sync_linear(st, now.isoformat(), srcmap)
     persona.handover_post(st, now, srcmap)
+    if audit.gate(st, now.isoformat(), srcmap):  # runtime audit: findings go to rejected.jsonl, unsent drafts are withheld
+        say("audit: caught an unsourced fact - see 'Caught itself'")
     narrate(st, a0, q0, ev0)
     changed = shiftnote.render_handovers(st, now) or st["n_events"] != n0
     changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}, srcmap, BOOT) or changed

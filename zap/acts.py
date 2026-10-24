@@ -163,8 +163,10 @@ def sent_path(rel: str) -> str:
 
 def resolve(rel: str) -> str:
     """Path of an outbox artifact wherever it lives now (outbox/ or outbox/sent/)."""
-    if rel and not (ROOT / rel).exists() and (ROOT / sent_path(rel)).exists():
-        return sent_path(rel)
+    if rel and not (ROOT / rel).exists():
+        for alt in (sent_path(rel), "outbox/withheld/" + rel.rsplit("/", 1)[-1]):
+            if (ROOT / alt).exists():
+                return alt
     return rel
 
 
@@ -207,3 +209,12 @@ def ics(now: datetime, persona: dict, slug_: str, summary: str, when, attendees:
              "END:VEVENT", "END:VCALENDAR"]
     _atomic(OUTBOX / name, "\r\n".join(lines) + "\r\n")
     return f"outbox/{name}"
+
+
+def withhold(rel: str) -> str:
+    """Pull an unsent draft out of outbox/ into outbox/withheld/ (audit found an unsourced fact in it)."""
+    src, dst = ROOT / rel, ROOT / "outbox" / "withheld" / rel.rsplit("/", 1)[-1]
+    if src.exists():
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        os.replace(src, dst)
+    return "outbox/withheld/" + dst.name

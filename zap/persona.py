@@ -3,7 +3,7 @@ import re
 import sys
 from datetime import datetime
 
-from . import acts, extract, ledger
+from . import acts, audit, extract, ledger
 from .route import SLOTS, slot_id, team
 
 DRAFT_TOOL = {
@@ -76,7 +76,8 @@ class Persona:
                 probs = ["no valid record_draft call (subject and body required)"]
                 feedback = "You must answer by calling record_draft with both subject and body."
                 continue
-            probs = acts.verify_text(d["subject"] + "\n" + d["body"], self.srcmap, ids, no_money)
+            probs = acts.verify_text(d["subject"] + "\n" + d["body"], self.srcmap, ids, no_money) + \
+                audit.check_text(d["subject"] + "\n" + d["body"], ids, self.srcmap)
             if not probs:
                 return d["subject"].strip(), d["body"].strip()
             ledger.reject(self.id, p and p["id"], f"draft rejected by verify (attempt {_ + 1} of 3)", probs, self.at,
@@ -114,6 +115,8 @@ class Persona:
         if not em:
             return False
         rel = acts.resolve(em["path"])
+        if "withheld" in rel:  # the runtime audit pulled this draft; only its owner can release it
+            return False
         text = (ledger.ROOT / rel).read_text()
         head, _, rest = text.partition("\n\n")
         body = rest.split("\n\n--\nDrafted by")[0]
@@ -121,7 +124,8 @@ class Persona:
         to = next((ln[4:] for ln in head.splitlines() if ln.startswith("To: ")), "")
         cite = [c.strip() for c in next((ln[9:] for ln in head.splitlines() if ln.startswith("Sources: ")), "").split(",")]
         probs = acts.commitment_problems(subj + "\n" + body, inbound, self.srcmap) + \
-            acts.verify_text(subj + "\n" + body, self.srcmap, cite) + (["no recipient address"] if "UNKNOWN" in to else [])
+            acts.verify_text(subj + "\n" + body, self.srcmap, cite) + audit.check_text(subj + "\n" + body, cite, self.srcmap) + \
+            (["no recipient address"] if "UNKNOWN" in to else [])
         if probs:
             ledger.reject(self.id, p["id"], "draft held back from auto-send: it would commit the company or failed the fact check; "
                           "owner asked instead", probs, self.at, subj + " / " + body)

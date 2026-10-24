@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+from datetime import datetime
 from pathlib import Path
 
 from .route import SLOTS, promise_id, route, slot_id, slug
@@ -15,6 +16,8 @@ REJECTED = H / "rejected.jsonl"
 def append(path: Path, rec: dict):
     """One fsync'd O_APPEND write; heals a torn last line left by kill -9."""
     path.parent.mkdir(parents=True, exist_ok=True)
+    if "ts" not in rec:
+        rec = {**rec, "ts": datetime.now().isoformat(timespec="seconds")}  # wall clock, display only (NOW stays the ledger clock)
     line = json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n"
     fd = os.open(path, os.O_RDWR | os.O_APPEND | os.O_CREAT, 0o644)
     try:
@@ -41,7 +44,7 @@ def read_jsonl(path: Path) -> list[dict]:
 def _fold(st: dict, ev: dict):
     op, pid = ev["op"], ev.get("id")
     if op == "create":
-        st["promises"][pid] = {k: v for k, v in ev.items() if k not in ("op", "by_src")}
+        st["promises"][pid] = {k: v for k, v in ev.items() if k not in ("op", "by_src", "ts")}
     elif op == "ingest":
         st["ingested"].add(ev["source"])
     elif pid in st["promises"]:
