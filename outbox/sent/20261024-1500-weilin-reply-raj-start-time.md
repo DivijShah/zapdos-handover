@@ -1,3 +1,4 @@
+Status: SENT by Wei Lin Tan's AI assistant at 2026-10-24T15:00:00-05:00 (file-backed outbox: nothing leaves this machine)
 From: weilin@zapdemo.example
 To: Raj Kumar, Harbor Point (WhatsApp; no email address in pack)
 Subject: Re: Tuesday start time

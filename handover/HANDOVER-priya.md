@@ -21,7 +21,8 @@ Open: 3 · Done: 0
   - Draft ready; Bayview approval needed before publishing.
   - Lisa Park will review the case study once sent the draft and the list of planned photos.
   - Bayview case study approval ticket in progress, assigned to Priya; Lisa wants draft and photos.
-  - artifact: `outbox/20261024-1500-priya-reply-lisa-case-study.md`
+  - artifact: `outbox/sent/20261024-1500-priya-reply-lisa-case-study.md`
+  - artifact: `outbox/sent/20261024-1500-priya-reply-lisa-case-study.md`
 - **Northwind pallet-damage one-pager for Maria's VP** · due - · in_progress · sources: C01, C08, S011, L-ZAP-105
   - One-pager for Maria to forward to her VP.
   - Priya needs Maria's request details to make it.
@@ -30,7 +31,7 @@ Open: 3 · Done: 0
   - artifact: `outbox/20261024-1500-priya-onepager-brief-northwind.md`
 
 ## Done
-- none
+- **Sent by Priya Nair's AI**: Re: Case study → lisa.park@bayview-freight.example · `outbox/sent/20261024-1500-priya-reply-lisa-case-study.md` · re Bayview case study: draft + photos to Lisa · sources: E14, C08
 
 ## Superseded
 - none

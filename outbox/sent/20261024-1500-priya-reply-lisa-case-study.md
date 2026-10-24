@@ -1,3 +1,4 @@
+Status: SENT by Priya Nair's AI assistant at 2026-10-24T15:00:00-05:00 (file-backed outbox: nothing leaves this machine)
 From: priya@zapdemo.example
 To: lisa.park@bayview-freight.example
 Subject: Re: Case study

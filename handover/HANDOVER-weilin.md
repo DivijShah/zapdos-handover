@@ -53,10 +53,12 @@ Open: 11 · Done: 2
 - **Answer Raj: start 13:30 instead of 14:00?** · due - · waiting_owner · sources: C02, WA02
   - Raj asked about starting at 13:30 instead of 14:00.
   - Raj asks whether the team can start the install at 13:30 on Tuesday.
-  - artifact: `outbox/20261024-1500-weilin-reply-raj-start-time.md`
+  - artifact: `outbox/sent/20261024-1500-weilin-reply-raj-start-time.md`
+  - artifact: `outbox/sent/20261024-1500-weilin-reply-raj-start-time.md`
 - **Answer Ken: is a VLAN needed?** · due - · waiting_owner · sources: E04
   - Ken asks whether a VLAN is needed; reply owed.
-  - artifact: `outbox/20261024-1500-weilin-reply-ken-ips-vlan.md`
+  - artifact: `outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md`
+  - artifact: `outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md`
 - **Demo floor-by-floor progress tracking on Crestline call** · due - · open · sources: WA03
   - Farah asks for a floor-by-floor progress tracking demo by the engineer on the call.
 - **Document how deploy alerts are wired** · due - · in_progress · sources: S007, C10, L-ZAP-161
@@ -70,6 +72,8 @@ Open: 11 · Done: 2
   - latest: Wei Lin finished layout v2 and put it in Drive.
 - Harbor Point camera IP range from Ken · sources: C02, S001, E02, E04, L-ZAP-111
   - latest: IPs received (E04); VLAN question open
+- **Sent by Wei Lin Tan's AI**: Re: Tuesday start time → Raj Kumar, Harbor Point (WhatsApp; no email address in pack) · `outbox/sent/20261024-1500-weilin-reply-raj-start-time.md` · re Answer Raj: start 13:30 instead of 14:00? · sources: WA02, E02
+- **Sent by Wei Lin Tan's AI**: Re: IP range for Tuesday 3 Nov install → ken.ong@harborpoint.example · `outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md` · re Answer Ken: is a VLAN needed? · sources: E04, E02
 
 ## Superseded
 - none

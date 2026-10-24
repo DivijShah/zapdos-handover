@@ -1,3 +1,4 @@
+Status: SENT by Sam Rivera's AI assistant at 2026-10-24T15:00:00-05:00 (file-backed outbox: nothing leaves this machine)
 From: sam@zapdemo.example
 To: maria.gomez@northwind-cold.example
 Subject: Re: Dock cameras
