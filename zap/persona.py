@@ -331,11 +331,32 @@ class Persona:
                  "Who is the second reference, and has each customer given permission?", ["C06", "E08"])
         return "waiting_owner"
 
+    def h_tom_updated(self, p):
+        """Maria answered the re-ask with a time: .ics proposal + confirmation draft + 'send?' to Dana. Nothing is sent: it books Dana."""
+        src, fact = p["created_from"], p["new_fact"]
+        when = acts.parse_when(fact, datetime.fromisoformat(self.srcmap[src].at).year)
+        if when is None:
+            return self.h_updated(p)
+        ids = [src, "E03"]
+        maria = acts.addr_for(self.srcmap, "maria.gomez")
+        self.do(p, "ics", lambda: acts.ics(
+            self.now, self.who, "tom-call-proposal", "Northwind call with Tom Reyes (proposed)", when,
+            [maria] if maria else [], p, ids, f"Proposed from {src}: {fact}"))
+        ok = self.email(p, "email", "confirm-tom-call-maria", "maria.gomez",
+                        f"Reply to Maria's message {src}. Confirm that the call with Tom is proposed for the time she wrote: \"{fact}\" "
+                        "(repeat her words for the day and time). Say Dana will send a calendar invite. Do NOT mention or promise any price "
+                        "or any date for a number; Sam's AI is handling that separately.", ids, no_money=True)
+        if ok:
+            self.ask(p, "dana", "confirm-tom-call",
+                     f"Book the Northwind call with Tom? {src} says \"{fact}\". The AI drafted a confirmation to Maria and a proposal .ics; "
+                     "it has not checked your calendar and nothing has been sent (booking commits you).", ids)
+        return "waiting_owner"
+
     def h_updated(self, p):
         """A drop changed a fact this promise rested on: ask the owner to confirm; show what went stale."""
         old = self.st["promises"].get(p["supersedes"], {})
-        stale = [acts.resolve(a["path"]) for a in ledger.read_jsonl(ledger.ACTIONS)
-                 if a["promise_id"] == p["supersedes"] and (a.get("path") or "").startswith("outbox/")]
+        stale = list(dict.fromkeys(acts.resolve(a["path"]) for a in ledger.read_jsonl(ledger.ACTIONS)
+                                   if a["promise_id"] == p["supersedes"] and (a.get("path") or "").startswith("outbox/")))
         src = p["created_from"]
         text = (f"New fact on '{p['deliverable']}': {src} says \"{p['new_fact']}\". This replaces the earlier plan"
                 f"{' (outbox draft(s) written for it may now be stale: ' + ', '.join(stale) + ')' if stale else ''}. "
@@ -353,6 +374,7 @@ class Persona:
         "ridgeline.site_visit": h_ridge_visit, "ridgeline.price": h_ridge_price, "cedar.numbers_refs": h_cedar,
     }
 
+    UPDATED = {"northwind.tom_call": h_tom_updated}
     LIVE = ("open", "in_progress", "waiting_owner")
     AI_DONE = {"northwind.maria_reply"}  # earlier runs marked these done on drafting; drafted != sent, so re-evaluate
 
@@ -362,11 +384,11 @@ class Persona:
         mine.sort(key=lambda p: (p["due"] or "9999", SLOTS.get(p["slot"], {}).get("prio", 99)))
         n = 0
         for p in mine:
-            h = self.h_updated if p.get("supersedes") else self.HANDLERS.get(p["slot"])
+            h = self.UPDATED.get(p["slot"], Persona.h_updated) if p.get("supersedes") else self.HANDLERS.get(p["slot"])
             if not h:
                 continue
             try:
-                want = h(p) if p.get('supersedes') else h(self, p)
+                want = h(self, p)
             except Exception as e:
                 print(f"persona {self.id} {p['slot']}: {type(e).__name__}: {str(e)[:160]}", file=sys.stderr)
                 continue

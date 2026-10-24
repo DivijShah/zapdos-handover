@@ -15,6 +15,9 @@ TOOL = {
 SYSTEM = ("You compare ONE existing promise (with its source texts) to ONE new source. Call record_verdict.\n"
           "- changed: the new source states a DIFFERENT scheduled time, date of an event, quantity, place, price figure or decision than the one the promise rests on "
           "(for example a new call time replacing the old one). `quote` must be copied verbatim from the new source.\n"
+          "- An offered time slot that is already in the past by the new source's date (compare each source's date, shown with its weekday, with the new "
+          "source's date; e.g. \"Friday afternoon\" in an email of Wed 21 Oct meant Fri 23 Oct) is stale: a newly offered different concrete slot for the same "
+          "meeting REPLACES it, so answer `changed`.\n"
           "- A new or moved DEADLINE for the same deliverable (\"I need it by 30 Oct\") is `same`, not changed: it is a due-date update.\n"
           "- same: consistent, or only progress on the same fact.\n- unrelated: about something else.\n"
           "Never infer. If unsure, answer same.")
@@ -28,9 +31,11 @@ def judge(src, p: dict, m: dict, srcmap: dict) -> dict:
     cp = _path(src.id, p["id"])
     if cp.exists():
         return json.loads(cp.read_text())
-    old = "\n\n".join(f"[{i}]\n{srcmap[i].text[:1200]}" for i in p["sources"][:4] if i in srcmap)
+    from datetime import datetime
+    day = lambda a: datetime.fromisoformat(a).strftime("%a %d %b %Y")  # noqa: E731
+    old = "\n\n".join(f"[{i}] (dated {day(srcmap[i].at)})\n{srcmap[i].text[:1200]}" for i in p["sources"][:4] if i in srcmap)
     user = (f"EXISTING PROMISE: {p['deliverable']} (due {p['due'] or 'none'}; notes: {'; '.join(p['notes']) or 'none'})\n"
-            f"ITS SOURCES:\n{old}\n\nNEW SOURCE [{src.id}]:\n{src.text}")
+            f"ITS SOURCES:\n{old}\n\nNEW SOURCE [{src.id}] (dated {day(src.at)}):\n{src.text}")
     r = extract.client().messages.create(model=extract.MODEL, max_tokens=500, system=SYSTEM, tools=[TOOL],
                                          tool_choice={"type": "auto"}, messages=[{"role": "user", "content": user}])
     v = next((b.input for b in r.content if b.type == "tool_use"), None)

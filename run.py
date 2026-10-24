@@ -140,10 +140,13 @@ def main():
         first = False
         if once:
             break
-        for _ in range(TICK):
+        seen = [(f.name, f.stat().st_mtime) for f in sources.drop_files()]
+        for _ in range(TICK * 2):
             if stop:
                 break
-            time.sleep(1)
+            time.sleep(0.5)
+            if [(f.name, f.stat().st_mtime) for f in sources.drop_files()] != seen:
+                break  # a new drop landed: ingest now, don't wait out the tick
     console.print("[dim]flushed, exit 0[/]")
 
 
