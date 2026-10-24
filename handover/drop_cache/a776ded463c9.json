@@ -1,0 +1,16 @@
+{
+ "file": "maria-tom-time.txt",
+ "sha": "a776ded463c9",
+ "test": true,
+ "seq": 0,
+ "model": "claude-sonnet-5-5",
+ "sources": [
+  {
+   "kind": "email",
+   "at": "2026-10-24T16:30:00-05:00",
+   "frm": "maria.gomez@northwind-cold.example",
+   "to": "sam@zapdemo.example",
+   "text": "Hi Sam, thanks for the nudge. Tom can now do Wed 28 Oct at 10:00 CT for the call, so please book it for then."
+  }
+ ]
+}

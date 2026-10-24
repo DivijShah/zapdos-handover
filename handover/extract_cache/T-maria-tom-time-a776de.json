@@ -1,0 +1,18 @@
+{
+ "source_id": "T-maria-tom-time-a776de",
+ "model": "claude-sonnet-5-5",
+ "test": true,
+ "mentions": [
+  {
+   "slot": "northwind.tom_call",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Northwind",
+   "topic": "tom call",
+   "due": null,
+   "evidence": "Tom can now do Wed 28 Oct at 10:00 CT for the call, so please book it for then.",
+   "note": "Maria asks Sam to book the call with Tom for Wed 28 Oct 10:00 CT.",
+   "ev_ok": true
+  }
+ ]
+}
