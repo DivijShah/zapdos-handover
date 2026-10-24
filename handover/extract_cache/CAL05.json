@@ -1,15 +1,16 @@
 {
  "source_id": "CAL05",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.weekly_report",
    "state": "open",
-   "counterparty": "Chris",
-   "deliverable": "Weekly report to Chris at Bayview",
+   "kind": "followup",
+   "counterparty": "Bayview",
+   "topic": "weekly report",
    "due": null,
    "evidence": "Calendar event: Bayview weekly report due",
-   "note": "Calendar event recurring every Friday marks the Bayview weekly report as due; no explicit date given in source.",
+   "note": "Recurring Friday event; next on 2026-10-30 at 17:00 +08:00, attendee weilin.",
    "ev_ok": true
   }
  ]

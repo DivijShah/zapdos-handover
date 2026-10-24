@@ -1,13 +1,16 @@
 {
  "source_id": "S007",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "internal.deploy_alerts_doc",
    "state": "open",
+   "kind": "followup",
+   "counterparty": "internal",
+   "topic": "deploy alerts",
    "due": null,
    "evidence": "Does anyone know how the alerts are wired? Alex set them up.",
-   "note": "Wei Lin asks who knows how deploy-api alerts are wired; Alex set them up. No doc commitment stated yet.",
+   "note": "Wei Lin asks how deploy-api alerts are set up after an overnight outage; only Alex knew.",
    "ev_ok": true
   }
  ]

@@ -1,13 +1,16 @@
 {
  "source_id": "L-ZAP-161",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "internal.deploy_alerts_doc",
    "state": "open",
+   "kind": "post",
+   "counterparty": "internal",
+   "topic": "deploy alerts",
    "due": null,
-   "evidence": "Linear ZAP-161: Document how deploy alerts are set up",
-   "note": "Ticket in Backlog, unassigned, no due date; Alex is on leave.",
+   "evidence": "Document how deploy alerts are set up",
+   "note": "Ticket in Backlog, unassigned; Alex on leave.",
    "ev_ok": true
   }
  ]

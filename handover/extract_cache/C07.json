@@ -1,10 +1,13 @@
 {
  "source_id": "C07",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "ridgeline.price",
    "state": "open",
+   "kind": "price",
+   "counterparty": "Ridgeline",
+   "topic": "price range",
    "due": null,
    "evidence": "Asked for a price range and a site visit next week.",
    "note": "Omar asked for a price range; pricing comes from Sam.",
@@ -13,9 +16,12 @@
   {
    "slot": "ridgeline.site_visit",
    "state": "open",
+   "kind": "booking",
+   "counterparty": "Ridgeline",
+   "topic": "site visit",
    "due": null,
    "evidence": "Dana: \"Let me check calendars and come back to you.\" Nothing booked yet.",
-   "note": "Site visit requested for next week; nothing booked yet, Dana to come back to Omar.",
+   "note": "Site visit requested for next week; nothing booked yet.",
    "ev_ok": true
   }
  ]

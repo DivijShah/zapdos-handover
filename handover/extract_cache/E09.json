@@ -1,21 +1,27 @@
 {
  "source_id": "E09",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "ridgeline.site_visit",
    "state": "open",
+   "kind": "booking",
+   "counterparty": "Ridgeline",
+   "topic": "site visit",
    "due": null,
    "evidence": "Could you do Tuesday or Wednesday next week for a site visit? Mornings are best.",
-   "note": "Omar asks for a site visit Tuesday or Wednesday next week, mornings preferred; not yet booked.",
+   "note": "Omar asks for a site visit Tuesday or Wednesday next week, mornings preferred.",
    "ev_ok": true
   },
   {
    "slot": "ridgeline.price",
    "state": "open",
+   "kind": "price",
+   "counterparty": "Ridgeline",
+   "topic": "price range",
    "due": null,
    "evidence": "And a ballpark price would help me get budget.",
-   "note": "Omar asks for a ballpark price to help him get budget.",
+   "note": "Omar asks for a ballpark price to get budget.",
    "ev_ok": true
   }
  ]

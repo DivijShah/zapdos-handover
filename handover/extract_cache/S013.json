@@ -1,16 +1,16 @@
 {
  "source_id": "S013",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "ridgeline.price",
    "state": "open",
    "kind": "price",
    "counterparty": "Ridgeline",
-   "deliverable": "Handle Ridgeline pricing",
+   "topic": "ridgeline pricing",
    "due": null,
    "evidence": "I'll handle Ridgeline pricing when I land.",
-   "note": "Sam says he will handle Ridgeline pricing after landing; no date given.",
+   "note": "Sam says he will handle Ridgeline pricing after he lands.",
    "ev_ok": true
   }
  ]

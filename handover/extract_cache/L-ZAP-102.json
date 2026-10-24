@@ -1,5 +1,17 @@
 {
  "source_id": "L-ZAP-102",
- "model": "claude-haiku-5-5",
- "mentions": []
+ "model": "claude-sonnet-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "kind": "price",
+   "counterparty": "Northwind",
+   "topic": "northwind price",
+   "due": "2026-10-22",
+   "evidence": "Note: Maria asked for price by Thu",
+   "note": "Linear ticket ZAP-102 Northwind price is Todo, unassigned, due 2026-10-22.",
+   "ev_ok": true
+  }
+ ]
 }

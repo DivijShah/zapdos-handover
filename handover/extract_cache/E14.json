@@ -1,13 +1,16 @@
 {
  "source_id": "E14",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.casestudy",
    "state": "open",
+   "kind": "casestudy",
+   "counterparty": "Bayview",
+   "topic": "case study",
    "due": null,
    "evidence": "Please send the draft and tell me which photos you plan to use.",
-   "note": "Lisa Park asks for the case study draft and the photo list to review.",
+   "note": "Lisa Park will review the case study once sent the draft and the list of planned photos.",
    "ev_ok": true
   }
  ]

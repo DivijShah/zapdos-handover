@@ -1,17 +1,16 @@
 {
  "source_id": "L-ZAP-105",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "northwind.onepager",
    "state": "open",
    "kind": "onepager",
    "counterparty": "Northwind",
-   "topic": "pallet damage one-pager",
-   "deliverable": "One-pager on pallet-damage tracking for VP",
+   "topic": "one-pager VP",
    "due": null,
-   "evidence": "Linear ZAP-105: Northwind one-pager for VP",
-   "note": "Linear ticket is in Backlog, unassigned, with no due date.",
+   "evidence": "Northwind one-pager for VP",
+   "note": "Linear ticket ZAP-105 in Backlog, unassigned, no due date.",
    "ev_ok": true
   }
  ]

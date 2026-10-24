@@ -1,13 +1,13 @@
 {
  "source_id": "E05",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "crestline.send_onepager",
    "state": "open",
-   "due": "2026-11-03",
+   "due": null,
    "evidence": "Please send the one-pager before so my team can read it.",
-   "note": "Farah asks Zapdemo to send the one-pager before the 3 Nov call; no sent email shown.",
+   "note": "Farah asks for the one-pager to be sent before the 3 Nov call at 15:00.",
    "ev_ok": true
   }
  ]

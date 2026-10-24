@@ -1,21 +1,27 @@
 {
  "source_id": "E04",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "harbor_point.ip_range",
    "state": "done",
+   "kind": "server",
+   "counterparty": "Harbor Point",
+   "topic": "ip range",
    "due": null,
    "evidence": "Range 10.20.4.0/24, mask 255.255.255.0, gateway 10.20.4.1. Use .50 to .55 for the cameras.",
-   "note": "Ken Ong sent the IP range for the 6 cameras.",
+   "note": "Ken Ong supplied the IP range for the cameras.",
    "ev_ok": true
   },
   {
    "slot": "harbor_point.vlan_reply",
    "state": "open",
+   "kind": "reply",
+   "counterparty": "Harbor Point",
+   "topic": "vlan reply",
    "due": null,
    "evidence": "Do you need a VLAN?",
-   "note": "Ken Ong asks whether Zapdemo needs a VLAN; no reply yet.",
+   "note": "Ken asks whether a VLAN is needed; reply owed.",
    "ev_ok": true
   }
  ]

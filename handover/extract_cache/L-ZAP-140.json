@@ -1,17 +1,16 @@
 {
  "source_id": "L-ZAP-140",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.glare",
    "state": "open",
-   "kind": "fix",
+   "kind": "install",
    "counterparty": "Bayview",
-   "topic": "night glare alerts",
-   "deliverable": "Fix night glare false alerts",
+   "topic": "night glare",
    "due": null,
-   "evidence": "Linear ZAP-140: Bayview night glare false alerts",
-   "note": "Ticket is In Progress with night mask applied on cams 2 and 5; no due date set.",
+   "evidence": "Bayview night glare false alerts",
+   "note": "Ticket in progress, assigned to weilin; night mask on cams 2 and 5.",
    "ev_ok": true
   }
  ]

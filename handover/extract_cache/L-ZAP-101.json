@@ -1,14 +1,17 @@
 {
  "source_id": "L-ZAP-101",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "northwind.layout",
    "state": "done",
-   "due": "2026-10-22",
-   "evidence": "Linear ZAP-101: Northwind dock camera layout ... Status: Done ... Note: Layout v2 in Drive",
-   "note": "Linear ticket ZAP-101 for the Northwind dock camera layout is marked Done; layout v2 is in Drive.",
-   "ev_ok": false
+   "kind": "layout",
+   "counterparty": "Northwind",
+   "topic": "camera layout",
+   "due": null,
+   "evidence": "Status: Done",
+   "note": "Layout v2 in Drive; ticket ZAP-101 marked Done.",
+   "ev_ok": true
   }
  ]
 }

@@ -1,13 +1,16 @@
 {
  "source_id": "S006",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "jordan_lee.onboarding",
    "state": "open",
-   "due": "2026-10-26",
-   "evidence": "Jordan accepted, starts Monday! Someone please set up accounts and a first-week plan. Wei Lin is buddy.",
-   "note": "Set up accounts, laptop, first-week plan for Jordan Lee; Wei Lin is buddy. Starts Monday.",
+   "kind": "onboarding",
+   "counterparty": "Jordan Lee",
+   "topic": "new hire onboarding",
+   "due": null,
+   "evidence": "Someone please set up accounts and a first-week plan. Wei Lin is buddy.",
+   "note": "Accounts and first-week plan needed for Jordan, with Wei Lin as buddy.",
    "ev_ok": true
   }
  ]

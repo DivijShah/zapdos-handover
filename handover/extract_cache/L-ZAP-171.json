@@ -1,14 +1,17 @@
 {
  "source_id": "L-ZAP-171",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.clip",
    "state": "open",
+   "kind": "clip",
+   "counterparty": "Bayview",
+   "topic": "night clip",
    "due": "2026-10-26",
-   "evidence": "Linear ZAP-171: 30s night-shift clip for Monday post. Status: Todo. Due: 2026-10-26",
-   "note": "30s night-shift clip for Monday post is Todo, unassigned, due 2026-10-26.",
-   "ev_ok": false
+   "evidence": "ZAP-171: 30s night-shift clip for Monday post",
+   "note": "Ticket is unassigned, status Todo, due 2026-10-26.",
+   "ev_ok": true
   }
  ]
 }

@@ -1,15 +1,16 @@
 {
  "source_id": "C06",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "cedar.numbers_refs",
    "state": "open",
-   "kind": "reply",
+   "kind": "investor",
    "counterparty": "Cedar Fund",
+   "topic": "numbers refs",
    "due": "2026-10-28",
    "evidence": "Rachel wants updated pilot numbers and 2 customer references by Wednesday 28 Oct.",
-   "note": "Rachel Kim wants updated pilot numbers and 2 customer references by 28 Oct; references need customer permission first.",
+   "note": "References need customer permission before sharing any contact.",
    "ev_ok": true
   },
   {
@@ -17,9 +18,10 @@
    "state": "open",
    "kind": "booking",
    "counterparty": "Cedar Fund",
+   "topic": "engineer call",
    "due": null,
    "evidence": "She'd like a 20-minute call with the engineer to understand the tech.",
-   "note": "Rachel wants a 20-minute call with the engineer; no booking mentioned yet.",
+   "note": "Requested by Rachel; not yet booked.",
    "ev_ok": true
   }
  ]

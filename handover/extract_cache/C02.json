@@ -1,37 +1,49 @@
 {
  "source_id": "C02",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
+  {
+   "slot": "harbor_point.install",
+   "state": "open",
+   "kind": "install",
+   "counterparty": "Harbor Point",
+   "topic": "install",
+   "due": null,
+   "evidence": "Install is set for Tuesday 3 Nov, 14:00 to 16:30 Singapore time. 6 cameras on the paint shop.",
+   "note": "Install scheduled 3 Nov 14:00-16:30 SGT, 6 cameras.",
+   "ev_ok": true
+  },
   {
    "slot": "harbor_point.ip_range",
    "state": "open",
+   "kind": "server",
+   "counterparty": "Harbor Point",
+   "topic": "ip range",
    "due": null,
    "evidence": "Ken (IT) still has to send the IP range and subnet for the cameras.",
-   "note": "Ken Ong still has to send the IP range and subnet for the 6 cameras.",
+   "note": "Ken has yet to send the IP range and subnet.",
    "ev_ok": true
   },
   {
    "slot": "harbor_point.cam3_relocation",
    "state": "open",
+   "kind": "install",
+   "counterparty": "Harbor Point",
+   "topic": "cam3 relocation",
    "due": null,
    "evidence": "Wei Lin to propose a new spot for camera 3.",
-   "note": "A new storage rack blocks camera 3; Wei Lin to propose a new spot.",
+   "note": "Storage rack blocks camera 3's view of bay C.",
    "ev_ok": true
   },
   {
    "slot": "harbor_point.start_time_reply",
    "state": "open",
+   "kind": "reply",
+   "counterparty": "Harbor Point",
+   "topic": "start time",
    "due": null,
    "evidence": "Raj asked if we can start at 13:30 instead.",
-   "note": "Raj asked whether the install can start at 13:30 instead of 14:00.",
-   "ev_ok": true
-  },
-  {
-   "slot": "harbor_point.install",
-   "state": "open",
-   "due": "2026-11-03",
-   "evidence": "Install is set for Tuesday 3 Nov, 14:00 to 16:30 Singapore time.",
-   "note": "On-site install of 6 cameras scheduled 3 Nov 14:00-16:30; not yet physically done.",
+   "note": "Raj asked about starting at 13:30 instead of 14:00.",
    "ev_ok": true
   }
  ]

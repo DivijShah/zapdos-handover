@@ -1,168 +1,172 @@
 {"op":"ingest","source":"E11"}
 {"op":"ingest","source":"E12"}
-{"op":"create","id":"84e5515f15","slot":"internal.deploy_alerts_doc","deliverable":"Document how deploy alerts are wired","kind":"server","counterparty":"internal","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["S007"],"created_from":"S007","notes":["Wei Lin asks who knows how deploy-api alerts are wired; Alex set them up. No doc commitment stated yet."],"flags":[]}
+{"op":"create","id":"84e5515f15","slot":"internal.deploy_alerts_doc","deliverable":"Document how deploy alerts are wired","kind":"server","counterparty":"internal","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["S007"],"created_from":"S007","notes":["Wei Lin asks how deploy-api alerts are set up after an overnight outage; only Alex knew."],"flags":[]}
 {"op":"ingest","source":"S007"}
-{"op":"create","id":"184d262a60","slot":"northwind.layout","deliverable":"Northwind dock camera layout (doors 1-12)","kind":"layout","counterparty":"northwind","owner":"weilin","due":"2026-10-22","due_at":"2026-10-20T18:00:00-05:00","status":"open","sources":["C01"],"created_from":"C01","notes":["Camera layout for doors 1-12 promised by Thursday 22 Oct; no delivery shown in this call."],"flags":[]}
-{"op":"create","id":"a9227252ec","slot":"northwind.price","deliverable":"Northwind price for Maria","kind":"price","counterparty":"northwind","owner":"sam","due":"2026-10-22","due_at":"2026-10-20T18:00:00-05:00","status":"open","sources":["C01"],"created_from":"C01","notes":["Price/number for Northwind promised by Thursday 22 Oct."],"flags":[]}
-{"op":"create","id":"35efac7f1f","slot":"northwind.tom_call","deliverable":"Book next call with Tom Reyes (Northwind)","kind":"booking","counterparty":"northwind","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C01"],"created_from":"C01","notes":["Next call must include Tom Reyes; not yet booked."],"flags":[]}
-{"op":"create","id":"da00b3a116","slot":"northwind.onepager","deliverable":"Northwind pallet-damage one-pager for Maria's VP","kind":"onepager","counterparty":"northwind","owner":"priya","due":null,"due_at":null,"status":"open","sources":["C01"],"created_from":"C01","notes":["One-pager on pallet-damage tracking requested for Maria to forward to her VP."],"flags":[]}
+{"op":"create","id":"184d262a60","slot":"northwind.layout","deliverable":"Northwind dock camera layout (doors 1-12)","kind":"layout","counterparty":"northwind","owner":"weilin","due":"2026-10-22","due_at":"2026-10-20T18:00:00-05:00","status":"open","sources":["C01"],"created_from":"C01","notes":["Camera layout for dock doors 1-12 promised by Thursday."],"flags":[]}
+{"op":"create","id":"a9227252ec","slot":"northwind.price","deliverable":"Northwind price for Maria","kind":"price","counterparty":"northwind","owner":"sam","due":"2026-10-22","due_at":"2026-10-20T18:00:00-05:00","status":"open","sources":["C01"],"created_from":"C01","notes":["Price for Northwind requested by Thursday 22 Oct."],"flags":[]}
+{"op":"create","id":"35efac7f1f","slot":"northwind.tom_call","deliverable":"Book next call with Tom Reyes (Northwind)","kind":"booking","counterparty":"northwind","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C01"],"created_from":"C01","notes":["Tom Reyes signs off on anything mounted on the building."],"flags":[]}
+{"op":"create","id":"da00b3a116","slot":"northwind.onepager","deliverable":"Northwind pallet-damage one-pager for Maria's VP","kind":"onepager","counterparty":"northwind","owner":"priya","due":null,"due_at":null,"status":"open","sources":["C01"],"created_from":"C01","notes":["One-pager for Maria to forward to her VP."],"flags":[]}
 {"op":"ingest","source":"C01"}
 {"op":"ingest","source":"S008"}
-{"op":"update","id":"a9227252ec","add_sources":["E01"],"add_notes":["Sam promised Maria a price by Thursday (22 Oct) per the sent email."]}
-{"op":"update","id":"184d262a60","add_sources":["E01"],"add_notes":["Sam promised Maria the camera layout by Thursday; no delivery shown in this source."]}
-{"op":"update","id":"35efac7f1f","add_sources":["E01"],"add_notes":["Sam promised to set up the next call including Tom Reyes; not yet booked per this source."]}
+{"op":"update","id":"184d262a60","add_sources":["E01"],"add_notes":["Sam promised Maria the layout by Thursday."]}
+{"op":"update","id":"a9227252ec","add_sources":["E01"],"add_notes":["Sam promised Maria a price by Thursday."]}
+{"op":"update","id":"35efac7f1f","add_sources":["E01"],"add_notes":["Sam said Zapdemo will set up the next call with Tom."]}
 {"op":"ingest","source":"E01"}
-{"op":"create","id":"16c9c02c48","slot":"harbor_point.ip_range","deliverable":"Harbor Point camera IP range from Ken","kind":"install","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["Ken Ong still has to send the IP range and subnet for the 6 cameras."],"flags":[]}
-{"op":"create","id":"b3aad8dc79","slot":"harbor_point.cam3_relocation","deliverable":"Harbor Point: relocate cam 3 (rack in bay C)","kind":"layout","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["A new storage rack blocks camera 3; Wei Lin to propose a new spot."],"flags":[]}
-{"op":"create","id":"8a5a9fb60f","slot":"harbor_point.start_time_reply","deliverable":"Answer Raj: start 13:30 instead of 14:00?","kind":"reply","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["Raj asked whether the install can start at 13:30 instead of 14:00."],"flags":[]}
-{"op":"create","id":"7173cc1d4d","slot":"harbor_point.install","deliverable":"Harbor Point install: 6 cams, paint shop","kind":"install","counterparty":"harbor_point","owner":"weilin","due":"2026-11-03","due_at":"2026-10-21T09:00:00+08:00","status":"open","sources":["C02"],"created_from":"C02","notes":["On-site install of 6 cameras scheduled 3 Nov 14:00-16:30; not yet physically done."],"flags":[]}
+{"op":"create","id":"7173cc1d4d","slot":"harbor_point.install","deliverable":"Harbor Point install: 6 cams, paint shop","kind":"install","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["Install scheduled 3 Nov 14:00-16:30 SGT, 6 cameras."],"flags":[]}
+{"op":"create","id":"16c9c02c48","slot":"harbor_point.ip_range","deliverable":"Harbor Point camera IP range from Ken","kind":"install","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["Ken has yet to send the IP range and subnet."],"flags":[]}
+{"op":"create","id":"b3aad8dc79","slot":"harbor_point.cam3_relocation","deliverable":"Harbor Point: relocate cam 3 (rack in bay C)","kind":"layout","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["Storage rack blocks camera 3's view of bay C."],"flags":[]}
+{"op":"create","id":"8a5a9fb60f","slot":"harbor_point.start_time_reply","deliverable":"Answer Raj: start 13:30 instead of 14:00?","kind":"reply","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C02"],"created_from":"C02","notes":["Raj asked about starting at 13:30 instead of 14:00."],"flags":[]}
 {"op":"ingest","source":"C02"}
-{"op":"update","id":"7173cc1d4d","add_sources":["S001"],"add_notes":["Install is scheduled for Tue 3 Nov 14:00-16:30 SGT; not yet physically done."]}
-{"op":"update","id":"16c9c02c48","add_sources":["S001"],"add_notes":["Still waiting on Ken for the IP range for the cameras."]}
+{"op":"update","id":"7173cc1d4d","add_sources":["S001"],"add_notes":["Install scheduled for 3 Nov 14:00-16:30 SGT; not yet performed."],"due":"2026-11-03","due_at":"2026-10-21T09:05:00+08:00"}
+{"op":"update","id":"16c9c02c48","add_sources":["S001"],"add_notes":["IP range from Ken not yet received."]}
 {"op":"ingest","source":"S001"}
-{"op":"update","id":"16c9c02c48","add_sources":["E02"],"add_notes":["Wei Lin asked Ken for the IP range; not yet received per this source."],"due":"2026-11-03","due_at":"2026-10-21T10:30:00+08:00"}
+{"op":"update","id":"16c9c02c48","add_sources":["E02"],"add_notes":["Wei Lin asked Ken Ong for the IP range, subnet mask and gateway; not yet received."]}
+{"op":"update","id":"7173cc1d4d","add_sources":["E02"],"add_notes":["On-site install of 6 cameras is scheduled for Tue 3 Nov at 14:00."]}
 {"op":"ingest","source":"E02"}
-{"op":"update","id":"35efac7f1f","add_sources":["E03"],"add_notes":["Maria says Tom is free Friday afternoon; Zapdemo needs to confirm the call."]}
-{"op":"update","id":"a9227252ec","add_sources":["E03"],"add_notes":["Maria asks for a rough cost estimate for the dock cameras, needed for her VP."]}
+{"op":"update","id":"a9227252ec","add_sources":["E03"],"add_notes":["Maria asks for a rough cost for the dock cameras."]}
+{"op":"update","id":"35efac7f1f","add_sources":["E03"],"add_notes":["Maria offers Friday afternoon for a call including Tom."]}
 {"op":"ingest","source":"E03"}
-{"op":"create","id":"601a2158f7","slot":"crestline.clash","deliverable":"Resolve clash: Crestline call vs Harbor Point install (3 Nov)","kind":"booking","counterparty":"crestline","owner":"dana","due":"2026-11-03","due_at":"2026-10-21T16:00:00-05:00","status":"open","sources":["C03"],"created_from":"C03","notes":["Engineer call booked on 3 Nov; Wei Lin was not copied on the one-pager email, so the clash concerns Wei Lin's availability."],"flags":[]}
-{"op":"create","id":"aec4099af8","slot":"crestline.engineer_call","deliverable":"Crestline engineer call (3 Nov 15:00 SGT)","kind":"booking","counterparty":"crestline","owner":"dana","due":"2026-11-03","due_at":"2026-10-21T16:00:00-05:00","status":"done","sources":["C03"],"created_from":"C03","notes":["Engineer call with Farah is booked for Tuesday 3 Nov at 15:00 Singapore time."],"flags":[]}
-{"op":"create","id":"b3a8d80bb0","slot":"crestline.onepager","deliverable":"Crestline one-pager","kind":"onepager","counterparty":"crestline","owner":"priya","due":"2026-11-03","due_at":"2026-10-21T16:00:00-05:00","status":"open","sources":["C03"],"created_from":"C03","notes":["One-pager promised to Farah by email before the 3 Nov call."],"flags":[]}
-{"op":"create","id":"91ae534556","slot":"crestline.send_onepager","deliverable":"Send Crestline one-pager to Farah","kind":"followup","counterparty":"crestline","owner":"dana","due":"2026-11-03","due_at":"2026-10-21T16:00:00-05:00","status":"open","sources":["C03"],"created_from":"C03","notes":["Source does not show the one-pager was sent; it is owed before the 3 Nov call."],"flags":[]}
-{"op":"create","id":"0cc2b9431a","slot":"crestline.demo_progress","deliverable":"Demo floor-by-floor progress tracking on Crestline call","kind":"pilot","counterparty":"crestline","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C03"],"created_from":"C03","notes":["Farah wants to track fit-out progress floor by floor; no demo date stated in the source."],"flags":[]}
+{"op":"create","id":"aec4099af8","slot":"crestline.engineer_call","deliverable":"Crestline engineer call (3 Nov 15:00 SGT)","kind":"booking","counterparty":"crestline","owner":"dana","due":"2026-11-03","due_at":"2026-10-21T16:00:00-05:00","status":"done","sources":["C03"],"created_from":"C03","notes":["Engineer call with Farah booked for 3 Nov 15:00 Singapore time."],"flags":[]}
+{"op":"create","id":"b3a8d80bb0","slot":"crestline.onepager","deliverable":"Crestline one-pager","kind":"onepager","counterparty":"crestline","owner":"priya","due":null,"due_at":null,"status":"open","sources":["C03"],"created_from":"C03","notes":["One-pager promised to Farah before the 3 Nov call."],"flags":[]}
+{"op":"create","id":"91ae534556","slot":"crestline.send_onepager","deliverable":"Send Crestline one-pager to Farah","kind":"followup","counterparty":"crestline","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C03"],"created_from":"C03","notes":["One-pager to be emailed to Farah before the call; Sam copied, not Wei Lin."],"flags":[]}
 {"op":"ingest","source":"C03"}
-{"op":"update","id":"601a2158f7","add_sources":["S002"],"add_notes":["Wei Lin needs to be on the 3 Nov Crestline call with Farah, which Dana booked."]}
+{"op":"update","id":"aec4099af8","add_sources":["S002"],"add_notes":["Dana booked the Crestline call with Farah for Tue 3 Nov 15:00 SGT; Wei Lin needed."]}
 {"op":"ingest","source":"S002"}
-{"op":"update","id":"a9227252ec","add_sources":["S003"],"add_notes":["Sam will do the price for Northwind, due Thursday."]}
-{"op":"update","id":"184d262a60","add_sources":["S003"],"add_notes":["Wei Lin asked to do the Northwind layout, due Thursday with the price."]}
+{"op":"update","id":"a9227252ec","add_sources":["S003"],"add_notes":["Sam will do the price for Northwind, wanted by Thursday."]}
+{"op":"update","id":"184d262a60","add_sources":["S003"],"add_notes":["Sam asks Wei Lin to do the layout; Northwind wants it by Thursday."]}
 {"op":"ingest","source":"S003"}
-{"op":"create","id":"a2d9f52dc3","slot":"internal.reimburse_weilin","deliverable":"Approve $640 reimbursement to Wei Lin","kind":"approval","counterparty":"internal","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C10"],"created_from":"C10","notes":["Wei Lin's $640 site-trip expense needs Sam's approval before reimbursement."],"flags":[]}
-{"op":"update","id":"84e5515f15","add_sources":["C10"],"add_notes":["Nobody knows how deploy-api alerts were set up; alex is on leave, so documentation is needed."]}
+{"op":"create","id":"a2d9f52dc3","slot":"internal.reimburse_weilin","deliverable":"Approve $640 reimbursement to Wei Lin","kind":"approval","counterparty":"internal","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C10"],"created_from":"C10","notes":["Reimbursement of $640 needs Sam's approval."],"flags":[]}
+{"op":"update","id":"84e5515f15","add_sources":["C10"],"add_notes":["Deploy server went down Tuesday night; alert setup undocumented."]}
+{"op":"create","id":"601a2158f7","slot":"crestline.clash","deliverable":"Resolve clash: Crestline call vs Harbor Point install (3 Nov)","kind":"booking","counterparty":"crestline","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C10"],"created_from":"C10","notes":["Crestline call 3 Nov 15:00 SGT overlaps Harbor Point install 14:00-16:30 SGT."],"flags":[]}
+{"op":"update","id":"7173cc1d4d","add_sources":["C10"],"add_notes":["Install scheduled for Tue 3 Nov."]}
 {"op":"ingest","source":"C10"}
-{"op":"update","id":"a2d9f52dc3","add_sources":["S009"],"add_notes":["Wei Lin paid $640 for taxi and hotel and asks who approves the reimbursement; no approval yet."]}
+{"op":"update","id":"a2d9f52dc3","add_sources":["S009"],"add_notes":["Wei Lin paid $640 for taxi and hotel and asks who approves the reimbursement."]}
 {"op":"ingest","source":"S009"}
-{"op":"update","id":"91ae534556","add_sources":["E05"],"add_notes":["Farah asks Zapdemo to send the one-pager before the 3 Nov call; no sent email shown."]}
+{"op":"update","id":"91ae534556","add_sources":["E05"],"add_notes":["Farah asks for the one-pager to be sent before the 3 Nov call at 15:00."]}
 {"op":"ingest","source":"E05"}
-{"op":"create","id":"b68f7dc802","slot":"bayview.casestudy","deliverable":"Bayview case study: draft + photos to Lisa","kind":"casestudy","counterparty":"bayview","owner":"priya","due":null,"due_at":null,"status":"open","sources":["C08"],"created_from":"C08","notes":["Case study draft is ready; Bayview must approve before it goes public."],"flags":[]}
-{"op":"create","id":"3ec65c1e02","slot":"bayview.clip","deliverable":"30s night-shift clip for Monday post","kind":"clip","counterparty":"bayview","owner":"weilin","due":"2026-10-26","due_at":"2026-10-22T09:00:00+08:00","status":"open","sources":["C08"],"created_from":"C08","notes":["Priya needs a 30-second night-shift clip from Wei Lin for the Monday LinkedIn post."],"flags":[]}
-{"op":"update","id":"da00b3a116","add_sources":["C08"],"add_notes":["Northwind one-pager depends on someone telling Priya what Maria asked for."]}
+{"op":"create","id":"b68f7dc802","slot":"bayview.casestudy","deliverable":"Bayview case study: draft + photos to Lisa","kind":"casestudy","counterparty":"bayview","owner":"priya","due":null,"due_at":null,"status":"open","sources":["C08"],"created_from":"C08","notes":["Draft ready; Bayview approval needed before publishing."],"flags":[]}
+{"op":"create","id":"3ec65c1e02","slot":"bayview.clip","deliverable":"30s night-shift clip for Monday post","kind":"clip","counterparty":"bayview","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C08"],"created_from":"C08","notes":["Clip needed for the LinkedIn post planned for Monday 26 Oct."],"flags":[]}
+{"op":"update","id":"da00b3a116","add_sources":["C08"],"add_notes":["Priya needs Maria's request details to make it."]}
 {"op":"ingest","source":"C08"}
-{"op":"create","id":"f3804a88c5","slot":"cedar.numbers_refs","deliverable":"Cedar Fund: pilot numbers + 2 references","kind":"investor","counterparty":"cedar","owner":"sam","due":"2026-10-28","due_at":"2026-10-22T09:00:00-05:00","status":"open","sources":["C06"],"created_from":"C06","notes":["Rachel Kim wants updated pilot numbers and 2 customer references by 28 Oct; references need customer permission first."],"flags":[]}
-{"op":"create","id":"a3229fed02","slot":"cedar.engineer_call","deliverable":"Book Cedar call: Rachel with an engineer","kind":"booking","counterparty":"cedar","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C06"],"created_from":"C06","notes":["Rachel wants a 20-minute call with the engineer; no booking mentioned yet."],"flags":[]}
+{"op":"create","id":"f3804a88c5","slot":"cedar.numbers_refs","deliverable":"Cedar Fund: pilot numbers + 2 references","kind":"investor","counterparty":"cedar","owner":"sam","due":"2026-10-28","due_at":"2026-10-22T09:00:00-05:00","status":"open","sources":["C06"],"created_from":"C06","notes":["References need customer permission before sharing any contact."],"flags":[]}
+{"op":"create","id":"a3229fed02","slot":"cedar.engineer_call","deliverable":"Book Cedar call: Rachel with an engineer","kind":"booking","counterparty":"cedar","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C06"],"created_from":"C06","notes":["Requested by Rachel; not yet booked."],"flags":[]}
 {"op":"ingest","source":"C06"}
-{"op":"update","id":"16c9c02c48","add_sources":["E04"],"add_notes":["Ken Ong sent the IP range for the 6 cameras."],"status":"done"}
-{"op":"create","id":"6a5790396f","slot":"harbor_point.vlan_reply","deliverable":"Answer Ken: is a VLAN needed?","kind":"reply","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["E04"],"created_from":"E04","notes":["Ken Ong asks whether Zapdemo needs a VLAN; no reply yet."],"flags":[]}
+{"op":"update","id":"16c9c02c48","add_sources":["E04"],"add_notes":["Ken Ong supplied the IP range for the cameras."],"status":"done"}
+{"op":"create","id":"6a5790396f","slot":"harbor_point.vlan_reply","deliverable":"Answer Ken: is a VLAN needed?","kind":"reply","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["E04"],"created_from":"E04","notes":["Ken asks whether a VLAN is needed; reply owed."],"flags":[]}
 {"op":"ingest","source":"E04"}
-{"op":"create","id":"52a1cfd904","slot":"jordan_lee.onboarding","deliverable":"Onboard Jordan: accounts, laptop, first task, buddy","kind":"onboarding","counterparty":"jordan_lee","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C04"],"created_from":"C04","notes":["Jordan needs Slack, Linear, email accounts, laptop, first task and buddy before starting Mon 26 Oct."],"flags":[]}
-{"op":"create","id":"46192cbd69","slot":"jordan_lee.reply","deliverable":"Reply to Jordan: where to go Mon 09:00","kind":"reply","counterparty":"jordan_lee","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C04"],"created_from":"C04","notes":["Sam promised to send Jordan logins and first-week plan before the weekend."],"flags":[]}
+{"op":"create","id":"52a1cfd904","slot":"jordan_lee.onboarding","deliverable":"Onboard Jordan: accounts, laptop, first task, buddy","kind":"onboarding","counterparty":"jordan_lee","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C04"],"created_from":"C04","notes":["Jordan starts Mon 26 Oct 9am Austin; accounts, laptop, first task needed; Wei Lin is buddy."],"flags":[]}
+{"op":"create","id":"46192cbd69","slot":"jordan_lee.reply","deliverable":"Reply to Jordan: where to go Mon 09:00","kind":"reply","counterparty":"jordan_lee","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C04"],"created_from":"C04","notes":["Sam promised logins and first-week plan before the weekend."],"flags":[]}
 {"op":"ingest","source":"C04"}
-{"op":"update","id":"184d262a60","add_sources":["S004"],"add_notes":["Wei Lin says Northwind layout v2 is done and in Drive."],"status":"done"}
+{"op":"update","id":"184d262a60","add_sources":["S004"],"add_notes":["Wei Lin finished layout v2 and put it in Drive."],"status":"done"}
 {"op":"update","id":"a9227252ec","add_sources":["S004"]}
 {"op":"ingest","source":"S004"}
-{"op":"update","id":"52a1cfd904","add_sources":["S006"],"add_notes":["Set up accounts, laptop, first-week plan for Jordan Lee; Wei Lin is buddy. Starts Monday."]}
+{"op":"update","id":"52a1cfd904","add_sources":["S006"],"add_notes":["Accounts and first-week plan needed for Jordan, with Wei Lin as buddy."]}
 {"op":"ingest","source":"S006"}
-{"op":"update","id":"f3804a88c5","add_sources":["E08"],"add_notes":["Rachel asked for updated pilot numbers and 2 references by Wed 28 Oct."]}
-{"op":"update","id":"a3229fed02","add_sources":["E08"],"add_notes":["Rachel asked for a 20-minute call with an engineer; no booking mentioned yet."]}
+{"op":"update","id":"f3804a88c5","add_sources":["E08"],"add_notes":["Rachel Kim recaps updated pilot numbers and 2 references owed by Wed 28 Oct."]}
+{"op":"update","id":"a3229fed02","add_sources":["E08"],"add_notes":["Rachel asks for a 20-minute call with an engineer; not yet booked."]}
 {"op":"ingest","source":"E08"}
 {"op":"ingest","source":"S005"}
-{"op":"update","id":"b3aad8dc79","add_sources":["WA01"],"add_notes":["Raj asks whether camera 3 can move 2m left because a new rack blocks its spot; unanswered in this source."]}
+{"op":"update","id":"b3aad8dc79","add_sources":["WA01"],"add_notes":["Raj asks to move camera 3 two metres left onto the column because a rack blocks the spot."]}
 {"op":"ingest","source":"WA01"}
-{"op":"update","id":"8a5a9fb60f","add_sources":["WA02"],"add_notes":["Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet."]}
+{"op":"update","id":"8a5a9fb60f","add_sources":["WA02"],"add_notes":["Raj asks whether the team can start the install at 13:30 on Tuesday."]}
 {"op":"ingest","source":"WA02"}
-{"op":"create","id":"1dabedf067","slot":"bayview.glare","deliverable":"Bayview night glare false alerts (cams 2, 5)","kind":"pilot","counterparty":"bayview","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Night glare false alerts at Bayview need fixing; no fix date given."],"flags":[]}
-{"op":"create","id":"1486390443","slot":"bayview.pass_bar","deliverable":"Bayview pilot pass bar (signed)","kind":"approval","counterparty":"bayview","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Written pilot pass bar must be signed before pilot review; goes through Sam."],"flags":[]}
-{"op":"create","id":"92c7d9ee68","slot":"bayview.weekly_report","deliverable":"Bayview weekly Friday report","kind":"pilot","counterparty":"bayview","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Weekly report to Chris every Friday requested."],"flags":[]}
+{"op":"create","id":"1dabedf067","slot":"bayview.glare","deliverable":"Bayview night glare false alerts (cams 2, 5)","kind":"pilot","counterparty":"bayview","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Chris counted 14 false alerts on Wednesday night."],"flags":[]}
+{"op":"create","id":"1486390443","slot":"bayview.pass_bar","deliverable":"Bayview pilot pass bar (signed)","kind":"approval","counterparty":"bayview","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Pass bar goes through Sam."],"flags":[]}
+{"op":"create","id":"92c7d9ee68","slot":"bayview.weekly_report","deliverable":"Bayview weekly Friday report","kind":"pilot","counterparty":"bayview","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Weekly report requested each Friday."],"flags":[]}
 {"op":"ingest","source":"C05"}
-{"op":"update","id":"1dabedf067","add_sources":["E07"],"add_notes":["Night-glare false alerts at Bayview continue (14 last night) and need fixing."]}
-{"op":"update","id":"92c7d9ee68","add_sources":["E07"],"add_notes":["Chris asks for the weekly report by Friday (23 Oct, the email's own date)."],"due":"2026-10-23","due_at":"2026-10-23T07:05:00-05:00"}
+{"op":"update","id":"1dabedf067","add_sources":["E07"],"add_notes":["Chris reports 14 false alerts after 10pm; night lead starting to ignore them."]}
+{"op":"update","id":"92c7d9ee68","add_sources":["E07"],"add_notes":["Chris asks for the weekly report on Friday."]}
 {"op":"ingest","source":"E07"}
-{"op":"update","id":"1dabedf067","add_sources":["S014"],"add_notes":["Wei Lin is trying a night mask on cameras 2 and 5 to fix the 14 false night alerts."]}
+{"op":"update","id":"1dabedf067","add_sources":["S014"],"add_notes":["Wei Lin is trying a night mask on cams 2 and 5 to address 14 false alerts after 10pm."]}
 {"op":"ingest","source":"S014"}
-{"op":"update","id":"1486390443","add_sources":["S015"],"add_notes":["Written pilot pass bar must be signed before the Bayview review; assigned to Sam."]}
+{"op":"update","id":"1486390443","add_sources":["S015"],"add_notes":["Bayview wants the written pilot pass bar signed before the review; assigned to Sam."]}
 {"op":"ingest","source":"S015"}
 {"op":"ingest","source":"E13"}
-{"op":"update","id":"91ae534556","add_sources":["S016"],"add_notes":["Dana asks whether the Crestline one-pager was sent; no sent email is shown, so it is unconfirmed."]}
+{"op":"update","id":"91ae534556","add_sources":["S016"],"add_notes":["Dana asks whether the Crestline one-pager was sent; no confirmation given."]}
 {"op":"ingest","source":"S016"}
-{"op":"update","id":"b68f7dc802","add_sources":["E14"],"add_notes":["Lisa Park asks for the case study draft and the photo list to review."]}
+{"op":"update","id":"b68f7dc802","add_sources":["E14"],"add_notes":["Lisa Park will review the case study once sent the draft and the list of planned photos."]}
 {"op":"ingest","source":"E14"}
-{"op":"update","id":"0cc2b9431a","add_sources":["WA03"],"add_notes":["Farah asks that the engineer show floor-by-floor progress tracking on the call; not yet confirmed."]}
+{"op":"create","id":"0cc2b9431a","slot":"crestline.demo_progress","deliverable":"Demo floor-by-floor progress tracking on Crestline call","kind":"pilot","counterparty":"crestline","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["WA03"],"created_from":"WA03","notes":["Farah asks for a floor-by-floor progress tracking demo by the engineer on the call."],"flags":[]}
 {"op":"ingest","source":"WA03"}
 {"op":"create","id":"908bc52ca9","slot":"ridgeline.price","deliverable":"Ridgeline ballpark price range for Omar","kind":"price","counterparty":"ridgeline","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C07"],"created_from":"C07","notes":["Omar asked for a price range; pricing comes from Sam."],"flags":[]}
-{"op":"create","id":"8b2f334ef4","slot":"ridgeline.site_visit","deliverable":"Ridgeline site visit Tue 27 / Wed 28 AM","kind":"booking","counterparty":"ridgeline","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C07"],"created_from":"C07","notes":["Site visit requested for next week; nothing booked yet, Dana to come back to Omar."],"flags":[]}
+{"op":"create","id":"8b2f334ef4","slot":"ridgeline.site_visit","deliverable":"Ridgeline site visit Tue 27 / Wed 28 AM","kind":"booking","counterparty":"ridgeline","owner":"dana","due":null,"due_at":null,"status":"open","sources":["C07"],"created_from":"C07","notes":["Site visit requested for next week; nothing booked yet."],"flags":[]}
 {"op":"ingest","source":"C07"}
-{"op":"update","id":"8b2f334ef4","add_sources":["S012"],"add_notes":["Dana will check calendars; the site visit is not yet booked."]}
-{"op":"update","id":"908bc52ca9","add_sources":["S012"],"add_notes":["Ridgeline wants a ballpark price; no price has been given yet."]}
+{"op":"update","id":"8b2f334ef4","add_sources":["S012"],"add_notes":["Dana will check calendars for a Ridgeline site visit next week; not yet booked."]}
+{"op":"update","id":"908bc52ca9","add_sources":["S012"],"add_notes":["Ridgeline wants a ballpark price."]}
 {"op":"ingest","source":"S012"}
-{"op":"update","id":"46192cbd69","add_sources":["E06"],"add_notes":["Jordan asks for logins and where to go at 9 on Monday; Zapdemo owes an answer."]}
+{"op":"update","id":"46192cbd69","add_sources":["E06"],"add_notes":["Jordan asks for logins and first-day details before Monday."]}
+{"op":"update","id":"52a1cfd904","add_sources":["E06"],"add_notes":["Jordan has received no logins or first-day details."]}
 {"op":"ingest","source":"E06"}
-{"op":"update","id":"8b2f334ef4","add_sources":["E09"],"add_notes":["Omar asks for a site visit Tuesday or Wednesday next week, mornings preferred; not yet booked."]}
-{"op":"update","id":"908bc52ca9","add_sources":["E09"],"add_notes":["Omar asks for a ballpark price to help him get budget."]}
+{"op":"update","id":"8b2f334ef4","add_sources":["E09"],"add_notes":["Omar asks for a site visit Tuesday or Wednesday next week, mornings preferred."]}
+{"op":"update","id":"908bc52ca9","add_sources":["E09"],"add_notes":["Omar asks for a ballpark price to get budget."]}
 {"op":"ingest","source":"E09"}
-{"op":"update","id":"3ec65c1e02","add_sources":["S010"],"add_notes":["Priya asks Wei Lin for a 30s Bayview night-shift clip for Monday's post; no firm time given."]}
+{"op":"update","id":"3ec65c1e02","add_sources":["S010"],"add_notes":["Priya asks Wei Lin for a 30s night-shift Bayview clip for Monday's post."]}
 {"op":"ingest","source":"S010"}
 {"op":"update","id":"da00b3a116","add_sources":["S011"],"add_notes":["Priya offers to make the Northwind one-pager but needs to know what Maria asked for."]}
 {"op":"ingest","source":"S011"}
-{"op":"update","id":"908bc52ca9","add_sources":["S013"],"add_notes":["Sam says he will handle Ridgeline pricing after landing; no date given."]}
+{"op":"update","id":"908bc52ca9","add_sources":["S013"],"add_notes":["Sam says he will handle Ridgeline pricing after he lands."]}
 {"op":"ingest","source":"S013"}
-{"op":"update","id":"1dabedf067","add_sources":["WA04"],"add_notes":["Cam 2 alerts improved; cam 5 false alerts still bad, so the glare fix remains owed."]}
+{"op":"update","id":"1dabedf067","add_sources":["WA04"],"add_notes":["Alerts improved on cam 2 but still bad on cam 5 at Bayview."]}
 {"op":"ingest","source":"WA04"}
-{"op":"create","id":"9a98b2c1a2","slot":"optix.po","deliverable":"Optix PO by Tue 27 Oct 17:00 (50% upfront)","kind":"payment","counterparty":"optix","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C09"],"created_from":"C09","notes":["Optix needs a PO by Tuesday 27 Oct to hold stock; 50% upfront payment requested."],"flags":[]}
-{"op":"create","id":"8cadc92446","slot":"optix.model_check","deliverable":"Confirm Optix OX-4K matches the Northwind layout","kind":"layout","counterparty":"optix","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C09"],"created_from":"C09","notes":["Wei Lin must confirm the quoted camera model matches his layout before the PO."],"flags":[]}
+{"op":"create","id":"9a98b2c1a2","slot":"optix.po","deliverable":"Optix PO by Tue 27 Oct 17:00 (50% upfront)","kind":"payment","counterparty":"optix","owner":"sam","due":"2026-10-27","due_at":"2026-10-24T09:00:00-05:00","status":"open","sources":["C09"],"created_from":"C09","notes":["Optix needs a PO by 27 Oct to hold stock; 50% upfront."],"flags":[]}
+{"op":"create","id":"8cadc92446","slot":"optix.model_check","deliverable":"Confirm Optix OX-4K matches the Northwind layout","kind":"layout","counterparty":"optix","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C09"],"created_from":"C09","notes":["Wei Lin must confirm the model matches his layout; he hasn't seen the quote."],"flags":[]}
 {"op":"ingest","source":"C09"}
-{"op":"update","id":"9a98b2c1a2","add_sources":["E10"],"add_notes":["Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment required."]}
+{"op":"update","id":"9a98b2c1a2","add_sources":["E10"],"add_notes":["Optix needs a PO by Tue 27 Oct to hold stock for 12 OX-4K cameras, $4,680 total, 50% upfront."]}
 {"op":"ingest","source":"E10"}
-{"op":"create","id":"75ec07a571","slot":"northwind.maria_reply","deliverable":"Reply to Maria's chase (Northwind)","kind":"reply","counterparty":"northwind","owner":"sam","due":null,"due_at":null,"status":"open","sources":["E15"],"created_from":"E15","notes":["Maria chases Sam for a reply on whether the deal is still on; she needs the number for her VP."],"flags":[]}
 {"op":"update","id":"a9227252ec","add_sources":["E15"]}
+{"op":"create","id":"75ec07a571","slot":"northwind.maria_reply","deliverable":"Reply to Maria's chase (Northwind)","kind":"reply","counterparty":"northwind","owner":"sam","due":null,"due_at":null,"status":"open","sources":["E15"],"created_from":"E15","notes":["Maria chased Sam asking whether the project is still on."],"flags":[]}
 {"op":"ingest","source":"E15"}
+{"op":"update","id":"7173cc1d4d","add_sources":["CAL01"]}
 {"op":"ingest","source":"CAL01"}
-{"op":"update","id":"601a2158f7","add_sources":["CAL02"],"add_notes":["Calendar shows a Crestline Data Centers call on 3 Nov with Wei Lin attending, which may double-book Wei Lin."]}
+{"op":"update","id":"aec4099af8","add_sources":["CAL02"],"add_notes":["Call with Dana and Wei Lin is on the calendar for 3 Nov 15:00-15:45 (+08:00)."]}
 {"op":"ingest","source":"CAL02"}
 {"op":"ingest","source":"CAL03"}
 {"op":"ingest","source":"CAL04"}
-{"op":"update","id":"92c7d9ee68","add_sources":["CAL05"],"add_notes":["Calendar event recurring every Friday marks the Bayview weekly report as due; no explicit date given in source."]}
+{"op":"update","id":"92c7d9ee68","add_sources":["CAL05"],"add_notes":["Recurring Friday event; next on 2026-10-30 at 17:00 +08:00, attendee weilin."]}
 {"op":"ingest","source":"CAL05"}
-{"op":"update","id":"f3804a88c5","add_sources":["CAL06"],"add_notes":["Calendar event on 28 Oct 09:00-09:30 marks deadline for pilot numbers and references for Cedar Fund."]}
+{"op":"update","id":"f3804a88c5","add_sources":["CAL06"],"add_notes":["Calendar event on 28 Oct 09:00 marks the deadline for numbers and references to Cedar Fund."]}
 {"op":"ingest","source":"CAL06"}
-{"op":"update","id":"9a98b2c1a2","add_sources":["CAL07"],"add_notes":["Calendar shows an Optix PO deadline on Tue 27 Oct 17:00, attendee sam."],"due":"2026-10-27","due_at":"2026-10-24T15:00:00-05:00"}
+{"op":"update","id":"9a98b2c1a2","add_sources":["CAL07"],"add_notes":["Calendar event for the Optix PO deadline on 2026-10-27 at 17:00, attendee Sam."]}
 {"op":"ingest","source":"CAL07"}
 {"op":"update","id":"184d262a60","add_sources":["L-ZAP-101"]}
 {"op":"ingest","source":"L-ZAP-101"}
+{"op":"update","id":"a9227252ec","add_sources":["L-ZAP-102"]}
 {"op":"ingest","source":"L-ZAP-102"}
 {"op":"update","id":"184d262a60","add_sources":["L-ZAP-103"],"add_flags":["duplicate:L-ZAP-103"]}
 {"op":"ingest","source":"L-ZAP-103"}
-{"op":"update","id":"35efac7f1f","add_sources":["L-ZAP-104"],"add_notes":["Linear ticket is Todo, unassigned, no due date; booking not yet done."]}
+{"op":"update","id":"35efac7f1f","add_sources":["L-ZAP-104"],"add_notes":["Linear ticket ZAP-104 is unassigned and in Todo status."]}
 {"op":"ingest","source":"L-ZAP-104"}
-{"op":"update","id":"da00b3a116","add_sources":["L-ZAP-105"],"add_notes":["Linear ticket is in Backlog, unassigned, with no due date."]}
+{"op":"update","id":"da00b3a116","add_sources":["L-ZAP-105"],"add_notes":["Linear ticket ZAP-105 in Backlog, unassigned, no due date."]}
 {"op":"ingest","source":"L-ZAP-105"}
-{"op":"update","id":"b3aad8dc79","add_sources":["L-ZAP-110"],"add_notes":["Camera 3 relocation is in progress, assigned to weilin; waiting on Raj's photos."],"due":"2026-11-02","due_at":"2026-10-24T15:00:00-05:00"}
+{"op":"update","id":"b3aad8dc79","add_sources":["L-ZAP-110"],"add_notes":["In Progress, assigned to weilin; waiting on Raj's photos."],"due":"2026-11-02","due_at":"2026-10-24T15:00:00-05:00"}
 {"op":"ingest","source":"L-ZAP-110"}
 {"op":"update","id":"16c9c02c48","add_sources":["L-ZAP-111"],"due":"2026-11-02","due_at":"2026-10-24T15:00:00-05:00"}
 {"op":"ingest","source":"L-ZAP-111"}
-{"op":"update","id":"b3a8d80bb0","add_sources":["L-ZAP-120"],"add_notes":["Crestline one-pager is in Todo, unassigned, due 2026-11-02, promised by Dana."],"due":"2026-11-02","due_at":"2026-10-24T15:00:00-05:00"}
+{"op":"update","id":"b3a8d80bb0","add_sources":["L-ZAP-120"],"add_notes":["Ticket is unassigned, status Todo, due 2026-11-02; promised by Dana."],"due":"2026-11-02","due_at":"2026-10-24T15:00:00-05:00"}
 {"op":"ingest","source":"L-ZAP-120"}
-{"op":"update","id":"601a2158f7","add_sources":["L-ZAP-121"],"add_notes":["Ticket says Crestline call clashes with Harbor install; status Backlog, unassigned, no due date."]}
+{"op":"update","id":"601a2158f7","add_sources":["L-ZAP-121"],"add_notes":["Ticket ZAP-121 is unassigned in Backlog with no due date."]}
 {"op":"ingest","source":"L-ZAP-121"}
-{"op":"update","id":"52a1cfd904","add_sources":["L-ZAP-130"],"add_notes":["Onboarding ticket for Jordan Lee (starts Mon 26 Oct); status Todo, unassigned."],"due":"2026-10-25","due_at":"2026-10-24T15:00:00-05:00"}
+{"op":"update","id":"52a1cfd904","add_sources":["L-ZAP-130"],"add_notes":["Ticket unassigned, status Todo, due 2026-10-25; Jordan starts Mon 26 Oct."],"due":"2026-10-25","due_at":"2026-10-24T15:00:00-05:00"}
 {"op":"ingest","source":"L-ZAP-130"}
 {"op":"update","id":"1dabedf067","add_sources":["L-ZAP-140"]}
 {"op":"ingest","source":"L-ZAP-140"}
-{"op":"update","id":"1486390443","add_sources":["L-ZAP-141"],"add_notes":["Ticket for the written pilot pass bar is Todo, unassigned, with no due date."]}
+{"op":"update","id":"1486390443","add_sources":["L-ZAP-141"],"add_notes":["Linear ticket ZAP-141 is Todo, unassigned, no due date."]}
 {"op":"ingest","source":"L-ZAP-141"}
-{"op":"update","id":"92c7d9ee68","add_sources":["L-ZAP-142"],"add_notes":["Linear ticket for Bayview weekly report is in Backlog, unassigned, no due date."]}
+{"op":"update","id":"92c7d9ee68","add_sources":["L-ZAP-142"],"add_notes":["Ticket in Backlog, unassigned, no due date."]}
 {"op":"ingest","source":"L-ZAP-142"}
-{"op":"update","id":"f3804a88c5","add_sources":["L-ZAP-150"],"add_notes":["Ticket assigned to Sam, status Todo, due 2026-10-28; asks customers first."]}
+{"op":"update","id":"f3804a88c5","add_sources":["L-ZAP-150"],"add_notes":["Due 2026-10-28; note says ask customers first."]}
 {"op":"ingest","source":"L-ZAP-150"}
-{"op":"update","id":"a2d9f52dc3","add_sources":["L-ZAP-160"],"add_notes":["Linear ticket to reimburse Wei Lin $640 is in Backlog, unassigned, with no due date."]}
+{"op":"update","id":"a2d9f52dc3","add_sources":["L-ZAP-160"],"add_notes":["Linear ticket in Backlog, unassigned, no due date."]}
 {"op":"ingest","source":"L-ZAP-160"}
-{"op":"update","id":"84e5515f15","add_sources":["L-ZAP-161"],"add_notes":["Ticket in Backlog, unassigned, no due date; Alex is on leave."]}
+{"op":"update","id":"84e5515f15","add_sources":["L-ZAP-161"],"add_notes":["Ticket in Backlog, unassigned; Alex on leave."]}
 {"op":"ingest","source":"L-ZAP-161"}
-{"op":"update","id":"b68f7dc802","add_sources":["L-ZAP-170"],"add_notes":["Case study draft and photos for Lisa Park to approve; status In Progress, no due date."]}
+{"op":"update","id":"b68f7dc802","add_sources":["L-ZAP-170"],"add_notes":["Bayview case study approval ticket in progress, assigned to Priya; Lisa wants draft and photos."]}
 {"op":"ingest","source":"L-ZAP-170"}
-{"op":"update","id":"3ec65c1e02","add_sources":["L-ZAP-171"],"add_notes":["30s night-shift clip for Monday post is Todo, unassigned, due 2026-10-26."]}
+{"op":"update","id":"3ec65c1e02","add_sources":["L-ZAP-171"],"add_notes":["Ticket is unassigned, status Todo, due 2026-10-26."],"due":"2026-10-26","due_at":"2026-10-24T15:00:00-05:00"}
 {"op":"ingest","source":"L-ZAP-171"}
-{"op":"update","id":"601a2158f7","add_sources":["CAL01"],"add_flags":["clash"]}
+{"op":"update","id":"601a2158f7","add_sources":["CAL01","CAL02"],"add_flags":["clash"]}
 {"op":"update","id":"a9227252ec","status":"waiting_owner"}
+{"op":"update","id":"75ec07a571","status":"done"}
 {"op":"update","id":"a2d9f52dc3","status":"waiting_owner"}
 {"op":"update","id":"8cadc92446","status":"waiting_owner"}
-{"op":"update","id":"75ec07a571","status":"done"}
 {"op":"update","id":"601a2158f7","status":"waiting_owner"}

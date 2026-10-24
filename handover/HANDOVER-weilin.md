@@ -17,45 +17,47 @@ Open: 11 · Done: 2
 - Crestline Data Centers call · Tue 03 Nov 15:00-15:45 UTC+08:00 · **CLASH with Harbor Point Yard install**
 
 ## Open
-- **Bayview weekly Friday report** **OVERDUE** · due Fri 23 Oct · open · sources: C05, E07, CAL05, L-ZAP-142
-  - Weekly report to Chris every Friday requested.
-  - Chris asks for the weekly report by Friday (23 Oct, the email's own date).
-  - Calendar event recurring every Friday marks the Bayview weekly report as due; no explicit date given in source.
-  - Linear ticket for Bayview weekly report is in Backlog, unassigned, no due date.
-- **Onboard Jordan: accounts, laptop, first task, buddy** · due Sun 25 Oct · open · sources: C04, S006, L-ZAP-130
-  - Jordan needs Slack, Linear, email accounts, laptop, first task and buddy before starting Mon 26 Oct.
-  - Set up accounts, laptop, first-week plan for Jordan Lee; Wei Lin is buddy. Starts Monday.
-  - Onboarding ticket for Jordan Lee (starts Mon 26 Oct); status Todo, unassigned.
+- **Onboard Jordan: accounts, laptop, first task, buddy** · due Sun 25 Oct · open · sources: C04, S006, E06, L-ZAP-130
+  - Jordan starts Mon 26 Oct 9am Austin; accounts, laptop, first task needed; Wei Lin is buddy.
+  - Accounts and first-week plan needed for Jordan, with Wei Lin as buddy.
+  - Jordan has received no logins or first-day details.
+  - Ticket unassigned, status Todo, due 2026-10-25; Jordan starts Mon 26 Oct.
 - **30s night-shift clip for Monday post** · due Mon 26 Oct · open · sources: C08, S010, L-ZAP-171
-  - Priya needs a 30-second night-shift clip from Wei Lin for the Monday LinkedIn post.
-  - Priya asks Wei Lin for a 30s Bayview night-shift clip for Monday's post; no firm time given.
-  - 30s night-shift clip for Monday post is Todo, unassigned, due 2026-10-26.
+  - Clip needed for the LinkedIn post planned for Monday 26 Oct.
+  - Priya asks Wei Lin for a 30s night-shift Bayview clip for Monday's post.
+  - Ticket is unassigned, status Todo, due 2026-10-26.
 - **Harbor Point: relocate cam 3 (rack in bay C)** · due Mon 02 Nov · open · sources: C02, WA01, L-ZAP-110
-  - A new storage rack blocks camera 3; Wei Lin to propose a new spot.
-  - Raj asks whether camera 3 can move 2m left because a new rack blocks its spot; unanswered in this source.
-  - Camera 3 relocation is in progress, assigned to weilin; waiting on Raj's photos.
-- **Harbor Point install: 6 cams, paint shop** · due Tue 03 Nov · open · sources: C02, S001
-  - On-site install of 6 cameras scheduled 3 Nov 14:00-16:30; not yet physically done.
-  - Install is scheduled for Tue 3 Nov 14:00-16:30 SGT; not yet physically done.
+  - Storage rack blocks camera 3's view of bay C.
+  - Raj asks to move camera 3 two metres left onto the column because a rack blocks the spot.
+  - In Progress, assigned to weilin; waiting on Raj's photos.
+- **Harbor Point install: 6 cams, paint shop** · due Tue 03 Nov · open · sources: C02, S001, E02, C10, CAL01
+  - Install scheduled 3 Nov 14:00-16:30 SGT, 6 cameras.
+  - Install scheduled for 3 Nov 14:00-16:30 SGT; not yet performed.
+  - On-site install of 6 cameras is scheduled for Tue 3 Nov at 14:00.
+  - Install scheduled for Tue 3 Nov.
 - **Confirm Optix OX-4K matches the Northwind layout** · due - · waiting_owner · sources: C09
-  - Wei Lin must confirm the quoted camera model matches his layout before the PO.
+  - Wei Lin must confirm the model matches his layout; he hasn't seen the quote.
 - **Bayview night glare false alerts (cams 2, 5)** · due - · open · sources: C05, E07, S014, WA04, L-ZAP-140
-  - Night glare false alerts at Bayview need fixing; no fix date given.
-  - Night-glare false alerts at Bayview continue (14 last night) and need fixing.
-  - Wei Lin is trying a night mask on cameras 2 and 5 to fix the 14 false night alerts.
-  - Cam 2 alerts improved; cam 5 false alerts still bad, so the glare fix remains owed.
+  - Chris counted 14 false alerts on Wednesday night.
+  - Chris reports 14 false alerts after 10pm; night lead starting to ignore them.
+  - Wei Lin is trying a night mask on cams 2 and 5 to address 14 false alerts after 10pm.
+  - Alerts improved on cam 2 but still bad on cam 5 at Bayview.
+- **Bayview weekly Friday report** · due - · open · sources: C05, E07, CAL05, L-ZAP-142
+  - Weekly report requested each Friday.
+  - Chris asks for the weekly report on Friday.
+  - Recurring Friday event; next on 2026-10-30 at 17:00 +08:00, attendee weilin.
+  - Ticket in Backlog, unassigned, no due date.
 - **Answer Raj: start 13:30 instead of 14:00?** · due - · open · sources: C02, WA02
-  - Raj asked whether the install can start at 13:30 instead of 14:00.
-  - Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet.
+  - Raj asked about starting at 13:30 instead of 14:00.
+  - Raj asks whether the team can start the install at 13:30 on Tuesday.
 - **Answer Ken: is a VLAN needed?** · due - · open · sources: E04
-  - Ken Ong asks whether Zapdemo needs a VLAN; no reply yet.
-- **Demo floor-by-floor progress tracking on Crestline call** · due - · open · sources: C03, WA03
-  - Farah wants to track fit-out progress floor by floor; no demo date stated in the source.
-  - Farah asks that the engineer show floor-by-floor progress tracking on the call; not yet confirmed.
+  - Ken asks whether a VLAN is needed; reply owed.
+- **Demo floor-by-floor progress tracking on Crestline call** · due - · open · sources: WA03
+  - Farah asks for a floor-by-floor progress tracking demo by the engineer on the call.
 - **Document how deploy alerts are wired** · due - · open · sources: S007, C10, L-ZAP-161
-  - Wei Lin asks who knows how deploy-api alerts are wired; Alex set them up. No doc commitment stated yet.
-  - Nobody knows how deploy-api alerts were set up; alex is on leave, so documentation is needed.
-  - Ticket in Backlog, unassigned, no due date; Alex is on leave.
+  - Wei Lin asks how deploy-api alerts are set up after an overnight outage; only Alex knew.
+  - Deploy server went down Tuesday night; alert setup undocumented.
+  - Ticket in Backlog, unassigned; Alex on leave.
   - artifact: `outbox/deploy-alerts-known-facts.md`
 
 ## Done

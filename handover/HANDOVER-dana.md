@@ -14,30 +14,28 @@ Open: 5 · Done: 1
 - Crestline Data Centers call · Tue 03 Nov 15:00-15:45 UTC+08:00
 
 ## Open
-- **Resolve clash: Crestline call vs Harbor Point install (3 Nov)** · due Tue 03 Nov · waiting_owner · sources: C03, S002, CAL02, L-ZAP-121, CAL01
-  - Engineer call booked on 3 Nov; Wei Lin was not copied on the one-pager email, so the clash concerns Wei Lin's availability.
-  - Wei Lin needs to be on the 3 Nov Crestline call with Farah, which Dana booked.
-  - Calendar shows a Crestline Data Centers call on 3 Nov with Wei Lin attending, which may double-book Wei Lin.
-  - Ticket says Crestline call clashes with Harbor install; status Backlog, unassigned, no due date.
+- **Book Cedar call: Rachel with an engineer** · due - · open · sources: C06, E08
+  - Requested by Rachel; not yet booked.
+  - Rachel asks for a 20-minute call with an engineer; not yet booked.
+- **Ridgeline site visit Tue 27 / Wed 28 AM** · due - · open · sources: C07, S012, E09
+  - Site visit requested for next week; nothing booked yet.
+  - Dana will check calendars for a Ridgeline site visit next week; not yet booked.
+  - Omar asks for a site visit Tuesday or Wednesday next week, mornings preferred.
+- **Resolve clash: Crestline call vs Harbor Point install (3 Nov)** · due - · waiting_owner · sources: C10, L-ZAP-121, CAL01, CAL02
+  - Crestline call 3 Nov 15:00 SGT overlaps Harbor Point install 14:00-16:30 SGT.
+  - Ticket ZAP-121 is unassigned in Backlog with no due date.
   - flag: clash
   - artifact: `outbox/20261024-1500-dana-reschedule-crestline-call.md`
-- **Send Crestline one-pager to Farah** · due Tue 03 Nov · open · sources: C03, E05, S016
-  - Source does not show the one-pager was sent; it is owed before the 3 Nov call.
-  - Farah asks Zapdemo to send the one-pager before the 3 Nov call; no sent email shown.
-  - Dana asks whether the Crestline one-pager was sent; no sent email is shown, so it is unconfirmed.
-- **Book Cedar call: Rachel with an engineer** · due - · open · sources: C06, E08
-  - Rachel wants a 20-minute call with the engineer; no booking mentioned yet.
-  - Rachel asked for a 20-minute call with an engineer; no booking mentioned yet.
-- **Ridgeline site visit Tue 27 / Wed 28 AM** · due - · open · sources: C07, S012, E09
-  - Site visit requested for next week; nothing booked yet, Dana to come back to Omar.
-  - Dana will check calendars; the site visit is not yet booked.
-  - Omar asks for a site visit Tuesday or Wednesday next week, mornings preferred; not yet booked.
+- **Send Crestline one-pager to Farah** · due - · open · sources: C03, E05, S016
+  - One-pager to be emailed to Farah before the call; Sam copied, not Wei Lin.
+  - Farah asks for the one-pager to be sent before the 3 Nov call at 15:00.
+  - Dana asks whether the Crestline one-pager was sent; no confirmation given.
 - **Book next call with Tom Reyes (Northwind)** · due - · open · sources: C01, E01, E03, L-ZAP-104
-  - Next call must include Tom Reyes; not yet booked.
-  - Sam promised to set up the next call including Tom Reyes; not yet booked per this source.
-  - Maria says Tom is free Friday afternoon; Zapdemo needs to confirm the call.
-  - Linear ticket is Todo, unassigned, no due date; booking not yet done.
+  - Tom Reyes signs off on anything mounted on the building.
+  - Sam said Zapdemo will set up the next call with Tom.
+  - Maria offers Friday afternoon for a call including Tom.
+  - Linear ticket ZAP-104 is unassigned and in Todo status.
   - artifact: `outbox/20261024-1500-dana-tom-call-reask-maria.md`
 
 ## Done
-- Crestline engineer call (3 Nov 15:00 SGT) · sources: C03
+- Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02

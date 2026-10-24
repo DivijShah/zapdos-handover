@@ -1,17 +1,16 @@
 {
  "source_id": "WA04",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.glare",
    "state": "open",
-   "kind": "fix",
-   "counterparty": "Chris Hale (Bayview)",
-   "topic": "night glare alerts",
-   "deliverable": "Fix night glare false alerts on cam 5",
+   "kind": "pilot",
+   "counterparty": "Bayview",
+   "topic": "night glare",
    "due": null,
    "evidence": "Night lead says alerts better on cam 2, still bad on cam 5.",
-   "note": "Cam 2 alerts improved; cam 5 false alerts still bad, so the glare fix remains owed.",
+   "note": "Alerts improved on cam 2 but still bad on cam 5 at Bayview.",
    "ev_ok": true
   }
  ]

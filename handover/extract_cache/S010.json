@@ -1,16 +1,16 @@
 {
  "source_id": "S010",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.clip",
    "state": "open",
    "kind": "clip",
    "counterparty": "Bayview",
-   "deliverable": "30s night-shift video clip for Monday's LinkedIn post",
+   "topic": "night clip",
    "due": null,
    "evidence": "Need a 30s night-shift clip from Bayview for Monday's post. @weilin when you can.",
-   "note": "Priya asks Wei Lin for a 30s Bayview night-shift clip for Monday's post; no firm time given.",
+   "note": "Priya asks Wei Lin for a 30s night-shift Bayview clip for Monday's post.",
    "ev_ok": true
   }
  ]

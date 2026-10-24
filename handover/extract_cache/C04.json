@@ -1,21 +1,27 @@
 {
  "source_id": "C04",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "jordan_lee.onboarding",
    "state": "open",
+   "kind": "onboarding",
+   "counterparty": "Jordan Lee",
+   "topic": "new hire onboarding",
    "due": null,
    "evidence": "Needs Slack, Linear and email accounts, a laptop, a first task and a buddy. Wei Lin is the buddy.",
-   "note": "Jordan needs Slack, Linear, email accounts, laptop, first task and buddy before starting Mon 26 Oct.",
+   "note": "Jordan starts Mon 26 Oct 9am Austin; accounts, laptop, first task needed; Wei Lin is buddy.",
    "ev_ok": true
   },
   {
    "slot": "jordan_lee.reply",
    "state": "open",
-   "due": "2026-10-24",
-   "evidence": "Sam: \"We'll send your logins and first-week plan before the weekend.\"",
-   "note": "Sam promised to send Jordan logins and first-week plan before the weekend.",
+   "kind": "reply",
+   "counterparty": "Jordan Lee",
+   "topic": "logins plan",
+   "due": null,
+   "evidence": "We'll send your logins and first-week plan before the weekend.",
+   "note": "Sam promised logins and first-week plan before the weekend.",
    "ev_ok": true
   }
  ]

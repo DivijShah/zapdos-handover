@@ -1,16 +1,16 @@
 {
  "source_id": "WA02",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "harbor_point.start_time_reply",
    "state": "open",
    "kind": "reply",
-   "counterparty": "Raj Kumar",
-   "topic": "install start time",
-   "due": "2026-10-27",
-   "evidence": "Also can your team start 13:30 on Tuesday? Forklifts move at 16:00.",
-   "note": "Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet.",
+   "counterparty": "Harbor Point",
+   "topic": "start time",
+   "due": null,
+   "evidence": "can your team start 13:30 on Tuesday? Forklifts move at 16:00.",
+   "note": "Raj asks whether the team can start the install at 13:30 on Tuesday.",
    "ev_ok": true
   }
  ]

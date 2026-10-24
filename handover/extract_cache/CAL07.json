@@ -1,16 +1,16 @@
 {
  "source_id": "CAL07",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "optix.po",
    "state": "open",
    "kind": "payment",
    "counterparty": "Optix",
-   "deliverable": "Optix PO deadline (purchase order / upfront payment for cameras)",
-   "due": "2026-10-27",
-   "evidence": "Calendar event: Optix PO deadline. Start: 2026-10-27T17:00:00-05:00",
-   "note": "Calendar shows an Optix PO deadline on Tue 27 Oct 17:00, attendee sam.",
+   "topic": "PO deadline",
+   "due": null,
+   "evidence": "Calendar event: Optix PO deadline",
+   "note": "Calendar event for the Optix PO deadline on 2026-10-27 at 17:00, attendee Sam.",
    "ev_ok": true
   }
  ]

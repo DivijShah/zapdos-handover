@@ -1,13 +1,16 @@
 {
  "source_id": "WA03",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "crestline.demo_progress",
    "state": "open",
+   "kind": "demo",
+   "counterparty": "Crestline",
+   "topic": "progress demo",
    "due": null,
    "evidence": "can the engineer show us how you track progress floor by floor on the call?",
-   "note": "Farah asks that the engineer show floor-by-floor progress tracking on the call; not yet confirmed.",
+   "note": "Farah asks for a floor-by-floor progress tracking demo by the engineer on the call.",
    "ev_ok": true
   }
  ]

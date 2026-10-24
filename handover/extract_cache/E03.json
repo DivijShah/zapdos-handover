@@ -1,21 +1,27 @@
 {
  "source_id": "E03",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
-  {
-   "slot": "northwind.tom_call",
-   "state": "open",
-   "due": null,
-   "evidence": "Tom is free Friday afternoon if that works.",
-   "note": "Maria says Tom is free Friday afternoon; Zapdemo needs to confirm the call.",
-   "ev_ok": true
-  },
   {
    "slot": "northwind.price",
    "state": "open",
+   "kind": "price",
+   "counterparty": "Northwind",
+   "topic": "rough price",
    "due": null,
    "evidence": "what will this roughly cost? My VP will ask.",
-   "note": "Maria asks for a rough cost estimate for the dock cameras, needed for her VP.",
+   "note": "Maria asks for a rough cost for the dock cameras.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.tom_call",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Northwind",
+   "topic": "tom call",
+   "due": null,
+   "evidence": "Tom is free Friday afternoon if that works.",
+   "note": "Maria offers Friday afternoon for a call including Tom.",
    "ev_ok": true
   }
  ]

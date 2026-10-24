@@ -1,5 +1,14 @@
 {
  "source_id": "CAL01",
- "model": "claude-haiku-5-5",
- "mentions": []
+ "model": "claude-sonnet-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.install",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Calendar event: Harbor Point Yard install\nStart: 2026-11-03T14:00:00+08:00",
+   "note": "Install scheduled 3 Nov 14:00-16:30 at Harbor Point Yard paint shop, attendee weilin.",
+   "ev_ok": true
+  }
+ ]
 }

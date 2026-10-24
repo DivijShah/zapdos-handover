@@ -1,29 +1,38 @@
 {
  "source_id": "C05",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.glare",
    "state": "open",
+   "kind": "pilot",
+   "counterparty": "Bayview",
+   "topic": "glare fix",
    "due": null,
    "evidence": "Night shift is getting false alerts: glare from the dock lights after 10pm.",
-   "note": "Night glare false alerts at Bayview need fixing; no fix date given.",
+   "note": "Chris counted 14 false alerts on Wednesday night.",
    "ev_ok": true
   },
   {
    "slot": "bayview.pass_bar",
    "state": "open",
+   "kind": "approval",
+   "counterparty": "Bayview",
+   "topic": "pass bar",
    "due": null,
-   "evidence": "Chris wants it in writing before the pilot review.",
-   "note": "Written pilot pass bar must be signed before pilot review; goes through Sam.",
+   "evidence": "The pilot pass bar (what counts as success) was never signed. Chris wants it in writing before the pilot review.",
+   "note": "Pass bar goes through Sam.",
    "ev_ok": true
   },
   {
    "slot": "bayview.weekly_report",
    "state": "open",
+   "kind": "followup",
+   "counterparty": "Bayview",
+   "topic": "weekly report",
    "due": null,
    "evidence": "Chris wants a weekly report every Friday.",
-   "note": "Weekly report to Chris every Friday requested.",
+   "note": "Weekly report requested each Friday.",
    "ev_ok": true
   }
  ]

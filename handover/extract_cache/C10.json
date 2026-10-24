@@ -1,21 +1,49 @@
 {
  "source_id": "C10",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "internal.reimburse_weilin",
    "state": "open",
+   "kind": "payment",
+   "counterparty": "Wei Lin",
+   "topic": "reimburse expenses",
    "due": null,
    "evidence": "Wei Lin paid $640 out of pocket for the Harbor Point site trip. Needs Sam's approval to reimburse.",
-   "note": "Wei Lin's $640 site-trip expense needs Sam's approval before reimbursement.",
+   "note": "Reimbursement of $640 needs Sam's approval.",
    "ev_ok": true
   },
   {
    "slot": "internal.deploy_alerts_doc",
    "state": "open",
+   "kind": "followup",
+   "counterparty": "internal",
+   "topic": "deploy alerts",
    "due": null,
    "evidence": "nobody knows how the alerts were set up. Alex set them up and is on two weeks' leave.",
-   "note": "Nobody knows how deploy-api alerts were set up; alex is on leave, so documentation is needed.",
+   "note": "Deploy server went down Tuesday night; alert setup undocumented.",
+   "ev_ok": true
+  },
+  {
+   "slot": "crestline.clash",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Crestline",
+   "topic": "wei lin double-booking",
+   "due": null,
+   "evidence": "Dana: Crestline call booked for Tue 3 Nov 15:00 SGT.",
+   "note": "Crestline call 3 Nov 15:00 SGT overlaps Harbor Point install 14:00-16:30 SGT.",
+   "ev_ok": true
+  },
+  {
+   "slot": "harbor_point.install",
+   "state": "open",
+   "kind": "install",
+   "counterparty": "Harbor Point",
+   "topic": "on-site install",
+   "due": null,
+   "evidence": "Wei Lin: Harbor Point install is Tue 3 Nov 14:00 to 16:30 SGT.",
+   "note": "Install scheduled for Tue 3 Nov.",
    "ev_ok": true
   }
  ]

@@ -1,13 +1,16 @@
 {
  "source_id": "L-ZAP-103",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "northwind.layout",
    "state": "duplicate",
+   "kind": "layout",
+   "counterparty": "Northwind",
+   "topic": "camera layout",
    "due": null,
    "evidence": "Note: Duplicate of ZAP-101?",
-   "note": "Linear ticket ZAP-103 for Northwind layout is marked as a possible duplicate of ZAP-101.",
+   "note": "Ticket ZAP-103 Northwind layout is flagged as a possible duplicate of ZAP-101.",
    "ev_ok": true
   }
  ]

@@ -1,16 +1,16 @@
 {
  "source_id": "E10",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "optix.po",
    "state": "open",
    "kind": "payment",
    "counterparty": "Optix",
-   "deliverable": "Purchase order for 12 OX-4K cameras (quote Q-1182) with 50% upfront payment",
+   "topic": "camera PO",
    "due": null,
    "evidence": "Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
-   "note": "Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment required.",
+   "note": "Optix needs a PO by Tue 27 Oct to hold stock for 12 OX-4K cameras, $4,680 total, 50% upfront.",
    "ev_ok": true
   }
  ]

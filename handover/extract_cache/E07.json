@@ -1,21 +1,27 @@
 {
  "source_id": "E07",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.glare",
    "state": "open",
+   "kind": "install",
+   "counterparty": "Bayview",
+   "topic": "night glare",
    "due": null,
-   "evidence": "14 false alerts again last night, all after 10pm. My night lead is starting to ignore them.",
-   "note": "Night-glare false alerts at Bayview continue (14 last night) and need fixing.",
+   "evidence": "14 false alerts again last night, all after 10pm.",
+   "note": "Chris reports 14 false alerts after 10pm; night lead starting to ignore them.",
    "ev_ok": true
   },
   {
    "slot": "bayview.weekly_report",
    "state": "open",
-   "due": "2026-10-23",
+   "kind": "followup",
+   "counterparty": "Bayview",
+   "topic": "weekly report",
+   "due": null,
    "evidence": "Can we get the weekly report Friday?",
-   "note": "Chris asks for the weekly report by Friday (23 Oct, the email's own date).",
+   "note": "Chris asks for the weekly report on Friday.",
    "ev_ok": true
   }
  ]

@@ -10,7 +10,7 @@
  {
   "id": "ZAP-102",
   "title": "Northwind price",
-  "assignee": null,
+  "assignee": "sam",
   "status": "Todo",
   "due": "2026-10-22",
   "note": "Maria asked for price by Thu"

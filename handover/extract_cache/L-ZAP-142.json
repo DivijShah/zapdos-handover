@@ -1,13 +1,16 @@
 {
  "source_id": "L-ZAP-142",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.weekly_report",
    "state": "open",
+   "kind": "followup",
+   "counterparty": "Bayview",
+   "topic": "weekly report",
    "due": null,
-   "evidence": "Linear ZAP-142: Bayview weekly report (Fridays)",
-   "note": "Linear ticket for Bayview weekly report is in Backlog, unassigned, no due date.",
+   "evidence": "Bayview weekly report (Fridays)",
+   "note": "Ticket in Backlog, unassigned, no due date.",
    "ev_ok": true
   }
  ]

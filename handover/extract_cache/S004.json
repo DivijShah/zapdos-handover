@@ -1,21 +1,27 @@
 {
  "source_id": "S004",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "northwind.layout",
    "state": "done",
+   "kind": "layout",
+   "counterparty": "Northwind",
+   "topic": "camera layout",
    "due": null,
    "evidence": "Northwind layout v2 done: 12 doors, 12 cameras, one per door, mounted 4m high. In Drive.",
-   "note": "Wei Lin says Northwind layout v2 is done and in Drive.",
+   "note": "Wei Lin finished layout v2 and put it in Drive.",
    "ev_ok": true
   },
   {
    "slot": "northwind.price",
    "state": "open",
+   "kind": "price",
+   "counterparty": "Northwind",
+   "topic": "customer price",
    "due": null,
    "evidence": "Waiting on price.",
-   "note": "Layout is done; the Northwind price is still owed.",
+   "note": "Layout is done; the price for Northwind is still awaited.",
    "ev_ok": true
   }
  ]

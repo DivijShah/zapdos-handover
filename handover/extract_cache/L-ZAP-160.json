@@ -1,13 +1,13 @@
 {
  "source_id": "L-ZAP-160",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "internal.reimburse_weilin",
    "state": "open",
    "due": null,
-   "evidence": "Linear ZAP-160: Reimburse Wei Lin $640",
-   "note": "Linear ticket to reimburse Wei Lin $640 is in Backlog, unassigned, with no due date.",
+   "evidence": "Reimburse Wei Lin $640",
+   "note": "Linear ticket in Backlog, unassigned, no due date.",
    "ev_ok": true
   }
  ]

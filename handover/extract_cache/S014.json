@@ -1,16 +1,16 @@
 {
  "source_id": "S014",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.glare",
    "state": "open",
-   "kind": "fix",
+   "kind": "pilot",
    "counterparty": "Bayview",
-   "deliverable": "Fix night glare false alerts (trying night mask on cams 2 and 5)",
+   "topic": "night glare",
    "due": null,
    "evidence": "Bayview glare: 14 false alerts after 10pm. Trying a night mask on cams 2 and 5.",
-   "note": "Wei Lin is trying a night mask on cameras 2 and 5 to fix the 14 false night alerts.",
+   "note": "Wei Lin is trying a night mask on cams 2 and 5 to address 14 false alerts after 10pm.",
    "ev_ok": true
   }
  ]

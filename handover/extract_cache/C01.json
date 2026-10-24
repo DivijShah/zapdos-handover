@@ -1,13 +1,16 @@
 {
  "source_id": "C01",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "northwind.layout",
    "state": "open",
+   "kind": "layout",
+   "counterparty": "Northwind",
+   "topic": "camera layout",
    "due": "2026-10-22",
    "evidence": "She wants a camera layout for doors 1 to 12 and a price, both by Thursday 22 Oct.",
-   "note": "Camera layout for doors 1-12 promised by Thursday 22 Oct; no delivery shown in this call.",
+   "note": "Camera layout for dock doors 1-12 promised by Thursday.",
    "ev_ok": true
   },
   {
@@ -15,7 +18,7 @@
    "state": "open",
    "due": "2026-10-22",
    "evidence": "We'll get you the layout and a number by Thursday.",
-   "note": "Price/number for Northwind promised by Thursday 22 Oct.",
+   "note": "Price for Northwind requested by Thursday 22 Oct.",
    "ev_ok": true
   },
   {
@@ -23,7 +26,7 @@
    "state": "open",
    "due": null,
    "evidence": "Her site manager, Tom Reyes, has to be on the next call.",
-   "note": "Next call must include Tom Reyes; not yet booked.",
+   "note": "Tom Reyes signs off on anything mounted on the building.",
    "ev_ok": true
   },
   {
@@ -31,7 +34,7 @@
    "state": "open",
    "due": null,
    "evidence": "She asked for a one-pager on pallet-damage tracking she can forward to her VP.",
-   "note": "One-pager on pallet-damage tracking requested for Maria to forward to her VP.",
+   "note": "One-pager for Maria to forward to her VP.",
    "ev_ok": true
   }
  ]

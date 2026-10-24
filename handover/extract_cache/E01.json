@@ -1,21 +1,24 @@
 {
  "source_id": "E01",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
-  {
-   "slot": "northwind.price",
-   "state": "open",
-   "due": "2026-10-22",
-   "evidence": "We'll send the layout and a price by Thursday",
-   "note": "Sam promised Maria a price by Thursday (22 Oct) per the sent email.",
-   "ev_ok": true
-  },
   {
    "slot": "northwind.layout",
    "state": "open",
-   "due": "2026-10-22",
+   "kind": "layout",
+   "counterparty": "Northwind",
+   "topic": "camera layout",
+   "due": null,
    "evidence": "We'll send the layout and a price by Thursday",
-   "note": "Sam promised Maria the camera layout by Thursday; no delivery shown in this source.",
+   "note": "Sam promised Maria the layout by Thursday.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "due": null,
+   "evidence": "We'll send the layout and a price by Thursday",
+   "note": "Sam promised Maria a price by Thursday.",
    "ev_ok": true
   },
   {
@@ -23,7 +26,7 @@
    "state": "open",
    "due": null,
    "evidence": "set up the next call with Tom",
-   "note": "Sam promised to set up the next call including Tom Reyes; not yet booked per this source.",
+   "note": "Sam said Zapdemo will set up the next call with Tom.",
    "ev_ok": true
   }
  ]

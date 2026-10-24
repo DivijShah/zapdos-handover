@@ -1,13 +1,27 @@
 {
  "source_id": "E06",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "jordan_lee.reply",
    "state": "open",
+   "kind": "reply",
+   "counterparty": "Jordan Lee",
+   "topic": "first day reply",
    "due": null,
-   "evidence": "I haven't received any logins or first-day details yet. Where should I go at 9?",
-   "note": "Jordan asks for logins and where to go at 9 on Monday; Zapdemo owes an answer.",
+   "evidence": "Where should I go at 9?",
+   "note": "Jordan asks for logins and first-day details before Monday.",
+   "ev_ok": true
+  },
+  {
+   "slot": "jordan_lee.onboarding",
+   "state": "open",
+   "kind": "onboarding",
+   "counterparty": "Jordan Lee",
+   "topic": "onboarding accounts",
+   "due": null,
+   "evidence": "I haven't received any logins or first-day details yet.",
+   "note": "Jordan has received no logins or first-day details.",
    "ev_ok": true
   }
  ]

@@ -1,14 +1,17 @@
 {
  "source_id": "L-ZAP-170",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.casestudy",
    "state": "open",
+   "kind": "casestudy",
+   "counterparty": "Bayview",
+   "topic": "case study",
    "due": null,
-   "evidence": "Linear ZAP-170: Bayview case study approval | Status: In Progress | Note: Lisa wants draft + photos",
-   "note": "Case study draft and photos for Lisa Park to approve; status In Progress, no due date.",
-   "ev_ok": false
+   "evidence": "Lisa wants draft + photos",
+   "note": "Bayview case study approval ticket in progress, assigned to Priya; Lisa wants draft and photos.",
+   "ev_ok": true
   }
  ]
 }

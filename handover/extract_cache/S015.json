@@ -1,13 +1,16 @@
 {
  "source_id": "S015",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "bayview.pass_bar",
    "state": "open",
+   "kind": "pilot",
+   "counterparty": "Bayview",
+   "topic": "pass bar",
    "due": null,
    "evidence": "Bayview wants the pass bar signed before the review. That's yours.",
-   "note": "Written pilot pass bar must be signed before the Bayview review; assigned to Sam.",
+   "note": "Bayview wants the written pilot pass bar signed before the review; assigned to Sam.",
    "ev_ok": true
   }
  ]

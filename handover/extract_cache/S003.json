@@ -1,21 +1,27 @@
 {
  "source_id": "S003",
- "model": "claude-haiku-5-5",
+ "model": "claude-sonnet-5-5",
  "mentions": [
   {
    "slot": "northwind.price",
    "state": "open",
-   "due": "2026-10-22",
+   "kind": "price",
+   "counterparty": "Northwind",
+   "topic": "price quote",
+   "due": null,
    "evidence": "Northwind wants layout + price by Thu. I'll do the price.",
-   "note": "Sam will do the price for Northwind, due Thursday.",
+   "note": "Sam will do the price for Northwind, wanted by Thursday.",
    "ev_ok": true
   },
   {
    "slot": "northwind.layout",
    "state": "open",
-   "due": "2026-10-22",
+   "kind": "layout",
+   "counterparty": "Northwind",
+   "topic": "camera layout",
+   "due": null,
    "evidence": "@weilin can you do the layout?",
-   "note": "Wei Lin asked to do the Northwind layout, due Thursday with the price.",
+   "note": "Sam asks Wei Lin to do the layout; Northwind wants it by Thursday.",
    "ev_ok": true
   }
  ]
