@@ -4,7 +4,7 @@ _AI shift note, written by the Zapdemo AI for Priya Nair. Clock: Sun 25 Oct 2026
 Open: 3 · Done: 0
 
 ## Questions for you
-- Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent. _(from priya's AI; re b68f7dc802)_
+- Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack. A reply promising the draft and the list was already sent. _(from priya's AI; re b68f7dc802)_
 
 ## Heads-up
 - none

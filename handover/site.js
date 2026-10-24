@@ -142,7 +142,7 @@ window.SITE = {
    "time": "",
    "persona": "sam",
    "kind": "asked",
-   "text": "asked sam: What customer price should Northwind (Maria) be quoted for the 12-door dock cameras?",
+   "text": "asked sam: Maria's holding reply was sent (no price in it). What customer price should Northwin",
    "cites": [
     "C01",
     "E01",
@@ -1257,7 +1257,7 @@ window.SITE = {
    "waiting": [
     {
      "id": "36ddde2532",
-     "text": "What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost (\"Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.\", E10), not a sell price. Brief is in the outbox.",
+     "text": "Maria's holding reply was sent (no price in it). What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost (\"Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.\", E10), not a sell price. Brief is in the outbox.",
      "from": "sam",
      "re": "a9227252ec",
      "due": "Thu 22 Oct",
@@ -1293,7 +1293,7 @@ window.SITE = {
     },
     {
      "id": "842f3bda13",
-     "text": "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. The reply draft in the outbox says you will confirm; nothing has been sent.",
+     "text": "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. An acknowledgement was already sent to him (it says you will confirm and promises nothing else); he is still waiting for the location.",
      "from": "sam",
      "re": "46192cbd69",
      "due": "",
@@ -1515,7 +1515,7 @@ window.SITE = {
     },
     {
      "id": "c0f37290f9",
-     "text": "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. The reply draft in the outbox commits no time; nothing has been sent.",
+     "text": "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. An acknowledgement that commits no time was already sent; he is still waiting for your answer.",
      "from": "weilin",
      "re": "8a5a9fb60f",
      "due": "",
@@ -1524,7 +1524,7 @@ window.SITE = {
     },
     {
      "id": "17004d1e5c",
-     "text": "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? The draft in the outbox confirms the IPs and says you will answer; nothing has been sent.",
+     "text": "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? An acknowledgement confirming the IPs was already sent and says you will answer; he is still waiting for the VLAN answer.",
      "from": "weilin",
      "re": "6a5790396f",
      "due": "",
@@ -1797,7 +1797,7 @@ window.SITE = {
    "waiting": [
     {
      "id": "d7b0918b8f",
-     "text": "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent.",
+     "text": "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack. A reply promising the draft and the list was already sent.",
      "from": "priya",
      "re": "b68f7dc802",
      "due": "",
@@ -1942,7 +1942,7 @@ window.SITE = {
   {
    "to": "sam",
    "from": "sam",
-   "text": "What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost (\"Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.\", E10), not a sell price. Brief is in the outbox."
+   "text": "Maria's holding reply was sent (no price in it). What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost (\"Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.\", E10), not a sell price. Brief is in the outbox."
   },
   {
    "to": "sam",
@@ -1972,12 +1972,12 @@ window.SITE = {
   {
    "to": "weilin",
    "from": "weilin",
-   "text": "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. The reply draft in the outbox commits no time; nothing has been sent."
+   "text": "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. An acknowledgement that commits no time was already sent; he is still waiting for your answer."
   },
   {
    "to": "weilin",
    "from": "weilin",
-   "text": "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? The draft in the outbox confirms the IPs and says you will answer; nothing has been sent."
+   "text": "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? An acknowledgement confirming the IPs was already sent and says you will answer; he is still waiting for the VLAN answer."
   },
   {
    "to": "dana",
@@ -1987,12 +1987,12 @@ window.SITE = {
   {
    "to": "priya",
    "from": "priya",
-   "text": "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent."
+   "text": "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack. A reply promising the draft and the list was already sent."
   },
   {
    "to": "sam",
    "from": "sam",
-   "text": "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. The reply draft in the outbox says you will confirm; nothing has been sent."
+   "text": "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. An acknowledgement was already sent to him (it says you will confirm and promises nothing else); he is still waiting for the location."
   }
  ]
 };

@@ -5,8 +5,8 @@ Open: 11 · Done: 2
 
 ## Questions for you
 - Does the quoted camera match your layout? Optix quote Q-1182: "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront." (E10). You have not seen it (C09). Sam needs to know before the PO (due Tue 27 Oct). _(from weilin's AI; re 8cadc92446)_
-- Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. The reply draft in the outbox commits no time; nothing has been sent. _(from weilin's AI; re 8a5a9fb60f)_
-- Ken asks: "Do you need a VLAN?" (E04). The pack does not say. What should the reply tell him? The draft in the outbox confirms the IPs and says you will answer; nothing has been sent. _(from weilin's AI; re 6a5790396f)_
+- Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. An acknowledgement that commits no time was already sent; he is still waiting for your answer. _(from weilin's AI; re 8a5a9fb60f)_
+- Ken asks: "Do you need a VLAN?" (E04). The pack does not say. What should the reply tell him? An acknowledgement confirming the IPs was already sent and says you will answer; he is still waiting for the VLAN answer. _(from weilin's AI; re 6a5790396f)_
 
 ## Heads-up
 - Crestline call 2026-11-03 15:00-15:45 SGT (CAL02). Farah asked Dana by WhatsApp: "Hi Dana, quick one: can the engineer show us how you track progress floor by floor on the call?" (WA03). You were not copied on the one-pager email either (E05). _(sources: CAL02, WA03, E05)_
