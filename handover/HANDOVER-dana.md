@@ -37,7 +37,6 @@ Open: 5 · Done: 1
   - Maria offers Friday afternoon for a call including Tom.
   - Linear ticket ZAP-104 is unassigned and in Todo status.
   - artifact: `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md`
-  - artifact: `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md`
 
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02

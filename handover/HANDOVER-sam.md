@@ -40,7 +40,6 @@ Open: 7 · Done: 1
   - Sam promised logins and first-week plan before the weekend.
   - Jordan asks for logins and first-day details before Monday.
   - artifact: `outbox/sent/20261024-1500-sam-reply-jordan-monday.md`
-  - artifact: `outbox/sent/20261024-1500-sam-reply-jordan-monday.md`
 - **Ridgeline ballpark price range for Omar** · due - · waiting_owner · sources: C07, S012, E09, S013
   - Omar asked for a price range; pricing comes from Sam.
   - Ridgeline wants a ballpark price.
@@ -56,7 +55,7 @@ Open: 7 · Done: 1
   - Linear ticket in Backlog, unassigned, no due date.
 
 ## Done
-- Reply to Maria's chase (Northwind) · sources: E15 · outbox/sent/20261024-1500-sam-reply-maria-northwind.md, outbox/sent/20261024-1500-sam-reply-maria-northwind.md
+- Reply to Maria's chase (Northwind) · sources: E15 · outbox/sent/20261024-1500-sam-reply-maria-northwind.md
   - latest: Maria chased Sam asking whether the project is still on.
 - **Sent by Sam Rivera's AI**: Re: Monday? → jordan.lee@mail.example · `outbox/sent/20261024-1500-sam-reply-jordan-monday.md` · re Reply to Jordan: where to go Mon 09:00 · sources: E06, C04
 - **Sent by Sam Rivera's AI**: Re: Dock cameras → maria.gomez@northwind-cold.example · `outbox/sent/20261024-1500-sam-reply-maria-northwind.md` · re Reply to Maria's chase (Northwind) · sources: E15, E03, C01, L-ZAP-101
