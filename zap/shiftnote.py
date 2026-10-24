@@ -72,7 +72,7 @@ def render_handovers(st: dict, now: datetime) -> bool:
             if p["status"] == "done":
                 done.append(f"- {p['deliverable']} · sources: {', '.join(p['sources'])}"
                             + (f" · {', '.join(arts[p['id']])}" if p["id"] in arts else ""))
-                done += [f"  - {n}" for n in p["notes"]]
+                done += [f"  - latest: {n}" for n in p["notes"][-1:]]  # older notes may describe the pre-done state
         lines += ["", "## Done"] + (done or ["- none"])
         sup = []
         for p in mine:
