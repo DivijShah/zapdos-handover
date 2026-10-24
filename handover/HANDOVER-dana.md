@@ -41,7 +41,7 @@ Open: 5 · Done: 1
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02
   - latest: Call with Dana and Wei Lin is on the calendar for 3 Nov 15:00-15:45 (+08:00).
-- **Sent by Dana Brooks's AI**: New times for our next call with Tom → maria.gomez@northwind-cold.example · `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md` · re Book next call with Tom Reyes (Northwind) · sources: E03, C01, L-ZAP-104
+- **Sent by Dana Brooks's AI**: Next call with Tom Reyes → maria.gomez@northwind-cold.example · `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md` · re Book next call with Tom Reyes (Northwind) · sources: E03, C01, L-ZAP-104
 
 ## Superseded
 - none

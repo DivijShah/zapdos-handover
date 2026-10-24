@@ -510,6 +510,7 @@ window.SITE = {
       "cites": [
        "C03",
        "E05",
+       "C10",
        "CAL01",
        "CAL02"
       ],
@@ -534,21 +535,21 @@ window.SITE = {
        },
        {
         "fact": "14:00",
-        "src": "CAL01",
-        "line": "Start: 2026-11-03T14:00:00+08:00",
+        "src": "C10",
+        "line": "- Wei Lin: Harbor Point install is Tue 3 Nov 14:00 to 16:30 SGT.",
         "uncited": false
        },
        {
         "fact": "16:30",
-        "src": "CAL01",
-        "line": "End: 2026-11-03T16:30:00+08:00",
+        "src": "C10",
+        "line": "- Wei Lin: Harbor Point install is Tue 3 Nov 14:00 to 16:30 SGT.",
         "uncited": false
        },
        {
         "fact": "Tue",
         "src": "C10",
         "line": "- Dana: Crestline call booked for Tue 3 Nov 15:00 SGT.",
-        "uncited": true
+        "uncited": false
        },
        {
         "fact": "Farah",
@@ -572,7 +573,7 @@ window.SITE = {
         "fact": "SGT",
         "src": "C10",
         "line": "- Dana: Crestline call booked for Tue 3 Nov 15:00 SGT.",
-        "uncited": true
+        "uncited": false
        }
       ]
      },
@@ -598,6 +599,12 @@ window.SITE = {
         "uncited": false
        },
        {
+        "fact": "Reyes",
+        "src": "C01",
+        "line": "- Her site manager, Tom Reyes, has to be on the next call. He signs off on anything mounted on the building.",
+        "uncited": false
+       },
+       {
         "fact": "Maria",
         "src": "E03",
         "line": "From: maria.gomez@northwind-cold.example",
@@ -619,36 +626,6 @@ window.SITE = {
         "fact": "Zapdemo",
         "src": "E03",
         "line": "To: sam@zapdemo.example",
-        "uncited": false
-       },
-       {
-        "fact": "Labs",
-        "src": null,
-        "line": null,
-        "uncited": false
-       },
-       {
-        "fact": "Northwind",
-        "src": "E03",
-        "line": "From: maria.gomez@northwind-cold.example",
-        "uncited": false
-       },
-       {
-        "fact": "Cold",
-        "src": "E03",
-        "line": "From: maria.gomez@northwind-cold.example",
-        "uncited": false
-       },
-       {
-        "fact": "Storage",
-        "src": "C01",
-        "line": "Call: Northwind Cold Storage: dock camera layout",
-        "uncited": false
-       },
-       {
-        "fact": "Reyes",
-        "src": "C01",
-        "line": "- Her site manager, Tom Reyes, has to be on the next call. He signs off on anything mounted on the building.",
         "uncited": false
        }
       ]
@@ -833,9 +810,9 @@ window.SITE = {
     ]
    }
   ],
-  "checked": 88,
-  "unsourced": 1,
-  "uncited": 2
+  "checked": 84,
+  "unsourced": 0,
+  "uncited": 0
  },
  "rejected": [],
  "rejected_total": 0,
@@ -855,9 +832,9 @@ window.SITE = {
  },
  "last_action": {
   "type": "send",
-  "persona": "priya",
+  "persona": "dana",
   "at": "2026-10-24T15:00:00-05:00",
-  "path": "outbox/sent/20261024-1500-priya-reply-lisa-case-study.md"
+  "path": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md"
  },
  "clock": "2026-10-24T15:00:00-05:00",
  "people": [
@@ -1368,7 +1345,7 @@ window.SITE = {
     },
     {
      "id": "35efac7f1f:send",
-     "title": "SENT: New times for our next call with Tom",
+     "title": "SENT: Next call with Tom Reyes",
      "due": "",
      "overdue": false,
      "status": "sent",
@@ -1472,20 +1449,28 @@ window.SITE = {
    "sources": ""
   },
   {
+   "file": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md",
+   "sent": true,
+   "kind": "md",
+   "to": "maria.gomez@northwind-cold.example",
+   "subject": "Next call with Tom Reyes",
+   "sources": "E03, C01, L-ZAP-104"
+  },
+  {
+   "file": "outbox/20261024-1500-dana-reschedule-crestline-call.md",
+   "sent": false,
+   "kind": "md",
+   "to": "farah.aziz@crestline-dc.example",
+   "subject": "Our call on Tue 3 Nov",
+   "sources": "C03, E05, C10, CAL01, CAL02"
+  },
+  {
    "file": "outbox/sent/20261024-1500-priya-reply-lisa-case-study.md",
    "sent": true,
    "kind": "md",
    "to": "lisa.park@bayview-freight.example",
    "subject": "Re: Case study",
    "sources": "E14, C08"
-  },
-  {
-   "file": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md",
-   "sent": true,
-   "kind": "md",
-   "to": "maria.gomez@northwind-cold.example",
-   "subject": "New times for our next call with Tom",
-   "sources": "E03, C01, L-ZAP-104"
   },
   {
    "file": "outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md",
@@ -1518,14 +1503,6 @@ window.SITE = {
    "to": "jordan.lee@mail.example",
    "subject": "Re: Monday?",
    "sources": "E06, C04"
-  },
-  {
-   "file": "outbox/20261024-1500-dana-reschedule-crestline-call.md",
-   "sent": false,
-   "kind": "md",
-   "to": "farah.aziz@crestline-dc.example",
-   "subject": "Our call on Tue 3 Nov",
-   "sources": "C03, E05, CAL01, CAL02"
   },
   {
    "file": "outbox/20261024-1500-priya-onepager-brief-northwind.md",
