@@ -207,6 +207,13 @@ function render(force){
   ["board","audit","caught"].forEach(function(t){document.getElementById("tab-"+t).className=t===TAB?"on":""});
 }
 function tab(t){TAB=t;location.hash=t;render(true)}
+var autoTab=false;
+function demoTab(){  // hands-off demo: Audit tab by itself in a fixed window (first_boot+audit_at .. +audit_for); never moves on restart or reload
+  var h=window.HEARTBEAT; if(!h||!h.demo||!h.demo.audit_at) return;
+  var now=Date.now()/1000, a=h.demo.first_boot+h.demo.audit_at, b=a+(h.demo.audit_for||30);
+  if(now>=a&&now<b){ if(TAB!=="audit"&&!autoTab){ autoTab=true; tab("audit"); } }
+  else if(autoTab){ autoTab=false; tab("board"); }
+}
 function tickAge(){
   var h=window.HEARTBEAT, S=window.SITE, pill=document.getElementById("pill");
   document.getElementById("banner").textContent=(h&&h.banner)||"waiting for the first tick…";
@@ -233,6 +240,7 @@ function reload(){
 render(true); tickAge();
 setInterval(reload,3000);
 setInterval(tickAge,1000);
+setInterval(demoTab,1000);
 </script>
 </body>
 </html>

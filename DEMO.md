@@ -4,9 +4,8 @@ Nobody types during the demo. A judge kills the process, `demo.sh` brings it bac
 
 ## Setup (before 20:30)
 - **Primary screen: the browser, full screen at 1080p.** `open index.html` (file://), Board tab. It re-reads the ledger every 3 s: live activity feed on the right, items that are new glow for 2 s, superseded items strike through, the green "RUNNING · tick Ns ago" pill turns red "NOT RUNNING" after 60 s and back to green by itself. The footer always shows the counts and the audit result ("N facts · 0 unsourced").
-- **Terminal A, small, in a corner of the screen:** `cd /Users/divij/PersonalProjects/hackday && ./demo.sh` (loops `run.py`; `DEMO_DROP_AT` seconds after the FIRST boot, default 110, the prepared drop is copied into `inbox/drops/`).
+- **Terminal A, small, in a corner of the screen:** `cd /Users/divij/PersonalProjects/hackday && ./demo.sh` (loops `run.py`; `DEMO_DROP_AT` seconds after the FIRST boot, default 110, the prepared drop is copied into `inbox/drops/`; `DEMO_AUDIT_AT`, default 140, the page switches itself to the Audit tab for 30 s and then back to Board).
 - Pane B (optional, tiny): `watch -n 5 'git log --oneline | head -12'`
-- Pane C (empty prompt, used at 2:20): `cd /Users/divij/PersonalProjects/hackday`
 - The real repo must be untouched: `handover/demo.json` and `inbox/drops/demo-2030.txt` must NOT exist. The drop is ingested once, for good. To rehearse, always copy: `rsync -a --exclude .git ./ /tmp/demo-copy/` and run `./demo.sh` there.
 - Stop at the end with Ctrl-C in Terminal A (it stops the loop and the process).
 - What the judge runs: `kill -9 $(pgrep -f "run.py --demo-drop-at")`. Nobody relaunches.
@@ -19,7 +18,7 @@ Nobody types during the demo. A judge kills the process, `demo.sh` brings it bac
 | Drop lands, from first boot | 111.2 | 111.2 |
 | Drop lands to "ingested drop" | 12.1 | 12.3 |
 | Drop lands to supersede line, `.ics` and confirmation draft, and the page showing them | 13.7 to 13.8 | 13.9 |
-| `python run.py --audit` | 0.4 | 0.4 |
+| `python run.py --audit` (optional now) | 0.4 | 0.4 |
 Both rehearsals: no duplicate actions, questions or Slack records after the kill, exactly one `demo:drop` key, 7 LLM calls, about $0.04. The audit line in those runs read "1 unsourced" because of a bug in the audit (it read a drop id as a name); it is fixed and a re-run on a copy ended "129 facts checked · 0 unsourced". The fix and the rest of the hands-off path were re-checked once in a copy (kill, automatic restart, drop, audit), not stopwatch-timed again.
 
 ## Narration
@@ -38,8 +37,8 @@ Both rehearsals: no duplicate actions, questions or Slack records after the kill
 **1:50 (the drop lands on its own, T+110 s)**
 "A new message just arrived: Maria says Tom can do Friday 30 October at 2pm Dallas and wants the number by then." Wait about 14 s. Watch the feed: new lines slide in and glow. Point at Dana: "The old Tom-call item strikes through as superseded. There is a new booking with a calendar proposal and a confirmation, held for Dana because booking commits her. And Sam's price question now carries a due date, Friday 30 October, with the drop as its source."
 
-**2:20 to 2:50 (pane C: `python run.py --audit`, in front of the browser; the keep-the-beat from before)**
-"Every number, date, dollar amount and name in everything the AI wrote, with the source line it came from." Let it scroll; point at `$4,680 <- E10` and `2pm <- D-demo-2030-…`. The last line reads "N facts checked · 0 unsourced". "If it ever can't find one, that line says so."
+**2:20 to 2:50 (the page shows the audit on its own; nobody touches anything)**
+"Every number, date, dollar amount and name in everything the AI wrote, with the source line it came from." The page flips itself to the Audit tab at T+140 s and back to Board after 30 s. Point at `$4,680 <- E10` and `2pm <- D-demo-2030-…`, and at the headline "N facts checked · 0 unsourced". "If it ever can't find one, that line says so, and the draft is held back." (Optional, not needed: `python run.py --audit` prints the same thing.)
 
 **2:50**
 "Everything a person promised has an owner, a source and a next step, and when the process dies it picks up where it left off without asking anyone."

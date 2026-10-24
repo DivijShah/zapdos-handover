@@ -26,6 +26,8 @@ def describe(a: dict, st: dict) -> tuple[str, str, list[str]]:
     cites = list((a.get("cite") or p.get("sources") or [])[:3])
     if t == "drop":
         return "system", "drop landed: " + (a.get("path") or "").rsplit("/", 1)[-1], []
+    if t == "audit":
+        return "system", "audit tab on screen", []
     if t.startswith("inform-"):
         return a["persona"], f"told {a.get('to')}: heads-up", cites
     if t.startswith("linear-"):
@@ -98,7 +100,7 @@ def footer_text(st: dict, n_sources: int, boot: float | None, since: float | Non
 
 
 def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict | None = None, srcmap: dict | None = None,
-           boot: float | None = None, since: float | None = None) -> bool:
+           boot: float | None = None, since: float | None = None, demo: dict | None = None) -> bool:
     qs = ledger.questions()
     acts_ = ledger.read_jsonl(ledger.ACTIONS)
     s = ledger.stats(st)
@@ -145,7 +147,7 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
             "questions": [{"to": q["to"], "from": q["from"], "text": q["question"]} for q in qs if not q.get("answered")]}
     ch = _w(ledger.H / "site.js", "window.SITE = " + json.dumps(site, ensure_ascii=False, indent=1) + ";\n")
     u = extract.usage_totals(since)
-    hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick, "boot": boot,
+    hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick, "boot": boot, "demo": demo,
           "llm": {"calls": u["calls"], "tokens": u["in"] + u["out"], "cost": u["cost"]}}
     _w(ledger.H / "heartbeat.js", "window.HEARTBEAT = " + json.dumps(hb, ensure_ascii=False) + ";\n")
     return ch

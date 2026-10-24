@@ -21,6 +21,7 @@ from zap import audit, drops, extract, ledger, persona, render, route, shiftnote
 
 TICK = 20
 BOOT = time.time()
+DEMO_CFG: dict | None = None  # {first_boot, audit_at, audit_for} once --demo-audit-at is given; exported to the page
 LOG = ROOT / "handover" / "run.log"
 console = Console(width=None if sys.stdout.isatty() else 140, highlight=False)
 stop = False
@@ -114,11 +115,25 @@ def demo_drop_check(after: float):
     say(f"drop landed: inbox/drops/demo-2030.txt (T+{int(after)}s after first boot)")
 
 
+AUDIT_FOR = 30  # seconds the page shows the Audit tab by itself
+
+
+def demo_audit_check(after: float):
+    """Once, `after` seconds past the FIRST boot ever: note that the page is now showing the audit. The window itself is
+    first_boot+after .. +30 s (the page computes it from heartbeat.js), so a restart or reload can never re-trigger or move it."""
+    if not DEMO.exists() or "demo:audit" in ledger.action_keys():
+        return
+    if time.time() - json.loads(DEMO.read_text())["first_boot"] < after:
+        return
+    ledger.record_action("demo", "system", "audit", None, now_clock().isoformat(), after_s=after, shown_s=AUDIT_FOR)
+    say(f"audit tab on screen for {AUDIT_FOR} s (T+{int(after)}s after first boot)")
+
+
 # ---- narration: one line per action ----
 def narrate(st: dict, a0: int, q0: set, ev0: int):
     for a in ledger.read_jsonl(ledger.ACTIONS)[a0:]:
         who, text, cites = site.describe(a, st)
-        if a["type"] != "drop":  # the 'drop landed' line is printed where the drop is copied
+        if a["type"] not in ("drop", "audit"):  # those two lines are printed where they happen
             say(f"{who}-ai {text} ({','.join(cites)})")
     for q in ledger.questions():
         if q["id"] not in q0:
@@ -165,7 +180,7 @@ def tick(first: bool, table: bool = False) -> None:
         say("audit: caught an unsourced fact - see 'Caught itself'")
     narrate(st, a0, q0, ev0)
     changed = shiftnote.render_handovers(st, now) or st["n_events"] != n0
-    changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}, srcmap, BOOT, session_start()) or changed
+    changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}, srcmap, BOOT, session_start(), DEMO_CFG) or changed
     if table:
         console.print(render.status_table(st, now))
     if failed:
@@ -247,8 +262,16 @@ def main():
     signal.signal(signal.SIGINT, _sig)
     signal.signal(signal.SIGTERM, _sig)
     demo_after = float(_arg("--demo-drop-at")) if "--demo-drop-at" in sys.argv else None
+    audit_after = float(_arg("--demo-audit-at")) if "--demo-audit-at" in sys.argv else None
     table = "--table" in sys.argv
     ensure_working_copies()
+    if audit_after is not None:
+        global DEMO_CFG
+        if not DEMO.exists():
+            tmp = DEMO.with_suffix(".tmp")
+            tmp.write_text(json.dumps({"first_boot": time.time()}))
+            os.replace(tmp, DEMO)
+        DEMO_CFG = {"first_boot": json.loads(DEMO.read_text())["first_boot"], "audit_at": audit_after, "audit_for": AUDIT_FOR}
     now = now_clock()
     pack = sources.load_pack(now) + sources.load_drops(now)
     st = ledger.materialize()
@@ -257,6 +280,8 @@ def main():
     while not stop:
         if demo_after is not None:
             demo_drop_check(demo_after)
+        if audit_after is not None:
+            demo_audit_check(audit_after)
         tick(first, table)
         first = False
         if once:
@@ -268,6 +293,8 @@ def main():
             time.sleep(0.5)
             if demo_after is not None:
                 demo_drop_check(demo_after)
+            if audit_after is not None:
+                demo_audit_check(audit_after)
             if [(f.name, f.stat().st_mtime) for f in sources.drop_files()] != seen:
                 break  # a new drop landed: ingest now, don't wait out the tick
     log("flushed, exit 0")
