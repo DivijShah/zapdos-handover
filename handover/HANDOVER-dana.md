@@ -45,4 +45,4 @@ Open: 5 · Done: 1
 - **Sent by Dana Brooks's AI**: New times for our next call with Tom → maria.gomez@northwind-cold.example · `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md` · re Book next call with Tom Reyes (Northwind) · sources: E03, C01, L-ZAP-104
 
 ## Superseded
-- ~~Book next call with Tom Reyes (Northwind)~~ · **superseded by** the newer version (T-demo-2030-16420d): "Tom can do Friday 30 Oct, 2pm Dallas." · stale artifacts: outbox/sent/20261024-1500-dana-tom-call-reask-maria.md, outbox/sent/20261024-1500-dana-tom-call-reask-maria.md
+- ~~Book next call with Tom Reyes (Northwind)~~ · **superseded by** the newer version (T-demo-2030-16420d): "Tom can do Friday 30 Oct, 2pm Dallas." · stale artifacts: outbox/sent/20261024-1500-dana-tom-call-reask-maria.md
