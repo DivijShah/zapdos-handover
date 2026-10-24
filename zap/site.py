@@ -117,6 +117,9 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
                     "overdue": bool(st["promises"].get(q["promise_id"])) and _overdue({**st["promises"][q["promise_id"]], "status": "open"}, now),
                     "due_src": st["promises"].get(q["promise_id"], {}).get("due_src")}
                    for q in qs if q.get("to") == me and not q.get("answered")]
+        # questions on promises a drop just touched (new due date, supersede) go first: they are what changed
+        touched = lambda w: bool((st["promises"].get(w["re"]) or {}).get("supersedes")) or str((st["promises"].get(w["re"]) or {}).get("due_src", "")).startswith(("D-", "T-"))  # noqa: E731
+        waiting.sort(key=lambda w: not touched(w))
         handed = [{"text": a["text"], "cite": a.get("cite", []), "from": a["persona"]}
                   for a in acts_ if a["type"].startswith("inform-") and a.get("to") == me]
         handed += [item(p, handed="dependency") for p in mine if "dependency" in p["flags"] and p["status"] in LIVE]
