@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-170",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "bayview.casestudy",
+   "state": "open",
+   "due": null,
+   "evidence": "Linear ZAP-170: Bayview case study approval | Status: In Progress | Note: Lisa wants draft + photos",
+   "note": "Case study draft and photos for Lisa Park to approve; status In Progress, no due date.",
+   "ev_ok": false
+  }
+ ]
+}

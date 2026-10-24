@@ -1,0 +1,18 @@
+{
+ "source_id": "WA01",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.cam3_relocation",
+   "state": "open",
+   "kind": "install",
+   "counterparty": "Raj Kumar",
+   "topic": "cam3 relocation",
+   "deliverable": "Move camera 3 two metres left onto the column because a new storage rack blocks the spot",
+   "due": null,
+   "evidence": "New storage rack in front of cam 3 spot, bay C. Can move it 2m left onto the column?",
+   "note": "Raj asks whether camera 3 can move 2m left because a new rack blocks its spot; unanswered in this source.",
+   "ev_ok": true
+  }
+ ]
+}

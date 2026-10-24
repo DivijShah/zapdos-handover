@@ -1,0 +1,14 @@
+{
+ "source_id": "S011",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.onepager",
+   "state": "open",
+   "due": null,
+   "evidence": "Also happy to make the Northwind one-pager, just need to know what Maria asked for.",
+   "note": "Priya offers to make the Northwind one-pager but needs to know what Maria asked for.",
+   "ev_ok": true
+  }
+ ]
+}

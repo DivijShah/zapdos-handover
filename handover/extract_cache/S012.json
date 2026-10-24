@@ -1,0 +1,22 @@
+{
+ "source_id": "S012",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "ridgeline.site_visit",
+   "state": "open",
+   "due": null,
+   "evidence": "Ridgeline wants a site visit next week + ballpark price. I'll check calendars.",
+   "note": "Dana will check calendars; the site visit is not yet booked.",
+   "ev_ok": true
+  },
+  {
+   "slot": "ridgeline.price",
+   "state": "open",
+   "due": null,
+   "evidence": "Ridgeline wants a site visit next week + ballpark price.",
+   "note": "Ridgeline wants a ballpark price; no price has been given yet.",
+   "ev_ok": true
+  }
+ ]
+}

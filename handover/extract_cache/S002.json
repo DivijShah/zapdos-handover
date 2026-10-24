@@ -1,0 +1,14 @@
+{
+ "source_id": "S002",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "crestline.clash",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Booked Crestline Data Centers: Tue 3 Nov 15:00 SGT with Farah. Need Wei Lin on it.",
+   "note": "Wei Lin needs to be on the 3 Nov Crestline call with Farah, which Dana booked.",
+   "ev_ok": true
+  }
+ ]
+}

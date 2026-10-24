@@ -1,0 +1,25 @@
+{
+ "source_id": "C09",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "optix.po",
+   "state": "open",
+   "due": "2026-10-27",
+   "evidence": "They need a PO by Tuesday 27 Oct to hold stock. 50% upfront (test payment only tonight).",
+   "note": "Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment, test payment only.",
+   "ev_ok": true
+  },
+  {
+   "slot": "new",
+   "state": "open",
+   "kind": "reply",
+   "counterparty": "Wei Lin",
+   "topic": "camera model match",
+   "due": null,
+   "evidence": "The camera model has to match Wei Lin's layout. Wei Lin has not seen this quote.",
+   "note": "Camera model must match Wei Lin's layout; Wei Lin has not yet seen the quote.",
+   "ev_ok": true
+  }
+ ]
+}

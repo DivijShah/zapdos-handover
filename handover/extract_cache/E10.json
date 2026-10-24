@@ -1,0 +1,14 @@
+{
+ "source_id": "E10",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "optix.po",
+   "state": "open",
+   "due": "2026-10-27",
+   "evidence": "Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+   "note": "Optix needs a PO by Tue 27 Oct to hold stock for quote Q-1182; 50% upfront.",
+   "ev_ok": true
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "source_id": "S016",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "crestline.send_onepager",
+   "state": "open",
+   "due": null,
+   "evidence": "Sent Crestline the one-pager? @sam you were cc'd, did it go?",
+   "note": "Dana asks whether the Crestline one-pager was sent; no sent email is shown, so it is unconfirmed.",
+   "ev_ok": true
+  }
+ ]
+}

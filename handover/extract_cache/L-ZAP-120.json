@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-120",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "crestline.onepager",
+   "state": "open",
+   "due": "2026-11-02",
+   "evidence": "Linear ZAP-120: Crestline one-pager. Status: Todo. Due: 2026-11-02. Note: Promised by Dana",
+   "note": "Crestline one-pager is in Todo, unassigned, due 2026-11-02, promised by Dana.",
+   "ev_ok": false
+  }
+ ]
+}

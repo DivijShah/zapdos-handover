@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-150",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "cedar.numbers_refs",
+   "state": "open",
+   "due": "2026-10-28",
+   "evidence": "Linear ZAP-150: Cedar Fund: pilot numbers + 2 references",
+   "note": "Ticket assigned to Sam, status Todo, due 2026-10-28; asks customers first.",
+   "ev_ok": true
+  }
+ ]
+}

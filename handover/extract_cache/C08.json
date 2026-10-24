@@ -1,0 +1,30 @@
+{
+ "source_id": "C08",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "bayview.casestudy",
+   "state": "open",
+   "due": null,
+   "evidence": "Bayview case study: draft is ready, but Bayview has to approve it before anything goes public.",
+   "note": "Case study draft is ready; Bayview must approve before it goes public.",
+   "ev_ok": true
+  },
+  {
+   "slot": "bayview.clip",
+   "state": "open",
+   "due": "2026-10-26",
+   "evidence": "LinkedIn post planned for Monday 26 Oct. Priya needs a 30-second clip of the night-shift view from Wei Lin.",
+   "note": "Priya needs a 30-second night-shift clip from Wei Lin for the Monday LinkedIn post.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.onepager",
+   "state": "open",
+   "due": null,
+   "evidence": "Northwind one-pager: Priya can make it if someone tells her what Maria asked for.",
+   "note": "Northwind one-pager depends on someone telling Priya what Maria asked for.",
+   "ev_ok": true
+  }
+ ]
+}

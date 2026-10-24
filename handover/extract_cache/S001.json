@@ -1,0 +1,22 @@
+{
+ "source_id": "S001",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.install",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Harbor Point install locked: Tue 3 Nov 14:00-16:30 SGT.",
+   "note": "Install is scheduled for Tue 3 Nov 14:00-16:30 SGT; not yet physically done.",
+   "ev_ok": true
+  },
+  {
+   "slot": "harbor_point.ip_range",
+   "state": "open",
+   "due": null,
+   "evidence": "Waiting on Ken for IPs.",
+   "note": "Still waiting on Ken for the IP range for the cameras.",
+   "ev_ok": true
+  }
+ ]
+}

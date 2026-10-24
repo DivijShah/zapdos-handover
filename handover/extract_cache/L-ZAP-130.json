@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-130",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "jordan_lee.onboarding",
+   "state": "open",
+   "due": "2026-10-25",
+   "evidence": "Linear ZAP-130: Onboard Jordan Lee: accounts, laptop, first task",
+   "note": "Onboarding ticket for Jordan Lee (starts Mon 26 Oct); status Todo, unassigned.",
+   "ev_ok": true
+  }
+ ]
+}

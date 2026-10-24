@@ -1,0 +1,14 @@
+{
+ "source_id": "S009",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "internal.reimburse_weilin",
+   "state": "open",
+   "due": null,
+   "evidence": "I paid $640 for the Harbor Point trip (taxi + hotel). Who approves reimbursements?",
+   "note": "Wei Lin paid $640 for taxi and hotel and asks who approves the reimbursement; no approval yet.",
+   "ev_ok": true
+  }
+ ]
+}

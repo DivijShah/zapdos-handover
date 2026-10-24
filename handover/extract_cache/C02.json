@@ -1,0 +1,38 @@
+{
+ "source_id": "C02",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.ip_range",
+   "state": "open",
+   "due": null,
+   "evidence": "Ken (IT) still has to send the IP range and subnet for the cameras.",
+   "note": "Ken Ong still has to send the IP range and subnet for the 6 cameras.",
+   "ev_ok": true
+  },
+  {
+   "slot": "harbor_point.cam3_relocation",
+   "state": "open",
+   "due": null,
+   "evidence": "Wei Lin to propose a new spot for camera 3.",
+   "note": "A new storage rack blocks camera 3; Wei Lin to propose a new spot.",
+   "ev_ok": true
+  },
+  {
+   "slot": "harbor_point.start_time_reply",
+   "state": "open",
+   "due": null,
+   "evidence": "Raj asked if we can start at 13:30 instead.",
+   "note": "Raj asked whether the install can start at 13:30 instead of 14:00.",
+   "ev_ok": true
+  },
+  {
+   "slot": "harbor_point.install",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Install is set for Tuesday 3 Nov, 14:00 to 16:30 Singapore time.",
+   "note": "On-site install of 6 cameras scheduled 3 Nov 14:00-16:30; not yet physically done.",
+   "ev_ok": true
+  }
+ ]
+}

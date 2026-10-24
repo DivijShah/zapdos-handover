@@ -1,0 +1,22 @@
+{
+ "source_id": "E15",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.maria_reply",
+   "state": "open",
+   "due": null,
+   "evidence": "Thursday came and went. Are we still on? My VP asked for the number this morning.",
+   "note": "Maria chases Sam for a reply on whether the deal is still on; she needs the number for her VP.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "due": null,
+   "evidence": "My VP asked for the number this morning.",
+   "note": "Maria's VP wants the price number Zapdemo owes Northwind; no figure has been sent in this email.",
+   "ev_ok": true
+  }
+ ]
+}

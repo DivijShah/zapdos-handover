@@ -1,0 +1,38 @@
+{
+ "source_id": "C01",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.layout",
+   "state": "open",
+   "due": "2026-10-22",
+   "evidence": "She wants a camera layout for doors 1 to 12 and a price, both by Thursday 22 Oct.",
+   "note": "Camera layout for doors 1-12 promised by Thursday 22 Oct; no delivery shown in this call.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "due": "2026-10-22",
+   "evidence": "We'll get you the layout and a number by Thursday.",
+   "note": "Price/number for Northwind promised by Thursday 22 Oct.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.tom_call",
+   "state": "open",
+   "due": null,
+   "evidence": "Her site manager, Tom Reyes, has to be on the next call.",
+   "note": "Next call must include Tom Reyes; not yet booked.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.onepager",
+   "state": "open",
+   "due": null,
+   "evidence": "She asked for a one-pager on pallet-damage tracking she can forward to her VP.",
+   "note": "One-pager on pallet-damage tracking requested for Maria to forward to her VP.",
+   "ev_ok": true
+  }
+ ]
+}

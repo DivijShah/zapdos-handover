@@ -1,0 +1,16 @@
+{
+ "source_id": "CAL05",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "bayview.weekly_report",
+   "state": "open",
+   "counterparty": "Chris",
+   "deliverable": "Weekly report to Chris at Bayview",
+   "due": null,
+   "evidence": "Calendar event: Bayview weekly report due",
+   "note": "Calendar event recurring every Friday marks the Bayview weekly report as due; no explicit date given in source.",
+   "ev_ok": true
+  }
+ ]
+}

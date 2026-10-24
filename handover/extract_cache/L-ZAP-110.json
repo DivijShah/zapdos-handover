@@ -1,0 +1,15 @@
+{
+ "source_id": "L-ZAP-110",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.cam3_relocation",
+   "state": "open",
+   "topic": "camera 3 relocation",
+   "due": "2026-11-02",
+   "evidence": "Linear ZAP-110: Harbor Point: relocate camera 3 (new rack in the way)",
+   "note": "Camera 3 relocation is in progress, assigned to weilin; waiting on Raj's photos.",
+   "ev_ok": true
+  }
+ ]
+}

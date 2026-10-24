@@ -1,0 +1,14 @@
+{
+ "source_id": "E06",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "jordan_lee.reply",
+   "state": "open",
+   "due": null,
+   "evidence": "I haven't received any logins or first-day details yet. Where should I go at 9?",
+   "note": "Jordan asks for logins and where to go at 9 on Monday; Zapdemo owes an answer.",
+   "ev_ok": true
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "source_id": "E01",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "due": "2026-10-22",
+   "evidence": "We'll send the layout and a price by Thursday",
+   "note": "Sam promised Maria a price by Thursday (22 Oct) per the sent email.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.layout",
+   "state": "open",
+   "due": "2026-10-22",
+   "evidence": "We'll send the layout and a price by Thursday",
+   "note": "Sam promised Maria the camera layout by Thursday; no delivery shown in this source.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.tom_call",
+   "state": "open",
+   "due": null,
+   "evidence": "set up the next call with Tom",
+   "note": "Sam promised to set up the next call including Tom Reyes; not yet booked per this source.",
+   "ev_ok": true
+  }
+ ]
+}

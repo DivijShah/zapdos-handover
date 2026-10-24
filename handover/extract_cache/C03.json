@@ -1,0 +1,46 @@
+{
+ "source_id": "C03",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "crestline.clash",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Dana booked Tuesday 3 Nov, 15:00 Singapore time.",
+   "note": "Engineer call booked on 3 Nov; Wei Lin was not copied on the one-pager email, so the clash concerns Wei Lin's availability.",
+   "ev_ok": true
+  },
+  {
+   "slot": "crestline.engineer_call",
+   "state": "done",
+   "due": "2026-11-03",
+   "evidence": "Farah wants a proper call with our engineer. Dana booked Tuesday 3 Nov, 15:00 Singapore time.",
+   "note": "Engineer call with Farah is booked for Tuesday 3 Nov at 15:00 Singapore time.",
+   "ev_ok": true
+  },
+  {
+   "slot": "crestline.onepager",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Dana promised a one-pager by email before that call.",
+   "note": "One-pager promised to Farah by email before the 3 Nov call.",
+   "ev_ok": true
+  },
+  {
+   "slot": "crestline.send_onepager",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Dana promised a one-pager by email before that call.",
+   "note": "Source does not show the one-pager was sent; it is owed before the 3 Nov call.",
+   "ev_ok": true
+  },
+  {
+   "slot": "crestline.demo_progress",
+   "state": "open",
+   "due": null,
+   "evidence": "wants to track fit-out progress floor by floor.",
+   "note": "Farah wants to track fit-out progress floor by floor; no demo date stated in the source.",
+   "ev_ok": true
+  }
+ ]
+}

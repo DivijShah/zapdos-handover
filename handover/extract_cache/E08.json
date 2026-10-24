@@ -1,0 +1,30 @@
+{
+ "source_id": "E08",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "cedar.numbers_refs",
+   "state": "open",
+   "kind": "casestudy",
+   "counterparty": "Cedar Fund (Rachel Kim)",
+   "topic": "pilot numbers refs",
+   "deliverable": "Updated pilot numbers and 2 customer references",
+   "due": "2026-10-28",
+   "evidence": "updated pilot numbers and 2 references by Wed 28 Oct",
+   "note": "Rachel asked for updated pilot numbers and 2 references by Wed 28 Oct.",
+   "ev_ok": true
+  },
+  {
+   "slot": "cedar.engineer_call",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Cedar Fund (Rachel Kim)",
+   "topic": "engineer call",
+   "deliverable": "20-minute call with an engineer",
+   "due": null,
+   "evidence": "20 minutes with your engineer when convenient",
+   "note": "Rachel asked for a 20-minute call with an engineer; no booking mentioned yet.",
+   "ev_ok": true
+  }
+ ]
+}

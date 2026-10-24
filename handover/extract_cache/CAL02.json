@@ -1,0 +1,14 @@
+{
+ "source_id": "CAL02",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "crestline.clash",
+   "state": "open",
+   "due": "2026-11-03",
+   "evidence": "Start: 2026-11-03T15:00:00+08:00",
+   "note": "Calendar shows a Crestline Data Centers call on 3 Nov with Wei Lin attending, which may double-book Wei Lin.",
+   "ev_ok": true
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-111",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.ip_range",
+   "state": "open",
+   "due": "2026-11-02",
+   "evidence": "Linear ZAP-111: Harbor Point: IP addresses for 6 cameras. Assignee: weilin. Status: Todo. Due: 2026-11-02",
+   "note": "Ticket to get the IP range for the 6 Harbor Point cameras; status Todo, assigned to Wei Lin.",
+   "ev_ok": true
+  }
+ ]
+}

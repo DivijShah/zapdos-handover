@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-141",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "bayview.pass_bar",
+   "state": "open",
+   "due": null,
+   "evidence": "Linear ZAP-141: Bayview pilot pass bar (signed)",
+   "note": "Ticket for the written pilot pass bar is Todo, unassigned, with no due date.",
+   "ev_ok": true
+  }
+ ]
+}

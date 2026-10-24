@@ -1,0 +1,14 @@
+{
+ "source_id": "L-ZAP-121",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "crestline.clash",
+   "state": "open",
+   "due": null,
+   "evidence": "Linear ZAP-121: Crestline call clashes with Harbor install",
+   "note": "Ticket says Crestline call clashes with Harbor install; status Backlog, unassigned, no due date.",
+   "ev_ok": true
+  }
+ ]
+}

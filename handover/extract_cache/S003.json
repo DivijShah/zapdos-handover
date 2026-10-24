@@ -1,0 +1,22 @@
+{
+ "source_id": "S003",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "due": "2026-10-22",
+   "evidence": "Northwind wants layout + price by Thu. I'll do the price.",
+   "note": "Sam will do the price for Northwind, due Thursday.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.layout",
+   "state": "open",
+   "due": "2026-10-22",
+   "evidence": "@weilin can you do the layout?",
+   "note": "Wei Lin asked to do the Northwind layout, due Thursday with the price.",
+   "ev_ok": true
+  }
+ ]
+}

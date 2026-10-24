@@ -1,0 +1,18 @@
+{
+ "source_id": "E02",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "harbor_point.ip_range",
+   "state": "open",
+   "kind": "",
+   "counterparty": "Ken Ong (Harbor Point)",
+   "topic": "",
+   "deliverable": "Request IP range, subnet mask and gateway for the 6 cameras",
+   "due": "2026-11-03",
+   "evidence": "could you send the IP range, subnet mask and gateway for the 6 cameras? Install is Tue 3 Nov, 14:00.",
+   "note": "Wei Lin asked Ken for the IP range; not yet received per this source.",
+   "ev_ok": true
+  }
+ ]
+}

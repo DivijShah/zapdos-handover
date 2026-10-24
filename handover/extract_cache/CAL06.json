@@ -1,0 +1,14 @@
+{
+ "source_id": "CAL06",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "cedar.numbers_refs",
+   "state": "open",
+   "due": "2026-10-28",
+   "evidence": "Cedar Fund deadline: numbers + references",
+   "note": "Calendar event on 28 Oct 09:00-09:30 marks deadline for pilot numbers and references for Cedar Fund.",
+   "ev_ok": true
+  }
+ ]
+}

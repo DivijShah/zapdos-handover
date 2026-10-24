@@ -1,0 +1,22 @@
+{
+ "source_id": "C10",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "internal.reimburse_weilin",
+   "state": "open",
+   "due": null,
+   "evidence": "Wei Lin paid $640 out of pocket for the Harbor Point site trip. Needs Sam's approval to reimburse.",
+   "note": "Wei Lin's $640 site-trip expense needs Sam's approval before reimbursement.",
+   "ev_ok": true
+  },
+  {
+   "slot": "internal.deploy_alerts_doc",
+   "state": "open",
+   "due": null,
+   "evidence": "nobody knows how the alerts were set up. Alex set them up and is on two weeks' leave.",
+   "note": "Nobody knows how deploy-api alerts were set up; alex is on leave, so documentation is needed.",
+   "ev_ok": true
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "source_id": "L-ZAP-104",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "northwind.tom_call",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Northwind",
+   "deliverable": "Book next Northwind call with Tom Reyes",
+   "due": null,
+   "evidence": "Linear ZAP-104: Book next Northwind call with Tom Reyes",
+   "note": "Linear ticket is Todo, unassigned, no due date; booking not yet done.",
+   "ev_ok": true
+  }
+ ]
+}

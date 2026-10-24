@@ -1,0 +1,26 @@
+{
+ "source_id": "C06",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "cedar.numbers_refs",
+   "state": "open",
+   "kind": "reply",
+   "counterparty": "Cedar Fund",
+   "due": "2026-10-28",
+   "evidence": "Rachel wants updated pilot numbers and 2 customer references by Wednesday 28 Oct.",
+   "note": "Rachel Kim wants updated pilot numbers and 2 customer references by 28 Oct; references need customer permission first.",
+   "ev_ok": true
+  },
+  {
+   "slot": "cedar.engineer_call",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Cedar Fund",
+   "due": null,
+   "evidence": "She'd like a 20-minute call with the engineer to understand the tech.",
+   "note": "Rachel wants a 20-minute call with the engineer; no booking mentioned yet.",
+   "ev_ok": true
+  }
+ ]
+}

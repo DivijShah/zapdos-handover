@@ -1,0 +1,22 @@
+{
+ "source_id": "C07",
+ "model": "claude-haiku-5-5",
+ "mentions": [
+  {
+   "slot": "ridgeline.price",
+   "state": "open",
+   "due": null,
+   "evidence": "Asked for a price range and a site visit next week.",
+   "note": "Omar asked for a price range; pricing comes from Sam.",
+   "ev_ok": true
+  },
+  {
+   "slot": "ridgeline.site_visit",
+   "state": "open",
+   "due": null,
+   "evidence": "Dana: \"Let me check calendars and come back to you.\" Nothing booked yet.",
+   "note": "Site visit requested for next week; nothing booked yet, Dana to come back to Omar.",
+   "ev_ok": true
+  }
+ ]
+}
