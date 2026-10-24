@@ -30,7 +30,7 @@ _S = [
     ("jordan_lee.reply", "reply", "Reply to Jordan: where to go Mon 09:00",
      "Answer Jordan's email (logins, where to go at 9)", "hiring decisions"),
     ("northwind.price", "price", "Northwind price for Maria",
-     "Customer price/quote Zapdemo owes Northwind (Maria). A supplier quote (Optix) is NOT this", None),
+     "Customer price/quote Zapdemo owes Northwind (Maria), including a deadline for it. A supplier quote (Optix) is NOT this", None),
     ("northwind.maria_reply", "reply", "Reply to Maria's chase (Northwind)", "Answer Maria's chase email", None),
     ("optix.po", "payment", "Optix PO by Tue 27 Oct 17:00 (50% upfront)",
      "Supplier purchase order / upfront payment for Optix cameras", None),

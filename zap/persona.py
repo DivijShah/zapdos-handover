@@ -99,6 +99,35 @@ class Persona:
             raise Rejected(f"{atype}: {probs}")
         self.do(p, atype, lambda: acts.document(self.now, self.who, slug_, title, md, p, ids))
 
+    def autosend(self, p, inbound: list[str], resolves: list[tuple[str, str]] = ()) -> bool:
+        """SEND POLICY. Move the drafted email to outbox/sent/ iff it commits the company to nothing new and still passes
+        verify; otherwise file a 'send?' question to the owner. Key {id}:send makes it once-only."""
+        keys = ledger.action_keys()
+        if f"{p['id']}:send" in keys:
+            return True
+        em = next((a for a in ledger.read_jsonl(ledger.ACTIONS) if a["key"] == f"{p['id']}:email"), None)
+        if not em:
+            return False
+        rel = acts.resolve(em["path"])
+        text = (ledger.ROOT / rel).read_text()
+        head, _, rest = text.partition("\n\n")
+        body = rest.split("\n\n--\nDrafted by")[0]
+        subj = next((ln[9:] for ln in head.splitlines() if ln.startswith("Subject: ")), "")
+        to = next((ln[4:] for ln in head.splitlines() if ln.startswith("To: ")), "")
+        cite = [c.strip() for c in next((ln[9:] for ln in head.splitlines() if ln.startswith("Sources: ")), "").split(",")]
+        probs = acts.commitment_problems(subj + "\n" + body, inbound, self.srcmap) + \
+            acts.verify_text(subj + "\n" + body, self.srcmap, cite) + (["no recipient address"] if "UNKNOWN" in to else [])
+        if probs:
+            self.ask(p, self.id, "send-approve", f"Send the draft '{subj}'? It was NOT sent automatically: {', '.join(probs)}. "
+                     f"Draft is in the outbox ({rel}).", cite)
+            return False
+        path = acts.send(rel, self.who, self.at)
+        ledger.record_action(p["id"], self.id, "send", path, self.at, to=to, subject=subj, cite=cite)
+        for qto, qkey in resolves:
+            ledger.answer_question(p["id"], qto, qkey, "Sent automatically: it commits the company to nothing new (send policy).",
+                                   f"{self.id}'s AI", self.at)
+        return True
+
     # ---- handlers (return desired status or None) ----
     def h_maria_reply(self, p):
         ids = ["E15", "E03", "C01", "L-ZAP-101"]
@@ -107,10 +136,8 @@ class Persona:
                         "mention any price or amount. Say the camera layout for doors 1 to 12 is done (L-ZAP-101, C01). Say you are "
                         "flagging the price to Sam and that Dana will be in touch about the call with Tom. Do not say when.",
                         ids, no_money=True)
-        if ok:
-            self.ask(p, "sam", "send-maria",
-                     "Send the reply to Maria (draft in outbox, no price in it)? She chased and her VP asked for the number (E15). "
-                     "Nothing has been sent.", ids)
+        if ok and self.autosend(p, ["E15"], [("sam", "send-maria")]):
+            return "done"
         return "waiting_owner"
 
     def h_price(self, p):
@@ -155,10 +182,8 @@ class Persona:
                         "Ask Maria for new times for the next call that includes her site manager Tom Reyes (he signs off anything "
                         "mounted). Her earlier note said Tom was free Friday afternoon (E03) but that Friday has passed, so ask for "
                         "fresh availability. No prices.", ids, no_money=True)
-        if ok:
-            self.ask(p, "dana", "send-tom-reask",
-                     "Send the draft asking Maria for new times for the call with Tom Reyes? His Friday slot (E03) has passed. "
-                     "Draft is in the outbox; nothing has been sent.", ids)
+        if ok and self.autosend(p, ["E03", "E15"], [("dana", "send-tom-reask")]):
+            return "in_progress"  # re-ask sent; booking stays open until Maria answers
         return "waiting_owner"
 
     def h_onepager(self, p):
@@ -244,6 +269,8 @@ class Persona:
         ok = self.email(p, "email", "reply-jordan-monday", "jordan.lee",
                         "Reply to Jordan's email E06. Say the first-day details and logins are being sorted by the team and that Sam "
                         "will confirm where to go on Monday. Do NOT state any place, address, room or time; none is in the pack.", ids)
+        if ok:
+            self.autosend(p, ["E06"])
         self.ask(p, "sam", "jordan-location",
                  "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. "
                  "The reply draft in the outbox says you will confirm; nothing has been sent.", ids)
@@ -254,6 +281,8 @@ class Persona:
         ok = self.email(p, "email", "reply-ken-ips-vlan", "ken.ong",
                         "Reply to Ken's email E04. Confirm the IP range, mask and gateway he sent were received (repeat them exactly as written "
                         "in E04). On his VLAN question say Wei Lin will confirm and do not answer it.", ids)
+        if ok:
+            self.autosend(p, ["E04"])
         self.ask(p, "weilin", "vlan",
                  "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? "
                  "The draft in the outbox confirms the IPs and says you will answer; nothing has been sent.", ids)
@@ -265,6 +294,8 @@ class Persona:
                         "Write a short WhatsApp-style reply to Raj's voice note WA02 asking if the team can start at 13:30 on Tuesday. "
                         "Say Wei Lin will confirm. Do NOT agree or decline and do not commit any time.", ids,
                         to_label="Raj Kumar, Harbor Point (WhatsApp; no email address in pack)")
+        if ok:
+            self.autosend(p, ["WA02"])
         self.ask(p, "weilin", "start-1330",
                  "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. "
                  "The reply draft in the outbox commits no time; nothing has been sent.", ids)
@@ -275,6 +306,8 @@ class Persona:
         ok = self.email(p, "email", "reply-lisa-case-study", "lisa.park",
                         "Reply to Lisa's email E14. Thank her for agreeing to review. Say Priya will send the case-study draft and the list "
                         "of photos she plans to use. Do not name any photo and do not state any result or number.", ids, no_money=True)
+        if ok:
+            self.autosend(p, ["E14"])
         self.ask(p, "priya", "photos",
                  "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). "
                  "No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent.", ids)
@@ -301,7 +334,7 @@ class Persona:
     def h_updated(self, p):
         """A drop changed a fact this promise rested on: ask the owner to confirm; show what went stale."""
         old = self.st["promises"].get(p["supersedes"], {})
-        stale = [a["path"] for a in ledger.read_jsonl(ledger.ACTIONS)
+        stale = [acts.resolve(a["path"]) for a in ledger.read_jsonl(ledger.ACTIONS)
                  if a["promise_id"] == p["supersedes"] and (a.get("path") or "").startswith("outbox/")]
         src = p["created_from"]
         text = (f"New fact on '{p['deliverable']}': {src} says \"{p['new_fact']}\". This replaces the earlier plan"

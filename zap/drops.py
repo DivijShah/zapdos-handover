@@ -112,7 +112,7 @@ def purge(now: datetime) -> dict:
     acts_ = ledger.read_jsonl(ledger.ACTIONS)
     gone_acts = [a for a in acts_ if a["promise_id"] in dead]
     qs = ledger.read_jsonl(ledger.QUESTIONS)
-    gone_q = {q["id"] for q in qs if q["promise_id"] in dead}
+    gone_q = {q["id"] for q in qs if q.get("promise_id") in dead}
     slack = ledger.read_jsonl(ledger.H / "slack.jsonl")
     keep_slack = [m for m in slack if m.get("key") not in gone_q and not str(m.get("key", "")).split(":")[0] in dead]
 
@@ -131,7 +131,8 @@ def purge(now: datetime) -> dict:
     files = 0
     for a in gone_acts:
         if a.get("path", "") and a["path"].startswith("outbox/"):
-            f = ledger.ROOT / a["path"]
+            from . import acts
+            f = ledger.ROOT / acts.resolve(a["path"])
             if f.exists():
                 f.unlink()
                 files += 1

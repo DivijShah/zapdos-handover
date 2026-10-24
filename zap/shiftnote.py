@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from . import ledger
+from . import acts, ledger
 from .render import LIVE, _due_label, _overdue, _sorted
 from .route import team
 
@@ -21,6 +21,11 @@ def _write_if_changed(path, text: str) -> bool:
     return True
 
 
+def _due_note(st: dict, q: dict) -> str:
+    p = st["promises"].get(q.get("promise_id"))
+    return f" **Due {_due_label(p['due'])}** (per {p['due_src']})" if p and p.get("due") and p.get("due_src") else ""
+
+
 def _attending(who_id: str, tz: ZoneInfo) -> list[str]:
     evs = json.loads((ledger.H / "calendar.json").read_text())
     mine = sorted((e for e in evs if who_id in e["attendees"]), key=lambda e: datetime.fromisoformat(e["start"]))
@@ -35,7 +40,7 @@ def _attending(who_id: str, tz: ZoneInfo) -> list[str]:
 
 
 def render_handovers(st: dict, now: datetime) -> bool:
-    qs = ledger.read_jsonl(ledger.QUESTIONS)
+    qs = ledger.questions()
     acts_ = ledger.read_jsonl(ledger.ACTIONS)
     changed = False
     for who in team():
@@ -45,13 +50,15 @@ def render_handovers(st: dict, now: datetime) -> bool:
         arts = {}
         for a in acts_:
             if a.get("path") and a["persona"] == me:
-                arts.setdefault(a["promise_id"], []).append(a["path"])
+                arts.setdefault(a["promise_id"], [])
+                if acts.resolve(a["path"]) not in arts[a["promise_id"]]:
+                    arts[a["promise_id"]].append(acts.resolve(a["path"]))
         lines = [f"# Handover: {who['name']} ({me})",
                  f"_AI shift note, written by the Zapdemo AI for {who['name']}. "
                  f"Clock: {now.astimezone(tz).strftime('%a %d %b %Y %H:%M %Z')}._", "",
                  f"Open: {len(live)} · Done: {sum(p['status'] == 'done' for p in mine)}", ""]
         mq = [q for q in qs if q.get("to") == me and not q.get("answered")]
-        lines += ["## Questions for you"] + ([f"- {q['question']} _(from {q['from']}'s AI; re {q['promise_id']})_" for q in mq]
+        lines += ["## Questions for you"] + ([f"- {q['question']}{_due_note(st, q)} _(from {q['from']}'s AI; re {q['promise_id']})_" for q in mq]
                                              or ["- none"]) + [""]
         hu = [a for a in acts_ if a["type"].startswith("inform-") and a.get("to") == me]
         lines += ["## Heads-up"] + ([f"- {a['text']} _(sources: {', '.join(a.get('cite', []))})_" for a in hu] or ["- none"]) + [""]
@@ -73,12 +80,17 @@ def render_handovers(st: dict, now: datetime) -> bool:
                 done.append(f"- {p['deliverable']} · sources: {', '.join(p['sources'])}"
                             + (f" · {', '.join(arts[p['id']])}" if p["id"] in arts else ""))
                 done += [f"  - latest: {n}" for n in p["notes"][-1:]]  # older notes may describe the pre-done state
+        for a in acts_:
+            if a["type"] == "send" and a["persona"] == me:
+                pr = st["promises"].get(a["promise_id"], {})
+                done.append(f"- **Sent by {who['name']}'s AI**: {a.get('subject', '')} → {a.get('to', '')} · `{a['path']}` · "
+                            f"re {pr.get('deliverable', a['promise_id'])} · sources: {', '.join(a.get('cite', []))}")
         lines += ["", "## Done"] + (done or ["- none"])
         sup = []
         for p in mine:
             if p["status"] == "superseded":
                 new = st["promises"].get(p.get("superseded_by"))
-                stale = [a["path"] for a in acts_ if a["promise_id"] == p["id"] and (a.get("path") or "").startswith("outbox/")]
+                stale = [acts.resolve(a["path"]) for a in acts_ if a["promise_id"] == p["id"] and (a.get("path") or "").startswith("outbox/")]
                 sup.append(f"- ~~{p['deliverable']}~~ · **superseded by** the newer version "
                            f"({new['created_from'] if new else '?'}): \"{new['new_fact'] if new else ''}\""
                            + (f" · stale artifacts: {', '.join(stale)}" if stale else ""))

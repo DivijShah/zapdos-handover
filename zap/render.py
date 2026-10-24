@@ -45,7 +45,7 @@ def _write_if_changed(path, text: str) -> bool:
 
 
 def render_handovers(st: dict, now: datetime) -> bool:
-    qs = ledger.read_jsonl(ledger.QUESTIONS)
+    qs = ledger.questions()
     changed = False
     for who in team():
         pid_, tz = who["id"], ZoneInfo(who["tz"])

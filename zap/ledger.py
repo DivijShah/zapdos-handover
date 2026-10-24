@@ -55,7 +55,7 @@ def _fold(st: dict, ev: dict):
             for f in ev.get("add_flags", []):
                 if f not in p["flags"]:
                     p["flags"].append(f)
-            for k in ("status", "due", "due_at"):
+            for k in ("status", "due", "due_at", "due_src"):
                 if k in ev:
                     p[k] = ev[k]
             if op == "done":
@@ -80,11 +80,32 @@ def _emit(st: dict, ev: dict):
     st["n_events"] += 1
 
 
+def questions() -> list[dict]:
+    """questions.jsonl folded by id (a later record for the same id, e.g. an answer, merges into the first)."""
+    out, idx = [], {}
+    for r in read_jsonl(QUESTIONS):
+        if r["id"] in idx:
+            out[idx[r["id"]]].update(r)
+        else:
+            idx[r["id"]] = len(out)
+            out.append(dict(r))
+    return out
+
+
+def answer_question(pid: str, to: str, qkey: str, answer: str, by: str, at: str) -> bool:
+    qid = hashlib.sha1(f"{pid}|{to}|{qkey}".encode()).hexdigest()[:10]
+    cur = next((q for q in questions() if q["id"] == qid), None)
+    if not cur or cur.get("answered"):
+        return False
+    append(QUESTIONS, dict(id=qid, answered=True, answer=answer, answered_by=by, answered_at=at))
+    return True
+
+
 def stats(st: dict) -> dict:
     c = {"open": 0, "in_progress": 0, "waiting_owner": 0, "done": 0, "superseded": 0}
     for p in st["promises"].values():
         c[p["status"]] = c.get(p["status"], 0) + 1
-    qs = read_jsonl(QUESTIONS)
+    qs = questions()
     acts = read_jsonl(ACTIONS)
     c["questions"] = sum(1 for q in qs if not q.get("answered"))
     c["last_action"] = acts[-1] if acts else None
@@ -132,6 +153,7 @@ def _apply_mention(st, src, m, judge):
         owner, routed = route(kind, m["slot"])
         _emit(st, dict(op="create", id=pid, slot=m["slot"], deliverable=label, kind=kind, counterparty=cp,
                        owner=owner, due=m.get("due"), due_at=src.at if m.get("due") else None,
+                       due_src=src.id if m.get("due") else None,
                        status="done" if m["state"] == "done" else "open", sources=[src.id],
                        created_from=src.id, notes=[note] if note else [],
                        flags=([f"duplicate:{src.id}"] if m["state"] == "duplicate" else []) +
@@ -145,7 +167,8 @@ def _apply_mention(st, src, m, judge):
             owner, routed = route(p["kind"], p["slot"])
             _emit(st, dict(op="create", id=nid, slot=p["slot"], deliverable=p["deliverable"], kind=p["kind"],
                            counterparty=p["counterparty"], owner=owner, due=m.get("due") or p["due"],
-                           due_at=src.at if m.get("due") else p.get("due_at"), status="open",
+                           due_at=src.at if m.get("due") else p.get("due_at"),
+                           due_src=src.id if m.get("due") else p.get("due_src"), status="open",
                            sources=[src.id] + [s for s in p["sources"] if s != src.id], created_from=src.id,
                            notes=[note] if note else [], flags=["supersedes"], supersedes=pid,
                            new_fact=v["quote"], reason=v.get("reason", "")))
@@ -163,7 +186,7 @@ def _apply_mention(st, src, m, judge):
     if m["state"] == "superseded" and p["status"] != "superseded":
         d["status"] = "superseded"
     if m.get("due") and m["due"] != p["due"] and src.at >= (p.get("due_at") or ""):
-        d["due"], d["due_at"] = m["due"], src.at
+        d["due"], d["due_at"], d["due_src"] = m["due"], src.at, src.id
     if d:
         _emit(st, dict(op="update", id=pid, **d))
 

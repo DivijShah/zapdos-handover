@@ -3,6 +3,7 @@ import json
 import os
 import re
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from . import ledger
@@ -64,6 +65,10 @@ def verify_text(text: str, srcmap: dict, ids: list[str], no_money: bool = False)
         if not re.search(rf"(?<![\d.]){re.escape(ip)}(?![\d])", corpus):
             probs.append(f"ip {ip}")
     body = re.sub(r"\b\d{1,3}(?:\.\d{1,3}){3}(?:/\d{1,2})?", " ", body)
+    for dot in re.findall(r"(?<![\w.])\.\d+", body):  # '.50 to .55': leading-dot octets, checked verbatim
+        if dot not in corpus:
+            probs.append(f"number {dot}")
+    body = re.sub(r"(?<![\w.])\.\d+", " ", body)
     if no_money and "$" in body:
         probs.append("money not allowed in this message")
     if re.search(r"https?://|www\.", body):
@@ -128,3 +133,77 @@ def linear_update(issue: str, **fields) -> list[str]:
     if changed:
         _atomic(p, json.dumps(data, indent=1))
     return changed
+
+
+# ---------- send policy ----------
+WEEKDAYS = r"monday|tuesday|wednesday|thursday|friday|saturday|sunday"
+_SCHED = (rf"\b\d{{1,2}}:\d{{2}}\b|\b\d{{1,2}}\s?(?:am|pm)\b|\b(?:{WEEKDAYS})\b|\b\d{{1,2}}(?:st|nd|rd|th)?\s+(?:{MONTHS})[a-z]*|"
+          rf"\b(?:{MONTHS})[a-z]*\.?\s+\d{{1,2}}\b")
+_COMMIT = r"\b(will attend|will be attending|will be there|will join|is attending|are attending|will deliver|quote|estimate|discount|invoice)\b"
+
+
+def commitment_problems(text: str, inbound_ids: list[str], srcmap: dict) -> list[str]:
+    """A draft may go out unasked only if it commits the company to nothing new: no money, no schedule token (time, day,
+    date) that the counterparty's own message did not already contain, no attendee or delivery promise."""
+    inbound = "\n".join(srcmap[i].text for i in inbound_ids if i in srcmap).lower()
+    probs = []
+    if "$" in text or re.search(r"\b(usd|dollars?|euros?)\b", text.lower()):
+        probs.append("money or price")
+    for m in re.finditer(_SCHED, text.lower()):
+        if m.group(0) not in inbound:
+            probs.append(f"offers schedule '{m.group(0)}'")
+    for m in re.finditer(_COMMIT, text.lower()):
+        probs.append(f"commitment '{m.group(0)}'")
+    return sorted(set(probs))
+
+
+def sent_path(rel: str) -> str:
+    return "outbox/sent/" + rel.rsplit("/", 1)[-1]
+
+
+def resolve(rel: str) -> str:
+    """Path of an outbox artifact wherever it lives now (outbox/ or outbox/sent/)."""
+    if rel and not (ROOT / rel).exists() and (ROOT / sent_path(rel)).exists():
+        return sent_path(rel)
+    return rel
+
+
+def send(rel: str, persona: dict, at: str) -> str:
+    """The file-backed 'send': move outbox/x.md -> outbox/sent/x.md with a Status line. Idempotent across a crash."""
+    src, dst = ROOT / rel, ROOT / sent_path(rel)
+    if not src.exists():
+        return sent_path(rel)
+    stamp = f"Status: SENT by {persona['name']}'s AI assistant at {at} (file-backed outbox: nothing leaves this machine)\n"
+    _atomic(dst, stamp + src.read_text())
+    src.unlink()
+    return sent_path(rel)
+
+
+def parse_when(quote_: str, year: int):
+    """(date, hour, minute, tzid) from 'Friday 30 Oct, 2pm Dallas' style text; None unless date, time AND zone are all written."""
+    q = quote_.lower()
+    md = re.search(rf"\b(\d{{1,2}})(?:st|nd|rd|th)?\s+({MONTHS})", q)
+    dm = re.search(rf"\b({MONTHS})[a-z]*\.?\s+(\d{{1,2}})\b", q)
+    tm = re.search(r"\b(\d{1,2})(?::(\d{2}))?\s?(am|pm)\b", q)
+    tz = "America/Chicago" if re.search(r"\b(dallas|cdt|ct|central|texas)\b", q) else None
+    if not ((md or dm) and tm and tz):
+        return None
+    day, mon = (int(md.group(1)), md.group(2)) if md else (int(dm.group(2)), dm.group(1))
+    h = int(tm.group(1)) % 12 + (12 if tm.group(3) == "pm" else 0)
+    from datetime import date
+    return date(year, MONTHS.split("|").index(mon[:3]) + 1, day), h, int(tm.group(2) or 0), tz
+
+
+def ics(now: datetime, persona: dict, slug_: str, summary: str, when, attendees: list[str], promise: dict, cite: list[str],
+        note: str) -> str:
+    """Proposal .ics (METHOD:PUBLISH, TENTATIVE). No DTEND: the pack gives no duration, so none is invented."""
+    d, h, m, tz = when
+    name = f"{now:%Y%m%d-%H%M}-{persona['id']}-{slug(slug_)}.ics"
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Zapdemo AI//handover//EN", "METHOD:PUBLISH", "BEGIN:VEVENT",
+             f"UID:{promise['id']}@zapdemo.example", f"DTSTAMP:{now.astimezone(ZoneInfo('UTC')):%Y%m%dT%H%M%SZ}",
+             f"DTSTART;TZID={tz}:{d:%Y%m%d}T{h:02d}{m:02d}00", f"SUMMARY:{summary}", "STATUS:TENTATIVE",
+             f"ORGANIZER:mailto:{persona['email']}", *[f"ATTENDEE:mailto:{a}" for a in attendees],
+             f"DESCRIPTION:{note} Proposed by {persona['name']}'s AI assistant (an AI); not sent. Sources: {', '.join(cite)}.",
+             "END:VEVENT", "END:VCALENDAR"]
+    _atomic(OUTBOX / name, "\r\n".join(lines) + "\r\n")
+    return f"outbox/{name}"

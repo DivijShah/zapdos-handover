@@ -13,8 +13,9 @@ TOOL = {
         "reason": {"type": "string"}}, "required": ["verdict", "quote", "reason"]},
 }
 SYSTEM = ("You compare ONE existing promise (with its source texts) to ONE new source. Call record_verdict.\n"
-          "- changed: the new source states a DIFFERENT time, date, quantity, place, price or decision than the one the promise rests on "
-          "(for example a new time replacing the old time). `quote` must be copied verbatim from the new source.\n"
+          "- changed: the new source states a DIFFERENT scheduled time, date of an event, quantity, place, price figure or decision than the one the promise rests on "
+          "(for example a new call time replacing the old one). `quote` must be copied verbatim from the new source.\n"
+          "- A new or moved DEADLINE for the same deliverable (\"I need it by 30 Oct\") is `same`, not changed: it is a due-date update.\n"
           "- same: consistent, or only progress on the same fact.\n- unrelated: about something else.\n"
           "Never infer. If unsure, answer same.")
 
