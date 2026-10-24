@@ -67,8 +67,8 @@ window.SITE = {
        },
        {
         "fact": "Sam",
-        "src": "E03",
-        "line": "To: sam@zapdemo.example",
+        "src": "E15",
+        "line": "Hi Sam, Thursday came and went. Are we still on? My VP asked for the number this morning.",
         "uncited": false
        },
        {
@@ -109,14 +109,14 @@ window.SITE = {
        },
        {
         "fact": "Optix",
-        "src": "E10",
-        "line": "From: ben.ortiz@optix-supply.example",
+        "src": "C09",
+        "line": "Call: Optix Camera Supply: quote for Northwind",
         "uncited": false
        },
        {
         "fact": "Northwind",
-        "src": "E03",
-        "line": "From: maria.gomez@northwind-cold.example",
+        "src": "C01",
+        "line": "Call: Northwind Cold Storage: dock camera layout",
         "uncited": false
        }
       ]
@@ -137,14 +137,14 @@ window.SITE = {
        },
        {
         "fact": "Jordan",
-        "src": "E06",
-        "line": "From: jordan.lee@mail.example",
+        "src": "C04",
+        "line": "Call: Welcome call: Jordan Lee, new ML engineer",
         "uncited": false
        },
        {
         "fact": "Sam",
         "src": "E06",
-        "line": "To: sam@zapdemo.example",
+        "line": "Hi Sam, excited for Monday! I haven't received any logins or first-day details yet. Where should I go at 9?",
         "uncited": false
        },
        {
@@ -185,14 +185,14 @@ window.SITE = {
        },
        {
         "fact": "Maria",
-        "src": "E15",
-        "line": "From: maria.gomez@northwind-cold.example",
+        "src": "C01",
+        "line": "Attendees: Sam Rivera, Maria Gomez (Ops Lead, Northwind Cold Storage)",
         "uncited": false
        },
        {
         "fact": "Sam",
         "src": "E15",
-        "line": "To: sam@zapdemo.example",
+        "line": "Hi Sam, Thursday came and went. Are we still on? My VP asked for the number this morning.",
         "uncited": false
        },
        {
@@ -223,7 +223,20 @@ window.SITE = {
        "S009",
        "L-ZAP-160"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-160",
+        "src": "L-ZAP-160",
+        "line": "Linear ZAP-160: Reimburse Wei Lin $640",
+        "uncited": false
+       },
+       {
+        "fact": "sam",
+        "src": "C10",
+        "line": "Attendees: Sam Rivera, Wei Lin Tan, Dana Brooks, Priya Nair",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-141: ZAP-141.assignee: None -> 'sam'",
@@ -233,7 +246,20 @@ window.SITE = {
        "S015",
        "L-ZAP-141"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-141",
+        "src": "L-ZAP-141",
+        "line": "Linear ZAP-141: Bayview pilot pass bar (signed)",
+        "uncited": false
+       },
+       {
+        "fact": "sam",
+        "src": "C05",
+        "line": "- Pass bar and anything contractual goes through Sam.",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-102: ZAP-102.assignee: None -> 'sam'",
@@ -247,7 +273,20 @@ window.SITE = {
        "E15",
        "L-ZAP-102"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-102",
+        "src": "L-ZAP-102",
+        "line": "Linear ZAP-102: Northwind price",
+        "uncited": false
+       },
+       {
+        "fact": "sam",
+        "src": "C01",
+        "line": "Attendees: Sam Rivera, Maria Gomez (Ops Lead, Northwind Cold Storage)",
+        "uncited": false
+       }
+      ]
      }
     ]
    },
@@ -336,8 +375,8 @@ window.SITE = {
        },
        {
         "fact": "Ken",
-        "src": "E04",
-        "line": "From: ken.ong@harborpoint.example",
+        "src": "E02",
+        "line": "Hi Ken, could you send the IP range, subnet mask and gateway for the 6 cameras? Install is Tue 3 Nov, 14:00.",
         "uncited": false
        },
        {
@@ -414,7 +453,20 @@ window.SITE = {
        "C10",
        "L-ZAP-161"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-161",
+        "src": "L-ZAP-161",
+        "line": "Linear ZAP-161: Document how deploy alerts are set up",
+        "uncited": false
+       },
+       {
+        "fact": "weilin",
+        "src": "S007",
+        "line": "weilin: deploy-api went down overnight, back now. Does anyone know how the alerts are wired? Alex set them up.",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-103: ZAP-103.status: 'Todo' -> 'Done'; ZAP-103.note: 'Duplicate of ZAP-101?' -> 'Duplicate of Z",
@@ -427,7 +479,14 @@ window.SITE = {
        "L-ZAP-101",
        "L-ZAP-103"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-103",
+        "src": "L-ZAP-103",
+        "line": "Linear ZAP-103: Northwind layout",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-171: ZAP-171.assignee: None -> 'weilin'",
@@ -437,7 +496,20 @@ window.SITE = {
        "S010",
        "L-ZAP-171"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-171",
+        "src": "L-ZAP-171",
+        "line": "Linear ZAP-171: 30s night-shift clip for Monday post",
+        "uncited": false
+       },
+       {
+        "fact": "weilin",
+        "src": "S010",
+        "line": "priya: Need a 30s night-shift clip from Bayview for Monday's post. @weilin when you can.",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-130: ZAP-130.assignee: None -> 'weilin'",
@@ -448,7 +520,20 @@ window.SITE = {
        "E06",
        "L-ZAP-130"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-130",
+        "src": "L-ZAP-130",
+        "line": "Linear ZAP-130: Onboard Jordan Lee: accounts, laptop, first task",
+        "uncited": false
+       },
+       {
+        "fact": "weilin",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-142: ZAP-142.assignee: None -> 'weilin'",
@@ -459,7 +544,20 @@ window.SITE = {
        "CAL05",
        "L-ZAP-142"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-142",
+        "src": "L-ZAP-142",
+        "line": "Linear ZAP-142: Bayview weekly report (Fridays)",
+        "uncited": false
+       },
+       {
+        "fact": "weilin",
+        "src": "CAL05",
+        "line": "Attendees: weilin",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-110: ZAP-110.note: \"Waiting on Raj's photos\" -> 'photo received (WA01); Raj proposes 2 m left o",
@@ -471,6 +569,12 @@ window.SITE = {
        "L-ZAP-110"
       ],
       "facts": [
+       {
+        "fact": "ZAP-110",
+        "src": "L-ZAP-110",
+        "line": "Linear ZAP-110: Harbor Point: relocate camera 3 (new rack in the way)",
+        "uncited": false
+       },
        {
         "fact": "2",
         "src": "WA01",
@@ -496,7 +600,14 @@ window.SITE = {
        "E04",
        "L-ZAP-111"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-111",
+        "src": "L-ZAP-111",
+        "line": "Linear ZAP-111: Harbor Point: IP addresses for 6 cameras",
+        "uncited": false
+       }
+      ]
      }
     ]
    },
@@ -606,8 +717,8 @@ window.SITE = {
        },
        {
         "fact": "Maria",
-        "src": "E03",
-        "line": "From: maria.gomez@northwind-cold.example",
+        "src": "C01",
+        "line": "Attendees: Sam Rivera, Maria Gomez (Ops Lead, Northwind Cold Storage)",
         "uncited": false
        },
        {
@@ -624,8 +735,8 @@ window.SITE = {
        },
        {
         "fact": "Zapdemo",
-        "src": "E03",
-        "line": "To: sam@zapdemo.example",
+        "src": "T",
+        "line": "Sam Rivera (sam), Founder, Austin, sam@zapdemo.example, owns: sales, pricing, investors, hiring decisions, approvals and payments",
         "uncited": false
        }
       ]
@@ -639,7 +750,20 @@ window.SITE = {
        "E03",
        "L-ZAP-104"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-104",
+        "src": "L-ZAP-104",
+        "line": "Linear ZAP-104: Book next Northwind call with Tom Reyes",
+        "uncited": false
+       },
+       {
+        "fact": "dana",
+        "src": "T",
+        "line": "Dana Brooks (dana), Sales caller, Austin, dana@zapdemo.example, owns: discovery calls, booking meetings, lead follow-ups",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-121: ZAP-121.assignee: None -> 'dana'",
@@ -650,7 +774,20 @@ window.SITE = {
        "CAL01",
        "CAL02"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-121",
+        "src": "L-ZAP-121",
+        "line": "Linear ZAP-121: Crestline call clashes with Harbor install",
+        "uncited": false
+       },
+       {
+        "fact": "dana",
+        "src": "C10",
+        "line": "Attendees: Sam Rivera, Wei Lin Tan, Dana Brooks, Priya Nair",
+        "uncited": false
+       }
+      ]
      }
     ]
    },
@@ -769,8 +906,8 @@ window.SITE = {
        },
        {
         "fact": "Priya",
-        "src": "E14",
-        "line": "To: priya@zapdemo.example",
+        "src": "C08",
+        "line": "Attendees: Priya Nair, Sam Rivera",
         "uncited": false
        },
        {
@@ -781,8 +918,8 @@ window.SITE = {
        },
        {
         "fact": "Bayview",
-        "src": "E14",
-        "line": "From: lisa.park@bayview-freight.example",
+        "src": "C08",
+        "line": "- Bayview case study: draft is ready, but Bayview has to approve it before anything goes public.",
         "uncited": false
        }
       ]
@@ -796,7 +933,20 @@ window.SITE = {
        "S011",
        "L-ZAP-105"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-105",
+        "src": "L-ZAP-105",
+        "line": "Linear ZAP-105: Northwind one-pager for VP",
+        "uncited": false
+       },
+       {
+        "fact": "priya",
+        "src": "C08",
+        "line": "Attendees: Priya Nair, Sam Rivera",
+        "uncited": false
+       }
+      ]
      },
      {
       "file": "linear ZAP-120: ZAP-120.assignee: None -> 'priya'",
@@ -805,12 +955,25 @@ window.SITE = {
        "C03",
        "L-ZAP-120"
       ],
-      "facts": []
+      "facts": [
+       {
+        "fact": "ZAP-120",
+        "src": "L-ZAP-120",
+        "line": "Linear ZAP-120: Crestline one-pager",
+        "uncited": false
+       },
+       {
+        "fact": "priya",
+        "src": "T",
+        "line": "Priya Nair (priya), Content, Singapore, priya@zapdemo.example, owns: case studies, LinkedIn posts, videos, one-pagers",
+        "uncited": false
+       }
+      ]
      }
     ]
    }
   ],
-  "checked": 84,
+  "checked": 109,
   "unsourced": 0,
   "uncited": 0
  },
