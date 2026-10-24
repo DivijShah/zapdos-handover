@@ -1,11 +1,15 @@
 # Handover: Sam Rivera (sam)
 _AI shift note, written by the Zapdemo AI for Sam Rivera. Clock: Sat 24 Oct 2026 15:00 CDT._
 
-Open: 7 · Done: 1
+Open: 8 · Done: 0
 
 ## Questions for you
 - What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost ("Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.", E10), not a sell price. Brief is in the outbox. _(from sam's AI; re a9227252ec)_
 - Approve reimbursing Wei Lin? "Wei Lin paid $640 out of pocket for the Harbor Point site trip. Needs Sam's approval to reimburse." (C10, ZAP-160). Nothing will be paid without your approval; test mode only. _(from sam's AI; re a2d9f52dc3)_
+- Rachel wants 2 customer references by Wed 28 Oct (C06). Only one pilot customer (Bayview) appears in the pack. Who is the second reference, and has each customer given permission? _(from sam's AI; re f3804a88c5)_
+- [unverified facts removed: number 09:00] Where should Jordan go on Monday at #? He asked (E#) and no office address or location exists anywhere in the pack. The reply draft in the outbox says you will confirm; nothing has been sent. _(from sam's AI; re 46192cbd69)_
+- [unverified facts removed: date 24 oct] Send the reply to Maria (draft in outbox, no price in it)? She chased on # Oct and her VP asked for the number (E#). Nothing has been sent. _(from sam's AI; re 75ec07a571)_
+- What ballpark price range should Omar at Ridgeline get? He asked to get budget (E09). The pack has no Ridgeline price. _(from sam's AI; re 908bc52ca9)_
 
 ## Heads-up
 - none
@@ -28,15 +32,19 @@ Open: 7 · Done: 1
   - Optix needs a PO by 27 Oct to hold stock; 50% upfront.
   - Optix needs a PO by Tue 27 Oct to hold stock for 12 OX-4K cameras, $4,680 total, 50% upfront.
   - Calendar event for the Optix PO deadline on 2026-10-27 at 17:00, attendee Sam.
-- **Cedar Fund: pilot numbers + 2 references** · due Wed 28 Oct · open · sources: C06, E08, CAL06, L-ZAP-150
+- **Cedar Fund: pilot numbers + 2 references** · due Wed 28 Oct · waiting_owner · sources: C06, E08, CAL06, L-ZAP-150
   - References need customer permission before sharing any contact.
   - Rachel Kim recaps updated pilot numbers and 2 references owed by Wed 28 Oct.
   - Calendar event on 28 Oct 09:00 marks the deadline for numbers and references to Cedar Fund.
   - Due 2026-10-28; note says ask customers first.
-- **Reply to Jordan: where to go Mon 09:00** · due - · open · sources: C04, E06
+- **Reply to Jordan: where to go Mon 09:00** · due - · waiting_owner · sources: C04, E06
   - Sam promised logins and first-week plan before the weekend.
   - Jordan asks for logins and first-day details before Monday.
-- **Ridgeline ballpark price range for Omar** · due - · open · sources: C07, S012, E09, S013
+  - artifact: `outbox/20261024-1500-sam-reply-jordan-monday.md`
+- **Reply to Maria's chase (Northwind)** · due - · waiting_owner · sources: E15
+  - Maria chased Sam asking whether the project is still on.
+  - artifact: `outbox/20261024-1500-sam-reply-maria-northwind.md`
+- **Ridgeline ballpark price range for Omar** · due - · waiting_owner · sources: C07, S012, E09, S013
   - Omar asked for a price range; pricing comes from Sam.
   - Ridgeline wants a ballpark price.
   - Omar asks for a ballpark price to get budget.
@@ -51,4 +59,7 @@ Open: 7 · Done: 1
   - Linear ticket in Backlog, unassigned, no due date.
 
 ## Done
-- Reply to Maria's chase (Northwind) · sources: E15 · outbox/20261024-1500-sam-reply-maria-northwind.md
+- none
+
+## Superseded
+- none

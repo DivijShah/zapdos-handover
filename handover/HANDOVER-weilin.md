@@ -5,6 +5,9 @@ Open: 11 · Done: 2
 
 ## Questions for you
 - Does the quoted camera match your layout? Optix quote Q-1182: "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront." (E10). You have not seen it (C09). Sam needs to know before the PO (due Tue 27 Oct). _(from weilin's AI; re 8cadc92446)_
+- Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. The reply draft in the outbox commits no time; nothing has been sent. _(from weilin's AI; re 8a5a9fb60f)_
+- [unverified facts removed: number 255.0, number 4.0, number 4.1, number 50, number 55] AI draft for 'Answer Ken: is a VLAN needed?' failed fact check and was NOT written (['number #', 'number #', 'number #', 'number #', 'number #']). Please advise. _(from weilin's AI; re 6a5790396f)_
+- Ken asks: "Do you need a VLAN?" (E04). The pack does not say. What should the reply tell him? The draft in the outbox confirms the IPs and says you will answer; nothing has been sent. _(from weilin's AI; re 6a5790396f)_
 
 ## Heads-up
 - Crestline call 2026-11-03 15:00-15:45 SGT (CAL02). Farah asked Dana by WhatsApp: "Hi Dana, quick one: can the engineer show us how you track progress floor by floor on the call?" (WA03). You were not copied on the one-pager email either (E05). _(sources: CAL02, WA03, E05)_
@@ -30,6 +33,7 @@ Open: 11 · Done: 2
   - Storage rack blocks camera 3's view of bay C.
   - Raj asks to move camera 3 two metres left onto the column because a rack blocks the spot.
   - In Progress, assigned to weilin; waiting on Raj's photos.
+  - photo received (WA01); Raj proposes 2 m left onto column
 - **Harbor Point install: 6 cams, paint shop** · due Tue 03 Nov · open · sources: C02, S001, E02, C10, CAL01
   - Install scheduled 3 Nov 14:00-16:30 SGT, 6 cameras.
   - Install scheduled for 3 Nov 14:00-16:30 SGT; not yet performed.
@@ -47,14 +51,15 @@ Open: 11 · Done: 2
   - Chris asks for the weekly report on Friday.
   - Recurring Friday event; next on 2026-10-30 at 17:00 +08:00, attendee weilin.
   - Ticket in Backlog, unassigned, no due date.
-- **Answer Raj: start 13:30 instead of 14:00?** · due - · open · sources: C02, WA02
+- **Answer Raj: start 13:30 instead of 14:00?** · due - · waiting_owner · sources: C02, WA02
   - Raj asked about starting at 13:30 instead of 14:00.
   - Raj asks whether the team can start the install at 13:30 on Tuesday.
-- **Answer Ken: is a VLAN needed?** · due - · open · sources: E04
+  - artifact: `outbox/20261024-1500-weilin-reply-raj-start-time.md`
+- **Answer Ken: is a VLAN needed?** · due - · waiting_owner · sources: E04
   - Ken asks whether a VLAN is needed; reply owed.
 - **Demo floor-by-floor progress tracking on Crestline call** · due - · open · sources: WA03
   - Farah asks for a floor-by-floor progress tracking demo by the engineer on the call.
-- **Document how deploy alerts are wired** · due - · open · sources: S007, C10, L-ZAP-161
+- **Document how deploy alerts are wired** · due - · in_progress · sources: S007, C10, L-ZAP-161
   - Wei Lin asks how deploy-api alerts are set up after an overnight outage; only Alex knew.
   - Deploy server went down Tuesday night; alert setup undocumented.
   - Ticket in Backlog, unassigned; Alex on leave.
@@ -62,4 +67,16 @@ Open: 11 · Done: 2
 
 ## Done
 - Northwind dock camera layout (doors 1-12) · sources: C01, E01, S003, S004, L-ZAP-101, L-ZAP-103
+  - Camera layout for dock doors 1-12 promised by Thursday.
+  - Sam promised Maria the layout by Thursday.
+  - Sam asks Wei Lin to do the layout; Northwind wants it by Thursday.
+  - Wei Lin finished layout v2 and put it in Drive.
 - Harbor Point camera IP range from Ken · sources: C02, S001, E02, E04, L-ZAP-111
+  - Ken has yet to send the IP range and subnet.
+  - IP range from Ken not yet received.
+  - Wei Lin asked Ken Ong for the IP range, subnet mask and gateway; not yet received.
+  - Ken Ong supplied the IP range for the cameras.
+  - IPs received (E04); VLAN question open
+
+## Superseded
+- none

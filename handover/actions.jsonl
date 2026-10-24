@@ -22,3 +22,8 @@
 {"key":"35efac7f1f:email","promise_id":"35efac7f1f","persona":"dana","type":"email","path":"outbox/20261024-1500-dana-tom-call-reask-maria.md","at":"2026-10-24T15:00:00-05:00"}
 {"key":"a9227252ec:slack-handover","promise_id":"a9227252ec","persona":"sam","type":"slack-handover","path":"handover/slack.jsonl","at":"2026-10-24T15:00:00-05:00"}
 {"key":"a9227252ec:linear-ZAP-102","promise_id":"a9227252ec","persona":"sam","type":"linear-ZAP-102","path":null,"at":"2026-10-24T15:00:00-05:00","changes":["ZAP-102.assignee: None -> 'sam'"]}
+{"key":"46192cbd69:email","promise_id":"46192cbd69","persona":"sam","type":"email","path":"outbox/20261024-1500-sam-reply-jordan-monday.md","at":"2026-10-24T15:00:00-05:00"}
+{"key":"8a5a9fb60f:email","promise_id":"8a5a9fb60f","persona":"weilin","type":"email","path":"outbox/20261024-1500-weilin-reply-raj-start-time.md","at":"2026-10-24T15:00:00-05:00"}
+{"key":"b68f7dc802:email","promise_id":"b68f7dc802","persona":"priya","type":"email","path":"outbox/20261024-1500-priya-reply-lisa-case-study.md","at":"2026-10-24T15:00:00-05:00"}
+{"key":"b3aad8dc79:linear-note-ZAP-110","promise_id":"b3aad8dc79","persona":"weilin","type":"linear-note-ZAP-110","path":null,"at":"2026-10-24T15:00:00-05:00","changes":["ZAP-110.note: \"Waiting on Raj's photos\" -> 'photo received (WA01); Raj proposes 2 m left onto column'"],"cite":["WA01"]}
+{"key":"16c9c02c48:linear-note-ZAP-111","promise_id":"16c9c02c48","persona":"weilin","type":"linear-note-ZAP-111","path":null,"at":"2026-10-24T15:00:00-05:00","changes":["ZAP-111.note: '' -> 'IPs received (E04); VLAN question open'"],"cite":["E04"]}

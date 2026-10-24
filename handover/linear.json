@@ -45,7 +45,7 @@
   "assignee": "weilin",
   "status": "In Progress",
   "due": "2026-11-02",
-  "note": "Waiting on Raj's photos"
+  "note": "photo received (WA01); Raj proposes 2 m left onto column"
  },
  {
   "id": "ZAP-111",
@@ -53,7 +53,7 @@
   "assignee": "weilin",
   "status": "Todo",
   "due": "2026-11-02",
-  "note": ""
+  "note": "IPs received (E04); VLAN question open"
  },
  {
   "id": "ZAP-120",

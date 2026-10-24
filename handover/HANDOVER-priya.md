@@ -4,7 +4,7 @@ _AI shift note, written by the Zapdemo AI for Priya Nair. Clock: Sun 25 Oct 2026
 Open: 3 · Done: 0
 
 ## Questions for you
-- none
+- Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent. _(from priya's AI; re b68f7dc802)_
 
 ## Heads-up
 - none
@@ -13,15 +13,16 @@ Open: 3 · Done: 0
 - Daily stand-up · Mon 26 Oct 19:00-19:15 UTC-05:00
 
 ## Open
-- **Crestline one-pager** · due Mon 02 Nov · open · sources: C03, L-ZAP-120
+- **Crestline one-pager** · due Mon 02 Nov · in_progress · sources: C03, L-ZAP-120
   - One-pager promised to Farah before the 3 Nov call.
   - Ticket is unassigned, status Todo, due 2026-11-02; promised by Dana.
   - artifact: `outbox/20261024-1500-priya-onepager-brief-crestline.md`
-- **Bayview case study: draft + photos to Lisa** · due - · open · sources: C08, E14, L-ZAP-170
+- **Bayview case study: draft + photos to Lisa** · due - · waiting_owner · sources: C08, E14, L-ZAP-170
   - Draft ready; Bayview approval needed before publishing.
   - Lisa Park will review the case study once sent the draft and the list of planned photos.
   - Bayview case study approval ticket in progress, assigned to Priya; Lisa wants draft and photos.
-- **Northwind pallet-damage one-pager for Maria's VP** · due - · open · sources: C01, C08, S011, L-ZAP-105
+  - artifact: `outbox/20261024-1500-priya-reply-lisa-case-study.md`
+- **Northwind pallet-damage one-pager for Maria's VP** · due - · in_progress · sources: C01, C08, S011, L-ZAP-105
   - One-pager for Maria to forward to her VP.
   - Priya needs Maria's request details to make it.
   - Priya offers to make the Northwind one-pager but needs to know what Maria asked for.
@@ -29,4 +30,7 @@ Open: 3 · Done: 0
   - artifact: `outbox/20261024-1500-priya-onepager-brief-northwind.md`
 
 ## Done
+- none
+
+## Superseded
 - none
