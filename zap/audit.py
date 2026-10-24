@@ -70,7 +70,7 @@ def facts_in(text: str, srcmap: dict | None = None, strip_ids=()) -> list[tuple[
     out, seen = [], set()
     for i in sorted(strip_ids, key=len, reverse=True):
         text = text.replace(i, " ")
-    text = re.sub(r"\b(?:L-)?ZAP-\d+\b|\bCAL\d+\b", " ", text)  # issue / calendar ids are citations, not facts
+    text = re.sub(r"\b(?:L-)?ZAP-\d+\b|\bCAL\d+\b|\b[DT]-[\w-]+-[0-9a-f]{6}(?:-\d+)?\b", " ", text)  # issue / calendar ids are citations, not facts
     text = re.sub(r"^#+ .*$", " ", text, flags=re.M)  # markdown headings are template, not facts
     lex = lexicon(srcmap) if srcmap else set()
     scrub = text

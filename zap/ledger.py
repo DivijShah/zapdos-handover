@@ -109,7 +109,8 @@ def stats(st: dict) -> dict:
     qs = questions()
     acts = read_jsonl(ACTIONS)
     c["questions"] = sum(1 for q in qs if not q.get("answered"))
-    c["last_action"] = acts[-1] if acts else None
+    real = [a for a in acts if a["persona"] != "system"]  # the demo-drop bookkeeping row is not an AI action
+    c["last_action"] = real[-1] if real else None
     return c
 
 

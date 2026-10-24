@@ -345,7 +345,7 @@ class Persona:
         when = acts.parse_when(fact, datetime.fromisoformat(self.srcmap[src].at).year)
         if when is None:
             return self.h_updated(p)
-        ids = [src, "E03"]
+        ids = [src, "E03", "C01"]
         maria = acts.addr_for(self.srcmap, "maria.gomez")
         self.do(p, "ics", lambda: acts.ics(
             self.now, self.who, "tom-call-proposal", "Northwind call with Tom Reyes (proposed)", when,
