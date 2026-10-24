@@ -15,6 +15,12 @@ Open: 5 · Done: 1
 - Crestline Data Centers call · Tue 03 Nov 15:00-15:45 UTC+08:00
 
 ## Open
+- **Book next call with Tom Reyes (Northwind)** · due Fri 30 Oct · in_progress · sources: C01, E01, E03, L-ZAP-104, T-demo-2030-16420d
+  - Tom Reyes signs off on anything mounted on the building.
+  - Sam said Zapdemo will set up the next call with Tom.
+  - Maria offers Friday afternoon for a call including Tom.
+  - Linear ticket ZAP-104 is unassigned and in Todo status.
+  - artifact: `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md`
 - **Book Cedar call: Rachel with an engineer** · due - · open · sources: C06, E08
   - Requested by Rachel; not yet booked.
   - Rachel asks for a 20-minute call with an engineer; not yet booked.
@@ -31,12 +37,6 @@ Open: 5 · Done: 1
   - One-pager to be emailed to Farah before the call; Sam copied, not Wei Lin.
   - Farah asks for the one-pager to be sent before the 3 Nov call at 15:00.
   - Dana asks whether the Crestline one-pager was sent; no confirmation given.
-- **Book next call with Tom Reyes (Northwind)** · due - · in_progress · sources: C01, E01, E03, L-ZAP-104
-  - Tom Reyes signs off on anything mounted on the building.
-  - Sam said Zapdemo will set up the next call with Tom.
-  - Maria offers Friday afternoon for a call including Tom.
-  - Linear ticket ZAP-104 is unassigned and in Todo status.
-  - artifact: `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md`
 
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02

@@ -1,0 +1,16 @@
+{
+ "file": "demo-2030.txt",
+ "sha": "16420d26b1e6",
+ "test": true,
+ "seq": 0,
+ "model": "claude-sonnet-5-5",
+ "sources": [
+  {
+   "kind": "email",
+   "at": "2026-10-24T16:00:00-05:00",
+   "frm": "Maria Gomez <maria.gomez@northwind-cold.example>",
+   "to": "sam@zapdemo.example",
+   "text": "Hi Sam, thanks for the nudge. Tom can do Friday 30 Oct, 2pm Dallas. Please have the number by then.\n\nMaria"
+  }
+ ]
+}
