@@ -90,7 +90,8 @@ def create(purpose: str, **kw):
     return r
 
 
-def usage_totals() -> dict:
+def usage_totals(since: float | None = None) -> dict:
+    """Totals from the usage log; `since` (epoch seconds) limits it to the current session."""
     calls = tin = tout = 0
     cost = 0.0
     if USAGE.exists():
@@ -98,6 +99,8 @@ def usage_totals() -> dict:
             try:
                 u = json.loads(ln)
             except json.JSONDecodeError:
+                continue
+            if since and datetime.fromisoformat(u["at"]).timestamp() < since:
                 continue
             pi, po = PRICE.get(u["model"], (0, 0))
             calls += 1

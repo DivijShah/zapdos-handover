@@ -91,6 +91,14 @@ def git_commit(msg: str):
 DEMO = ledger.H / "demo.json"
 
 
+def session_start() -> float:
+    """'This session' = since the first boot of the demo run (demo.json) if there is one, else since this process started."""
+    try:
+        return json.loads(DEMO.read_text())["first_boot"]
+    except (OSError, ValueError, KeyError):
+        return BOOT
+
+
 def demo_drop_check(after: float):
     """Once, `after` seconds past the FIRST boot ever: copy the prepared drop into inbox/drops/. Key demo:drop survives restarts."""
     if not DEMO.exists():
@@ -157,7 +165,7 @@ def tick(first: bool, table: bool = False) -> None:
         say("audit: caught an unsourced fact - see 'Caught itself'")
     narrate(st, a0, q0, ev0)
     changed = shiftnote.render_handovers(st, now) or st["n_events"] != n0
-    changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}, srcmap, BOOT) or changed
+    changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}, srcmap, BOOT, session_start()) or changed
     if table:
         console.print(render.status_table(st, now))
     if failed:
@@ -167,7 +175,7 @@ def tick(first: bool, table: bool = False) -> None:
         if not first:
             console.print("\a", end="")
     note = f" · {len(failed)} retry pending (run.log)" if failed else ""
-    say(f"tick {time.strftime('%H:%M:%S')} · +{st['n_events'] - n0} events · {site.footer_text(st, len(pack), BOOT)}{note}")
+    say(f"tick {time.strftime('%H:%M:%S')} · +{st['n_events'] - n0} events · {site.footer_text(st, len(pack), BOOT, session_start())}{note}")
 
 
 def purge_drops():

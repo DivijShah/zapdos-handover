@@ -108,7 +108,7 @@ function owed(p){
   return '<div class="it'+isNew(p.id)+'"><div class="t">'+t+esc(p.title)+'</div><div class="meta">'+due+chips(p.sources,p.due?2:4)+'</div></div>';
 }
 function wait(q){
-  var due=q.due?'<span class="tag due">due '+esc(q.due)+'</span>'+(q.due_src?'<span class="c">'+esc(q.due_src)+'</span>':''):'';
+  var due=q.due?'<span class="tag '+(q.overdue?'over':'due')+'">'+(q.overdue?'OVERDUE ':'due ')+esc(q.due)+'</span>'+(q.due_src?'<span class="c">'+esc(q.due_src)+'</span>':''):'';
   return '<div class="it'+isNew(q.id)+'"><div class="t">'+esc(q.text.replace(/ _\(.*$/,""))+'</div><div class="meta">'+due+'<span>from '+esc(q["from"])+"'s AI</span></div></div>";
 }
 function hand(h){
@@ -219,7 +219,7 @@ function tickAge(){
   }
   if(S&&S.footer){
     var f=S.footer,l=(h&&h.llm)||{calls:0,tokens:0,cost:0},up=h&&h.boot?Math.max(0,Math.round(Date.now()/1000-h.boot)):0,A=S.audit||{checked:0,unsourced:0};
-    document.getElementById("footer").innerHTML=f.sources+" sources · "+f.promises+" promises · "+f.sent+" sent · "+f.asked+" asked · LLM "+l.calls+" calls $"+l.cost.toFixed(2)+
+    document.getElementById("footer").innerHTML=f.sources+" sources · "+f.promises+" promises · "+f.sent+" sent · "+f.asked+" asked · this session: "+l.calls+" calls · $"+l.cost.toFixed(2)+
       " · up "+Math.floor(up/3600)+"h"+("0"+Math.floor(up%3600/60)).slice(-2)+"m · <b"+(A.unsourced?' class="bad"':'')+">"+A.checked+" facts · "+A.unsourced+" unsourced</b>";
   }
 }

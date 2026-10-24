@@ -89,16 +89,16 @@ def _outbox() -> list[dict]:
     return out
 
 
-def footer_text(st: dict, n_sources: int, boot: float | None) -> str:
-    u = extract.usage_totals()
+def footer_text(st: dict, n_sources: int, boot: float | None, since: float | None = None) -> str:
+    u = extract.usage_totals(since)
     sent = sum(a["type"] == "send" for a in ledger.read_jsonl(ledger.ACTIONS))
     up = int(time.time() - boot) if boot else 0
     return (f"{n_sources} sources · {len(st['promises'])} promises · {sent} sent · {len(ledger.questions())} asked · "
-            f"LLM {u['calls']} calls {u['in'] + u['out']:,} tokens ${u['cost']:.2f} · up {up // 3600}h{up % 3600 // 60:02d}m{up % 60:02d}s")
+            f"this session: {u['calls']} calls · ${u['cost']:.2f} · up {up // 3600}h{up % 3600 // 60:02d}m{up % 60:02d}s")
 
 
 def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict | None = None, srcmap: dict | None = None,
-           boot: float | None = None) -> bool:
+           boot: float | None = None, since: float | None = None) -> bool:
     qs = ledger.questions()
     acts_ = ledger.read_jsonl(ledger.ACTIONS)
     s = ledger.stats(st)
@@ -114,6 +114,7 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
                 for p in mine if p["status"] in ("open", "in_progress")]
         waiting = [{"id": q["id"], "text": q["question"], "from": q["from"], "re": q["promise_id"],
                     "due": _due_label(st["promises"][q["promise_id"]]["due"]) if st["promises"].get(q["promise_id"], {}).get("due") else "",
+                    "overdue": bool(st["promises"].get(q["promise_id"])) and _overdue({**st["promises"][q["promise_id"]], "status": "open"}, now),
                     "due_src": st["promises"].get(q["promise_id"], {}).get("due_src")}
                    for q in qs if q.get("to") == me and not q.get("answered")]
         handed = [{"text": a["text"], "cite": a.get("cite", []), "from": a["persona"]}
@@ -140,7 +141,7 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
             "clock": now.isoformat(), "people": people, "outbox": _outbox()[:24],
             "questions": [{"to": q["to"], "from": q["from"], "text": q["question"]} for q in qs if not q.get("answered")]}
     ch = _w(ledger.H / "site.js", "window.SITE = " + json.dumps(site, ensure_ascii=False, indent=1) + ";\n")
-    u = extract.usage_totals()
+    u = extract.usage_totals(since)
     hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick, "boot": boot,
           "llm": {"calls": u["calls"], "tokens": u["in"] + u["out"], "cost": u["cost"]}}
     _w(ledger.H / "heartbeat.js", "window.HEARTBEAT = " + json.dumps(hb, ensure_ascii=False) + ";\n")
