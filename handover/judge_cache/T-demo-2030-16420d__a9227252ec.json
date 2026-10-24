@@ -1,0 +1,6 @@
+{
+ "verdict": "same",
+ "quote": "Please have the number by then.",
+ "reason": "The new email only moves the due date for the same price deliverable to Fri 30 Oct, before the call with Tom. A deadline update counts as same. The Tom call slot is a different item from the price promise.",
+ "test": true
+}

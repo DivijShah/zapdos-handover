@@ -6,6 +6,7 @@ Open: 5 · Done: 1
 ## Questions for you
 - Send the reschedule draft to Farah? Wei Lin is double-booked: Harbor Point Yard install 2026-11-03 14:00-16:30 vs Crestline Data Centers call 2026-11-03 15:00-15:45 (SGT). Draft is in the outbox; nothing has been sent. _(from dana's AI; re 601a2158f7)_
 - Who from Zapdemo attends the Ridgeline site visit on Tuesday or Wednesday morning? Omar asked (E09). The pack does not say who goes; Wei Lin is the engineer. _(from dana's AI; re 8b2f334ef4)_
+- Book the Northwind call with Tom? T-demo-2030-16420d says "Tom can do Friday 30 Oct, 2pm Dallas.". The AI drafted a confirmation to Maria and a proposal .ics; it has not checked your calendar and nothing has been sent (booking commits you). **Due Fri 30 Oct** (per T-demo-2030-16420d) _(from dana's AI; re 9e24b3e630)_
 
 ## Heads-up
 - none
@@ -15,6 +16,12 @@ Open: 5 · Done: 1
 - Crestline Data Centers call · Tue 03 Nov 15:00-15:45 UTC+08:00
 
 ## Open
+- **Book next call with Tom Reyes (Northwind)** · due Fri 30 Oct · waiting_owner · sources: T-demo-2030-16420d, C01, E01, E03, L-ZAP-104
+  - Tom offered Friday 30 Oct 2pm Dallas; not yet confirmed as booked.
+  - flag: supersedes
+  - **supersedes** the earlier version (35efac7f1f) per T-demo-2030-16420d: "Tom can do Friday 30 Oct, 2pm Dallas."
+  - artifact: `outbox/20261024-1500-dana-tom-call-proposal.ics`
+  - artifact: `outbox/20261024-1500-dana-confirm-tom-call-maria.md`
 - **Book Cedar call: Rachel with an engineer** · due - · open · sources: C06, E08
   - Requested by Rachel; not yet booked.
   - Rachel asks for a 20-minute call with an engineer; not yet booked.
@@ -31,12 +38,6 @@ Open: 5 · Done: 1
   - One-pager to be emailed to Farah before the call; Sam copied, not Wei Lin.
   - Farah asks for the one-pager to be sent before the 3 Nov call at 15:00.
   - Dana asks whether the Crestline one-pager was sent; no confirmation given.
-- **Book next call with Tom Reyes (Northwind)** · due - · in_progress · sources: C01, E01, E03, L-ZAP-104
-  - Tom Reyes signs off on anything mounted on the building.
-  - Sam said Zapdemo will set up the next call with Tom.
-  - Maria offers Friday afternoon for a call including Tom.
-  - Linear ticket ZAP-104 is unassigned and in Todo status.
-  - artifact: `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md`
 
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02
@@ -44,4 +45,4 @@ Open: 5 · Done: 1
 - **Sent by Dana Brooks's AI**: New times for our next call with Tom → maria.gomez@northwind-cold.example · `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md` · re Book next call with Tom Reyes (Northwind) · sources: E03, C01, L-ZAP-104
 
 ## Superseded
-- none
+- ~~Book next call with Tom Reyes (Northwind)~~ · **superseded by** the newer version (T-demo-2030-16420d): "Tom can do Friday 30 Oct, 2pm Dallas." · stale artifacts: outbox/sent/20261024-1500-dana-tom-call-reask-maria.md, outbox/sent/20261024-1500-dana-tom-call-reask-maria.md

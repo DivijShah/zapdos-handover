@@ -1,0 +1,29 @@
+{
+ "source_id": "T-demo-2030-16420d",
+ "model": "claude-sonnet-5-5",
+ "test": true,
+ "mentions": [
+  {
+   "slot": "northwind.price",
+   "state": "open",
+   "kind": "price",
+   "counterparty": "Northwind",
+   "topic": "price quote",
+   "due": "2026-10-30",
+   "evidence": "Please have the number by then.",
+   "note": "Maria wants the price by the Friday 30 Oct 2pm Dallas call with Tom.",
+   "ev_ok": true
+  },
+  {
+   "slot": "northwind.tom_call",
+   "state": "open",
+   "kind": "booking",
+   "counterparty": "Northwind",
+   "topic": "tom call",
+   "due": "2026-10-30",
+   "evidence": "Tom can do Friday 30 Oct, 2pm Dallas.",
+   "note": "Tom offered Friday 30 Oct 2pm Dallas; not yet confirmed as booked.",
+   "ev_ok": true
+  }
+ ]
+}

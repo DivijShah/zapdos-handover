@@ -1,0 +1,6 @@
+{
+ "verdict": "changed",
+ "quote": "Tom can do Friday 30 Oct, 2pm Dallas.",
+ "reason": "The earlier \"Friday afternoon\" offer (Fri 23 Oct) is already past as of Sat 24 Oct. Maria now offers a concrete new slot, Fri 30 Oct at 2pm Dallas, for the call with Tom. This replaces the stale slot.",
+ "test": true
+}
