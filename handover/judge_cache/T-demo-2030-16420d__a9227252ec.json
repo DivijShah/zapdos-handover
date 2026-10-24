@@ -1,6 +1,0 @@
-{
- "verdict": "same",
- "quote": "Please have the number by then.",
- "reason": "The new email only moves the due date for the same price deliverable to the Friday 30 Oct call. A moved deadline counts as a due-date update, not a changed fact.",
- "test": true
-}
