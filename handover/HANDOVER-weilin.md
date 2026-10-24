@@ -67,16 +67,9 @@ Open: 11 · Done: 2
 
 ## Done
 - Northwind dock camera layout (doors 1-12) · sources: C01, E01, S003, S004, L-ZAP-101, L-ZAP-103
-  - Camera layout for dock doors 1-12 promised by Thursday.
-  - Sam promised Maria the layout by Thursday.
-  - Sam asks Wei Lin to do the layout; Northwind wants it by Thursday.
-  - Wei Lin finished layout v2 and put it in Drive.
+  - latest: Wei Lin finished layout v2 and put it in Drive.
 - Harbor Point camera IP range from Ken · sources: C02, S001, E02, E04, L-ZAP-111
-  - Ken has yet to send the IP range and subnet.
-  - IP range from Ken not yet received.
-  - Wei Lin asked Ken Ong for the IP range, subnet mask and gateway; not yet received.
-  - Ken Ong supplied the IP range for the cameras.
-  - IPs received (E04); VLAN question open
+  - latest: IPs received (E04); VLAN question open
 
 ## Superseded
 - none

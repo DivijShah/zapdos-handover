@@ -41,9 +41,7 @@ Open: 5 · Done: 1
 
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02
-  - Engineer call with Farah booked for 3 Nov 15:00 Singapore time.
-  - Dana booked the Crestline call with Farah for Tue 3 Nov 15:00 SGT; Wei Lin needed.
-  - Call with Dana and Wei Lin is on the calendar for 3 Nov 15:00-15:45 (+08:00).
+  - latest: Call with Dana and Wei Lin is on the calendar for 3 Nov 15:00-15:45 (+08:00).
 
 ## Superseded
 - none
