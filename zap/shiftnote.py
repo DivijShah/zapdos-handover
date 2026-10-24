@@ -79,7 +79,7 @@ def render_handovers(st: dict, now: datetime) -> bool:
             if p["status"] == "superseded":
                 new = st["promises"].get(p.get("superseded_by"))
                 stale = [a["path"] for a in acts_ if a["promise_id"] == p["id"] and (a.get("path") or "").startswith("outbox/")]
-                sup.append(f"- ~~{p['deliverable']}~~ · **superseded by** {new['deliverable'] if new else p.get('superseded_by')} "
+                sup.append(f"- ~~{p['deliverable']}~~ · **superseded by** the newer version "
                            f"({new['created_from'] if new else '?'}): \"{new['new_fact'] if new else ''}\""
                            + (f" · stale artifacts: {', '.join(stale)}" if stale else ""))
         lines += ["", "## Superseded"] + (sup or ["- none"])
