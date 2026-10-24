@@ -1,7 +1,7 @@
 # Handover: Sam Rivera (sam)
 _AI shift note, written by the Zapdemo AI for Sam Rivera. Clock: Sat 24 Oct 2026 15:00 CDT._
 
-Open: 8 · Done: 0
+Open: 7 · Done: 1
 
 ## Questions for you
 - What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost ("Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.", E10), not a sell price. Brief is in the outbox. _(from sam's AI; re a9227252ec)_
@@ -23,6 +23,7 @@ Open: 8 · Done: 0
   - Maria asks for a rough cost estimate for the dock cameras, needed for her VP.
   - Sam will do the price for Northwind, due Thursday.
   - artifact: `outbox/20261024-1500-sam-northwind-pricing-brief.md`
+  - artifact: `handover/slack.jsonl`
 - **Optix PO by Tue 27 Oct 17:00 (50% upfront)** · due Tue 27 Oct · open · sources: C09, E10, CAL07
   - Optix needs a PO by Tuesday 27 Oct to hold stock; 50% upfront payment requested.
   - Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment required.
@@ -35,8 +36,6 @@ Open: 8 · Done: 0
 - **Reply to Jordan: where to go Mon 09:00** · due - · open · sources: C04, E06
   - Sam promised to send Jordan logins and first-week plan before the weekend.
   - Jordan asks for logins and where to go at 9 on Monday; Zapdemo owes an answer.
-- **Reply to Maria's chase (Northwind)** · due - · open · sources: E15
-  - Maria chases Sam for a reply on whether the deal is still on; she needs the number for her VP.
 - **Ridgeline ballpark price range for Omar** · due - · open · sources: C07, S012, E09, S013
   - Omar asked for a price range; pricing comes from Sam.
   - Ridgeline wants a ballpark price; no price has been given yet.
@@ -52,4 +51,4 @@ Open: 8 · Done: 0
   - Linear ticket to reimburse Wei Lin $640 is in Backlog, unassigned, with no due date.
 
 ## Done
-- none
+- Reply to Maria's chase (Northwind) · sources: E15 · outbox/20261024-1500-sam-reply-maria-northwind.md

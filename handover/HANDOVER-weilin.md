@@ -8,6 +8,7 @@ Open: 11 · Done: 2
 
 ## Heads-up
 - Crestline call 2026-11-03 15:00-15:45 SGT (CAL02). Farah asked Dana by WhatsApp: "Hi Dana, quick one: can the engineer show us how you track progress floor by floor on the call?" (WA03). You were not copied on the one-pager email either (E05). _(sources: CAL02, WA03, E05)_
+- Heads-up: you are double-booked on 3 Nov. Harbor Point Yard install 2026-11-03 14:00-16:30 vs Crestline Data Centers call 2026-11-03 15:00-15:45 (SGT). Dana's AI drafted a reschedule note to Farah and asked Dana whether to send it. Raj's 13:30 start request (WA02) is still waiting for your answer. _(sources: C03, E05, CAL01, CAL02, WA02)_
 
 ## Calendar you attend
 - Daily stand-up · Mon 26 Oct 19:00-19:15 UTC-05:00
