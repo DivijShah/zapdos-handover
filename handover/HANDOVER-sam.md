@@ -3,12 +3,26 @@ _AI shift note, written by the Zapdemo AI for Sam Rivera. Clock: Sat 24 Oct 2026
 
 Open: 8 · Done: 0
 
+## Questions for you
+- What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost ("Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.", E10), not a sell price. Brief is in the outbox. _(from sam's AI; re a9227252ec)_
+- Approve reimbursing Wei Lin? "Wei Lin paid $640 out of pocket for the Harbor Point site trip. Needs Sam's approval to reimburse." (C10, ZAP-160). Nothing will be paid without your approval; test mode only. _(from sam's AI; re a2d9f52dc3)_
+
+## Heads-up
+- none
+
+## Calendar you attend
+- Sam flight AUS to SFO to AUS · Thu 22 Oct 13:00-08:00 UTC-05:00
+- Daily stand-up · Mon 26 Oct 19:00-19:15 UTC-05:00
+- Optix PO deadline · Tue 27 Oct 17:00-17:15 UTC-05:00
+- Cedar Fund deadline: numbers + references · Wed 28 Oct 09:00-09:30 UTC-05:00
+
 ## Open
-- **Northwind price for Maria** **OVERDUE** · due Thu 22 Oct · open · sources: C01, E01, E03, S003, S004, E15
+- **Northwind price for Maria** **OVERDUE** · due Thu 22 Oct · waiting_owner · sources: C01, E01, E03, S003, S004, E15
   - Price/number for Northwind promised by Thursday 22 Oct.
   - Sam promised Maria a price by Thursday (22 Oct) per the sent email.
   - Maria asks for a rough cost estimate for the dock cameras, needed for her VP.
   - Sam will do the price for Northwind, due Thursday.
+  - artifact: `outbox/20261024-1500-sam-northwind-pricing-brief.md`
 - **Optix PO by Tue 27 Oct 17:00 (50% upfront)** · due Tue 27 Oct · open · sources: C09, E10, CAL07
   - Optix needs a PO by Tuesday 27 Oct to hold stock; 50% upfront payment requested.
   - Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment required.
@@ -32,13 +46,10 @@ Open: 8 · Done: 0
   - Written pilot pass bar must be signed before pilot review; goes through Sam.
   - Written pilot pass bar must be signed before the Bayview review; assigned to Sam.
   - Ticket for the written pilot pass bar is Todo, unassigned, with no due date.
-- **Approve $640 reimbursement to Wei Lin** · due - · open · sources: C10, S009, L-ZAP-160
+- **Approve $640 reimbursement to Wei Lin** · due - · waiting_owner · sources: C10, S009, L-ZAP-160
   - Wei Lin's $640 site-trip expense needs Sam's approval before reimbursement.
   - Wei Lin paid $640 for taxi and hotel and asks who approves the reimbursement; no approval yet.
   - Linear ticket to reimburse Wei Lin $640 is in Backlog, unassigned, with no due date.
-
-## Questions for you
-- none
 
 ## Done
 - none

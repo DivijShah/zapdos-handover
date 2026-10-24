@@ -3,6 +3,16 @@ _AI shift note, written by the Zapdemo AI for Dana Brooks. Clock: Sat 24 Oct 202
 
 Open: 5 · Done: 1
 
+## Questions for you
+- none
+
+## Heads-up
+- none
+
+## Calendar you attend
+- Daily stand-up · Mon 26 Oct 19:00-19:15 UTC-05:00
+- Crestline Data Centers call · Tue 03 Nov 15:00-15:45 UTC+08:00
+
 ## Open
 - **Resolve clash: Crestline call vs Harbor Point install (3 Nov)** · due Tue 03 Nov · open · sources: C03, S002, CAL02, L-ZAP-121, CAL01
   - Engineer call booked on 3 Nov; Wei Lin was not copied on the one-pager email, so the clash concerns Wei Lin's availability.
@@ -26,9 +36,6 @@ Open: 5 · Done: 1
   - Sam promised to set up the next call including Tom Reyes; not yet booked per this source.
   - Maria says Tom is free Friday afternoon; Zapdemo needs to confirm the call.
   - Linear ticket is Todo, unassigned, no due date; booking not yet done.
-
-## Questions for you
-- none
 
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03

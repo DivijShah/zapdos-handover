@@ -161,3 +161,6 @@
 {"op":"update","id":"3ec65c1e02","add_sources":["L-ZAP-171"],"add_notes":["30s night-shift clip for Monday post is Todo, unassigned, due 2026-10-26."]}
 {"op":"ingest","source":"L-ZAP-171"}
 {"op":"update","id":"601a2158f7","add_sources":["CAL01"],"add_flags":["clash"]}
+{"op":"update","id":"a9227252ec","status":"waiting_owner"}
+{"op":"update","id":"a2d9f52dc3","status":"waiting_owner"}
+{"op":"update","id":"8cadc92446","status":"waiting_owner"}
