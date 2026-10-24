@@ -33,7 +33,7 @@ def append(path: Path, rec: dict):
 def read_jsonl(path: Path) -> list[dict]:
     out = []
     if path.exists():
-        for ln in path.read_text().splitlines():
+        for ln in path.read_text(errors="replace").splitlines():
             try:
                 out.append(json.loads(ln))
             except json.JSONDecodeError:
@@ -258,6 +258,10 @@ def add_question(st: dict, pid: str, to: str, frm: str, qkey: str, question: str
 def ensure_slot(st: dict, slot: str, src_ids: list[str], at: str, note: str) -> str:
     """Create the dependency promise for a catalog slot if missing (idempotent). Returns its id."""
     pid = slot_id(slot)
+    if pid in st["promises"]:
+        missing = [i for i in src_ids if i not in st["promises"][pid]["sources"]]
+        if missing:
+            _emit(st, dict(op="update", id=pid, add_sources=missing))
     if pid not in st["promises"]:
         s = SLOTS[slot]
         owner, _ = route(s["kind"], slot)
@@ -276,3 +280,21 @@ def reject(persona: str, pid: str | None, reason: str, offending: list[str], at:
     append(REJECTED, dict(key=key, at=at, persona=persona, promise_id=pid, reason=reason, offending=list(offending),
                           excerpt=" ".join(text.split())[:200]))
     return True
+
+
+def reword_question(qid: str, text: str) -> bool:
+    """Replace only the text of an existing question (id/key unchanged) in questions.jsonl and its Slack DM record."""
+    changed = False
+    for path, field in ((QUESTIONS, "question"), (H / "slack.jsonl", "text")):
+        recs = read_jsonl(path)
+        for r in recs:
+            if (r.get("id") if path == QUESTIONS else r.get("key")) == qid and field in r and r[field] != text:
+                r[field] = text
+                changed = True
+        tmp = path.with_suffix(".tmp")
+        with open(tmp, "w") as f:
+            f.write("".join(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n" for r in recs))
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, path)
+    return changed

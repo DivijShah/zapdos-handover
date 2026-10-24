@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The 24/7 Handover · v2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Read-only. Open from file://. Data: handover/site.js + handover/heartbeat.js, rewritten by `python run.py` every tick; this page re-reads them every 3 s. -->
+<style>
+/* index-v2: visual layer only. Same DOM, same classes, same JS as index.html. */
+:root{
+  --bg:#07090e; --bg2:#0b0f17; --panel:rgba(255,255,255,.035); --panel2:rgba(255,255,255,.055);
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
+  --fg:#f2f5fa; --body:#c9d2e0; --dim:#8b96aa; --dim2:#5f6a7d;
+  --amber:#ffc83d; --red:#ff5f5f; --green:#3ddc84; --violet:#b9a3ff; --cyan:#5ad1f0;
+  --sam:#ff9f43; --weilin:#4dabf7; --dana:#e599f7; --priya:#63e6be; --system:#9aa5b8;
+  --r:14px; --rs:8px;
+  --ease:cubic-bezier(.2,.8,.2,1);           /* ~critically damped spring, response .4s */
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--body);
+  font:18px/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  font-optical-sizing:auto;-webkit-font-smoothing:antialiased;overflow:hidden}
+body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:10px;padding:12px 18px 10px;
+  background:
+    radial-gradient(1200px 600px at 18% -10%, rgba(77,171,247,.10), transparent 60%),
+    radial-gradient(900px 500px at 95% 110%, rgba(185,163,255,.08), transparent 60%),
+    linear-gradient(var(--bg2),var(--bg))}
+
+/* ── header ─────────────────────────────────────────── */
+header{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:16px;align-items:center;padding-bottom:8px;
+  border-bottom:1px solid var(--hair)}
+h1{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.05;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+h1 span{color:var(--dim);font-weight:400;letter-spacing:-.005em}
+#banner{grid-column:1;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.01em;color:var(--dim2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.right{grid-column:2;grid-row:1/3;display:flex;align-items:center;gap:12px}
+#pill{font-size:22px;font-weight:800;letter-spacing:-.01em;border-radius:999px;padding:8px 22px 8px 16px;color:#052a14;background:var(--green);
+  box-shadow:0 0 0 1px rgba(61,220,132,.35),0 8px 28px rgba(61,220,132,.28);white-space:nowrap;display:flex;align-items:center;gap:10px;
+  transition:background .35s var(--ease),box-shadow .35s var(--ease),color .35s var(--ease)}
+#pill i{width:12px;height:12px;border-radius:50%;background:#052a14;display:inline-block;animation:pulse 1.6s infinite}
+#pill.off{background:var(--red);color:#330808;box-shadow:0 0 0 1px rgba(255,95,95,.4),0 8px 28px rgba(255,95,95,.3)}#pill.off i{animation:none;background:#330808}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+nav{display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--hair)}
+nav button{font-weight:600;font-size:16px;letter-spacing:-.005em;font-family:inherit;color:var(--dim);background:transparent;border:0;border-radius:999px;padding:6px 16px;cursor:pointer;
+  transition:background .3s var(--ease),color .3s var(--ease),transform .1s ease-out}
+nav button:active{transform:scale(.97)}
+nav button.on{color:var(--bg);background:var(--fg);box-shadow:0 2px 10px rgba(0,0,0,.35)}
+
+/* ── board ──────────────────────────────────────────── */
+main{min-height:0}
+a{color:inherit;text-decoration:none}a.c:hover,a.pl:hover{text-decoration:underline;filter:brightness(1.25)}
+#pill.proc{background:var(--amber);color:#2b1d00}#pill.proc i{background:#2b1d00;animation:pulse .7s infinite}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 420px;gap:12px;height:100%}
+.col,.rail{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:10px 11px 8px;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:3px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.rail{background:rgba(14,18,27,.72);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border-color:var(--hair2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 20px 50px rgba(0,0,0,.45)}
+.badge{align-self:flex-start;font-size:27px;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:#0d1118;border-radius:11px;padding:4px 15px 4px 13px;margin-bottom:1px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.badge small{font-size:15px;font-weight:600;letter-spacing:.01em;margin-left:9px;opacity:.72}
+.b-sam{background:var(--sam)}.b-weilin{background:var(--weilin)}.b-dana{background:var(--dana)}.b-priya{background:var(--priya)}.b-system{background:var(--system)}
+.pb{font-size:12px;font-weight:800;color:#0d1118;border-radius:5px;padding:1px 7px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.sec{min-height:0;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.sec.owed,.sec.wait,.sec.hand{flex:0 0 auto}.sec.done{flex:1 1 0}
+.done .it .t{-webkit-line-clamp:1}
+.sec h3{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);display:flex;justify-content:space-between;align-items:baseline;
+  border-top:1px solid var(--hair);padding-top:5px;margin-top:1px}
+.sec h3 b{font-size:14px;font-weight:700;color:var(--dim);letter-spacing:0;background:rgba(255,255,255,.06);border-radius:999px;padding:0 8px;min-width:22px;text-align:center}
+.it{padding:4px 9px 4px 11px;border-left:3px solid rgba(255,255,255,.14);border-radius:6px var(--rs) var(--rs) 6px;overflow:hidden;color:var(--body);background:var(--panel)}
+.it .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--fg);font-weight:500;letter-spacing:-.005em}
+.wait .it .t,.hand .it .t{-webkit-line-clamp:3;font-weight:450;color:var(--body)}
+.owed .it{border-left-color:rgba(255,255,255,.22)}
+.wait .it{border-left-color:var(--amber)}
+.meta{font-size:15px;color:var(--dim);margin-top:3px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-height:48px;overflow:hidden;letter-spacing:.005em}
+.c{font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;background:rgba(255,255,255,.07);border:1px solid var(--hair);border-radius:6px;padding:0 7px;color:#e6edf9}
+.tag{font-size:12px;font-weight:800;letter-spacing:.06em;border-radius:5px;padding:2px 7px;color:#0d1118;white-space:nowrap;background:#8b96aa}
+.tag.due{font-size:14px;letter-spacing:.02em;background:var(--amber)}
+.tag.over{font-size:14px;letter-spacing:.02em;background:var(--red);color:#330808}
+.tag.upd{background:var(--violet)}.tag.sent{background:var(--green);color:#052a14}.tag.prog{background:var(--cyan)}.tag.bad{background:var(--red)}
+.sup-it{border-left-color:var(--violet)!important;color:var(--violet);background:rgba(185,163,255,.06)}
+.sup-it .t{text-decoration:line-through;text-decoration-color:rgba(185,163,255,.7);color:var(--violet);font-weight:450}
+.more{font-size:14px;color:var(--dim2);padding-left:12px;letter-spacing:.01em}
+
+/* ── rail ───────────────────────────────────────────── */
+.rail h2{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.rail .box{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:4px}
+.feed{flex:1}
+.fl{border-left:3px solid var(--system);padding:4px 8px 4px 11px;border-radius:6px var(--rs) var(--rs) 6px;background:rgba(255,255,255,.035)}
+.fl .h{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.02em;color:var(--dim2);margin-bottom:2px}
+.fl .tx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--body);font-size:16px}
+.fl .meta{margin-top:3px}
+.fl.k-caught{background:rgba(255,95,95,.12)}.fl.k-sup .tx{color:var(--violet)}.fl.k-sent .tx{color:var(--green)}
+.ob{border-left:3px solid rgba(255,255,255,.18);padding:3px 0 3px 10px;font-size:16px}.ob.sent{border-color:var(--green)}.ob.ics{border-color:var(--violet)}
+.ob .tt{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;color:var(--body)}
+.caught{border-left:3px solid var(--red);padding-left:10px}
+.caught .tt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.zero{color:var(--green);font-weight:700;letter-spacing:-.005em;padding-left:4px}
+
+/* ── footer ─────────────────────────────────────────── */
+footer{font:600 16px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.01em;color:var(--dim);border-top:1px solid var(--hair);padding-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+footer b{color:var(--green)}footer b.bad{color:var(--red)}
+
+/* ── motion: transform+opacity only, spring-like curve, no overshoot ── */
+@keyframes slide{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes glow{0%,30%{box-shadow:0 0 0 2px rgba(255,212,59,.95),0 0 28px rgba(255,212,59,.55);background:rgba(255,212,59,.14)}100%{box-shadow:0 0 0 0 transparent;background:var(--panel)}}
+.new{animation:slide .42s var(--ease),glow 2.2s var(--ease);will-change:transform,opacity}
+@keyframes strike{from{background-size:0 3px}to{background-size:100% 3px}}
+.newsup .t{text-decoration:none;background:linear-gradient(var(--violet),var(--violet)) no-repeat 0 58%/0 3px;animation:strike .8s var(--ease) forwards}
+.newsup{animation:glow 2.2s var(--ease)}
+@media (prefers-reduced-motion:reduce){
+  .new,.newsup{animation:glow 1.2s ease-out}  /* cross-fade only, no slide */
+  .newsup .t{animation:none;background-size:100% 3px}
+  #pill i{animation:none}
+}
+@media (prefers-reduced-transparency:reduce){ .rail{background:#0e121b;backdrop-filter:none;-webkit-backdrop-filter:none} }
+
+/* ── audit + caught tabs ────────────────────────────── */
+.audit{height:100%;display:flex;flex-direction:column;gap:10px;min-height:0}
+.big{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--fg)}.big b{color:var(--green)}.big b.bad{color:var(--red)}
+.big small{display:block;font-size:15px;font-weight:400;letter-spacing:0;color:var(--dim);margin:6px 0 0}
+.agrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;flex:1;min-height:0}
+.acol{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:12px;overflow:auto;min-height:0}
+.afile{margin-top:10px;font:13px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.02em;color:var(--dim2);word-break:break-all}.afile b{color:var(--body)}
+.fact{font-size:17px;margin-top:5px;padding:4px 0 4px 10px;border-left:3px solid var(--green);border-radius:0 6px 6px 0;background:rgba(61,220,132,.05);color:var(--fg)}
+.fact.un{border-color:var(--red);background:rgba(255,95,95,.08)}.fact.unc{border-color:var(--amber);background:rgba(255,200,61,.06)}
+.fact .q{display:block;font-size:14px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.cwrap{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:16px 20px;overflow:auto;height:100%;display:flex;flex-direction:column;gap:12px}
+.cwrap .caught{font-size:20px}.cwrap .ex{font-size:15px;color:var(--dim);margin-top:3px}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="h1">Zapdemo</h1>
+  <div id="banner">waiting for the first tick…</div>
+  <div class="right"><div id="pill" class="off"><i></i><span>NOT RUNNING</span></div>
+    <nav><button id="tab-board" onclick="tab('board')">Board</button><button id="tab-audit" onclick="tab('audit')">Audit</button><button id="tab-caught" onclick="tab('caught')">Caught itself</button></nav></div>
+</header>
+<main id="main"></main>
+<footer id="footer"></footer>
+<script src="handover/site.js"></script>
+<script src="handover/heartbeat.js"></script>
+<script>
+"use strict";
+var LIM = {owed: 3, wait: 2, hand: 1, done: 3};
+var TAB = (location.hash || "#board").slice(1), prev = null, lastSig = "";
+var ctx = {cur: {}, curSup: {}, curFeed: {}};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function srcChip(x){return '<a class="c" href="handover/sources/'+encodeURIComponent(x)+'.txt" target="_blank" rel="noopener" title="open the verbatim source record">'+esc(x)+'</a>'}
+function chips(a,n,plain){return (a||[]).slice(0,n||5).map(function(x){return plain?'<span class="c">'+esc(x)+'</span>':srcChip(x)}).join("")}
+function fileLink(path,html){return path?'<a class="pl" href="'+esc(path)+'" target="_blank" rel="noopener" title="open the outbox file">'+html+'</a>':html}
+function more(n){return n>0?'<div class="more">+'+n+' more in HANDOVER-*.md</div>':""}
+function isNew(id){ctx.cur[id]=1;return prev&&!prev.ids[id]?" new":""}
+function pb(who){return '<span class="pb b-'+esc(who)+'">'+esc(who)+'</span>'}
+function sec(cls,label,items,lim,render){
+  var shown=items.slice(0,lim).map(render).join("");
+  return '<div class="sec '+cls+'"><h3><span>'+label+'</span><b>'+items.length+'</b></h3>'+(shown||'<div class="more">none</div>')+more(items.length-lim)+'</div>';
+}
+function owed(p){
+  var t=(p.updated?'<span class="tag upd">UPDATED</span> ':'')+(p.status==="in_progress"?'<span class="tag prog">IN PROGRESS</span> ':'');
+  var due=p.due?'<span class="tag '+(p.overdue?'over':'due')+'">'+(p.overdue?'OVERDUE ':'due ')+esc(p.due)+'</span>'+(p.due_src?srcChip(p.due_src):''):'';
+  return '<div class="it'+isNew(p.id)+'"><div class="t">'+t+esc(p.title)+'</div><div class="meta">'+due+chips(p.sources,p.due?2:4)+'</div></div>';
+}
+function wait(q){
+  var due=q.due?'<span class="tag '+(q.overdue?'over':'due')+'">'+(q.overdue?'OVERDUE ':'due ')+esc(q.due)+'</span>'+(q.due_src?srcChip(q.due_src):''):'';
+  return '<div class="it'+isNew(q.id)+'"><div class="t">'+esc(q.text.replace(/ _\(.*$/,""))+'</div><div class="meta">'+due+'<span>from '+esc(q["from"])+"'s AI</span></div></div>";
+}
+function hand(h){
+  var id="h:"+(h.text||h.title).slice(0,60);
+  if(h.text) return '<div class="it'+isNew(id)+'"><div class="t">'+esc(h.text)+'</div><div class="meta">'+chips(h.cite,4)+'</div></div>';
+  return '<div class="it'+isNew(id)+'"><div class="t">'+esc(h.title)+'</div><div class="meta"><span class="tag">DEPENDENCY</span>'+chips(h.sources,4)+'</div></div>';
+}
+function done(p){
+  var sent=p.status==="sent";
+  return '<div class="it'+isNew(p.id)+'"><div class="t">'+(sent?'<span class="tag sent">SENT BY AI</span> ':"")+(sent?fileLink(p.path,esc(p.title.replace(/^SENT: /,""))):esc(p.title.replace(/^SENT: /,"")))+'</div><div class="meta">'+(sent?esc(((p.notes||[""])[0]||"").split("  ·  ")[0])+" ":"")+chips(p.sources,sent?2:4)+'</div></div>';
+}
+function supIt(s){
+  ctx.curSup[s.id]=1;
+  var fresh=prev&&!prev.sup[s.id]?" newsup":"";
+  return '<div class="it sup-it'+fresh+'"><div class="t">'+esc(s.title)+'</div><div class="meta"><span class="tag upd">SUPERSEDED</span> by '+esc(s.by)+(s.fact?': “'+esc(s.fact)+'”':"")+'</div></div>';
+}
+function feedLine(f){
+  ctx.curFeed[f.key]=1;
+  var fresh=prev&&!prev.feed[f.key]?" new":"";
+  return '<div class="fl k-'+esc(f.kind)+fresh+'" style="border-left-color:var(--'+esc(f.persona)+')"><div class="h">'+esc(f.time||"earlier")+pb(f.persona)+'</div><div class="tx">'+esc(f.text)+'</div>'+
+    (f.cites&&f.cites.length?'<div class="meta">'+chips(f.cites,3)+'</div>':"")+'</div>';
+}
+function board(S){
+  var html='<div class="board">';
+  S.people.forEach(function(p){
+    var sup=(p.superseded||[]).map(supIt).join("");
+    html+='<div class="col"><div class="badge b-'+esc(p.id)+'">'+esc(p.name.split(" ").slice(0,-1).join(" "))+'<small>'+esc(p.role)+'</small></div>'+
+      sec("owed","Owed",p.owed,LIM.owed,owed)+
+      sec("wait","Waiting on me",p.waiting,LIM.wait,wait)+
+      sec("hand","Handed to me",p.handed,LIM.hand,hand)+
+      '<div class="sec done"><h3><span>Done</span><b>'+p.done.length+'</b></h3>'+sup+
+      p.done.slice().reverse().slice(0,LIM.done).map(done).join("")+more(p.done.length-LIM.done)+'</div></div>';
+  });
+  var ob=S.outbox.slice(0,3).map(function(o){
+    var tag=o.kind==="ics"?'<span class="tag upd">.ICS</span> ':o.sent?'<span class="tag sent">SENT</span> ':'<span class="tag">DRAFT</span> ';
+    return '<div class="ob '+(o.kind==="ics"?"ics":o.sent?"sent":"")+'"><div class="tt">'+tag+fileLink(o.file,esc(o.subject||o.file))+'</div></div>';
+  }).join("");
+  var rj=(S.rejected||[]).slice(0,2).map(function(r){
+    return '<div class="caught"><div class="tt">'+pb(r.persona)+' '+esc(r.reason)+'</div></div>';
+  }).join("");
+  html+='<div class="rail"><h2>Live activity</h2><div class="box feed">'+(S.feed||[]).slice(0,8).map(feedLine).join("")+'</div>'+
+    '<h2>Outbox · '+S.outbox.length+' files</h2><div class="box">'+ob+'</div>'+
+    '<h2>Caught itself · '+(S.rejected_total||0)+'</h2><div class="box">'+(rj||'<div class="zero">0 — nothing rejected yet</div>')+'</div></div></div>';
+  return html;
+}
+function auditView(S){
+  var A=S.audit||{groups:[],checked:0,unsourced:0,uncited:0};
+  var html='<div class="audit"><div class="big"><b'+(A.unsourced?' class="bad"':'')+'>token audit: '+A.checked+' checked · '+A.unsourced+' unsourced</b>'+
+    (A.uncited?'<small>'+A.uncited+' found in the pack but not in a cited source</small>':'')+
+    '<small>automated token audit — numbers, dates, $ and names in outbound text, matched verbatim against cited sources · python run.py --audit</small></div><div class="agrid">';
+  A.groups.forEach(function(g){
+    var n=g.files.reduce(function(a,f){return a+f.facts.length},0);
+    html+='<div class="acol"><div class="badge b-'+esc(g.persona)+'">'+esc(g.name.split(" ").slice(0,-1).join(" "))+'<small>'+n+' facts</small></div>';
+    g.files.forEach(function(f){
+      var key=f.facts.filter(function(x){return /[\d$]/.test(x.fact)||!x.src||x.uncited}).slice(0,4);
+      var rest=f.facts.length-key.length;
+      html+='<div class="afile"><b>'+esc(f.file.replace("outbox/","").replace(/\d{8}-\d{4}-/,""))+'</b> · '+f.facts.length+' facts</div>';
+      key.forEach(function(x){
+        html+='<div class="fact'+(x.src?(x.uncited?' unc':''):' un')+'">'+esc(x.fact)+' '+(x.src?srcChip(x.src):'<span class="c">NOT FOUND</span>')+'<span class="q">'+esc(x.line||"")+'</span></div>';
+      });
+      if(rest>0) html+='<div class="more">+'+rest+' more sourced</div>';
+    });
+    html+='</div>';
+  });
+  return html+'</div></div>';
+}
+function caughtView(S){
+  var rj=S.rejected||[];
+  var body=rj.length?rj.map(function(r){
+    return '<div class="caught"><div>'+pb(r.persona)+' '+esc(r.reason)+'</div><div class="meta">'+chips(r.offending,8,true)+'<span>'+esc((r.at||"").slice(0,16))+'</span></div><div class="ex">'+esc(r.excerpt||"")+'</div></div>';
+  }).join(""):'<div class="zero" style="font-size:34px">0 — nothing rejected yet</div>';
+  return '<div class="cwrap"><div class="big">Caught itself · '+(S.rejected_total||0)+'<small>drafts the fact check rejected and questions that replaced a guess · python run.py --rejections</small></div>'+body+'</div>';
+}
+function clocks(iso){
+  var d=new Date(iso);
+  function f(tz,full){
+    var o={timeZone:tz,weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"};
+    if(full){o.day="2-digit";o.month="short"}
+    var p={};new Intl.DateTimeFormat("en-GB",o).formatToParts(d).forEach(function(x){p[x.type]=x.value});
+    return p.weekday+(full?" "+p.day+" "+p.month:"")+" "+p.hour+":"+p.minute;
+  }
+  return f("America/Chicago",true)+" Austin / "+f("Asia/Singapore",false)+" Singapore";
+}
+function render(force){
+  var S=window.SITE; if(!S) return;
+  var sig=JSON.stringify(S)+TAB;
+  if(sig===lastSig&&!force) return;           // nothing changed: leave the DOM (and any running animation) alone
+  document.getElementById("h1").innerHTML='Zapdemo <span>· '+esc(clocks(S.clock))+' · 4 AIs · promise ledger</span>';
+  var main=document.getElementById("main"), keep=[];
+  [].forEach.call(main.querySelectorAll(".acol,.cwrap"),function(e){keep.push(e.scrollTop)});
+  ctx={cur:{},curSup:{},curFeed:{}};
+  main.innerHTML=TAB==="audit"?auditView(S):TAB==="caught"?caughtView(S):board(S);
+  [].forEach.call(main.querySelectorAll(".acol,.cwrap"),function(e,i){e.scrollTop=keep[i]||0});
+  if(TAB==="board"){ prev={ids:ctx.cur,sup:ctx.curSup,feed:ctx.curFeed}; }
+  lastSig=sig;
+  ["board","audit","caught"].forEach(function(t){document.getElementById("tab-"+t).className=t===TAB?"on":""});
+}
+function tab(t){TAB=t;location.hash=t;render(true)}
+var autoTab=false;
+function demoTab(){  // hands-off demo: Audit tab by itself in a fixed window (first_boot+audit_at .. +audit_for); never moves on restart or reload
+  var h=window.HEARTBEAT; if(!h||!h.demo||!h.demo.audit_at) return;
+  var now=Date.now()/1000, a=h.demo.first_boot+h.demo.audit_at, b=a+(h.demo.audit_for||30);
+  if(now>=a&&now<b){ if(TAB!=="audit"&&!autoTab){ autoTab=true; tab("audit"); } }
+  else if(autoTab){ autoTab=false; tab("board"); }
+}
+function tickAge(){
+  var h=window.HEARTBEAT, S=window.SITE, pill=document.getElementById("pill");
+  document.getElementById("banner").textContent=(h&&h.banner)||"waiting for the first tick…";
+  if(h&&h.tick_at){
+    var p=h.tick_at.split(":"), d=new Date(); d.setHours(+p[0],+p[1],+p[2],0);
+    var age=Math.round((Date.now()-d.getTime())/1000); if(age<0) age+=86400;
+    var ok=age<=60, proc=ok&&h.processing;
+    pill.className=proc?"proc":ok?"":"off";
+    pill.innerHTML="<i></i><span>"+(proc?"PROCESSING DROP…":ok?"RUNNING · tick "+age+"s ago":"NOT RUNNING")+"</span>";
+  }
+  if(S&&S.footer){
+    var f=S.footer,l=(h&&h.llm)||{calls:0,tokens:0,cost:0},up=h&&h.boot?Math.max(0,Math.round(Date.now()/1000-h.boot)):0,A=S.audit||{checked:0,unsourced:0};
+    document.getElementById("footer").innerHTML=f.sources+" sources · "+f.promises+" promises · "+f.sent+" sent · "+f.asked+" asked, "+((S.stats||{}).questions||0)+" open · this session: "+l.calls+" calls · $"+l.cost.toFixed(2)+
+      " · up "+Math.floor(up/3600)+"h"+("0"+Math.floor(up%3600/60)).slice(-2)+"m · <b"+(A.unsourced?' class="bad"':'')+">token audit: "+A.checked+" checked · "+A.unsourced+" unsourced</b>";
+  }
+}
+function reload(){
+  ["handover/site.js","handover/heartbeat.js"].forEach(function(src,i){
+    var s=document.createElement("script"); s.src=src+"?t="+Date.now();
+    s.onload=function(){ if(i===1){ render(); tickAge(); } s.remove(); }; s.onerror=function(){ s.remove(); };
+    document.body.appendChild(s);
+  });
+}
+render(true); tickAge();
+setInterval(reload,3000);
+setInterval(tickAge,1000);
+setInterval(demoTab,1000);
+</script>
+</body>
+</html>

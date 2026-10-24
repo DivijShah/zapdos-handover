@@ -89,8 +89,9 @@ class Persona:
         """Draft+verify+write outbox email. On rejection files a question to the owner instead. True if written."""
         try:
             def go():
-                subj, body = self.draft(task, ids, no_money, p)
-                return acts.email(self.now, self.who, slug_, acts.addr_for(self.srcmap, to_frag) or to_label, subj, body, p, ids)
+                cite = ids + ["T"]  # team.json (source T) supports names, roles and addresses of our own people
+                subj, body = self.draft(task, cite, no_money, p)
+                return acts.email(self.now, self.who, slug_, acts.addr_for(self.srcmap, to_frag) or to_label, subj, body, p, cite)
             self.do(p, atype, go)
             return True
         except Rejected as e:
@@ -174,8 +175,10 @@ class Persona:
         dep = ledger.ensure_slot(self.st, "optix.model_check", ["C09", "E10"], self.at,
                                  "Dependency of Northwind price/Optix PO (C09)")
         self.do(p, "dependency", lambda: None, depends_on=dep, to="weilin")
+        maria_sent = f"{slot_id('northwind.maria_reply')}:send" in ledger.action_keys()
         self.ask(p, "sam", "price",
-                 "What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost "
+                 ("Maria's holding reply was sent (no price in it). " if maria_sent else "")
+                 + "What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost "
                  f"(\"{quote[0][0]}\", E10), not a sell price. Brief is in the outbox.", ids)
         return "waiting_owner"
 
@@ -281,11 +284,11 @@ class Persona:
         ok = self.email(p, "email", "reply-jordan-monday", "jordan.lee",
                         "Reply to Jordan's email E06. Say the first-day details and logins are being sorted by the team and that Sam "
                         "will confirm where to go on Monday. Do NOT state any place, address, room or time; none is in the pack.", ids)
-        if ok:
-            self.autosend(p, ["E06"])
+        sent = bool(ok and self.autosend(p, ["E06"]))
         self.ask(p, "sam", "jordan-location",
                  "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. "
-                 "The reply draft in the outbox says you will confirm; nothing has been sent.", ids)
+                 + ("An acknowledgement was already sent to him (it says you will confirm and promises nothing else); he is still waiting for the location."
+                    if sent else "The reply draft in the outbox says you will confirm; nothing has been sent."), ids)
         return "waiting_owner"
 
     def h_vlan_reply(self, p):
@@ -293,11 +296,11 @@ class Persona:
         ok = self.email(p, "email", "reply-ken-ips-vlan", "ken.ong",
                         "Reply to Ken's email E04. Confirm the IP range, mask and gateway he sent were received (repeat them exactly as written "
                         "in E04). On his VLAN question say Wei Lin will confirm and do not answer it.", ids)
-        if ok:
-            self.autosend(p, ["E04"])
+        sent = bool(ok and self.autosend(p, ["E04"]))
         self.ask(p, "weilin", "vlan",
                  "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? "
-                 "The draft in the outbox confirms the IPs and says you will answer; nothing has been sent.", ids)
+                 + ("An acknowledgement confirming the IPs was already sent and says you will answer; he is still waiting for the VLAN answer."
+                    if sent else "The draft in the outbox confirms the IPs and says you will answer; nothing has been sent."), ids)
         return "waiting_owner"
 
     def h_start_time(self, p):
@@ -306,11 +309,11 @@ class Persona:
                         "Write a short WhatsApp-style reply to Raj's voice note WA02 asking if the team can start at 13:30 on Tuesday. "
                         "Say Wei Lin will confirm. Do NOT agree or decline and do not commit any time.", ids,
                         to_label="Raj Kumar, Harbor Point (WhatsApp; no email address in pack)")
-        if ok:
-            self.autosend(p, ["WA02"])
+        sent = bool(ok and self.autosend(p, ["WA02"]))
         self.ask(p, "weilin", "start-1330",
                  "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. "
-                 "The reply draft in the outbox commits no time; nothing has been sent.", ids)
+                 + ("An acknowledgement that commits no time was already sent; he is still waiting for your answer."
+                    if sent else "The reply draft in the outbox commits no time; nothing has been sent."), ids)
         return "waiting_owner"
 
     def h_casestudy(self, p):
@@ -318,11 +321,12 @@ class Persona:
         ok = self.email(p, "email", "reply-lisa-case-study", "lisa.park",
                         "Reply to Lisa's email E14. Thank her for agreeing to review. Say Priya will send the case-study draft and the list "
                         "of photos she plans to use. Do not name any photo and do not state any result or number.", ids, no_money=True)
-        if ok:
-            self.autosend(p, ["E14"])
+        sent = bool(ok and self.autosend(p, ["E14"]))
         self.ask(p, "priya", "photos",
                  "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). "
-                 "No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent.", ids)
+                 "No photo list exists in the pack. "
+                 + ("A reply promising the draft and the list was already sent."
+                    if sent else "The reply draft in the outbox promises one; nothing has been sent."), ids)
         return "waiting_owner"
 
     def h_ridge_visit(self, p):

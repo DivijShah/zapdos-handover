@@ -42,7 +42,7 @@ def _feed(st: dict, acts_: list, qs: list, rej: list) -> list[dict]:
         items.append((a.get("ts") or "", who, "sent" if a["type"] == "send" else "act", text, cites, "a:" + a["key"]))
     for q in qs:
         p = st["promises"].get(q.get("promise_id"), {})
-        items.append((q.get("ts") or "", q["from"], "asked", f"asked {q['to']}: {q['question'][:84]}", list(p.get("sources", []))[:3], "q:" + q["id"]))
+        items.append((q.get("ts") or "", q["from"], "asked", f"asked {q['to']}: {q['question'][:84]}" + (" → answered" if q.get("answered") else ""), list(p.get("sources", []))[:3], "q:" + q["id"]))
     for ev in ledger.read_jsonl(ledger.PROMISES):
         if ev["op"] == "supersede":
             old = st["promises"].get(ev["id"], {})
@@ -84,7 +84,7 @@ def _outbox() -> list[dict]:
             g = lambda k: next((ln.split(": ", 1)[1] for ln in head if ln.startswith(k + ": ")), "")  # noqa: E731
             out.append({"file": f"outbox/{'sent/' if sent else ''}{f.name}", "sent": sent, "kind": f.suffix[1:],
                         "to": g("To"), "subject": g("Subject") or f.stem.split("-", 3)[-1], "mtime": f.stat().st_mtime,
-                        "sources": g("Sources")})
+                        "sources": g("Sources"), "path": f"outbox/{'sent/' if sent else ''}{f.name}"})
     out.sort(key=lambda o: (o["file"].split("/")[-1][:13], o["mtime"]), reverse=True)
     for o in out:
         o.pop("mtime")
@@ -97,6 +97,24 @@ def footer_text(st: dict, n_sources: int, boot: float | None, since: float | Non
     up = int(time.time() - boot) if boot else 0
     return (f"{n_sources} sources · {len(st['promises'])} promises · {sent} sent · {len(ledger.questions())} asked · "
             f"this session: {u['calls']} calls · ${u['cost']:.2f} · up {up // 3600}h{up % 3600 // 60:02d}m{up % 60:02d}s")
+
+
+def write_heartbeat(banner, last_tick, boot, since, demo, processing) -> None:
+    """handover/heartbeat.js (wall-clock, gitignored). `processing`="drop" while a drop is being ingested: the page shows it."""
+    u = extract.usage_totals(since)
+    hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick, "boot": boot, "demo": demo,
+          "processing": processing, "llm": {"calls": u["calls"], "tokens": u["in"] + u["out"], "cost": u["cost"]}}
+    _w(ledger.H / "heartbeat.js", "window.HEARTBEAT = " + json.dumps(hb, ensure_ascii=False) + ";\n")
+
+
+def write_sources(srcmap: dict | None) -> None:
+    """handover/sources/<id>.txt: the verbatim source record behind every citation chip (write-if-changed)."""
+    if not srcmap:
+        return
+    d = ledger.H / "sources"
+    d.mkdir(exist_ok=True)
+    for sid, s in srcmap.items():
+        _w(d / f"{sid}.txt", f"[{sid} · {s.kind} · {s.at}]\n\n{s.text}\n")
 
 
 def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict | None = None, srcmap: dict | None = None,
@@ -128,7 +146,7 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
         sent_pids = {a["promise_id"] for a in acts_ if a["type"] == "send"}
         done = [item(p) for p in mine if p["status"] == "done" and p["id"] not in sent_pids]
         done += [{"id": a["key"], "title": f"SENT: {a.get('subject', '')}", "due": "", "overdue": False, "status": "sent",
-                  "sources": a.get("cite", [])[:7], "notes": [f"→ {a.get('to', '')}  ·  {a['path']}"], "flags": []}
+                  "sources": a.get("cite", [])[:7], "notes": [f"→ {a.get('to', '')}  ·  {a['path']}"], "flags": [], "path": a["path"]}
                  for a in acts_ if a["type"] == "send" and a["persona"] == me]
         sup = [{"id": p["id"], "title": p["deliverable"], "sources": p["sources"][:3],
                 "by": (st["promises"].get(p.get("superseded_by")) or {}).get("created_from"),
@@ -140,14 +158,12 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
     rej = ledger.read_jsonl(ledger.REJECTED)
     sent_n = sum(a["type"] == "send" for a in acts_)
     site = {"feed": _feed(st, acts_, qs, rej), "audit": au, "rejected": rej[-14:][::-1], "rejected_total": len(rej),
-            "footer": {"sources": len(srcmap or {}), "promises": len(st["promises"]), "sent": sent_n, "asked": len(qs)},
+            "footer": {"sources": len([s for s in (srcmap or {}).values() if s.kind != "team"]), "promises": len(st["promises"]), "sent": sent_n, "asked": len(qs)},
             "stats": {k: v for k, v in s.items() if k != "last_action"},
             "last_action": s["last_action"] and {k: s["last_action"].get(k) for k in ("type", "persona", "at", "path")},
             "clock": now.isoformat(), "people": people, "outbox": _outbox()[:24],
             "questions": [{"to": q["to"], "from": q["from"], "text": q["question"]} for q in qs if not q.get("answered")]}
     ch = _w(ledger.H / "site.js", "window.SITE = " + json.dumps(site, ensure_ascii=False, indent=1) + ";\n")
-    u = extract.usage_totals(since)
-    hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick, "boot": boot, "demo": demo,
-          "llm": {"calls": u["calls"], "tokens": u["in"] + u["out"], "cost": u["cost"]}}
-    _w(ledger.H / "heartbeat.js", "window.HEARTBEAT = " + json.dumps(hb, ensure_ascii=False) + ";\n")
+    write_heartbeat(banner, last_tick, boot, since, demo, None)
+    write_sources(srcmap)
     return ch

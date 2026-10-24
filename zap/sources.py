@@ -49,6 +49,9 @@ def load_pack(now: datetime) -> list[Source]:
         text = (f"Calendar event: {ev['title']}\nStart: {ev['start']}\nEnd: {ev['end']}\n"
                 f"Attendees: {', '.join(ev['attendees'])}\nWhere: {ev['where'] or 'n/a'}")
         out.append(Source(f"CAL{i:02d}", "calendar", now_iso, text, {"event": ev}))
+    from .route import team
+    out.append(Source("T", "team", now_iso, "team.json\n" + "\n".join(
+        f"{t['name']} ({t['id']}), {t['role']}, {t['city']}, {t['email']}, owns: {', '.join(t['owns'])}" for t in team())))
     return out
 
 

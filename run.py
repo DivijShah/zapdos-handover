@@ -64,7 +64,7 @@ def ensure_working_copies():
 BANNER = {"text": None}
 
 
-def banner(st: dict, n_cached: int, n_total: int):
+def banner_text(st: dict, n_cached: int, n_total: int) -> str:
     s = ledger.stats(st)
     if not st["promises"]:
         head = f"FRESH START — ingesting pack  (cache {n_cached}/{n_total} sources)"
@@ -74,9 +74,18 @@ def banner(st: dict, n_cached: int, n_total: int):
         head = (f"RESUMED  open={s['open']} in_progress={s['in_progress']} done={s['done']} "
                 f"waiting_owner={s['waiting_owner']} superseded={s['superseded']} questions={s['questions']}  last_action={last}  "
                 f"(cache {n_cached}/{n_total} sources)")
+    return head
+
+
+def banner(st: dict, n_cached: int, n_total: int):
+    head = banner_text(st, n_cached, n_total)
     console.print(f"[bold cyan]{head}[/]")
     BANNER["text"] = head
     return head
+
+
+def _real(pack):
+    return [s for s in pack if s.kind != "team"]  # team.json is source T: cited, never extracted, not counted as a pack source
 
 
 def git_commit(msg: str):
@@ -146,6 +155,10 @@ def narrate(st: dict, a0: int, q0: set, ev0: int):
 
 def tick(first: bool, table: bool = False) -> None:
     now = now_clock()
+    st0 = ledger.materialize()
+    uncached = [f for f in sources.drop_files() if not (sources.drop_cache_dir() / f"{sources.file_sha(f)}.json").exists()]
+    if uncached or any(s.kind == "drop" and s.id not in st0["ingested"] for s in sources.load_drops(now)):
+        site.write_heartbeat(BANNER["text"], None, BOOT, session_start(), DEMO_CFG, "drop")  # the page shows PROCESSING DROP…
     n_norm, norm_failed = drops.normalise_missing(now)
     pack = sources.load_pack(now) + sources.load_drops(now)
     srcmap = {s.id: s for s in pack}
@@ -179,6 +192,7 @@ def tick(first: bool, table: bool = False) -> None:
     if audit.gate(st, now.isoformat(), srcmap):  # runtime audit: findings go to rejected.jsonl, unsent drafts are withheld
         say("audit: caught an unsourced fact - see 'Caught itself'")
     narrate(st, a0, q0, ev0)
+    BANNER["text"] = banner_text(st, sum(extract.cached(s.id) is not None for s in _real(pack)), len(_real(pack)))  # header = live counts
     changed = shiftnote.render_handovers(st, now) or st["n_events"] != n0
     changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}, srcmap, BOOT, session_start(), DEMO_CFG) or changed
     if table:
@@ -190,7 +204,7 @@ def tick(first: bool, table: bool = False) -> None:
         if not first:
             console.print("\a", end="")
     note = f" · {len(failed)} retry pending (run.log)" if failed else ""
-    say(f"tick {time.strftime('%H:%M:%S')} · +{st['n_events'] - n0} events · {site.footer_text(st, len(pack), BOOT, session_start())}{note}")
+    say(f"tick {time.strftime('%H:%M:%S')} · +{st['n_events'] - n0} events · {site.footer_text(st, len(_real(pack)), BOOT, session_start())}{note}")
 
 
 def purge_drops():
@@ -241,6 +255,8 @@ def _arg(name: str):
 
 
 def main():
+    if "--demo-drop-at" in sys.argv or "--demo-audit-at" in sys.argv:
+        os.environ["ZAP_DEMO"] = "1"  # demo mode: model calls fail fast (30 s timeout, 1 retry)
     once = "--once" in sys.argv
     if "--drops-dir" in sys.argv:
         sources.set_drops_dir(_arg("--drops-dir"))
@@ -275,7 +291,7 @@ def main():
     now = now_clock()
     pack = sources.load_pack(now) + sources.load_drops(now)
     st = ledger.materialize()
-    banner(st, sum(extract.cached(s.id) is not None for s in pack), len(pack))
+    banner(st, sum(extract.cached(s.id) is not None for s in _real(pack)), len(_real(pack)))
     first = True
     while not stop:
         if demo_after is not None:

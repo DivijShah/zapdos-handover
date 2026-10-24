@@ -172,6 +172,8 @@ def resolve(rel: str) -> str:
 
 def send(rel: str, persona: dict, at: str) -> str:
     """The file-backed 'send': move outbox/x.md -> outbox/sent/x.md with a Status line. Idempotent across a crash."""
+    if rel == sent_path(rel):  # already the sent artifact (e.g. restart after a kill between move and record): do nothing, never unlink it
+        return rel
     src, dst = ROOT / rel, ROOT / sent_path(rel)
     if not src.exists():
         return sent_path(rel)

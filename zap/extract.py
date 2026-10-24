@@ -69,7 +69,8 @@ PRICE = {"claude-sonnet-5-5": (2.00, 10.00), "claude-haiku-5-5": (0.10, 0.50)}
 def client():
     global _client
     if _client is None:
-        _client = anthropic.Anthropic(max_retries=5, timeout=90)
+        demo = bool(os.environ.get("ZAP_DEMO"))  # demo mode: fail fast (30 s, 1 retry) so the room never watches a stalled call
+        _client = anthropic.Anthropic(max_retries=1 if demo else 5, timeout=30 if demo else 90)
     return _client
 
 
@@ -202,7 +203,7 @@ def extract_one(src: Source, now: datetime) -> dict:
 
 def extract_missing(sources: list[Source], now: datetime, workers: int = 6) -> tuple[int, list[str]]:
     """Extract every uncached source. Returns (n_extracted, failed_ids). Cached sources cost zero calls."""
-    todo = [s for s in sources if cached(s.id) is None]
+    todo = [s for s in sources if s.kind != "team" and cached(s.id) is None]
     failed = []
 
     def run(s):

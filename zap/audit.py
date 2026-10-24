@@ -44,6 +44,7 @@ def _find(token: str, ids: list[str], srcmap: dict, kind: str):
     return weak
 
 
+LABEL = "automated token audit — numbers, dates, $ and names in outbound text, matched verbatim against cited sources"
 _LEX = None
 
 
@@ -179,7 +180,7 @@ def run(srcmap: dict, st: dict) -> dict:
 
 def render_text(res: dict, delay: float = 0.0) -> list[str]:
     import time
-    out = []
+    out = [LABEL]
     for g in res["groups"]:
         out.append(f"\n== {g['persona'].upper()}  ({g['name']})  {sum(len(f['facts']) for f in g['files'])} facts")
         for f in g["files"]:
