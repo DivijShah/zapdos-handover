@@ -1,4 +1,212 @@
 window.SITE = {
+ "feed": [
+  {
+   "key": "q:75e69c64ec",
+   "time": "",
+   "persona": "sam",
+   "kind": "asked",
+   "text": "asked sam: Send the reply to Maria (draft in outbox, no price in it)? She chased and her VP ask",
+   "cites": [
+    "E15"
+   ]
+  },
+  {
+   "key": "q:842f3bda13",
+   "time": "",
+   "persona": "sam",
+   "kind": "asked",
+   "text": "asked sam: Where should Jordan go on Monday morning? He asked (E06) and no office address or lo",
+   "cites": [
+    "C04",
+    "E06"
+   ]
+  },
+  {
+   "key": "q:d7b0918b8f",
+   "time": "",
+   "persona": "priya",
+   "kind": "asked",
+   "text": "asked priya: Which photos do you plan to use in the Bayview case study? Lisa asked for the list w",
+   "cites": [
+    "C08",
+    "E14",
+    "L-ZAP-170"
+   ]
+  },
+  {
+   "key": "q:888cca474c",
+   "time": "",
+   "persona": "dana",
+   "kind": "asked",
+   "text": "asked dana: Send the draft asking Maria for new times for the call with Tom Reyes? His Friday sl",
+   "cites": [
+    "C01",
+    "E01",
+    "E03"
+   ]
+  },
+  {
+   "key": "q:685fda0c60",
+   "time": "",
+   "persona": "dana",
+   "kind": "asked",
+   "text": "asked dana: Who from Zapdemo attends the Ridgeline site visit on Tuesday or Wednesday morning? O",
+   "cites": [
+    "C07",
+    "S012",
+    "E09"
+   ]
+  },
+  {
+   "key": "q:17004d1e5c",
+   "time": "",
+   "persona": "weilin",
+   "kind": "asked",
+   "text": "asked weilin: Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply ",
+   "cites": [
+    "E04"
+   ]
+  },
+  {
+   "key": "q:c0f37290f9",
+   "time": "",
+   "persona": "weilin",
+   "kind": "asked",
+   "text": "asked weilin: Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); fork",
+   "cites": [
+    "C02",
+    "WA02"
+   ]
+  },
+  {
+   "key": "q:3dd5a834ca",
+   "time": "",
+   "persona": "sam",
+   "kind": "asked",
+   "text": "asked sam: What ballpark price range should Omar at Ridgeline get? He asked to get budget (E09)",
+   "cites": [
+    "C07",
+    "S012",
+    "E09"
+   ]
+  },
+  {
+   "key": "q:e2c4270926",
+   "time": "",
+   "persona": "sam",
+   "kind": "asked",
+   "text": "asked sam: Rachel wants 2 customer references by Wed 28 Oct (C06). Only one pilot customer (Bay",
+   "cites": [
+    "C06",
+    "E08",
+    "CAL06"
+   ]
+  },
+  {
+   "key": "q:5bb664a8bb",
+   "time": "",
+   "persona": "dana",
+   "kind": "asked",
+   "text": "asked dana: Send the reschedule draft to Farah? Wei Lin is double-booked: Harbor Point Yard inst",
+   "cites": [
+    "C10",
+    "L-ZAP-121",
+    "CAL01"
+   ]
+  },
+  {
+   "key": "q:665a4176e0",
+   "time": "",
+   "persona": "weilin",
+   "kind": "asked",
+   "text": "asked weilin: Does the quoted camera match your layout? Optix quote Q-1182: \"Attached quote: 12 x ",
+   "cites": [
+    "C09"
+   ]
+  },
+  {
+   "key": "q:a13162c7e1",
+   "time": "",
+   "persona": "sam",
+   "kind": "asked",
+   "text": "asked sam: Approve reimbursing Wei Lin? \"Wei Lin paid $640 out of pocket for the Harbor Point s",
+   "cites": [
+    "C10",
+    "S009",
+    "L-ZAP-160"
+   ]
+  },
+  {
+   "key": "q:36ddde2532",
+   "time": "",
+   "persona": "sam",
+   "kind": "asked",
+   "text": "asked sam: What customer price should Northwind (Maria) be quoted for the 12-door dock cameras?",
+   "cites": [
+    "C01",
+    "E01",
+    "E03"
+   ]
+  },
+  {
+   "key": "a:35efac7f1f:send",
+   "time": "",
+   "persona": "dana",
+   "kind": "sent",
+   "text": "sent tom-call-reask-maria",
+   "cites": [
+    "E03",
+    "C01",
+    "L-ZAP-104"
+   ]
+  },
+  {
+   "key": "a:35efac7f1f:email",
+   "time": "",
+   "persona": "dana",
+   "kind": "act",
+   "text": "drafted tom-call-reask-maria",
+   "cites": [
+    "C01",
+    "E01",
+    "E03"
+   ]
+  },
+  {
+   "key": "a:601a2158f7:email",
+   "time": "",
+   "persona": "dana",
+   "kind": "act",
+   "text": "drafted reschedule-crestline-call",
+   "cites": [
+    "C10",
+    "L-ZAP-121",
+    "CAL01"
+   ]
+  },
+  {
+   "key": "a:b68f7dc802:send",
+   "time": "",
+   "persona": "priya",
+   "kind": "sent",
+   "text": "sent reply-lisa-case-study",
+   "cites": [
+    "E14",
+    "C08"
+   ]
+  },
+  {
+   "key": "a:6a5790396f:send",
+   "time": "",
+   "persona": "weilin",
+   "kind": "sent",
+   "text": "sent reply-ken-ips-vlan",
+   "cites": [
+    "E04",
+    "E02"
+   ]
+  }
+ ],
  "audit": {
   "groups": [
    {
