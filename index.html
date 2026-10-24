@@ -130,7 +130,7 @@ function auditView(S){
     '<small>every number, date, $ and name in outbox/, outbox/sent/ and Linear changes → source id + verbatim line. CLI: python run.py --audit</small></div><div class="agrid">';
   A.groups.forEach(function(g){
     var n=g.files.reduce(function(a,f){return a+f.facts.length},0);
-    html+='<div class="acol"><h2>'+esc(g.name.split(" ")[0])+'<small>'+n+' facts</small></h2>';
+    html+='<div class="acol"><h2>'+esc(g.name.split(" ").slice(0,-1).join(" "))+'<small>'+n+' facts</small></h2>';
     g.files.forEach(function(f){
       var key=f.facts.filter(function(x){return /[\d$]/.test(x.fact)||!x.src||x.uncited}).slice(0,4);
       var rest=f.facts.length-key.length;
