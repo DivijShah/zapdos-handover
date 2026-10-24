@@ -15,7 +15,7 @@ load_dotenv(ROOT / ".env")
 
 from rich.console import Console  # noqa: E402
 
-from zap import drops, extract, ledger, persona, render, route, shiftnote, sources, supersede  # noqa: E402
+from zap import drops, extract, ledger, persona, render, route, shiftnote, site, sources, supersede  # noqa: E402
 
 TICK = 20
 console = Console(width=None if sys.stdout.isatty() else 140)
@@ -47,6 +47,9 @@ def ensure_working_copies():
         os.replace(tmp, sl)
 
 
+BANNER = {"text": None}
+
+
 def banner(st: dict, n_cached: int, n_total: int):
     s = ledger.stats(st)
     if not st["promises"]:
@@ -57,6 +60,7 @@ def banner(st: dict, n_cached: int, n_total: int):
         head = (f"RESUMED  open={s['open']} in_progress={s['in_progress']} done={s['done']} "
                 f"waiting_owner={s['waiting_owner']} superseded={s['superseded']} questions={s['questions']}  last_action={last}  (cache {n_cached}/{n_total} sources)")
     console.print(f"[bold cyan]{head}[/]")
+    BANNER["text"] = head
     return head
 
 
@@ -99,6 +103,7 @@ def tick(first: bool) -> None:
     persona.sync_linear(st, now.isoformat(), srcmap)
     persona.handover_post(st, now, srcmap)
     changed = shiftnote.render_handovers(st, now) or st["n_events"] != n0
+    changed = site.export(st, now, BANNER["text"], {"ingested": new_sources, "events": st["n_events"] - n0}) or changed
     if first or changed:
         console.print(render.status_table(st, now))
     if failed:
@@ -117,6 +122,7 @@ def purge_drops():
     res = drops.purge(now)
     st = ledger.materialize()
     shiftnote.render_handovers(st, now)
+    site.export(st, now, "purged TEST drops")
     git_commit(f"ai(system): purged TEST drops ({res['sources']} sources)")
     console.print("purged TEST drops: " + json.dumps(res))
 
@@ -125,6 +131,10 @@ def main():
     once = "--once" in sys.argv
     if "--drops-dir" in sys.argv:
         sources.set_drops_dir(sys.argv[sys.argv.index("--drops-dir") + 1])
+    if "--export" in sys.argv:
+        now = now_clock()
+        site.export(ledger.materialize(), now, "export only")
+        return console.print("exported handover/site.js")
     if "--purge-drops" in sys.argv:
         return purge_drops()
     signal.signal(signal.SIGINT, _sig)

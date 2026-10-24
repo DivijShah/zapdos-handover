@@ -104,20 +104,6 @@ window.SITE = {
    "handed": [],
    "done": [
     {
-     "id": "75ec07a571",
-     "title": "Reply to Maria's chase (Northwind)",
-     "due": "",
-     "overdue": false,
-     "status": "done",
-     "sources": [
-      "E15"
-     ],
-     "notes": [
-      "Maria chased Sam asking whether the project is still on."
-     ],
-     "flags": []
-    },
-    {
      "id": "46192cbd69:send",
      "title": "SENT: Re: Monday?",
      "due": "",

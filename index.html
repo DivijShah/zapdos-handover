@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The 24/7 Handover</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Read-only. Open from file://. Data: handover/site.js + handover/heartbeat.js, written by `python run.py` every tick. -->
+<style>
+:root{--bg:#0b0e14;--panel:#121722;--line:#222b3a;--fg:#e8edf5;--dim:#8a96ab;--owed:#f5c451;--wait:#ff7ab8;--hand:#6cc4ff;--done:#5fd38d;--sup:#b79cff;--bad:#ff6b6b}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--fg);font:15px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:10px;padding:12px 16px}
+header{display:flex;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h1{font-size:22px;letter-spacing:.2px;white-space:nowrap}
+#banner{min-width:0;font:600 16px ui-monospace,SFMono-Regular,Menlo,monospace;color:#7ee0ff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tick{font:14px ui-monospace,Menlo,monospace;color:var(--dim);white-space:nowrap}
+#tick.stale{color:var(--bad);font-weight:700}
+main{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 350px;gap:12px;min-height:0}
+.col,.rail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:6px}
+.who{font-size:20px;font-weight:700}.who small{font-weight:400;color:var(--dim);font-size:13px;margin-left:6px}
+.sec{min-height:0;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.sec h3{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:5px}
+.sec h3 b{font-weight:700}
+.owed h3{color:var(--owed)}.wait h3{color:var(--wait)}.hand h3{color:var(--hand)}.done h3{color:var(--done)}
+.it{font-size:14.5px;padding:3px 0 3px 8px;border-left:3px solid var(--line);overflow:hidden}
+.owed .it{border-color:var(--owed)}.wait .it{border-color:var(--wait)}.hand .it{border-color:var(--hand)}.done .it{border-color:var(--done)}
+.it .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wait .it .t{-webkit-line-clamp:3}
+.meta{font-size:11.5px;color:var(--dim);margin-top:1px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.c{font:11px ui-monospace,Menlo,monospace;background:#1b2332;border-radius:4px;padding:0 5px;color:#b8c4d8}
+.tag{font-size:10.5px;font-weight:700;border-radius:4px;padding:0 5px;color:#0b0e14}
+.tag.upd{background:var(--sup)}.tag.over{background:var(--bad)}.tag.sent{background:var(--done)}.tag.due{background:var(--owed)}.tag.draft{background:#556178;color:#fff}.tag.prog{background:#5ac8e8}
+.sup-it{border-color:var(--sup)!important;color:var(--sup)}
+.sup-it .t{text-decoration:line-through;text-decoration-color:#7a6aa8}
+.more{font-size:11.5px;color:var(--dim);padding-left:8px}
+.rail h2{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
+.rail .box{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:5px}
+.ob{font-size:13px;border-left:3px solid #556178;padding-left:7px}.ob.sent{border-color:var(--done)}.ob.ics,.ob.upd{border-color:var(--sup)}
+.ob .f{font:11px ui-monospace,Menlo,monospace;color:var(--dim);word-break:break-all}
+.q{font-size:12.5px;border-left:3px solid var(--wait);padding-left:7px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.q b{color:var(--wait)}
+.flash{animation:fl 2.5s ease-out}@keyframes fl{from{background:#2a2245}to{background:transparent}}
+</style>
+</head>
+<body>
+<header>
+  <h1>The 24/7 Handover</h1>
+  <div id="banner">waiting for the first tick…</div>
+  <div id="tick"></div>
+</header>
+<main id="main"></main>
+<script src="handover/site.js"></script>
+<script src="handover/heartbeat.js"></script>
+<script>
+"use strict";
+var LIM = {owed: 4, wait: 3, hand: 2, done: 4};
+var seen = {};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function chips(a){return (a||[]).map(function(x){return '<span class="c">'+esc(x)+'</span>'}).join("")}
+function more(n){return n>0?'<div class="more">+'+n+' more in handover/HANDOVER-*.md</div>':""}
+function sec(cls,label,items,lim,render){
+  var shown=items.slice(0,lim).map(render).join("");
+  return '<div class="sec '+cls+'"><h3><span>'+label+'</span><b>'+items.length+'</b></h3>'+(shown||'<div class="more">none</div>')+more(items.length-lim)+'</div>';
+}
+function owed(p){
+  var t=(p.updated?'<span class="tag upd">UPDATED</span> ':'')+(p.overdue?'<span class="tag over">OVERDUE</span> ':'')+(p.status==="in_progress"?'<span class="tag prog">IN PROGRESS</span> ':'');
+  var due=p.due?'<span class="tag due">due '+esc(p.due)+'</span>'+(p.due_src?'<span class="c">'+esc(p.due_src)+'</span>':''):'';
+  var fact=p.updated&&p.new_fact?'<div class="meta">“'+esc(p.new_fact)+'”</div>':"";
+  return '<div class="it"><div class="t">'+t+esc(p.title)+'</div>'+fact+'<div class="meta">'+due+chips(p.sources)+'</div></div>';
+}
+function wait(q){
+  var due=q.due?'<span class="tag due">due '+esc(q.due)+'</span>'+(q.due_src?'<span class="c">'+esc(q.due_src)+'</span>':''):'';
+  return '<div class="it"><div class="t">'+esc(q.text.replace(/ _\(.*$/,""))+'</div><div class="meta">'+due+'<span>from '+esc(q["from"])+"'s AI</span></div></div>";
+}
+function hand(h){
+  if(h.text) return '<div class="it"><div class="t">'+esc(h.text)+'</div><div class="meta">'+chips(h.cite)+'</div></div>';
+  return '<div class="it"><div class="t">'+esc(h.title)+'</div><div class="meta"><span class="tag draft">DEPENDENCY</span>'+chips(h.sources)+'</div></div>';
+}
+function done(p){
+  var sent=p.status==="sent";
+  return '<div class="it"><div class="t">'+(sent?'<span class="tag sent">SENT BY AI</span> ':"")+esc(p.title.replace(/^SENT: /,""))+'</div><div class="meta">'+(sent?esc((p.notes||[""])[0])+" ":"")+chips(p.sources)+'</div></div>';
+}
+function supIt(s){
+  return '<div class="it sup-it"><div class="t">'+esc(s.title)+'</div><div class="meta"><span class="tag upd">SUPERSEDED</span> by '+esc(s.by)+(s.fact?': “'+esc(s.fact)+'”':"")+'</div></div>';
+}
+function render(){
+  var S=window.SITE; if(!S) return;
+  var h=window.HEARTBEAT||{};
+  document.getElementById("banner").textContent=(h.banner||"RESUMED")+"";
+  var main=document.getElementById("main"), html="";
+  S.people.forEach(function(p){
+    var sup=(p.superseded||[]).map(supIt).join("");
+    html+='<div class="col" id="col-'+p.id+'"><div class="who">'+esc(p.name)+'<small>'+esc(p.role)+'</small></div>'+
+      sec("owed","Owed",p.owed,LIM.owed,owed)+
+      sec("wait","Waiting on me",p.waiting,LIM.wait,wait)+
+      sec("hand","Handed to me",p.handed,LIM.hand,hand)+
+      '<div class="sec done"><h3><span>Done</span><b>'+p.done.length+'</b></h3>'+sup+
+      p.done.slice().reverse().slice(0,LIM.done).map(done).join("")+more(p.done.length-LIM.done)+'</div></div>';
+  });
+  var st=S.stats;
+  var ob=S.outbox.slice(0,8).map(function(o){
+    var tag=o.kind==="ics"?'<span class="tag upd">.ICS</span> ':o.sent?'<span class="tag sent">SENT</span> ':'<span class="tag draft">DRAFT</span> ';
+    return '<div class="ob '+(o.kind==="ics"?"ics":o.sent?"sent":"")+'">'+tag+esc(o.subject||o.file)+'<div class="f">'+esc(o.to?o.to.slice(0,44)+"  ":"")+esc(o.file.replace("outbox/",""))+'</div></div>';
+  }).join("");
+  var qs=S.questions.slice(0,9).map(function(q){return '<div class="q"><b>'+esc(q.to)+'</b> · '+esc(q.text)+'</div>'}).join("");
+  html+='<div class="rail"><h2>Latest outbox · '+S.outbox.length+' files</h2><div class="box">'+ob+'</div>'+
+    '<h2 style="margin-top:6px">Open questions · '+S.questions.length+'</h2><div class="box">'+qs+'</div>'+
+    '<div class="more" style="margin-top:auto">open '+st.open+' · in progress '+st.in_progress+' · waiting '+st.waiting_owner+' · done '+st.done+' · superseded '+st.superseded+'</div></div>';
+  main.innerHTML=html;
+  S.people.forEach(function(p){ // flash a column whose content changed since last refresh
+    var sig=JSON.stringify([p.owed.length,p.waiting.length,p.handed.length,p.done.length,p.superseded.length]);
+    if(seen[p.id]&&seen[p.id]!==sig){document.getElementById("col-"+p.id).classList.add("flash")}
+    seen[p.id]=sig;
+  });
+  tickAge();
+}
+function tickAge(){
+  var h=window.HEARTBEAT, el=document.getElementById("tick"); if(!h||!h.tick_at){el.textContent="";return}
+  var p=h.tick_at.split(":"), d=new Date(); d.setHours(+p[0],+p[1],+p[2],0);
+  var age=Math.round((Date.now()-d.getTime())/1000); if(age<0) age+=86400;
+  el.textContent="last tick "+h.tick_at+" ("+age+"s ago)"+(h.last_tick?" · +"+h.last_tick.events+" events":"");
+  el.className=age>60?"stale":"";
+  if(age>60) el.textContent+="  ·  NOT RUNNING";
+}
+function reload(){
+  ["handover/site.js","handover/heartbeat.js"].forEach(function(src,i){
+    var s=document.createElement("script"); s.src=src+"?t="+Date.now();
+    s.onload=function(){ if(i===1){ render(); } s.remove(); }; s.onerror=function(){ s.remove(); };
+    document.body.appendChild(s);
+  });
+}
+render();
+setInterval(reload,10000);
+setInterval(tickAge,1000);
+</script>
+</body>
+</html>
