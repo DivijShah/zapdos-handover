@@ -27,3 +27,4 @@
 {"key":"b68f7dc802:email","promise_id":"b68f7dc802","persona":"priya","type":"email","path":"outbox/20261024-1500-priya-reply-lisa-case-study.md","at":"2026-10-24T15:00:00-05:00"}
 {"key":"b3aad8dc79:linear-note-ZAP-110","promise_id":"b3aad8dc79","persona":"weilin","type":"linear-note-ZAP-110","path":null,"at":"2026-10-24T15:00:00-05:00","changes":["ZAP-110.note: \"Waiting on Raj's photos\" -> 'photo received (WA01); Raj proposes 2 m left onto column'"],"cite":["WA01"]}
 {"key":"16c9c02c48:linear-note-ZAP-111","promise_id":"16c9c02c48","persona":"weilin","type":"linear-note-ZAP-111","path":null,"at":"2026-10-24T15:00:00-05:00","changes":["ZAP-111.note: '' -> 'IPs received (E04); VLAN question open'"],"cite":["E04"]}
+{"key":"6a5790396f:email","promise_id":"6a5790396f","persona":"weilin","type":"email","path":"outbox/20261024-1500-weilin-reply-ken-ips-vlan.md","at":"2026-10-24T15:00:00-05:00"}

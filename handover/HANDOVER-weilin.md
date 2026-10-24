@@ -6,7 +6,6 @@ Open: 11 · Done: 2
 ## Questions for you
 - Does the quoted camera match your layout? Optix quote Q-1182: "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront." (E10). You have not seen it (C09). Sam needs to know before the PO (due Tue 27 Oct). _(from weilin's AI; re 8cadc92446)_
 - Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. The reply draft in the outbox commits no time; nothing has been sent. _(from weilin's AI; re 8a5a9fb60f)_
-- [unverified facts removed: number 255.0, number 4.0, number 4.1, number 50, number 55] AI draft for 'Answer Ken: is a VLAN needed?' failed fact check and was NOT written (['number #', 'number #', 'number #', 'number #', 'number #']). Please advise. _(from weilin's AI; re 6a5790396f)_
 - Ken asks: "Do you need a VLAN?" (E04). The pack does not say. What should the reply tell him? The draft in the outbox confirms the IPs and says you will answer; nothing has been sent. _(from weilin's AI; re 6a5790396f)_
 
 ## Heads-up
@@ -57,6 +56,7 @@ Open: 11 · Done: 2
   - artifact: `outbox/20261024-1500-weilin-reply-raj-start-time.md`
 - **Answer Ken: is a VLAN needed?** · due - · waiting_owner · sources: E04
   - Ken asks whether a VLAN is needed; reply owed.
+  - artifact: `outbox/20261024-1500-weilin-reply-ken-ips-vlan.md`
 - **Demo floor-by-floor progress tracking on Crestline call** · due - · open · sources: WA03
   - Farah asks for a floor-by-floor progress tracking demo by the engineer on the call.
 - **Document how deploy alerts are wired** · due - · in_progress · sources: S007, C10, L-ZAP-161

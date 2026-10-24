@@ -7,9 +7,9 @@ Open: 8 · Done: 0
 - What customer price should Northwind (Maria) be quoted for the 12-door dock cameras? The pack only has supplier cost ("Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.", E10), not a sell price. Brief is in the outbox. _(from sam's AI; re a9227252ec)_
 - Approve reimbursing Wei Lin? "Wei Lin paid $640 out of pocket for the Harbor Point site trip. Needs Sam's approval to reimburse." (C10, ZAP-160). Nothing will be paid without your approval; test mode only. _(from sam's AI; re a2d9f52dc3)_
 - Rachel wants 2 customer references by Wed 28 Oct (C06). Only one pilot customer (Bayview) appears in the pack. Who is the second reference, and has each customer given permission? _(from sam's AI; re f3804a88c5)_
-- [unverified facts removed: number 09:00] Where should Jordan go on Monday at #? He asked (E#) and no office address or location exists anywhere in the pack. The reply draft in the outbox says you will confirm; nothing has been sent. _(from sam's AI; re 46192cbd69)_
-- [unverified facts removed: date 24 oct] Send the reply to Maria (draft in outbox, no price in it)? She chased on # Oct and her VP asked for the number (E#). Nothing has been sent. _(from sam's AI; re 75ec07a571)_
 - What ballpark price range should Omar at Ridgeline get? He asked to get budget (E09). The pack has no Ridgeline price. _(from sam's AI; re 908bc52ca9)_
+- Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. The reply draft in the outbox says you will confirm; nothing has been sent. _(from sam's AI; re 46192cbd69)_
+- Send the reply to Maria (draft in outbox, no price in it)? She chased and her VP asked for the number (E15). Nothing has been sent. _(from sam's AI; re 75ec07a571)_
 
 ## Heads-up
 - none
