@@ -9,3 +9,4 @@ __pycache__/
 *.log
 assets/*.mp4
 handover/heartbeat.js
+handover/llm_usage.jsonl

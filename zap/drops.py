@@ -66,8 +66,8 @@ def _validate(raw: str, items: list[dict], tzinfo) -> list[dict]:
 
 
 def _call(model: str, name: str, raw: str) -> list[dict]:
-    r = extract.client().messages.create(
-        model=model, max_tokens=3000, system=SYSTEM, tools=[TOOL], tool_choice={"type": "auto"},
+    r = extract.create(
+        "drop-normalise", model=model, max_tokens=3000, system=SYSTEM, tools=[TOOL], tool_choice={"type": "auto"},
         messages=[{"role": "user", "content": f"File name: {name}\n---\n{raw}"}])
     for b in r.content:
         if b.type == "tool_use":

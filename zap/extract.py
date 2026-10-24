@@ -61,6 +61,9 @@ TOOL = {
 }
 
 _client = None
+USAGE = ROOT / "handover" / "llm_usage.jsonl"
+# first-party list price, $ per million tokens (input, output); prompts <= 100K tokens
+PRICE = {"claude-sonnet-5-5": (2.00, 10.00), "claude-haiku-5-5": (0.10, 0.50)}
 
 
 def client():
@@ -68,6 +71,40 @@ def client():
     if _client is None:
         _client = anthropic.Anthropic(max_retries=5, timeout=90)
     return _client
+
+
+def create(purpose: str, **kw):
+    """messages.create + one usage line (real SDK token counts) in handover/llm_usage.jsonl (gitignored)."""
+    r = client().messages.create(**kw)
+    u = r.usage
+    line = json.dumps({"at": datetime.now().isoformat(timespec="seconds"), "model": kw["model"], "purpose": purpose,
+                       "in": u.input_tokens, "out": u.output_tokens,
+                       "cache_read": getattr(u, "cache_read_input_tokens", 0) or 0,
+                       "cache_write": getattr(u, "cache_creation_input_tokens", 0) or 0}) + "\n"
+    USAGE.parent.mkdir(exist_ok=True)
+    fd = os.open(USAGE, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+    try:
+        os.write(fd, line.encode())  # one small O_APPEND write: atomic across the extract threads
+    finally:
+        os.close(fd)
+    return r
+
+
+def usage_totals() -> dict:
+    calls = tin = tout = 0
+    cost = 0.0
+    if USAGE.exists():
+        for ln in USAGE.read_text().splitlines():
+            try:
+                u = json.loads(ln)
+            except json.JSONDecodeError:
+                continue
+            pi, po = PRICE.get(u["model"], (0, 0))
+            calls += 1
+            tin += u["in"] + u.get("cache_read", 0) + u.get("cache_write", 0)
+            tout += u["out"]
+            cost += (u["in"] * pi + u["out"] * po) / 1e6  # no caching is used, so cache fields are 0
+    return {"calls": calls, "in": tin, "out": tout, "cost": round(cost, 4)}
 
 
 def _norm(s: str) -> str:
@@ -95,8 +132,8 @@ def revalidate(src: Source, mentions: list[dict]) -> list[dict]:
 def _call(model: str, src: Source, now: datetime) -> list[dict]:
     wd = datetime.fromisoformat(src.at).strftime("%A %d %b %Y")
     user = f"Source id {src.id} ({src.kind}); source timestamp {src.at} ({wd}); today is {now.strftime('%A %d %b %Y')}.\n---\n{src.text}"
-    r = client().messages.create(
-        model=model, max_tokens=1500, system=SYSTEM, tools=[TOOL],
+    r = create(
+        "extract", model=model, max_tokens=1500, system=SYSTEM, tools=[TOOL],
         tool_choice={"type": "auto"},
         messages=[{"role": "user", "content": user}])
     for b in r.content:

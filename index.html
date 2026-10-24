@@ -4,42 +4,59 @@
 <meta charset="utf-8">
 <title>The 24/7 Handover</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Read-only. Open from file://. Data: handover/site.js + handover/heartbeat.js, written by `python run.py` every tick. -->
+<!-- Read-only. Open from file://. Data: handover/site.js + handover/heartbeat.js, written by `python run.py` every tick. Refreshes every 3 s. -->
 <style>
-:root{--bg:#0b0e14;--panel:#121722;--line:#222b3a;--fg:#e8edf5;--dim:#8a96ab;--owed:#f5c451;--wait:#ff7ab8;--hand:#6cc4ff;--done:#5fd38d;--sup:#b79cff;--bad:#ff6b6b}
+:root{--bg:#0b0e14;--panel:#121722;--line:#222b3a;--fg:#eef2f8;--dim:#98a4b8;--owed:#f5c451;--wait:#ff7ab8;--hand:#6cc4ff;--done:#5fd38d;--sup:#b79cff;--bad:#ff6b6b}
 *{box-sizing:border-box;margin:0}
-html,body{height:100%;background:var(--bg);color:var(--fg);font:15px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow:hidden}
-body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:10px;padding:12px 16px}
-header{display:flex;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:8px}
-h1{font-size:22px;letter-spacing:.2px;white-space:nowrap}
-#banner{min-width:0;font:600 16px ui-monospace,SFMono-Regular,Menlo,monospace;color:#7ee0ff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#tick{font:14px ui-monospace,Menlo,monospace;color:var(--dim);white-space:nowrap}
-#tick.stale{color:var(--bad);font-weight:700}
-main{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 350px;gap:12px;min-height:0}
-.col,.rail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:6px}
-.who{font-size:20px;font-weight:700}.who small{font-weight:400;color:var(--dim);font-size:13px;margin-left:6px}
-.sec{min-height:0;display:flex;flex-direction:column;gap:3px;overflow:hidden}
-.sec h3{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:5px}
-.sec h3 b{font-weight:700}
+html,body{height:100%;background:var(--bg);color:var(--fg);font:18px/1.28 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding:10px 14px}
+header{display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h1{font-size:28px;letter-spacing:.2px;white-space:nowrap}
+#banner{min-width:0;font:600 17px ui-monospace,SFMono-Regular,Menlo,monospace;color:#7ee0ff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tick{font:600 18px ui-monospace,Menlo,monospace;color:var(--dim);white-space:nowrap}
+#tick.stale{color:var(--bad)}
+nav{display:flex;gap:6px}
+nav button{font-weight:700;font-size:18px;font-family:inherit;color:var(--dim);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px 14px;cursor:pointer}
+nav button.on{color:var(--bg);background:var(--fg)}
+main{min-height:0}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 350px;gap:10px;height:100%}
+.col,.rail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:4px}
+.who{font-size:28px;font-weight:700;line-height:1.1}.who small{font-weight:400;color:var(--dim);font-size:18px;margin-left:8px}
+.sec{min-height:0;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.sec h3{font-size:18px;letter-spacing:1.2px;text-transform:uppercase;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:4px}
 .owed h3{color:var(--owed)}.wait h3{color:var(--wait)}.hand h3{color:var(--hand)}.done h3{color:var(--done)}
-.it{font-size:14.5px;padding:3px 0 3px 8px;border-left:3px solid var(--line);overflow:hidden}
+.it{padding:2px 0 2px 8px;border-left:4px solid var(--line);overflow:hidden}
 .owed .it{border-color:var(--owed)}.wait .it{border-color:var(--wait)}.hand .it{border-color:var(--hand)}.done .it{border-color:var(--done)}
 .it .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.wait .it .t{-webkit-line-clamp:3}
-.meta{font-size:11.5px;color:var(--dim);margin-top:1px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
-.c{font:11px ui-monospace,Menlo,monospace;background:#1b2332;border-radius:4px;padding:0 5px;color:#b8c4d8}
-.tag{font-size:10.5px;font-weight:700;border-radius:4px;padding:0 5px;color:#0b0e14}
-.tag.upd{background:var(--sup)}.tag.over{background:var(--bad)}.tag.sent{background:var(--done)}.tag.due{background:var(--owed)}.tag.draft{background:#556178;color:#fff}.tag.prog{background:#5ac8e8}
+.wait .it .t,.hand .it .t{-webkit-line-clamp:3}
+.meta{font-size:15px;color:var(--dim);margin-top:1px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;max-height:44px;overflow:hidden}
+.c{font:14px ui-monospace,Menlo,monospace;background:#1b2332;border-radius:4px;padding:0 5px;color:#c6d1e4}
+.tag{font-size:13px;font-weight:800;border-radius:4px;padding:0 6px;color:#0b0e14;white-space:nowrap}
+.tag.upd{background:var(--sup)}.tag.over{background:var(--bad)}.tag.sent{background:var(--done)}.tag.due{background:var(--owed)}.tag.draft{background:#7d8aa3}.tag.prog{background:#5ac8e8}.tag.bad{background:var(--bad)}
 .sup-it{border-color:var(--sup)!important;color:var(--sup)}
 .sup-it .t{text-decoration:line-through;text-decoration-color:#7a6aa8}
-.more{font-size:11.5px;color:var(--dim);padding-left:8px}
-.rail h2{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
-.rail .box{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:5px}
-.ob{font-size:13px;border-left:3px solid #556178;padding-left:7px}.ob.sent{border-color:var(--done)}.ob.ics,.ob.upd{border-color:var(--sup)}
-.ob .f{font:11px ui-monospace,Menlo,monospace;color:var(--dim);word-break:break-all}
-.q{font-size:12.5px;border-left:3px solid var(--wait);padding-left:7px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
-.q b{color:var(--wait)}
-.flash{animation:fl 2.5s ease-out}@keyframes fl{from{background:#2a2245}to{background:transparent}}
+.more{font-size:15px;color:var(--dim);padding-left:8px}
+.rail h2{font-size:18px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim)}
+.rail .box{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:4px}
+.ob{border-left:4px solid #7d8aa3;padding-left:7px}.ob.sent{border-color:var(--done)}.ob.ics{border-color:var(--sup)}
+.ob .tt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ob .f{font:13px ui-monospace,Menlo,monospace;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.caught{border-left:4px solid var(--bad);padding-left:7px}
+.caught .tt{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.zero{color:var(--done);font-weight:700;padding-left:4px}
+.flash{animation:fl 2.5s ease-out}@keyframes fl{from{background:#2a2245}to{background:var(--panel)}}
+footer{font:600 17px ui-monospace,Menlo,monospace;color:var(--dim);border-top:1px solid var(--line);padding-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* audit tab */
+.audit{height:100%;display:flex;flex-direction:column;gap:8px;min-height:0}
+.big{font-size:28px;font-weight:800}.big b{color:var(--done)}.big b.bad{color:var(--bad)}.big small{font-size:18px;font-weight:400;color:var(--dim);margin-left:10px}
+.agrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;flex:1;min-height:0}
+.acol{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;overflow:auto;min-height:0}
+.acol h2{font-size:28px}.acol h2 small{font-size:18px;color:var(--dim);font-weight:400;margin-left:6px}
+.afile{margin-top:8px;font:14px ui-monospace,Menlo,monospace;color:var(--dim);word-break:break-all}
+.afile b{color:var(--fg)}
+.fact{font-size:18px;margin-top:4px;padding-left:8px;border-left:4px solid var(--done)}
+.fact.un{border-color:var(--bad)}.fact.unc{border-color:var(--owed)}
+.fact .q{display:block;font-size:15px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -47,17 +64,19 @@ main{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 350px;gap:12px;m
   <h1>The 24/7 Handover</h1>
   <div id="banner">waiting for the first tick…</div>
   <div id="tick"></div>
+  <nav><button id="tab-board" onclick="tab('board')">Board</button><button id="tab-audit" onclick="tab('audit')">Audit</button></nav>
 </header>
 <main id="main"></main>
+<footer id="footer"></footer>
 <script src="handover/site.js"></script>
 <script src="handover/heartbeat.js"></script>
 <script>
 "use strict";
-var LIM = {owed: 4, wait: 3, hand: 2, done: 4};
-var seen = {};
+var LIM = {owed: 3, wait: 2, hand: 1, done: 3};
+var seen = {}, TAB = (location.hash || "#board").slice(1);
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function chips(a){return (a||[]).map(function(x){return '<span class="c">'+esc(x)+'</span>'}).join("")}
-function more(n){return n>0?'<div class="more">+'+n+' more in handover/HANDOVER-*.md</div>':""}
+function chips(a,n){return (a||[]).slice(0,n||5).map(function(x){return '<span class="c">'+esc(x)+'</span>'}).join("")}
+function more(n){return n>0?'<div class="more">+'+n+' more in HANDOVER-*.md</div>':""}
 function sec(cls,label,items,lim,render){
   var shown=items.slice(0,lim).map(render).join("");
   return '<div class="sec '+cls+'"><h3><span>'+label+'</span><b>'+items.length+'</b></h3>'+(shown||'<div class="more">none</div>')+more(items.length-lim)+'</div>';
@@ -65,62 +84,96 @@ function sec(cls,label,items,lim,render){
 function owed(p){
   var t=(p.updated?'<span class="tag upd">UPDATED</span> ':'')+(p.overdue?'<span class="tag over">OVERDUE</span> ':'')+(p.status==="in_progress"?'<span class="tag prog">IN PROGRESS</span> ':'');
   var due=p.due?'<span class="tag due">due '+esc(p.due)+'</span>'+(p.due_src?'<span class="c">'+esc(p.due_src)+'</span>':''):'';
-  var fact=p.updated&&p.new_fact?'<div class="meta">“'+esc(p.new_fact)+'”</div>':"";
-  return '<div class="it"><div class="t">'+t+esc(p.title)+'</div>'+fact+'<div class="meta">'+due+chips(p.sources)+'</div></div>';
+  return '<div class="it"><div class="t">'+t+esc(p.title)+'</div><div class="meta">'+due+chips(p.sources,4)+'</div></div>';
 }
 function wait(q){
   var due=q.due?'<span class="tag due">due '+esc(q.due)+'</span>'+(q.due_src?'<span class="c">'+esc(q.due_src)+'</span>':''):'';
   return '<div class="it"><div class="t">'+esc(q.text.replace(/ _\(.*$/,""))+'</div><div class="meta">'+due+'<span>from '+esc(q["from"])+"'s AI</span></div></div>";
 }
 function hand(h){
-  if(h.text) return '<div class="it"><div class="t">'+esc(h.text)+'</div><div class="meta">'+chips(h.cite)+'</div></div>';
-  return '<div class="it"><div class="t">'+esc(h.title)+'</div><div class="meta"><span class="tag draft">DEPENDENCY</span>'+chips(h.sources)+'</div></div>';
+  if(h.text) return '<div class="it"><div class="t">'+esc(h.text)+'</div><div class="meta">'+chips(h.cite,4)+'</div></div>';
+  return '<div class="it"><div class="t">'+esc(h.title)+'</div><div class="meta"><span class="tag draft">DEPENDENCY</span>'+chips(h.sources,4)+'</div></div>';
 }
 function done(p){
   var sent=p.status==="sent";
-  return '<div class="it"><div class="t">'+(sent?'<span class="tag sent">SENT BY AI</span> ':"")+esc(p.title.replace(/^SENT: /,""))+'</div><div class="meta">'+(sent?esc((p.notes||[""])[0])+" ":"")+chips(p.sources)+'</div></div>';
+  return '<div class="it"><div class="t">'+(sent?'<span class="tag sent">SENT BY AI</span> ':"")+esc(p.title.replace(/^SENT: /,""))+'</div><div class="meta">'+(sent?esc(((p.notes||[""])[0]||"").split("  ·  ")[0])+" ":"")+chips(p.sources,4)+'</div></div>';
 }
 function supIt(s){
   return '<div class="it sup-it"><div class="t">'+esc(s.title)+'</div><div class="meta"><span class="tag upd">SUPERSEDED</span> by '+esc(s.by)+(s.fact?': “'+esc(s.fact)+'”':"")+'</div></div>';
 }
-function render(){
-  var S=window.SITE; if(!S) return;
-  var h=window.HEARTBEAT||{};
-  document.getElementById("banner").textContent=(h.banner||"RESUMED")+"";
-  var main=document.getElementById("main"), html="";
+function board(S){
+  var html='<div class="board">';
   S.people.forEach(function(p){
     var sup=(p.superseded||[]).map(supIt).join("");
-    html+='<div class="col" id="col-'+p.id+'"><div class="who">'+esc(p.name)+'<small>'+esc(p.role)+'</small></div>'+
+    html+='<div class="col" id="col-'+p.id+'"><div class="who">'+esc(p.name.split(" ").slice(0,-1).join(" "))+'<small>'+esc(p.role)+'</small></div>'+
       sec("owed","Owed",p.owed,LIM.owed,owed)+
       sec("wait","Waiting on me",p.waiting,LIM.wait,wait)+
       sec("hand","Handed to me",p.handed,LIM.hand,hand)+
       '<div class="sec done"><h3><span>Done</span><b>'+p.done.length+'</b></h3>'+sup+
       p.done.slice().reverse().slice(0,LIM.done).map(done).join("")+more(p.done.length-LIM.done)+'</div></div>';
   });
-  var st=S.stats;
-  var ob=S.outbox.slice(0,8).map(function(o){
+  var ob=S.outbox.slice(0,5).map(function(o){
     var tag=o.kind==="ics"?'<span class="tag upd">.ICS</span> ':o.sent?'<span class="tag sent">SENT</span> ':'<span class="tag draft">DRAFT</span> ';
-    return '<div class="ob '+(o.kind==="ics"?"ics":o.sent?"sent":"")+'">'+tag+esc(o.subject||o.file)+'<div class="f">'+esc(o.to?o.to.slice(0,44)+"  ":"")+esc(o.file.replace("outbox/",""))+'</div></div>';
+    return '<div class="ob '+(o.kind==="ics"?"ics":o.sent?"sent":"")+'"><div class="tt">'+tag+esc(o.subject||o.file)+'</div><div class="f">'+esc(o.file.replace("outbox/",""))+'</div></div>';
   }).join("");
-  var qs=S.questions.slice(0,9).map(function(q){return '<div class="q"><b>'+esc(q.to)+'</b> · '+esc(q.text)+'</div>'}).join("");
-  html+='<div class="rail"><h2>Latest outbox · '+S.outbox.length+' files</h2><div class="box">'+ob+'</div>'+
-    '<h2 style="margin-top:6px">Open questions · '+S.questions.length+'</h2><div class="box">'+qs+'</div>'+
-    '<div class="more" style="margin-top:auto">open '+st.open+' · in progress '+st.in_progress+' · waiting '+st.waiting_owner+' · done '+st.done+' · superseded '+st.superseded+'</div></div>';
-  main.innerHTML=html;
-  S.people.forEach(function(p){ // flash a column whose content changed since last refresh
+  var rj=(S.rejected||[]).slice(0,3).map(function(r){
+    return '<div class="caught"><div class="tt"><span class="tag bad">'+esc(r.persona.toUpperCase())+'</span> '+esc(r.reason)+'</div><div class="meta">'+chips(r.offending,4)+'</div></div>';
+  }).join("");
+  html+='<div class="rail"><h2>Latest outbox · '+S.outbox.length+'</h2><div class="box">'+ob+'</div>'+
+    '<h2 style="margin-top:6px">Caught itself · '+(S.rejected_total||0)+'</h2><div class="box">'+(rj||'<div class="zero">0 — nothing rejected yet</div>')+'</div></div></div>';
+  return html;
+}
+function auditView(S){
+  var A=S.audit||{groups:[],checked:0,unsourced:0,uncited:0};
+  var html='<div class="audit"><div class="big"><b'+(A.unsourced?' class="bad"':'')+'>'+A.checked+' facts checked · '+A.unsourced+' unsourced</b>'+
+    (A.uncited?'<small>'+A.uncited+' found in the pack but not in a cited source</small>':'')+
+    '<small>every number, date, $ and name in outbox/, outbox/sent/ and Linear changes → source id + verbatim line. CLI: python run.py --audit</small></div><div class="agrid">';
+  A.groups.forEach(function(g){
+    var n=g.files.reduce(function(a,f){return a+f.facts.length},0);
+    html+='<div class="acol"><h2>'+esc(g.name.split(" ")[0])+'<small>'+n+' facts</small></h2>';
+    g.files.forEach(function(f){
+      var key=f.facts.filter(function(x){return /[\d$]/.test(x.fact)||!x.src||x.uncited}).slice(0,4);
+      var rest=f.facts.length-key.length;
+      html+='<div class="afile"><b>'+esc(f.file.replace("outbox/","").replace(/^sent\//,"sent/").replace(/^\d{8}-\d{4}-/,"").replace(/^sent\/\d{8}-\d{4}-/,"sent/"))+'</b> · '+f.facts.length+' facts</div>';
+      key.forEach(function(x){
+        html+='<div class="fact'+(x.src?(x.uncited?' unc':''):' un')+'">'+esc(x.fact)+' <span class="c">'+esc(x.src||"NOT FOUND")+'</span><span class="q">'+esc(x.line||"")+'</span></div>';
+      });
+      if(rest>0) html+='<div class="more">+'+rest+' more sourced</div>';
+    });
+    html+='</div>';
+  });
+  return html+'</div></div>';
+}
+function render(){
+  var S=window.SITE; if(!S) return;
+  var h=window.HEARTBEAT||{};
+  document.getElementById("banner").textContent=h.banner||"RESUMED";
+  var main=document.getElementById("main"), keep=[];
+  [].forEach.call(main.querySelectorAll(".acol"),function(e){keep.push(e.scrollTop)});
+  main.innerHTML=TAB==="audit"?auditView(S):board(S);
+  [].forEach.call(main.querySelectorAll(".acol"),function(e,i){e.scrollTop=keep[i]||0});
+  ["board","audit"].forEach(function(t){document.getElementById("tab-"+t).className=t===TAB?"on":""});
+  S.people.forEach(function(p){
     var sig=JSON.stringify([p.owed.length,p.waiting.length,p.handed.length,p.done.length,p.superseded.length]);
-    if(seen[p.id]&&seen[p.id]!==sig){document.getElementById("col-"+p.id).classList.add("flash")}
+    var el=document.getElementById("col-"+p.id);
+    if(el&&seen[p.id]&&seen[p.id]!==sig) el.classList.add("flash");
     seen[p.id]=sig;
   });
   tickAge();
 }
+function tab(t){TAB=t;location.hash=t;render()}
 function tickAge(){
-  var h=window.HEARTBEAT, el=document.getElementById("tick"); if(!h||!h.tick_at){el.textContent="";return}
+  var h=window.HEARTBEAT, el=document.getElementById("tick"), S=window.SITE;
+  if(!h||!h.tick_at){el.textContent="";return}
   var p=h.tick_at.split(":"), d=new Date(); d.setHours(+p[0],+p[1],+p[2],0);
   var age=Math.round((Date.now()-d.getTime())/1000); if(age<0) age+=86400;
-  el.textContent="last tick "+h.tick_at+" ("+age+"s ago)"+(h.last_tick?" · +"+h.last_tick.events+" events":"");
-  el.className=age>60?"stale":"";
-  if(age>60) el.textContent+="  ·  NOT RUNNING";
+  el.textContent="tick "+h.tick_at+" ("+age+"s ago)"; el.className=age>45?"stale":"";
+  if(age>45) el.textContent+=" · NOT RUNNING";
+  if(S&&S.footer){
+    var f=S.footer,l=h.llm||{calls:0,tokens:0,cost:0},up=h.boot?Math.max(0,Math.round(Date.now()/1000-h.boot)):0;
+    document.getElementById("footer").textContent=f.sources+" sources · "+f.promises+" promises · "+f.sent+" sent · "+f.asked+" asked · LLM "+l.calls+" calls "+
+      l.tokens.toLocaleString()+" tokens $"+l.cost.toFixed(2)+" · up "+Math.floor(up/3600)+"h"+("0"+Math.floor(up%3600/60)).slice(-2)+"m"+("0"+(up%60)).slice(-2)+"s";
+  }
 }
 function reload(){
   ["handover/site.js","handover/heartbeat.js"].forEach(function(src,i){
@@ -130,7 +183,7 @@ function reload(){
   });
 }
 render();
-setInterval(reload,10000);
+setInterval(reload,3000);
 setInterval(tickAge,1000);
 </script>
 </body>

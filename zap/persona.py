@@ -46,28 +46,30 @@ class Persona:
     def ask(self, p, to, qkey, text, cite):
         probs = acts.verify_text(text, self.srcmap, cite)
         if probs:
+            ledger.reject(self.id, p["id"], f"question text had unsourced facts; they were stripped (question '{qkey}' to {to})", probs, self.at, text)
             text = f"[unverified facts removed: {', '.join(probs)}] " + re.sub(r"\$?\d[\d,]*(?:[.:]\d+)?", "#", text)
         return ledger.add_question(self.st, p["id"], to, self.id, qkey, text, self.at)
 
     def inform(self, p, to, key, text, cite):
         probs = acts.verify_text(text, self.srcmap, cite)
         if probs:
+            ledger.reject(self.id, p["id"], f"heads-up '{key}' to {to} not posted: unsourced facts", probs, self.at, text)
             raise Rejected(f"inform {key}: {probs}")
         self.do(p, f"inform-{key}-{to}", lambda: None, to=to, text=text, cite=cite)
 
     def sources_block(self, ids):
         return "\n\n".join(f"[{i}]\n{self.srcmap[i].text}" for i in ids)
 
-    def draft(self, task: str, ids: list[str], no_money=False) -> tuple[str, str]:
-        system = (f"You are the AI assistant of {self.who['name']} ({self.who['role']}) at Zapdemo Labs. Write a short plain-text "
+    def draft(self, task: str, ids: list[str], no_money=False, p=None) -> tuple[str, str]:
+        system = (f"You are the AI assistant of {self.who['name']} ({self.who['role']}) at Zapdemo. Write a short plain-text "
                   "email on their behalf. Rules: say in the first sentence that you are their AI assistant; use ONLY facts from "
                   "SOURCES; do not state any number, date, time, price, name or address that is not written in SOURCES; never "
                   "promise a price or delivery date; no markdown; at most 110 words; sign off with the assistant's role only. Answer by calling the record_draft tool.")
         feedback, probs = "", ["no valid record_draft call (subject and body required)"]
         for _ in range(3):
             msg = f"TASK: {task}\n{feedback}\nSOURCES:\n{self.sources_block(ids)}"
-            r = extract.client().messages.create(
-                model=extract.MODEL, max_tokens=700, system=system, tools=[DRAFT_TOOL],
+            r = extract.create(
+                "draft", model=extract.MODEL, max_tokens=700, system=system, tools=[DRAFT_TOOL],
                 tool_choice={"type": "auto"}, messages=[{"role": "user", "content": msg}])
             d = next((b.input for b in r.content if b.type == "tool_use"), None)
             if d is None or not d.get("subject") or not d.get("body"):
@@ -77,6 +79,8 @@ class Persona:
             probs = acts.verify_text(d["subject"] + "\n" + d["body"], self.srcmap, ids, no_money)
             if not probs:
                 return d["subject"].strip(), d["body"].strip()
+            ledger.reject(self.id, p and p["id"], f"draft rejected by verify (attempt {_ + 1} of 3)", probs, self.at,
+                          d["subject"] + " / " + d["body"])
             feedback = f"Your previous draft was rejected for unsupported facts: {probs}. Remove them."
         raise Rejected(probs)
 
@@ -84,7 +88,7 @@ class Persona:
         """Draft+verify+write outbox email. On rejection files a question to the owner instead. True if written."""
         try:
             def go():
-                subj, body = self.draft(task, ids, no_money)
+                subj, body = self.draft(task, ids, no_money, p)
                 return acts.email(self.now, self.who, slug_, acts.addr_for(self.srcmap, to_frag) or to_label, subj, body, p, ids)
             self.do(p, atype, go)
             return True
@@ -96,6 +100,7 @@ class Persona:
     def doc(self, p, atype, slug_, title, md, ids):
         probs = acts.verify_text(md, self.srcmap, ids)
         if probs:
+            ledger.reject(self.id, p["id"], f"document '{atype}' not written: unsourced facts", probs, self.at, md)
             raise Rejected(f"{atype}: {probs}")
         self.do(p, atype, lambda: acts.document(self.now, self.who, slug_, title, md, p, ids))
 
@@ -118,6 +123,8 @@ class Persona:
         probs = acts.commitment_problems(subj + "\n" + body, inbound, self.srcmap) + \
             acts.verify_text(subj + "\n" + body, self.srcmap, cite) + (["no recipient address"] if "UNKNOWN" in to else [])
         if probs:
+            ledger.reject(self.id, p["id"], "draft held back from auto-send: it would commit the company or failed the fact check; "
+                          "owner asked instead", probs, self.at, subj + " / " + body)
             self.ask(p, self.id, "send-approve", f"Send the draft '{subj}'? It was NOT sent automatically: {', '.join(probs)}. "
                      f"Draft is in the outbox ({rel}).", cite)
             return False
@@ -211,7 +218,7 @@ class Persona:
         evs = {i: s[i].meta["event"] for i in p["sources"] if i in s and s[i].kind == "calendar"}
         a, b = (evs[k] for k in sorted(evs))
         fmt = lambda e: f"{e['title']} {e['start'][:10]} {e['start'][11:16]}-{e['end'][11:16]}"
-        ids = [i for i in ["C03", "E05", *sorted(evs)] if i in s]
+        ids = [i for i in ["C03", "E05", "C10", *sorted(evs)] if i in s]
         ok = self.email(p, "email", "reschedule-crestline-call", "farah.aziz",
                         "Draft a polite note to Farah: our engineer is booked on-site on Tue 3 Nov 14:00 to 16:30 SGT, which overlaps "
                         "the 15:00 call. Ask whether she can move the call to a time after 16:30 SGT that day, or another day that "
@@ -257,6 +264,7 @@ class Persona:
                         "- Alex is on two weeks' leave (C10); Alex is not in team.json."])
         probs = acts.verify_text(md, s, ids)
         if probs:
+            ledger.reject(self.id, p["id"], "deploy-alerts document not written: unsourced facts", probs, self.at, md)
             raise Rejected(probs)
         self.do(p, "doc", lambda: acts.doc_flat("deploy-alerts-known-facts.md",
                                                 "# Deploy alerts: known facts\n\n" + md + "\n\nSources: E11, E12, C10. "
@@ -432,6 +440,7 @@ def sync_linear(st: dict, at: str, srcmap: dict | None = None) -> int:
         if not p or f"{p['id']}:linear-note-{issue}" in keys:
             continue
         if srcmap and (probs := acts.verify_text(note, srcmap, cite)):
+            ledger.reject(p["owner"], p["id"], f"Linear note on {issue} not written: unsourced facts", probs, at, note)
             print(f"linear note {issue} rejected: {probs}", file=sys.stderr)
             continue
         ch = acts.linear_update(issue, note=note)
@@ -457,6 +466,7 @@ def handover_post(st: dict, now: datetime, srcmap: dict) -> bool:
     ids = ["C01", "L-ZAP-101", "E15"]
     probs = acts.verify_text(text, srcmap, ids)
     if probs:
+        ledger.reject("sam", by["northwind.price"]["id"], "Slack handover post not posted: unsourced facts", probs, now.isoformat(), text)
         print(f"handover_post rejected: {probs}", file=sys.stderr)
         return False
     if acts.slack_post("#sales", "ai-sam", now.isoformat(), text, "northwind:slack_handover"):

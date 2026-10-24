@@ -9,6 +9,7 @@ from .route import SLOTS, promise_id, route, slot_id, slug
 ROOT = Path(__file__).resolve().parent.parent
 H = ROOT / "handover"
 PROMISES, ACTIONS, QUESTIONS = H / "promises.jsonl", H / "actions.jsonl", H / "questions.jsonl"
+REJECTED = H / "rejected.jsonl"
 
 
 def append(path: Path, rec: dict):
@@ -260,3 +261,14 @@ def ensure_slot(st: dict, slot: str, src_ids: list[str], at: str, note: str) -> 
                        counterparty=s["counterparty"], owner=owner, due=None, due_at=None, status="open",
                        sources=list(src_ids), created_from="dependency", notes=[note], flags=["dependency"]))
     return pid
+
+
+def reject(persona: str, pid: str | None, reason: str, offending: list[str], at: str, text: str = "") -> bool:
+    """Log something the AI caught itself doing: a draft verify rejected, or a question that replaced a guess.
+    Once per distinct (persona, promise, reason, offending, text). Never invented: only called where a check actually failed."""
+    key = hashlib.sha1("|".join([persona, pid or "", reason, ",".join(offending), text[:300]]).encode()).hexdigest()[:12]
+    if any(r.get("key") == key for r in read_jsonl(REJECTED)):
+        return False
+    append(REJECTED, dict(key=key, at=at, persona=persona, promise_id=pid, reason=reason, offending=list(offending),
+                          excerpt=" ".join(text.split())[:200]))
+    return True

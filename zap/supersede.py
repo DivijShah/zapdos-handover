@@ -36,7 +36,7 @@ def judge(src, p: dict, m: dict, srcmap: dict) -> dict:
     old = "\n\n".join(f"[{i}] (dated {day(srcmap[i].at)})\n{srcmap[i].text[:1200]}" for i in p["sources"][:4] if i in srcmap)
     user = (f"EXISTING PROMISE: {p['deliverable']} (due {p['due'] or 'none'}; notes: {'; '.join(p['notes']) or 'none'})\n"
             f"ITS SOURCES:\n{old}\n\nNEW SOURCE [{src.id}] (dated {day(src.at)}):\n{src.text}")
-    r = extract.client().messages.create(model=extract.MODEL, max_tokens=500, system=SYSTEM, tools=[TOOL],
+    r = extract.create("supersede-judge", model=extract.MODEL, max_tokens=500, system=SYSTEM, tools=[TOOL],
                                          tool_choice={"type": "auto"}, messages=[{"role": "user", "content": user}])
     v = next((b.input for b in r.content if b.type == "tool_use"), None)
     if v is None:

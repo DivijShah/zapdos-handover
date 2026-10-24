@@ -5,7 +5,7 @@ import os
 import time
 from datetime import datetime
 
-from . import acts, ledger
+from . import acts, audit, extract, ledger
 from .render import LIVE, _due_label, _overdue, _sorted
 from .route import team
 
@@ -41,7 +41,16 @@ def _outbox() -> list[dict]:
     return out
 
 
-def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict | None = None) -> bool:
+def footer_text(st: dict, n_sources: int, boot: float | None) -> str:
+    u = extract.usage_totals()
+    sent = sum(a["type"] == "send" for a in ledger.read_jsonl(ledger.ACTIONS))
+    up = int(time.time() - boot) if boot else 0
+    return (f"{n_sources} sources · {len(st['promises'])} promises · {sent} sent · {len(ledger.questions())} asked · "
+            f"LLM {u['calls']} calls {u['in'] + u['out']:,} tokens ${u['cost']:.2f} · up {up // 3600}h{up % 3600 // 60:02d}m{up % 60:02d}s")
+
+
+def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict | None = None, srcmap: dict | None = None,
+           boot: float | None = None) -> bool:
     qs = ledger.questions()
     acts_ = ledger.read_jsonl(ledger.ACTIONS)
     s = ledger.stats(st)
@@ -73,11 +82,18 @@ def export(st: dict, now: datetime, banner: str | None = None, last_tick: dict |
                for p in mine if p["status"] == "superseded"]
         people.append({"id": me, "name": who["name"], "role": who["role"], "owed": owed, "waiting": waiting,
                        "handed": handed, "done": done, "superseded": sup, "asked": len(asked)})
-    site = {"stats": {k: v for k, v in s.items() if k != "last_action"},
+    au = audit.run(srcmap, st) if srcmap else {"groups": [], "checked": 0, "unsourced": 0, "uncited": 0}
+    rej = ledger.read_jsonl(ledger.REJECTED)
+    sent_n = sum(a["type"] == "send" for a in acts_)
+    site = {"audit": au, "rejected": rej[-12:][::-1], "rejected_total": len(rej),
+            "footer": {"sources": len(srcmap or {}), "promises": len(st["promises"]), "sent": sent_n, "asked": len(qs)},
+            "stats": {k: v for k, v in s.items() if k != "last_action"},
             "last_action": s["last_action"] and {k: s["last_action"].get(k) for k in ("type", "persona", "at", "path")},
             "clock": now.isoformat(), "people": people, "outbox": _outbox()[:24],
             "questions": [{"to": q["to"], "from": q["from"], "text": q["question"]} for q in qs if not q.get("answered")]}
     ch = _w(ledger.H / "site.js", "window.SITE = " + json.dumps(site, ensure_ascii=False, indent=1) + ";\n")
-    hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick}
+    u = extract.usage_totals()
+    hb = {"tick_at": time.strftime("%H:%M:%S"), "banner": banner, "last_tick": last_tick, "boot": boot,
+          "llm": {"calls": u["calls"], "tokens": u["in"] + u["out"], "cost": u["cost"]}}
     _w(ledger.H / "heartbeat.js", "window.HEARTBEAT = " + json.dumps(hb, ensure_ascii=False) + ";\n")
     return ch
