@@ -5,9 +5,12 @@
   {
    "slot": "optix.po",
    "state": "open",
-   "due": "2026-10-27",
+   "kind": "payment",
+   "counterparty": "Optix",
+   "deliverable": "Purchase order for 12 OX-4K cameras (quote Q-1182) with 50% upfront payment",
+   "due": null,
    "evidence": "Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
-   "note": "Optix needs a PO by Tue 27 Oct to hold stock for quote Q-1182; 50% upfront.",
+   "note": "Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment required.",
    "ev_ok": true
   }
  ]

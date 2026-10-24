@@ -1,7 +1,7 @@
 # Handover: Wei Lin Tan (weilin)
 _AI shift note, written by the Zapdemo AI for Wei Lin Tan. Clock: Sun 25 Oct 2026 04:00 +08._
 
-Open: 10 · Done: 2
+Open: 11 · Done: 2
 
 ## Open
 - **Bayview weekly Friday report** **OVERDUE** · due Fri 23 Oct · open · sources: C05, E07, CAL05, L-ZAP-142
@@ -17,9 +17,6 @@ Open: 10 · Done: 2
   - Priya needs a 30-second night-shift clip from Wei Lin for the Monday LinkedIn post.
   - Priya asks Wei Lin for a 30s Bayview night-shift clip for Monday's post; no firm time given.
   - 30s night-shift clip for Monday post is Todo, unassigned, due 2026-10-26.
-- **Answer Raj: start 13:30 instead of 14:00?** · due Tue 27 Oct · open · sources: C02, WA02
-  - Raj asked whether the install can start at 13:30 instead of 14:00.
-  - Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet.
 - **Harbor Point: relocate cam 3 (rack in bay C)** · due Mon 02 Nov · open · sources: C02, WA01, L-ZAP-110
   - A new storage rack blocks camera 3; Wei Lin to propose a new spot.
   - Raj asks whether camera 3 can move 2m left because a new rack blocks its spot; unanswered in this source.
@@ -27,11 +24,16 @@ Open: 10 · Done: 2
 - **Harbor Point install: 6 cams, paint shop** · due Tue 03 Nov · open · sources: C02, S001
   - On-site install of 6 cameras scheduled 3 Nov 14:00-16:30; not yet physically done.
   - Install is scheduled for Tue 3 Nov 14:00-16:30 SGT; not yet physically done.
+- **Confirm Optix OX-4K matches the Northwind layout** · due - · open · sources: C09
+  - Wei Lin must confirm the quoted camera model matches his layout before the PO.
 - **Bayview night glare false alerts (cams 2, 5)** · due - · open · sources: C05, E07, S014, WA04, L-ZAP-140
   - Night glare false alerts at Bayview need fixing; no fix date given.
   - Night-glare false alerts at Bayview continue (14 last night) and need fixing.
   - Wei Lin is trying a night mask on cameras 2 and 5 to fix the 14 false night alerts.
   - Cam 2 alerts improved; cam 5 false alerts still bad, so the glare fix remains owed.
+- **Answer Raj: start 13:30 instead of 14:00?** · due - · open · sources: C02, WA02
+  - Raj asked whether the install can start at 13:30 instead of 14:00.
+  - Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet.
 - **Answer Ken: is a VLAN needed?** · due - · open · sources: E04
   - Ken Ong asks whether Zapdemo needs a VLAN; no reply yet.
 - **Demo floor-by-floor progress tracking on Crestline call** · due - · open · sources: C03, WA03

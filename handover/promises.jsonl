@@ -54,12 +54,12 @@
 {"op":"create","id":"6a5790396f","slot":"harbor_point.vlan_reply","deliverable":"Answer Ken: is a VLAN needed?","kind":"reply","counterparty":"harbor_point","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["E04"],"created_from":"E04","notes":["Ken Ong asks whether Zapdemo needs a VLAN; no reply yet."],"flags":[]}
 {"op":"ingest","source":"E04"}
 {"op":"create","id":"52a1cfd904","slot":"jordan_lee.onboarding","deliverable":"Onboard Jordan: accounts, laptop, first task, buddy","kind":"onboarding","counterparty":"jordan_lee","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C04"],"created_from":"C04","notes":["Jordan needs Slack, Linear, email accounts, laptop, first task and buddy before starting Mon 26 Oct."],"flags":[]}
-{"op":"create","id":"46192cbd69","slot":"jordan_lee.reply","deliverable":"Reply to Jordan: where to go Mon 09:00","kind":"reply","counterparty":"jordan_lee","owner":"sam","due":"2026-10-24","due_at":"2026-10-22T10:00:00-05:00","status":"open","sources":["C04"],"created_from":"C04","notes":["Sam promised to send Jordan logins and first-week plan before the weekend."],"flags":[]}
+{"op":"create","id":"46192cbd69","slot":"jordan_lee.reply","deliverable":"Reply to Jordan: where to go Mon 09:00","kind":"reply","counterparty":"jordan_lee","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C04"],"created_from":"C04","notes":["Sam promised to send Jordan logins and first-week plan before the weekend."],"flags":[]}
 {"op":"ingest","source":"C04"}
 {"op":"update","id":"184d262a60","add_sources":["S004"],"add_notes":["Wei Lin says Northwind layout v2 is done and in Drive."],"status":"done"}
 {"op":"update","id":"a9227252ec","add_sources":["S004"]}
 {"op":"ingest","source":"S004"}
-{"op":"update","id":"52a1cfd904","add_sources":["S006"],"add_notes":["Set up accounts, laptop, first-week plan for Jordan Lee; Wei Lin is buddy. Starts Monday."],"due":"2026-10-26","due_at":"2026-10-22T11:05:00-05:00"}
+{"op":"update","id":"52a1cfd904","add_sources":["S006"],"add_notes":["Set up accounts, laptop, first-week plan for Jordan Lee; Wei Lin is buddy. Starts Monday."]}
 {"op":"ingest","source":"S006"}
 {"op":"update","id":"f3804a88c5","add_sources":["E08"],"add_notes":["Rachel asked for updated pilot numbers and 2 references by Wed 28 Oct."]}
 {"op":"update","id":"a3229fed02","add_sources":["E08"],"add_notes":["Rachel asked for a 20-minute call with an engineer; no booking mentioned yet."]}
@@ -67,7 +67,7 @@
 {"op":"ingest","source":"S005"}
 {"op":"update","id":"b3aad8dc79","add_sources":["WA01"],"add_notes":["Raj asks whether camera 3 can move 2m left because a new rack blocks its spot; unanswered in this source."]}
 {"op":"ingest","source":"WA01"}
-{"op":"update","id":"8a5a9fb60f","add_sources":["WA02"],"add_notes":["Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet."],"due":"2026-10-27","due_at":"2026-10-22T14:12:00+08:00"}
+{"op":"update","id":"8a5a9fb60f","add_sources":["WA02"],"add_notes":["Raj asks if the team can start the install at 13:30 Tuesday; Zapdemo has not replied yet."]}
 {"op":"ingest","source":"WA02"}
 {"op":"create","id":"1dabedf067","slot":"bayview.glare","deliverable":"Bayview night glare false alerts (cams 2, 5)","kind":"pilot","counterparty":"bayview","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Night glare false alerts at Bayview need fixing; no fix date given."],"flags":[]}
 {"op":"create","id":"1486390443","slot":"bayview.pass_bar","deliverable":"Bayview pilot pass bar (signed)","kind":"approval","counterparty":"bayview","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C05"],"created_from":"C05","notes":["Written pilot pass bar must be signed before pilot review; goes through Sam."],"flags":[]}
@@ -106,10 +106,10 @@
 {"op":"ingest","source":"S013"}
 {"op":"update","id":"1dabedf067","add_sources":["WA04"],"add_notes":["Cam 2 alerts improved; cam 5 false alerts still bad, so the glare fix remains owed."]}
 {"op":"ingest","source":"WA04"}
-{"op":"create","id":"9a98b2c1a2","slot":"optix.po","deliverable":"Optix PO by Tue 27 Oct 17:00 (50% upfront)","kind":"payment","counterparty":"optix","owner":"sam","due":"2026-10-27","due_at":"2026-10-24T09:00:00-05:00","status":"open","sources":["C09"],"created_from":"C09","notes":["Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment, test payment only."],"flags":[]}
-{"op":"create","id":"a43ce62028","slot":"new","deliverable":"Wei Lin: camera model match","kind":"reply","counterparty":"wei-lin","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C09"],"created_from":"C09","notes":["Camera model must match Wei Lin's layout; Wei Lin has not yet seen the quote."],"flags":[]}
+{"op":"create","id":"9a98b2c1a2","slot":"optix.po","deliverable":"Optix PO by Tue 27 Oct 17:00 (50% upfront)","kind":"payment","counterparty":"optix","owner":"sam","due":null,"due_at":null,"status":"open","sources":["C09"],"created_from":"C09","notes":["Optix needs a PO by Tuesday 27 Oct to hold stock; 50% upfront payment requested."],"flags":[]}
+{"op":"create","id":"8cadc92446","slot":"optix.model_check","deliverable":"Confirm Optix OX-4K matches the Northwind layout","kind":"layout","counterparty":"optix","owner":"weilin","due":null,"due_at":null,"status":"open","sources":["C09"],"created_from":"C09","notes":["Wei Lin must confirm the quoted camera model matches his layout before the PO."],"flags":[]}
 {"op":"ingest","source":"C09"}
-{"op":"update","id":"9a98b2c1a2","add_sources":["E10"],"add_notes":["Optix needs a PO by Tue 27 Oct to hold stock for quote Q-1182; 50% upfront."]}
+{"op":"update","id":"9a98b2c1a2","add_sources":["E10"],"add_notes":["Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment required."]}
 {"op":"ingest","source":"E10"}
 {"op":"create","id":"75ec07a571","slot":"northwind.maria_reply","deliverable":"Reply to Maria's chase (Northwind)","kind":"reply","counterparty":"northwind","owner":"sam","due":null,"due_at":null,"status":"open","sources":["E15"],"created_from":"E15","notes":["Maria chases Sam for a reply on whether the deal is still on; she needs the number for her VP."],"flags":[]}
 {"op":"update","id":"a9227252ec","add_sources":["E15"]}
@@ -123,7 +123,7 @@
 {"op":"ingest","source":"CAL05"}
 {"op":"update","id":"f3804a88c5","add_sources":["CAL06"],"add_notes":["Calendar event on 28 Oct 09:00-09:30 marks deadline for pilot numbers and references for Cedar Fund."]}
 {"op":"ingest","source":"CAL06"}
-{"op":"update","id":"9a98b2c1a2","add_sources":["CAL07"],"add_notes":["Calendar shows an Optix PO deadline on Tue 27 Oct 17:00, attendee sam."]}
+{"op":"update","id":"9a98b2c1a2","add_sources":["CAL07"],"add_notes":["Calendar shows an Optix PO deadline on Tue 27 Oct 17:00, attendee sam."],"due":"2026-10-27","due_at":"2026-10-24T15:00:00-05:00"}
 {"op":"ingest","source":"CAL07"}
 {"op":"update","id":"184d262a60","add_sources":["L-ZAP-101"]}
 {"op":"ingest","source":"L-ZAP-101"}

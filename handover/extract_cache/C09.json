@@ -5,20 +5,17 @@
   {
    "slot": "optix.po",
    "state": "open",
-   "due": "2026-10-27",
+   "due": null,
    "evidence": "They need a PO by Tuesday 27 Oct to hold stock. 50% upfront (test payment only tonight).",
-   "note": "Optix needs a PO by Tue 27 Oct to hold stock; 50% upfront payment, test payment only.",
+   "note": "Optix needs a PO by Tuesday 27 Oct to hold stock; 50% upfront payment requested.",
    "ev_ok": true
   },
   {
-   "slot": "new",
+   "slot": "optix.model_check",
    "state": "open",
-   "kind": "reply",
-   "counterparty": "Wei Lin",
-   "topic": "camera model match",
    "due": null,
    "evidence": "The camera model has to match Wei Lin's layout. Wei Lin has not seen this quote.",
-   "note": "Camera model must match Wei Lin's layout; Wei Lin has not yet seen the quote.",
+   "note": "Wei Lin must confirm the quoted camera model matches his layout before the PO.",
    "ev_ok": true
   }
  ]
