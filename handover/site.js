@@ -1,4 +1,850 @@
 window.SITE = {
+ "audit": {
+  "groups": [
+   {
+    "persona": "sam",
+    "name": "Sam Rivera",
+    "files": [
+     {
+      "file": "outbox/20261024-1500-sam-northwind-pricing-brief.md",
+      "state": "draft",
+      "cites": [
+       "E03",
+       "E15",
+       "C01",
+       "L-ZAP-101",
+       "E10",
+       "C09"
+      ],
+      "facts": [
+       {
+        "fact": "1",
+        "src": "C01",
+        "line": "- She wants a camera layout for doors 1 to 12 and a price, both by Thursday 22 Oct.",
+        "uncited": false
+       },
+       {
+        "fact": "12",
+        "src": "C01",
+        "line": "Maria runs 12 dock doors at their Dallas cold-storage DC. Pallets get damaged at the doors and nobody can say which shift or which carrier d",
+        "uncited": false
+       },
+       {
+        "fact": "22",
+        "src": "C01",
+        "line": "- She wants a camera layout for doors 1 to 12 and a price, both by Thursday 22 Oct.",
+        "uncited": false
+       },
+       {
+        "fact": "$4,680",
+        "src": "E10",
+        "line": "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+        "uncited": false
+       },
+       {
+        "fact": "2",
+        "src": "L-ZAP-101",
+        "line": "Note: Layout v2 in Drive",
+        "uncited": false
+       },
+       {
+        "fact": "27",
+        "src": "E10",
+        "line": "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+        "uncited": false
+       },
+       {
+        "fact": "50",
+        "src": "E10",
+        "line": "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+        "uncited": false
+       },
+       {
+        "fact": "VP",
+        "src": "E03",
+        "line": "Great. Tom is free Friday afternoon if that works. Also, what will this roughly cost? My VP will ask.",
+        "uncited": false
+       },
+       {
+        "fact": "Sam",
+        "src": "E03",
+        "line": "To: sam@zapdemo.example",
+        "uncited": false
+       },
+       {
+        "fact": "Drive",
+        "src": "L-ZAP-101",
+        "line": "Note: Layout v2 in Drive",
+        "uncited": false
+       },
+       {
+        "fact": "OX",
+        "src": "E10",
+        "line": "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+        "uncited": false
+       },
+       {
+        "fact": "PO",
+        "src": "E10",
+        "line": "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+        "uncited": false
+       },
+       {
+        "fact": "Tue",
+        "src": "E10",
+        "line": "Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.",
+        "uncited": false
+       },
+       {
+        "fact": "Wei",
+        "src": "C09",
+        "line": "- The camera model has to match Wei Lin's layout. Wei Lin has not seen this quote.",
+        "uncited": false
+       },
+       {
+        "fact": "Lin",
+        "src": "C09",
+        "line": "- The camera model has to match Wei Lin's layout. Wei Lin has not seen this quote.",
+        "uncited": false
+       },
+       {
+        "fact": "Optix",
+        "src": "E10",
+        "line": "From: ben.ortiz@optix-supply.example",
+        "uncited": false
+       },
+       {
+        "fact": "Northwind",
+        "src": "E03",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "outbox/sent/20261024-1500-sam-reply-jordan-monday.md",
+      "state": "sent",
+      "cites": [
+       "E06",
+       "C04"
+      ],
+      "facts": [
+       {
+        "fact": "jordan.lee@mail.example",
+        "src": "E06",
+        "line": "From: jordan.lee@mail.example",
+        "uncited": false
+       },
+       {
+        "fact": "Jordan",
+        "src": "E06",
+        "line": "From: jordan.lee@mail.example",
+        "uncited": false
+       },
+       {
+        "fact": "Sam",
+        "src": "E06",
+        "line": "To: sam@zapdemo.example",
+        "uncited": false
+       },
+       {
+        "fact": "Rivera",
+        "src": "C04",
+        "line": "Attendees: Sam Rivera, Jordan Lee (new hire)",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "outbox/sent/20261024-1500-sam-reply-maria-northwind.md",
+      "state": "sent",
+      "cites": [
+       "E15",
+       "E03",
+       "C01",
+       "L-ZAP-101"
+      ],
+      "facts": [
+       {
+        "fact": "maria.gomez@northwind-cold.example",
+        "src": "E15",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       },
+       {
+        "fact": "1",
+        "src": "C01",
+        "line": "- She wants a camera layout for doors 1 to 12 and a price, both by Thursday 22 Oct.",
+        "uncited": false
+       },
+       {
+        "fact": "12",
+        "src": "C01",
+        "line": "Maria runs 12 dock doors at their Dallas cold-storage DC. Pallets get damaged at the doors and nobody can say which shift or which carrier d",
+        "uncited": false
+       },
+       {
+        "fact": "Maria",
+        "src": "E15",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       },
+       {
+        "fact": "Sam",
+        "src": "E15",
+        "line": "To: sam@zapdemo.example",
+        "uncited": false
+       },
+       {
+        "fact": "Rivera",
+        "src": "C01",
+        "line": "Attendees: Sam Rivera, Maria Gomez (Ops Lead, Northwind Cold Storage)",
+        "uncited": false
+       },
+       {
+        "fact": "VP",
+        "src": "E15",
+        "line": "Hi Sam, Thursday came and went. Are we still on? My VP asked for the number this morning.",
+        "uncited": false
+       },
+       {
+        "fact": "Tom",
+        "src": "E03",
+        "line": "Great. Tom is free Friday afternoon if that works. Also, what will this roughly cost? My VP will ask.",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "linear ZAP-160: ZAP-160.assignee: None -> 'sam'",
+      "state": "linear",
+      "cites": [
+       "C10",
+       "S009",
+       "L-ZAP-160"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-141: ZAP-141.assignee: None -> 'sam'",
+      "state": "linear",
+      "cites": [
+       "C05",
+       "S015",
+       "L-ZAP-141"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-102: ZAP-102.assignee: None -> 'sam'",
+      "state": "linear",
+      "cites": [
+       "C01",
+       "E01",
+       "E03",
+       "S003",
+       "S004",
+       "E15",
+       "L-ZAP-102"
+      ],
+      "facts": []
+     }
+    ]
+   },
+   {
+    "persona": "weilin",
+    "name": "Wei Lin Tan",
+    "files": [
+     {
+      "file": "outbox/deploy-alerts-known-facts.md",
+      "state": "draft",
+      "cites": [
+       "E11",
+       "E12",
+       "C10"
+      ],
+      "facts": [
+       {
+        "fact": "2026-10-20T03:12:00+00:00",
+        "src": "E11",
+        "line": "Email (inbox) 2026-10-20T03:12:00+00:00",
+        "uncited": false
+       },
+       {
+        "fact": "2026-10-20T03:41:00+00:00",
+        "src": "E12",
+        "line": "Email (inbox) 2026-10-20T03:41:00+00:00",
+        "uncited": false
+       },
+       {
+        "fact": "29",
+        "src": "E12",
+        "line": "deploy-api recovered after 29 minutes.",
+        "uncited": false
+       },
+       {
+        "fact": "DOWN",
+        "src": "E11",
+        "line": "Subject: [DOWN] deploy-api",
+        "uncited": false
+       },
+       {
+        "fact": "Alex",
+        "src": "E11",
+        "line": "deploy-api is DOWN. Check: http health. Rule: alerts/deploy.yaml (owner: alex)",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md",
+      "state": "sent",
+      "cites": [
+       "E04",
+       "E02"
+      ],
+      "facts": [
+       {
+        "fact": "ken.ong@harborpoint.example",
+        "src": "E04",
+        "line": "From: ken.ong@harborpoint.example",
+        "uncited": false
+       },
+       {
+        "fact": "3",
+        "src": "E04",
+        "line": "Subject: Re: IP range for Tuesday 3 Nov install",
+        "uncited": false
+       },
+       {
+        "fact": "10.20.4.0/24",
+        "src": "E04",
+        "line": "Range 10.20.4.0/24, mask 255.255.255.0, gateway 10.20.4.1. Use .50 to .55 for the cameras. Do you need a VLAN?",
+        "uncited": false
+       },
+       {
+        "fact": "255.255.255.0",
+        "src": "E04",
+        "line": "Range 10.20.4.0/24, mask 255.255.255.0, gateway 10.20.4.1. Use .50 to .55 for the cameras. Do you need a VLAN?",
+        "uncited": false
+       },
+       {
+        "fact": "10.20.4.1",
+        "src": "E04",
+        "line": "Range 10.20.4.0/24, mask 255.255.255.0, gateway 10.20.4.1. Use .50 to .55 for the cameras. Do you need a VLAN?",
+        "uncited": false
+       },
+       {
+        "fact": "Ken",
+        "src": "E04",
+        "line": "From: ken.ong@harborpoint.example",
+        "uncited": false
+       },
+       {
+        "fact": "Wei",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       },
+       {
+        "fact": "Lin",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       },
+       {
+        "fact": "Tan",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "outbox/sent/20261024-1500-weilin-reply-raj-start-time.md",
+      "state": "sent",
+      "cites": [
+       "WA02",
+       "E02"
+      ],
+      "facts": [
+       {
+        "fact": "13:30",
+        "src": "WA02",
+        "line": "[voice note, transcribed] Also can your team start 13:30 on Tuesday? Forklifts move at 16:00.",
+        "uncited": false
+       },
+       {
+        "fact": "16:00",
+        "src": "WA02",
+        "line": "[voice note, transcribed] Also can your team start 13:30 on Tuesday? Forklifts move at 16:00.",
+        "uncited": false
+       },
+       {
+        "fact": "Raj",
+        "src": "WA02",
+        "line": "WhatsApp Raj Kumar (Harbor Point) -> weilin 2026-10-22T14:12:00+08:00",
+        "uncited": false
+       },
+       {
+        "fact": "Wei",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       },
+       {
+        "fact": "Lin",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       },
+       {
+        "fact": "Tan",
+        "src": "T",
+        "line": "Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onbo",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "linear ZAP-161: ZAP-161.assignee: None -> 'weilin'",
+      "state": "linear",
+      "cites": [
+       "S007",
+       "C10",
+       "L-ZAP-161"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-103: ZAP-103.status: 'Todo' -> 'Done'; ZAP-103.note: 'Duplicate of ZAP-101?' -> 'Duplicate of Z",
+      "state": "linear",
+      "cites": [
+       "C01",
+       "E01",
+       "S003",
+       "S004",
+       "L-ZAP-101",
+       "L-ZAP-103"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-171: ZAP-171.assignee: None -> 'weilin'",
+      "state": "linear",
+      "cites": [
+       "C08",
+       "S010",
+       "L-ZAP-171"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-130: ZAP-130.assignee: None -> 'weilin'",
+      "state": "linear",
+      "cites": [
+       "C04",
+       "S006",
+       "E06",
+       "L-ZAP-130"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-142: ZAP-142.assignee: None -> 'weilin'",
+      "state": "linear",
+      "cites": [
+       "C05",
+       "E07",
+       "CAL05",
+       "L-ZAP-142"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-110: ZAP-110.note: \"Waiting on Raj's photos\" -> 'photo received (WA01); Raj proposes 2 m left o",
+      "state": "linear",
+      "cites": [
+       "WA01",
+       "C02",
+       "WA01",
+       "L-ZAP-110"
+      ],
+      "facts": [
+       {
+        "fact": "2",
+        "src": "WA01",
+        "line": "[photo] New storage rack in front of cam 3 spot, bay C. Can move it 2m left onto the column?",
+        "uncited": false
+       },
+       {
+        "fact": "Raj",
+        "src": "WA01",
+        "line": "WhatsApp Raj Kumar (Harbor Point) -> weilin 2026-10-22T14:10:00+08:00",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "linear ZAP-111: ZAP-111.note: '' -> 'IPs received (E04); VLAN question open'",
+      "state": "linear",
+      "cites": [
+       "E04",
+       "C02",
+       "S001",
+       "E02",
+       "E04",
+       "L-ZAP-111"
+      ],
+      "facts": []
+     }
+    ]
+   },
+   {
+    "persona": "dana",
+    "name": "Dana Brooks",
+    "files": [
+     {
+      "file": "outbox/20261024-1500-dana-reschedule-crestline-call.md",
+      "state": "draft",
+      "cites": [
+       "C03",
+       "E05",
+       "CAL01",
+       "CAL02"
+      ],
+      "facts": [
+       {
+        "fact": "farah.aziz@crestline-dc.example",
+        "src": "E05",
+        "line": "From: farah.aziz@crestline-dc.example",
+        "uncited": false
+       },
+       {
+        "fact": "3",
+        "src": "C03",
+        "line": "- Farah wants a proper call with our engineer. Dana booked Tuesday 3 Nov, 15:00 Singapore time.",
+        "uncited": false
+       },
+       {
+        "fact": "15:00",
+        "src": "C03",
+        "line": "- Farah wants a proper call with our engineer. Dana booked Tuesday 3 Nov, 15:00 Singapore time.",
+        "uncited": false
+       },
+       {
+        "fact": "14:00",
+        "src": "CAL01",
+        "line": "Start: 2026-11-03T14:00:00+08:00",
+        "uncited": false
+       },
+       {
+        "fact": "16:30",
+        "src": "CAL01",
+        "line": "End: 2026-11-03T16:30:00+08:00",
+        "uncited": false
+       },
+       {
+        "fact": "Tue",
+        "src": "C10",
+        "line": "- Dana: Crestline call booked for Tue 3 Nov 15:00 SGT.",
+        "uncited": true
+       },
+       {
+        "fact": "Farah",
+        "src": "C03",
+        "line": "Attendees: Dana Brooks, Farah Aziz (Project Director, Crestline Data Centers, Singapore)",
+        "uncited": false
+       },
+       {
+        "fact": "Dana",
+        "src": "C03",
+        "line": "Attendees: Dana Brooks, Farah Aziz (Project Director, Crestline Data Centers, Singapore)",
+        "uncited": false
+       },
+       {
+        "fact": "Brooks",
+        "src": "C03",
+        "line": "Attendees: Dana Brooks, Farah Aziz (Project Director, Crestline Data Centers, Singapore)",
+        "uncited": false
+       },
+       {
+        "fact": "SGT",
+        "src": "C10",
+        "line": "- Dana: Crestline call booked for Tue 3 Nov 15:00 SGT.",
+        "uncited": true
+       }
+      ]
+     },
+     {
+      "file": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md",
+      "state": "sent",
+      "cites": [
+       "E03",
+       "C01",
+       "L-ZAP-104"
+      ],
+      "facts": [
+       {
+        "fact": "maria.gomez@northwind-cold.example",
+        "src": "E03",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       },
+       {
+        "fact": "Tom",
+        "src": "E03",
+        "line": "Great. Tom is free Friday afternoon if that works. Also, what will this roughly cost? My VP will ask.",
+        "uncited": false
+       },
+       {
+        "fact": "Maria",
+        "src": "E03",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       },
+       {
+        "fact": "Dana",
+        "src": "T",
+        "line": "Dana Brooks (dana), Sales caller, Austin, dana@zapdemo.example, owns: discovery calls, booking meetings, lead follow-ups",
+        "uncited": false
+       },
+       {
+        "fact": "Brooks",
+        "src": "T",
+        "line": "Dana Brooks (dana), Sales caller, Austin, dana@zapdemo.example, owns: discovery calls, booking meetings, lead follow-ups",
+        "uncited": false
+       },
+       {
+        "fact": "Zapdemo",
+        "src": "E03",
+        "line": "To: sam@zapdemo.example",
+        "uncited": false
+       },
+       {
+        "fact": "Labs",
+        "src": null,
+        "line": null,
+        "uncited": false
+       },
+       {
+        "fact": "Northwind",
+        "src": "E03",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       },
+       {
+        "fact": "Cold",
+        "src": "E03",
+        "line": "From: maria.gomez@northwind-cold.example",
+        "uncited": false
+       },
+       {
+        "fact": "Storage",
+        "src": "C01",
+        "line": "Call: Northwind Cold Storage: dock camera layout",
+        "uncited": false
+       },
+       {
+        "fact": "Reyes",
+        "src": "C01",
+        "line": "- Her site manager, Tom Reyes, has to be on the next call. He signs off on anything mounted on the building.",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "linear ZAP-104: ZAP-104.assignee: None -> 'dana'",
+      "state": "linear",
+      "cites": [
+       "C01",
+       "E01",
+       "E03",
+       "L-ZAP-104"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-121: ZAP-121.assignee: None -> 'dana'",
+      "state": "linear",
+      "cites": [
+       "C10",
+       "L-ZAP-121",
+       "CAL01",
+       "CAL02"
+      ],
+      "facts": []
+     }
+    ]
+   },
+   {
+    "persona": "priya",
+    "name": "Priya Nair",
+    "files": [
+     {
+      "file": "outbox/20261024-1500-priya-onepager-brief-crestline.md",
+      "state": "draft",
+      "cites": [
+       "C03",
+       "L-ZAP-120",
+       "E05"
+      ],
+      "facts": [
+       {
+        "fact": "3",
+        "src": "C03",
+        "line": "- Farah wants a proper call with our engineer. Dana booked Tuesday 3 Nov, 15:00 Singapore time.",
+        "uncited": false
+       },
+       {
+        "fact": "15:00",
+        "src": "C03",
+        "line": "- Farah wants a proper call with our engineer. Dana booked Tuesday 3 Nov, 15:00 Singapore time.",
+        "uncited": false
+       },
+       {
+        "fact": "Sam",
+        "src": "C03",
+        "line": "- Dana promised a one-pager by email before that call. Only Sam was copied on that email, not Wei Lin.",
+        "uncited": false
+       },
+       {
+        "fact": "Wei",
+        "src": "C03",
+        "line": "- Dana promised a one-pager by email before that call. Only Sam was copied on that email, not Wei Lin.",
+        "uncited": false
+       },
+       {
+        "fact": "Lin",
+        "src": "C03",
+        "line": "- Dana promised a one-pager by email before that call. Only Sam was copied on that email, not Wei Lin.",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "outbox/20261024-1500-priya-onepager-brief-northwind.md",
+      "state": "draft",
+      "cites": [
+       "C01",
+       "C08",
+       "S011",
+       "L-ZAP-105"
+      ],
+      "facts": [
+       {
+        "fact": "12",
+        "src": "C01",
+        "line": "Maria runs 12 dock doors at their Dallas cold-storage DC. Pallets get damaged at the doors and nobody can say which shift or which carrier d",
+        "uncited": false
+       },
+       {
+        "fact": "VP",
+        "src": "C01",
+        "line": "- She asked for a one-pager on pallet-damage tracking she can forward to her VP.",
+        "uncited": false
+       },
+       {
+        "fact": "Maria",
+        "src": "C01",
+        "line": "Attendees: Sam Rivera, Maria Gomez (Ops Lead, Northwind Cold Storage)",
+        "uncited": false
+       },
+       {
+        "fact": "Northwind",
+        "src": "C01",
+        "line": "Call: Northwind Cold Storage: dock camera layout",
+        "uncited": false
+       },
+       {
+        "fact": "Dallas",
+        "src": "C01",
+        "line": "Maria runs 12 dock doors at their Dallas cold-storage DC. Pallets get damaged at the doors and nobody can say which shift or which carrier d",
+        "uncited": false
+       },
+       {
+        "fact": "DC",
+        "src": "C01",
+        "line": "Maria runs 12 dock doors at their Dallas cold-storage DC. Pallets get damaged at the doors and nobody can say which shift or which carrier d",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "outbox/sent/20261024-1500-priya-reply-lisa-case-study.md",
+      "state": "sent",
+      "cites": [
+       "E14",
+       "C08"
+      ],
+      "facts": [
+       {
+        "fact": "lisa.park@bayview-freight.example",
+        "src": "E14",
+        "line": "From: lisa.park@bayview-freight.example",
+        "uncited": false
+       },
+       {
+        "fact": "Lisa",
+        "src": "E14",
+        "line": "From: lisa.park@bayview-freight.example",
+        "uncited": false
+       },
+       {
+        "fact": "Priya",
+        "src": "E14",
+        "line": "To: priya@zapdemo.example",
+        "uncited": false
+       },
+       {
+        "fact": "Nair",
+        "src": "C08",
+        "line": "Attendees: Priya Nair, Sam Rivera",
+        "uncited": false
+       },
+       {
+        "fact": "Bayview",
+        "src": "E14",
+        "line": "From: lisa.park@bayview-freight.example",
+        "uncited": false
+       }
+      ]
+     },
+     {
+      "file": "linear ZAP-105: ZAP-105.assignee: None -> 'priya'",
+      "state": "linear",
+      "cites": [
+       "C01",
+       "C08",
+       "S011",
+       "L-ZAP-105"
+      ],
+      "facts": []
+     },
+     {
+      "file": "linear ZAP-120: ZAP-120.assignee: None -> 'priya'",
+      "state": "linear",
+      "cites": [
+       "C03",
+       "L-ZAP-120"
+      ],
+      "facts": []
+     }
+    ]
+   }
+  ],
+  "checked": 88,
+  "unsourced": 1,
+  "uncited": 2
+ },
+ "rejected": [],
+ "rejected_total": 0,
+ "footer": {
+  "sources": 70,
+  "promises": 30,
+  "sent": 6,
+  "asked": 13
+ },
  "stats": {
   "open": 10,
   "in_progress": 5,
