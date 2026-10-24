@@ -185,7 +185,3 @@
 {"op":"update","id":"da00b3a116","status":"in_progress"}
 {"op":"update","id":"b3aad8dc79","add_notes":["photo received (WA01); Raj proposes 2 m left onto column"]}
 {"op":"update","id":"16c9c02c48","add_notes":["IPs received (E04); VLAN question open"]}
-{"op":"create","id":"f20500c89d","slot":"northwind.tom_call","deliverable":"Book next call with Tom Reyes (Northwind)","kind":"booking","counterparty":"northwind","owner":"dana","due":null,"due_at":null,"status":"open","sources":["T-maria-tom-time-a776de","C01","E01","E03","L-ZAP-104"],"created_from":"T-maria-tom-time-a776de","notes":["Maria asks Sam to book the call with Tom for Wed 28 Oct 10:00 CT."],"flags":["supersedes"],"supersedes":"35efac7f1f","new_fact":"Tom can now do Wed 28 Oct at 10:00 CT for the call, so please book it for then.","reason":"The promise rests on Maria offering Friday afternoon for the call with Tom. The new email replaces that with Wed 28 Oct at 10:00 CT.","by_src":"T-maria-tom-time-a776de"}
-{"op":"supersede","id":"35efac7f1f","by":"f20500c89d","source":"T-maria-tom-time-a776de","by_src":"T-maria-tom-time-a776de"}
-{"op":"ingest","source":"T-maria-tom-time-a776de"}
-{"op":"update","id":"f20500c89d","status":"waiting_owner"}
