@@ -1,0 +1,4 @@
+[S007 · slack · 2026-10-20T11:50:00+08:00]
+
+Slack #deploys 2026-10-20T11:50:00+08:00
+weilin: deploy-api went down overnight, back now. Does anyone know how the alerts are wired? Alex set them up.

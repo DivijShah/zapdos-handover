@@ -1,0 +1,9 @@
+[E04 · email · 2026-10-22T09:15:00+08:00]
+
+Email (inbox) 2026-10-22T09:15:00+08:00
+From: ken.ong@harborpoint.example
+To: weilin@zapdemo.example
+Cc: 
+Subject: Re: IP range for Tuesday 3 Nov install
+
+Range 10.20.4.0/24, mask 255.255.255.0, gateway 10.20.4.1. Use .50 to .55 for the cameras. Do you need a VLAN?

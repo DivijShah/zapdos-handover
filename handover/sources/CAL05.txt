@@ -1,0 +1,7 @@
+[CAL05 · calendar · 2026-10-24T15:00:00-05:00]
+
+Calendar event: Bayview weekly report due
+Start: 2026-10-30T17:00:00+08:00
+End: 2026-10-30T17:30:00+08:00
+Attendees: weilin
+Where: Every Friday

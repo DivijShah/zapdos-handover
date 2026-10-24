@@ -1,0 +1,7 @@
+[T · team · 2026-10-24T15:00:00-05:00]
+
+team.json
+Sam Rivera (sam), Founder, Austin, sam@zapdemo.example, owns: sales, pricing, investors, hiring decisions, approvals and payments
+Wei Lin Tan (weilin), Engineer, Singapore, weilin@zapdemo.example, owns: installs, camera layouts, deploys and servers, pilot delivery, onboarding new engineers
+Dana Brooks (dana), Sales caller, Austin, dana@zapdemo.example, owns: discovery calls, booking meetings, lead follow-ups
+Priya Nair (priya), Content, Singapore, priya@zapdemo.example, owns: case studies, LinkedIn posts, videos, one-pagers

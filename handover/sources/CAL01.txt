@@ -1,0 +1,7 @@
+[CAL01 · calendar · 2026-10-24T15:00:00-05:00]
+
+Calendar event: Harbor Point Yard install
+Start: 2026-11-03T14:00:00+08:00
+End: 2026-11-03T16:30:00+08:00
+Attendees: weilin
+Where: Harbor Point Yard, paint shop

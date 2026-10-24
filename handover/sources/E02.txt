@@ -1,0 +1,9 @@
+[E02 · email · 2026-10-21T10:30:00+08:00]
+
+Email (sent) 2026-10-21T10:30:00+08:00
+From: weilin@zapdemo.example
+To: ken.ong@harborpoint.example
+Cc: 
+Subject: IP range for Tuesday 3 Nov install
+
+Hi Ken, could you send the IP range, subnet mask and gateway for the 6 cameras? Install is Tue 3 Nov, 14:00.

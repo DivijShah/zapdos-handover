@@ -1,0 +1,9 @@
+[E01 · email · 2026-10-20T20:10:00-05:00]
+
+Email (sent) 2026-10-20T20:10:00-05:00
+From: sam@zapdemo.example
+To: maria.gomez@northwind-cold.example
+Cc: 
+Subject: Re: Dock cameras
+
+Thanks Maria. We'll send the layout and a price by Thursday, and set up the next call with Tom.

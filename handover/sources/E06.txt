@@ -1,0 +1,9 @@
+[E06 · email · 2026-10-23T16:20:00-05:00]
+
+Email (inbox) 2026-10-23T16:20:00-05:00
+From: jordan.lee@mail.example
+To: sam@zapdemo.example
+Cc: 
+Subject: Monday?
+
+Hi Sam, excited for Monday! I haven't received any logins or first-day details yet. Where should I go at 9?

@@ -1,0 +1,7 @@
+[L-ZAP-150 · linear · 2026-10-24T15:00:00-05:00]
+
+Linear ZAP-150: Cedar Fund: pilot numbers + 2 references
+Assignee: sam
+Status: Todo
+Due: 2026-10-28
+Note: Ask customers first

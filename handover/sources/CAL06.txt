@@ -1,0 +1,7 @@
+[CAL06 · calendar · 2026-10-24T15:00:00-05:00]
+
+Calendar event: Cedar Fund deadline: numbers + references
+Start: 2026-10-28T09:00:00-05:00
+End: 2026-10-28T09:30:00-05:00
+Attendees: sam
+Where: n/a

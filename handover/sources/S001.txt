@@ -1,0 +1,4 @@
+[S001 · slack · 2026-10-21T09:05:00+08:00]
+
+Slack #standups 2026-10-21T09:05:00+08:00
+weilin: Harbor Point install locked: Tue 3 Nov 14:00-16:30 SGT. Waiting on Ken for IPs.

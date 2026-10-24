@@ -1,0 +1,7 @@
+[CAL02 · calendar · 2026-10-24T15:00:00-05:00]
+
+Calendar event: Crestline Data Centers call
+Start: 2026-11-03T15:00:00+08:00
+End: 2026-11-03T15:45:00+08:00
+Attendees: dana, weilin
+Where: Video call

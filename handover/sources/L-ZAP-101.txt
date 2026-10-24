@@ -1,0 +1,7 @@
+[L-ZAP-101 · linear · 2026-10-24T15:00:00-05:00]
+
+Linear ZAP-101: Northwind dock camera layout
+Assignee: weilin
+Status: Done
+Due: 2026-10-22
+Note: Layout v2 in Drive

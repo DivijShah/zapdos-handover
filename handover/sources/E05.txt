@@ -1,0 +1,9 @@
+[E05 · email · 2026-10-22T08:40:00+08:00]
+
+Email (inbox) 2026-10-22T08:40:00+08:00
+From: farah.aziz@crestline-dc.example
+To: dana@zapdemo.example
+Cc: sam@zapdemo.example
+Subject: Our call on 3 Nov
+
+Looking forward to Tuesday 3 Nov at 15:00. Please send the one-pager before so my team can read it.

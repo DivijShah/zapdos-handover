@@ -1,0 +1,9 @@
+[E07 · email · 2026-10-23T07:05:00-05:00]
+
+Email (inbox) 2026-10-23T07:05:00-05:00
+From: chris.hale@bayview-freight.example
+To: weilin@zapdemo.example
+Cc: 
+Subject: Night shift alerts
+
+14 false alerts again last night, all after 10pm. My night lead is starting to ignore them. Can we get the weekly report Friday?

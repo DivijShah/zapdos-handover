@@ -1,0 +1,7 @@
+[CAL03 · calendar · 2026-10-24T15:00:00-05:00]
+
+Calendar event: Daily stand-up
+Start: 2026-10-26T19:00:00-05:00
+End: 2026-10-26T19:15:00-05:00
+Attendees: sam, weilin, dana, priya
+Where: Slack huddle, weekdays

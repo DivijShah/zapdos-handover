@@ -38,7 +38,7 @@ Open: 11 · Done: 2
   - Install scheduled for 3 Nov 14:00-16:30 SGT; not yet performed.
   - On-site install of 6 cameras is scheduled for Tue 3 Nov at 14:00.
   - Install scheduled for Tue 3 Nov.
-- **Confirm Optix OX-4K matches the Northwind layout** · due - · waiting_owner · sources: C09
+- **Confirm Optix OX-4K matches the Northwind layout** · due - · waiting_owner · sources: C09, E10
   - Wei Lin must confirm the model matches his layout; he hasn't seen the quote.
 - **Bayview night glare false alerts (cams 2, 5)** · due - · open · sources: C05, E07, S014, WA04, L-ZAP-140
   - Chris counted 14 false alerts on Wednesday night.

@@ -5,7 +5,7 @@ window.SITE = {
    "time": "",
    "persona": "sam",
    "kind": "asked",
-   "text": "asked sam: Send the reply to Maria (draft in outbox, no price in it)? She chased and her VP ask",
+   "text": "asked sam: Send the reply to Maria (draft in outbox, no price in it)? She chased and her VP ask → answered",
    "cites": [
     "E15"
    ]
@@ -38,7 +38,7 @@ window.SITE = {
    "time": "",
    "persona": "dana",
    "kind": "asked",
-   "text": "asked dana: Send the draft asking Maria for new times for the call with Tom Reyes? His Friday sl",
+   "text": "asked dana: Send the draft asking Maria for new times for the call with Tom Reyes? His Friday sl → answered",
    "cites": [
     "C01",
     "E01",
@@ -121,7 +121,8 @@ window.SITE = {
    "kind": "asked",
    "text": "asked weilin: Does the quoted camera match your layout? Optix quote Q-1182: \"Attached quote: 12 x ",
    "cites": [
-    "C09"
+    "C09",
+    "E10"
    ]
   },
   {
@@ -1315,7 +1316,8 @@ window.SITE = {
      "notes": [
       "→ jordan.lee@mail.example  ·  outbox/sent/20261024-1500-sam-reply-jordan-monday.md"
      ],
-     "flags": []
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-sam-reply-jordan-monday.md"
     },
     {
      "id": "75ec07a571:send",
@@ -1332,7 +1334,8 @@ window.SITE = {
      "notes": [
       "→ maria.gomez@northwind-cold.example  ·  outbox/sent/20261024-1500-sam-reply-maria-northwind.md"
      ],
-     "flags": []
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-sam-reply-maria-northwind.md"
     }
    ],
    "superseded": [],
@@ -1602,7 +1605,8 @@ window.SITE = {
      "notes": [
       "→ Raj Kumar, Harbor Point (WhatsApp; no email address in pack)  ·  outbox/sent/20261024-1500-weilin-reply-raj-start-time.md"
      ],
-     "flags": []
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-weilin-reply-raj-start-time.md"
     },
     {
      "id": "6a5790396f:send",
@@ -1617,7 +1621,8 @@ window.SITE = {
      "notes": [
       "→ ken.ong@harborpoint.example  ·  outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md"
      ],
-     "flags": []
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md"
     }
    ],
    "superseded": [],
@@ -1738,7 +1743,8 @@ window.SITE = {
      "notes": [
       "→ maria.gomez@northwind-cold.example  ·  outbox/sent/20261024-1500-dana-tom-call-reask-maria.md"
      ],
-     "flags": []
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md"
     }
    ],
    "superseded": [],
@@ -1814,7 +1820,8 @@ window.SITE = {
      "notes": [
       "→ lisa.park@bayview-freight.example  ·  outbox/sent/20261024-1500-priya-reply-lisa-case-study.md"
      ],
-     "flags": []
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-priya-reply-lisa-case-study.md"
     }
    ],
    "superseded": [],
@@ -1828,7 +1835,8 @@ window.SITE = {
    "kind": "md",
    "to": "",
    "subject": "facts",
-   "sources": ""
+   "sources": "",
+   "path": "outbox/deploy-alerts-known-facts.md"
   },
   {
    "file": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md",
@@ -1836,7 +1844,8 @@ window.SITE = {
    "kind": "md",
    "to": "maria.gomez@northwind-cold.example",
    "subject": "Next call with Tom Reyes",
-   "sources": "E03, C01, L-ZAP-104"
+   "sources": "E03, C01, L-ZAP-104",
+   "path": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md"
   },
   {
    "file": "outbox/20261024-1500-dana-reschedule-crestline-call.md",
@@ -1844,7 +1853,8 @@ window.SITE = {
    "kind": "md",
    "to": "farah.aziz@crestline-dc.example",
    "subject": "Our call on Tue 3 Nov",
-   "sources": "C03, E05, C10, CAL01, CAL02"
+   "sources": "C03, E05, C10, CAL01, CAL02",
+   "path": "outbox/20261024-1500-dana-reschedule-crestline-call.md"
   },
   {
    "file": "outbox/sent/20261024-1500-priya-reply-lisa-case-study.md",
@@ -1852,7 +1862,8 @@ window.SITE = {
    "kind": "md",
    "to": "lisa.park@bayview-freight.example",
    "subject": "Re: Case study",
-   "sources": "E14, C08"
+   "sources": "E14, C08",
+   "path": "outbox/sent/20261024-1500-priya-reply-lisa-case-study.md"
   },
   {
    "file": "outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md",
@@ -1860,7 +1871,8 @@ window.SITE = {
    "kind": "md",
    "to": "ken.ong@harborpoint.example",
    "subject": "Re: IP range for Tuesday 3 Nov install",
-   "sources": "E04, E02"
+   "sources": "E04, E02",
+   "path": "outbox/sent/20261024-1500-weilin-reply-ken-ips-vlan.md"
   },
   {
    "file": "outbox/sent/20261024-1500-weilin-reply-raj-start-time.md",
@@ -1868,7 +1880,8 @@ window.SITE = {
    "kind": "md",
    "to": "Raj Kumar, Harbor Point (WhatsApp; no email address in pack)",
    "subject": "Re: Tuesday start time",
-   "sources": "WA02, E02"
+   "sources": "WA02, E02",
+   "path": "outbox/sent/20261024-1500-weilin-reply-raj-start-time.md"
   },
   {
    "file": "outbox/sent/20261024-1500-sam-reply-maria-northwind.md",
@@ -1876,7 +1889,8 @@ window.SITE = {
    "kind": "md",
    "to": "maria.gomez@northwind-cold.example",
    "subject": "Re: Dock cameras",
-   "sources": "E15, E03, C01, L-ZAP-101"
+   "sources": "E15, E03, C01, L-ZAP-101",
+   "path": "outbox/sent/20261024-1500-sam-reply-maria-northwind.md"
   },
   {
    "file": "outbox/sent/20261024-1500-sam-reply-jordan-monday.md",
@@ -1884,7 +1898,8 @@ window.SITE = {
    "kind": "md",
    "to": "jordan.lee@mail.example",
    "subject": "Re: Monday?",
-   "sources": "E06, C04"
+   "sources": "E06, C04",
+   "path": "outbox/sent/20261024-1500-sam-reply-jordan-monday.md"
   },
   {
    "file": "outbox/20261024-1500-priya-onepager-brief-northwind.md",
@@ -1892,7 +1907,8 @@ window.SITE = {
    "kind": "md",
    "to": "",
    "subject": "onepager-brief-northwind",
-   "sources": ""
+   "sources": "",
+   "path": "outbox/20261024-1500-priya-onepager-brief-northwind.md"
   },
   {
    "file": "outbox/20261024-1500-priya-onepager-brief-crestline.md",
@@ -1900,7 +1916,8 @@ window.SITE = {
    "kind": "md",
    "to": "",
    "subject": "onepager-brief-crestline",
-   "sources": ""
+   "sources": "",
+   "path": "outbox/20261024-1500-priya-onepager-brief-crestline.md"
   },
   {
    "file": "outbox/20261024-1500-sam-northwind-pricing-brief.md",
@@ -1908,7 +1925,8 @@ window.SITE = {
    "kind": "md",
    "to": "",
    "subject": "northwind-pricing-brief",
-   "sources": ""
+   "sources": "",
+   "path": "outbox/20261024-1500-sam-northwind-pricing-brief.md"
   },
   {
    "file": "outbox/.gitkeep",
@@ -1916,7 +1934,8 @@ window.SITE = {
    "kind": "",
    "to": "",
    "subject": ".gitkeep",
-   "sources": ""
+   "sources": "",
+   "path": "outbox/.gitkeep"
   }
  ],
  "questions": [

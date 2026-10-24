@@ -1,0 +1,7 @@
+[L-ZAP-141 · linear · 2026-10-24T15:00:00-05:00]
+
+Linear ZAP-141: Bayview pilot pass bar (signed)
+Assignee: unassigned
+Status: Todo
+Due: none
+Note: none

@@ -1,0 +1,9 @@
+[E12 · email · 2026-10-20T03:41:00+00:00]
+
+Email (inbox) 2026-10-20T03:41:00+00:00
+From: alerts@zapdemo.example
+To: weilin@zapdemo.example
+Cc: 
+Subject: [RECOVERED] deploy-api
+
+deploy-api recovered after 29 minutes.

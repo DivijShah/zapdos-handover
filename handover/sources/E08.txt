@@ -1,0 +1,9 @@
+[E08 · email · 2026-10-22T11:30:00-05:00]
+
+Email (inbox) 2026-10-22T11:30:00-05:00
+From: rachel.kim@cedarfund.example
+To: sam@zapdemo.example
+Cc: 
+Subject: Next steps
+
+Good catching up. To recap: updated pilot numbers and 2 references by Wed 28 Oct, and 20 minutes with your engineer when convenient.

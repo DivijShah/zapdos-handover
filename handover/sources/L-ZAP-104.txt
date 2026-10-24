@@ -1,0 +1,7 @@
+[L-ZAP-104 · linear · 2026-10-24T15:00:00-05:00]
+
+Linear ZAP-104: Book next Northwind call with Tom Reyes
+Assignee: unassigned
+Status: Todo
+Due: none
+Note: none

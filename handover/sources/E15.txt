@@ -1,0 +1,9 @@
+[E15 · email · 2026-10-24T09:30:00-05:00]
+
+Email (inbox) 2026-10-24T09:30:00-05:00
+From: maria.gomez@northwind-cold.example
+To: sam@zapdemo.example
+Cc: 
+Subject: Re: Dock cameras
+
+Hi Sam, Thursday came and went. Are we still on? My VP asked for the number this morning.

@@ -1,0 +1,9 @@
+[E10 · email · 2026-10-24T09:20:00-05:00]
+
+Email (inbox) 2026-10-24T09:20:00-05:00
+From: ben.ortiz@optix-supply.example
+To: sam@zapdemo.example
+Cc: 
+Subject: Quote Q-1182: 12 cameras
+
+Attached quote: 12 x OX-4K dome, $4,680 total [fictional]. 2-week lead time. Need a PO by Tue 27 Oct to hold stock. 50% upfront.
