@@ -152,3 +152,51 @@ def apply_clashes(st: dict, clashes: list[dict]) -> int:
 def mark_ingested(st: dict, source_id: str):
     if source_id not in st["ingested"]:
         _emit(st, dict(op="ingest", source=source_id))
+
+
+# ---- actions / questions / dependency helpers (persona layer) ----
+def action_keys() -> set[str]:
+    return {a["key"] for a in read_jsonl(ACTIONS)}
+
+
+def record_action(promise_id: str, persona: str, atype: str, path: str | None, at: str, **extra) -> bool:
+    """Append an action once per key f"{promise_id}:{atype}". Returns False if it already existed."""
+    key = f"{promise_id}:{atype}"
+    if key in action_keys():
+        return False
+    append(ACTIONS, dict(key=key, promise_id=promise_id, persona=persona, type=atype, path=path, at=at, **extra))
+    return True
+
+
+def set_status(st: dict, pid: str, status: str, note: str | None = None):
+    p = st["promises"][pid]
+    d = {}
+    if p["status"] != status:
+        d["status"] = status
+    if note and note not in p["notes"]:
+        d["add_notes"] = [note]
+    if d:
+        _emit(st, dict(op="update", id=pid, **d))
+
+
+def add_question(st: dict, pid: str, to: str, frm: str, qkey: str, question: str, at: str) -> bool:
+    """Question for an owner persona. Idempotent on (promise, to, qkey); also posted as a DM record."""
+    import hashlib
+    qid = hashlib.sha1(f"{pid}|{to}|{qkey}".encode()).hexdigest()[:10]
+    if any(q["id"] == qid for q in read_jsonl(QUESTIONS)):
+        return False
+    append(QUESTIONS, dict(id=qid, promise_id=pid, to=to, **{"from": frm}, question=question, at=at, answered=False))
+    append(H / "slack.jsonl", dict(channel=f"dm:ai-{to}", user=f"ai-{frm}", at=at, text=question, key=qid))
+    return True
+
+
+def ensure_slot(st: dict, slot: str, src_ids: list[str], at: str, note: str) -> str:
+    """Create the dependency promise for a catalog slot if missing (idempotent). Returns its id."""
+    pid = slot_id(slot)
+    if pid not in st["promises"]:
+        s = SLOTS[slot]
+        owner, _ = route(s["kind"], slot)
+        _emit(st, dict(op="create", id=pid, slot=slot, deliverable=s["label"], kind=s["kind"],
+                       counterparty=s["counterparty"], owner=owner, due=None, due_at=None, status="open",
+                       sources=list(src_ids), created_from="dependency", notes=[note], flags=["dependency"]))
+    return pid

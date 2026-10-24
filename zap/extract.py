@@ -18,7 +18,7 @@ STATES = ["open", "done", "duplicate", "superseded"]
 
 CATALOG = "\n".join(f"- {k}: {v['desc']}" for k, v in SLOTS.items())
 SYSTEM = f"""You extract commitments for Zapdemo Labs (4 people: Sam founder, Wei Lin engineer, Dana sales caller, Priya content).
-Read ONE source and report every deliverable it mentions that Zapdemo owes (or must act on), by calling record_mentions.
+Read ONE source and report every deliverable it mentions that Zapdemo owes (or must act on). You MUST answer by calling the record_mentions tool (empty list if none).
 
 For each mention pick a `slot` from this fixed catalog. Use "new" only if nothing fits; then also give kind, counterparty (short name) and topic (2-3 word slug).
 {CATALOG}
@@ -97,7 +97,7 @@ def _call(model: str, src: Source, now: datetime) -> list[dict]:
     user = f"Source id {src.id} ({src.kind}); source timestamp {src.at} ({wd}); today is {now.strftime('%A %d %b %Y')}.\n---\n{src.text}"
     r = client().messages.create(
         model=model, max_tokens=1500, system=SYSTEM, tools=[TOOL],
-        tool_choice={"type": "tool", "name": "record_mentions"},
+        tool_choice={"type": "auto"},
         messages=[{"role": "user", "content": user}])
     for b in r.content:
         if b.type == "tool_use":
@@ -152,7 +152,7 @@ def extract_one(src: Source, now: datetime) -> dict:
     model = MODEL
     try:
         raw = _call(model, src, now)
-    except (anthropic.RateLimitError, anthropic.InternalServerError, anthropic.APIStatusError):
+    except (anthropic.RateLimitError, anthropic.InternalServerError):  # not BadRequest: that is a bug, surface it
         model = FALLBACK
         raw = _call(model, src, now)
     rec = {"source_id": src.id, "model": model, "mentions": _clean(src, raw)}

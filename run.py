@@ -15,7 +15,7 @@ load_dotenv(ROOT / ".env")
 
 from rich.console import Console  # noqa: E402
 
-from zap import extract, ledger, render, route, sources  # noqa: E402
+from zap import extract, ledger, persona, render, route, shiftnote, sources  # noqa: E402
 
 TICK = 20
 console = Console(width=None if sys.stdout.isatty() else 140)
@@ -86,7 +86,12 @@ def tick(first: bool) -> None:
         ledger.mark_ingested(st, src.id)
         new_sources += 1
     ledger.apply_clashes(st, route.detect_clashes([s for s in pack if s.kind == "calendar"]))
-    changed = render.render_handovers(st, now) or st["n_events"] != n0
+    srcmap = {s.id: s for s in pack}
+    for who in route.team():
+        persona.Persona(who["id"], st, now, srcmap).tick()
+    persona.sync_linear(st, now.isoformat())
+    persona.handover_post(st, now, srcmap)
+    changed = shiftnote.render_handovers(st, now) or st["n_events"] != n0
     if first or changed:
         console.print(render.status_table(st, now))
     if failed:
