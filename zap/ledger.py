@@ -1,4 +1,5 @@
 """Append-only promise ledger. State = replay of handover/*.jsonl. Everything is idempotent."""
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -39,7 +40,7 @@ def read_jsonl(path: Path) -> list[dict]:
 def _fold(st: dict, ev: dict):
     op, pid = ev["op"], ev.get("id")
     if op == "create":
-        st["promises"][pid] = {k: v for k, v in ev.items() if k != "op"}
+        st["promises"][pid] = {k: v for k, v in ev.items() if k not in ("op", "by_src")}
     elif op == "ingest":
         st["ingested"].add(ev["source"])
     elif pid in st["promises"]:
@@ -72,13 +73,15 @@ def materialize() -> dict:
 
 
 def _emit(st: dict, ev: dict):
+    if st.get("_src"):
+        ev = {**ev, "by_src": st["_src"]}  # lets --purge-drops remove everything a TEST source caused
     append(PROMISES, ev)
     _fold(st, ev)
     st["n_events"] += 1
 
 
 def stats(st: dict) -> dict:
-    c = {"open": 0, "done": 0, "waiting_owner": 0, "superseded": 0}
+    c = {"open": 0, "in_progress": 0, "waiting_owner": 0, "done": 0, "superseded": 0}
     for p in st["promises"].values():
         c[p["status"]] = c.get(p["status"], 0) + 1
     qs = read_jsonl(QUESTIONS)
@@ -97,38 +100,72 @@ def _mention_id(m: dict) -> tuple[str, str, str, str]:
             m.get("deliverable") or f"{m['counterparty']}: {m['topic']}")
 
 
-def apply_source(st: dict, src, mentions: list[dict]) -> int:
-    """Fold one source's mentions into the ledger. Idempotent: re-applying emits nothing new."""
+LIVE = ("open", "in_progress", "waiting_owner")
+
+
+def head(st: dict, pid: str):
+    """Follow superseded_by to the live promise for a slot."""
+    p = st["promises"].get(pid)
+    while p and p.get("superseded_by") in st["promises"]:
+        p = st["promises"][p["superseded_by"]]
+    return p
+
+
+def apply_source(st: dict, src, mentions: list[dict], judge=None) -> int:
+    """Fold one source's mentions into the ledger. Idempotent: re-applying emits nothing new.
+    `judge(src, promise, mention)` -> {verdict, quote} is consulted for drop sources that hit a live promise."""
     n0 = st["n_events"]
-    for m in mentions:
-        pid, cp, kind, label = _mention_id(m)
-        p = st["promises"].get(pid)
-        note = m.get("note") or ""
-        if p is None:
-            owner, routed = route(kind, m["slot"])
-            _emit(st, dict(op="create", id=pid, slot=m["slot"], deliverable=label, kind=kind, counterparty=cp,
-                           owner=owner, due=m.get("due"), due_at=src.at if m.get("due") else None,
-                           status="done" if m["state"] == "done" else "open", sources=[src.id],
-                           created_from=src.id, notes=[note] if note else [],
-                           flags=([f"duplicate:{src.id}"] if m["state"] == "duplicate" else []) +
-                                 ([] if routed else ["unrouted"])))
-            continue
-        d = {}
-        if src.id not in p["sources"]:
-            d["add_sources"] = [src.id]
-        if note and note not in p["notes"] and len(p["notes"]) < 4:
-            d["add_notes"] = [note]
-        if m["state"] == "duplicate" and f"duplicate:{src.id}" not in p["flags"]:
-            d["add_flags"] = [f"duplicate:{src.id}"]
-        if m["state"] == "done" and p["status"] != "done":
-            d["status"] = "done"
-        if m["state"] == "superseded" and p["status"] != "superseded":
-            d["status"] = "superseded"
-        if m.get("due") and m["due"] != p["due"] and src.at >= (p.get("due_at") or ""):
-            d["due"], d["due_at"] = m["due"], src.at
-        if d:
-            _emit(st, dict(op="update", id=pid, **d))
+    st["_src"] = src.id
+    try:
+        for m in mentions:
+            _apply_mention(st, src, m, judge)
+    finally:
+        st["_src"] = None
     return st["n_events"] - n0
+
+
+def _apply_mention(st, src, m, judge):
+    pid, cp, kind, label = _mention_id(m)
+    p = head(st, pid)
+    note = m.get("note") or ""
+    if p is None:
+        owner, routed = route(kind, m["slot"])
+        _emit(st, dict(op="create", id=pid, slot=m["slot"], deliverable=label, kind=kind, counterparty=cp,
+                       owner=owner, due=m.get("due"), due_at=src.at if m.get("due") else None,
+                       status="done" if m["state"] == "done" else "open", sources=[src.id],
+                       created_from=src.id, notes=[note] if note else [],
+                       flags=([f"duplicate:{src.id}"] if m["state"] == "duplicate" else []) +
+                             ([] if routed else ["unrouted"])))
+        return
+    pid = p["id"]
+    if judge and src.kind == "drop" and m["state"] == "open" and p["status"] in LIVE and src.id not in p["sources"]:
+        v = judge(src, p, m)
+        if v and v.get("verdict") == "changed":
+            nid = hashlib.sha1(f"{pid}|{src.id}".encode()).hexdigest()[:10]
+            owner, routed = route(p["kind"], p["slot"])
+            _emit(st, dict(op="create", id=nid, slot=p["slot"], deliverable=p["deliverable"], kind=p["kind"],
+                           counterparty=p["counterparty"], owner=owner, due=m.get("due") or p["due"],
+                           due_at=src.at if m.get("due") else p.get("due_at"), status="open",
+                           sources=[src.id] + [s for s in p["sources"] if s != src.id], created_from=src.id,
+                           notes=[note] if note else [], flags=["supersedes"], supersedes=pid,
+                           new_fact=v["quote"], reason=v.get("reason", "")))
+            _emit(st, dict(op="supersede", id=pid, by=nid, source=src.id))
+            return
+    d = {}
+    if src.id not in p["sources"]:
+        d["add_sources"] = [src.id]
+    if note and note not in p["notes"] and len(p["notes"]) < 4:
+        d["add_notes"] = [note]
+    if m["state"] == "duplicate" and f"duplicate:{src.id}" not in p["flags"]:
+        d["add_flags"] = [f"duplicate:{src.id}"]
+    if m["state"] == "done" and p["status"] != "done":
+        d["status"] = "done"
+    if m["state"] == "superseded" and p["status"] != "superseded":
+        d["status"] = "superseded"
+    if m.get("due") and m["due"] != p["due"] and src.at >= (p.get("due_at") or ""):
+        d["due"], d["due_at"] = m["due"], src.at
+    if d:
+        _emit(st, dict(op="update", id=pid, **d))
 
 
 def apply_clashes(st: dict, clashes: list[dict]) -> int:

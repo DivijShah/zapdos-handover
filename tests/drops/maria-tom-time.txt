@@ -1,0 +1,6 @@
+From: maria.gomez@northwind-cold.example
+To: sam@zapdemo.example
+Date: 2026-10-24T16:30:00-05:00
+Subject: Re: Dock cameras
+
+Hi Sam, thanks for the nudge. Tom can now do Wed 28 Oct at 10:00 CT for the call, so please book it for then.

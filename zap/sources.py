@@ -7,7 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PACK = ROOT / "work_pack"
-DROPS = ROOT / "inbox" / "drops"
+DEFAULT_DROPS = ROOT / "inbox" / "drops"
+DROPS = DEFAULT_DROPS
 DROP_EXT = {".txt", ".md", ".json"}
 
 
@@ -51,39 +52,47 @@ def load_pack(now: datetime) -> list[Source]:
     return out
 
 
-def _drop_items(path: Path):
-    raw = path.read_text(errors="replace")
-    if path.suffix == ".json":
-        try:
-            data = json.loads(raw)
-        except json.JSONDecodeError:
-            return [raw]
-        items = data if isinstance(data, list) else data.get("messages", [data]) if isinstance(data, dict) else [data]
-        return items
-    return [raw]
+def drop_cache_dir() -> Path:
+    return ROOT / "handover" / "drop_cache"
 
 
-def _render_item(item) -> tuple[str, str | None]:
-    if isinstance(item, dict):
-        at = next((item[k] for k in ("at", "date", "time", "timestamp", "start") if isinstance(item.get(k), str)), None)
-        return "\n".join(f"{k}: {v}" for k, v in item.items()), at
-    return str(item), None
+def is_test_dir() -> bool:
+    return DROPS.resolve() != DEFAULT_DROPS.resolve()
+
+
+def set_drops_dir(path: str | Path):
+    """Point ingestion at another folder (tests/drops). Sources from it are id-prefixed T- and purgeable."""
+    global DROPS
+    DROPS = Path(path).resolve()
+
+
+def drop_files() -> list[Path]:
+    if not DROPS.exists():
+        return []
+    return [p for p in sorted(DROPS.iterdir())
+            if p.is_file() and p.suffix.lower() in DROP_EXT and not p.name.startswith(".")]
+
+
+def file_sha(p: Path) -> str:
+    return hashlib.sha1(p.read_bytes()).hexdigest()[:12]
 
 
 def load_drops(now: datetime) -> list[Source]:
+    """Cache-only: turns each normalised drop file into Sources. Never calls the model (see drops.normalise_missing)."""
     out = []
-    if not DROPS.exists():
-        return out
-    for p in sorted(DROPS.iterdir()):
-        if p.suffix.lower() not in DROP_EXT or p.name.startswith("."):
+    for p in drop_files():
+        sha = file_sha(p)
+        cp = drop_cache_dir() / f"{sha}.json"
+        try:
+            rec = json.loads(cp.read_text()) if cp.exists() else None
+        except json.JSONDecodeError:
+            rec = None
+        if not rec:
             continue
-        items = _drop_items(p)
-        for n, item in enumerate(items, 1):
-            text, at = _render_item(item)
-            if not text.strip():
-                continue
-            h = hashlib.sha1(text.encode()).hexdigest()[:6]
-            sid = f"D-{p.stem[:24].replace(' ', '_')}-{h}" + (f"-{n}" if len(items) > 1 else "")
-            out.append(Source(sid, "drop", at or (now + timedelta(minutes=1)).isoformat(),
-                              f"Drop ({p.name})\n{text}"))
+        items = rec["sources"]
+        for n, it in enumerate(items, 1):
+            sid = f"{'T' if rec.get('test') else 'D'}-{p.stem[:24].replace(' ', '_')}-{sha[:6]}" + (f"-{n}" if len(items) > 1 else "")
+            head = f"Drop {it['kind']} ({p.name})\nFrom: {it.get('frm') or 'unknown'}\nTo: {it.get('to') or 'unknown'}"
+            at = it.get("at") or (now + timedelta(minutes=1 + rec.get("seq", 0))).isoformat()
+            out.append(Source(sid, "drop", at, f"{head}\n\n{it['text']}", {"file": p.name, "test": bool(rec.get("test"))}))
     return out

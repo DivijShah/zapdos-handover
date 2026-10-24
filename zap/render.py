@@ -11,7 +11,8 @@ from . import ledger
 from .route import SLOTS, team
 
 MAX_ROWS = 22
-STATUS_STYLE = {"open": "yellow", "waiting_owner": "magenta", "done": "green", "superseded": "dim"}
+LIVE = ("open", "in_progress", "waiting_owner")
+STATUS_STYLE = {"open": "yellow", "in_progress": "cyan", "waiting_owner": "magenta", "done": "green", "superseded": "dim"}
 
 
 def _due_label(due: str | None) -> str:
@@ -19,13 +20,13 @@ def _due_label(due: str | None) -> str:
 
 
 def _overdue(p: dict, now: datetime) -> bool:
-    return bool(p["due"]) and p["status"] in ("open", "waiting_owner") and \
+    return bool(p["due"]) and p["status"] in LIVE and \
         date.fromisoformat(p["due"]) < now.astimezone(ZoneInfo("America/Chicago")).date()
 
 
 def _sorted(st: dict, now: datetime) -> list[dict]:
     def key(p):
-        live = p["status"] in ("open", "waiting_owner")
+        live = p["status"] in LIVE
         prio = SLOTS.get(p["slot"], {}).get("prio", 99)
         return (not live, not _overdue(p, now), p["due"] or "9999", prio, p["id"])
     return sorted(st["promises"].values(), key=key)
@@ -49,7 +50,7 @@ def render_handovers(st: dict, now: datetime) -> bool:
     for who in team():
         pid_, tz = who["id"], ZoneInfo(who["tz"])
         mine = [p for p in _sorted(st, now) if p["owner"] == pid_]
-        live = [p for p in mine if p["status"] in ("open", "waiting_owner")]
+        live = [p for p in mine if p["status"] in LIVE]
         lines = [f"# Handover: {who['name']} ({pid_})",
                  f"_AI shift note, written by the Zapdemo AI for {who['name']}. "
                  f"Clock: {now.astimezone(tz).strftime('%a %d %b %Y %H:%M %Z')}._", "",
@@ -70,18 +71,20 @@ def render_handovers(st: dict, now: datetime) -> bool:
 
 def status_table(st: dict, now: datetime) -> Table:
     rows = _sorted(st, now)
-    live = [p for p in rows if p["status"] in ("open", "waiting_owner")]
+    live = [p for p in rows if p["status"] in LIVE]
     shown = rows[:MAX_ROWS]
     t = Table(box=box.SIMPLE_HEAD, pad_edge=False, expand=False,
-              title=f"Promises · {len(live)} open / {len(rows)} total · {now.strftime('%a %d %b %H:%M %Z')}")
+              title=f"Promises · {len(live)} live / {len(rows)} total · {now.strftime('%a %d %b %H:%M %Z')}")
     for c, kw in (("Owner", {}), ("Promise", {"max_width": 58, "overflow": "ellipsis", "no_wrap": True}),
                   ("Due", {}), ("Status", {}), ("Sources", {"max_width": 26, "overflow": "ellipsis", "no_wrap": True})):
         t.add_column(c, **kw)
     for p in shown:
         status = Text(p["status"], style=STATUS_STYLE.get(p["status"], ""))
         due = Text(_due_label(p["due"]), style="bold red" if _overdue(p, now) else "")
-        mark = " [dup]" if any(f.startswith("duplicate") for f in p["flags"]) else ""
+        mark = (" [dup]" if any(f.startswith("duplicate") for f in p["flags"]) else "") + (" [updated]" if p.get("supersedes") else "")
         t.add_row(p["owner"], p["deliverable"] + mark, due, status, ",".join(p["sources"]))
-    if len(rows) > len(shown):
-        t.caption = f"+{len(rows) - len(shown)} more (see handover/HANDOVER-*.md)"
+    cnt = {k: sum(p["status"] == k for p in rows) for k in STATUS_STYLE}
+    t.caption = (f"open {cnt['open']} · in progress {cnt['in_progress']} · waiting on owner {cnt['waiting_owner']} · "
+                 f"done {cnt['done']} · superseded {cnt['superseded']}"
+                 + (f"   (+{len(rows) - len(shown)} more rows: see handover/HANDOVER-*.md)" if len(rows) > len(shown) else ""))
     return t

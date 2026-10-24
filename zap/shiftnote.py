@@ -5,7 +5,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from . import ledger
-from .render import _due_label, _overdue, _sorted
+from .render import LIVE, _due_label, _overdue, _sorted
 from .route import team
 
 
@@ -41,7 +41,7 @@ def render_handovers(st: dict, now: datetime) -> bool:
     for who in team():
         me, tz = who["id"], ZoneInfo(who["tz"])
         mine = [p for p in _sorted(st, now) if p["owner"] == me]
-        live = [p for p in mine if p["status"] in ("open", "waiting_owner")]
+        live = [p for p in mine if p["status"] in LIVE]
         arts = {}
         for a in acts_:
             if a.get("path") and a["persona"] == me:
@@ -64,9 +64,24 @@ def render_handovers(st: dict, now: datetime) -> bool:
                          f"· sources: {', '.join(p['sources'])}")
             lines += [f"  - {n}" for n in p["notes"]]
             lines += [f"  - flag: {f}" for f in p["flags"]]
+            if p.get("supersedes"):
+                lines.append(f"  - **supersedes** the earlier version ({p['supersedes']}) per {p['created_from']}: \"{p['new_fact']}\"")
             lines += [f"  - artifact: `{a}`" for a in arts.get(p["id"], [])]
-        lines += ["", "## Done"] + ([f"- {p['deliverable']} · sources: {', '.join(p['sources'])}"
-                                     + (f" · {', '.join(arts[p['id']])}" if p["id"] in arts else "")
-                                     for p in mine if p["status"] == "done"] or ["- none"])
+        done = []
+        for p in mine:
+            if p["status"] == "done":
+                done.append(f"- {p['deliverable']} · sources: {', '.join(p['sources'])}"
+                            + (f" · {', '.join(arts[p['id']])}" if p["id"] in arts else ""))
+                done += [f"  - {n}" for n in p["notes"]]
+        lines += ["", "## Done"] + (done or ["- none"])
+        sup = []
+        for p in mine:
+            if p["status"] == "superseded":
+                new = st["promises"].get(p.get("superseded_by"))
+                stale = [a["path"] for a in acts_ if a["promise_id"] == p["id"] and (a.get("path") or "").startswith("outbox/")]
+                sup.append(f"- ~~{p['deliverable']}~~ · **superseded by** {new['deliverable'] if new else p.get('superseded_by')} "
+                           f"({new['created_from'] if new else '?'}): \"{new['new_fact'] if new else ''}\""
+                           + (f" · stale artifacts: {', '.join(stale)}" if stale else ""))
+        lines += ["", "## Superseded"] + (sup or ["- none"])
         changed |= _write_if_changed(ledger.H / f"HANDOVER-{me}.md", "\n".join(lines) + "\n")
     return changed

@@ -60,6 +60,10 @@ def verify_text(text: str, srcmap: dict, ids: list[str], no_money: bool = False)
         if iso.lower() not in corpus:
             probs.append(f"timestamp {iso}")
     body = re.sub(ISO, " ", body)
+    for ip in re.findall(r"\b\d{1,3}(?:\.\d{1,3}){3}(?:/\d{1,2})?", body):  # dotted addresses are one token
+        if not re.search(rf"(?<![\d.]){re.escape(ip)}(?![\d])", corpus):
+            probs.append(f"ip {ip}")
+    body = re.sub(r"\b\d{1,3}(?:\.\d{1,3}){3}(?:/\d{1,2})?", " ", body)
     if no_money and "$" in body:
         probs.append("money not allowed in this message")
     if re.search(r"https?://|www\.", body):

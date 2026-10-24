@@ -80,12 +80,12 @@ class Persona:
             feedback = f"Your previous draft was rejected for unsupported facts: {probs}. Remove them."
         raise Rejected(probs)
 
-    def email(self, p, atype, slug_, to_frag, task, ids, no_money=False) -> bool:
+    def email(self, p, atype, slug_, to_frag, task, ids, no_money=False, to_label=None) -> bool:
         """Draft+verify+write outbox email. On rejection files a question to the owner instead. True if written."""
         try:
             def go():
                 subj, body = self.draft(task, ids, no_money)
-                return acts.email(self.now, self.who, slug_, acts.addr_for(self.srcmap, to_frag), subj, body, p, ids)
+                return acts.email(self.now, self.who, slug_, acts.addr_for(self.srcmap, to_frag) or to_label, subj, body, p, ids)
             self.do(p, atype, go)
             return True
         except Rejected as e:
@@ -107,7 +107,11 @@ class Persona:
                         "mention any price or amount. Say the camera layout for doors 1 to 12 is done (L-ZAP-101, C01). Say you are "
                         "flagging the price to Sam and that Dana will be in touch about the call with Tom. Do not say when.",
                         ids, no_money=True)
-        return "done" if ok else "waiting_owner"
+        if ok:
+            self.ask(p, "sam", "send-maria",
+                     "Send the reply to Maria (draft in outbox, no price in it)? She chased and her VP asked for the number (E15). "
+                     "Nothing has been sent.", ids)
+        return "waiting_owner"
 
     def h_price(self, p):
         s = self.srcmap
@@ -151,7 +155,11 @@ class Persona:
                         "Ask Maria for new times for the next call that includes her site manager Tom Reyes (he signs off anything "
                         "mounted). Her earlier note said Tom was free Friday afternoon (E03) but that Friday has passed, so ask for "
                         "fresh availability. No prices.", ids, no_money=True)
-        return None if ok else "waiting_owner"
+        if ok:
+            self.ask(p, "dana", "send-tom-reask",
+                     "Send the draft asking Maria for new times for the call with Tom Reyes? His Friday slot (E03) has passed. "
+                     "Draft is in the outbox; nothing has been sent.", ids)
+        return "waiting_owner"
 
     def h_onepager(self, p):
         s = self.srcmap
@@ -165,13 +173,13 @@ class Persona:
             "### Open facts", "- Nothing beyond the quotes above is in the pack; ask the owner before adding claims.",
             "- Nothing goes public before the customer approves." if p["slot"] == "bayview.casestudy" else ""])
         self.doc(p, "brief", f"onepager-brief-{p['counterparty']}", f"One-pager brief: {p['deliverable']}", md, ids)
-        return None
+        return "in_progress"
 
     def h_send_onepager(self, p):
         dep = slot_id("crestline.onepager")
         self.do(p, "dependency", lambda: None, depends_on=dep, to="priya",
                 text="Send only after Priya's one-pager exists; no sent email is in the pack, so treat it as not sent.")
-        return None
+        return "in_progress"
 
     def h_clash(self, p):
         s = self.srcmap
@@ -228,25 +236,104 @@ class Persona:
         self.do(p, "doc", lambda: acts.doc_flat("deploy-alerts-known-facts.md",
                                                 "# Deploy alerts: known facts\n\n" + md + "\n\nSources: E11, E12, C10. "
                                                 "Written by Wei Lin's AI assistant (an AI).\n"))
-        return None
+        return "in_progress"
+
+
+    def h_jordan_reply(self, p):
+        ids = ["E06", "C04"]
+        ok = self.email(p, "email", "reply-jordan-monday", "jordan.lee",
+                        "Reply to Jordan's email E06. Say the first-day details and logins are being sorted by the team and that Sam "
+                        "will confirm where to go on Monday. Do NOT state any place, address, room or time; none is in the pack.", ids)
+        self.ask(p, "sam", "jordan-location",
+                 "Where should Jordan go on Monday morning? He asked (E06) and no office address or location exists anywhere in the pack. "
+                 "The reply draft in the outbox says you will confirm; nothing has been sent.", ids)
+        return "waiting_owner"
+
+    def h_vlan_reply(self, p):
+        ids = ["E04", "E02"]
+        ok = self.email(p, "email", "reply-ken-ips-vlan", "ken.ong",
+                        "Reply to Ken's email E04. Confirm the IP range, mask and gateway he sent were received (repeat them exactly as written "
+                        "in E04). On his VLAN question say Wei Lin will confirm and do not answer it.", ids)
+        self.ask(p, "weilin", "vlan",
+                 "Ken asks: \"Do you need a VLAN?\" (E04). The pack does not say. What should the reply tell him? "
+                 "The draft in the outbox confirms the IPs and says you will answer; nothing has been sent.", ids)
+        return "waiting_owner"
+
+    def h_start_time(self, p):
+        ids = ["WA02", "E02"]
+        ok = self.email(p, "email", "reply-raj-start-time", "raj.kumar",
+                        "Write a short WhatsApp-style reply to Raj's voice note WA02 asking if the team can start at 13:30 on Tuesday. "
+                        "Say Wei Lin will confirm. Do NOT agree or decline and do not commit any time.", ids,
+                        to_label="Raj Kumar, Harbor Point (WhatsApp; no email address in pack)")
+        self.ask(p, "weilin", "start-1330",
+                 "Can the Harbor Point install start at 13:30 instead of 14:00? Raj asked (WA02); forklifts move at 16:00. "
+                 "The reply draft in the outbox commits no time; nothing has been sent.", ids)
+        return "waiting_owner"
+
+    def h_casestudy(self, p):
+        ids = ["E14", "C08"]
+        ok = self.email(p, "email", "reply-lisa-case-study", "lisa.park",
+                        "Reply to Lisa's email E14. Thank her for agreeing to review. Say Priya will send the case-study draft and the list "
+                        "of photos she plans to use. Do not name any photo and do not state any result or number.", ids, no_money=True)
+        self.ask(p, "priya", "photos",
+                 "Which photos do you plan to use in the Bayview case study? Lisa asked for the list with the draft (E14). "
+                 "No photo list exists in the pack; the reply draft in the outbox promises one; nothing has been sent.", ids)
+        return "waiting_owner"
+
+    def h_ridge_visit(self, p):
+        self.ask(p, "dana", "ridgeline-attendee",
+                 "Who from Zapdemo attends the Ridgeline site visit on Tuesday or Wednesday morning? Omar asked (E09). The pack does not "
+                 "say who goes; Wei Lin is the engineer.", ["E09", "S012"])
+        return "waiting_owner"
+
+    def h_ridge_price(self, p):
+        self.ask(p, "sam", "ridgeline-ballpark",
+                 "What ballpark price range should Omar at Ridgeline get? He asked to get budget (E09). The pack has no Ridgeline price.",
+                 ["E09", "S012"])
+        return "waiting_owner"
+
+    def h_cedar(self, p):
+        self.ask(p, "sam", "second-reference",
+                 "Rachel wants 2 customer references by Wed 28 Oct (C06). Only one pilot customer (Bayview) appears in the pack. "
+                 "Who is the second reference, and has each customer given permission?", ["C06", "E08"])
+        return "waiting_owner"
+
+    def h_updated(self, p):
+        """A drop changed a fact this promise rested on: ask the owner to confirm; show what went stale."""
+        old = self.st["promises"].get(p["supersedes"], {})
+        stale = [a["path"] for a in ledger.read_jsonl(ledger.ACTIONS)
+                 if a["promise_id"] == p["supersedes"] and (a.get("path") or "").startswith("outbox/")]
+        src = p["created_from"]
+        text = (f"New fact on '{p['deliverable']}': {src} says \"{p['new_fact']}\". This replaces the earlier plan"
+                f"{' (outbox draft(s) written for it may now be stale: ' + ', '.join(stale) + ')' if stale else ''}. "
+                "Confirm and tell the AI how to proceed; nothing has been sent.")
+        self.ask(p, p["owner"], "updated-fact", text, p["sources"])
+        return "waiting_owner"
 
     HANDLERS = {
         "northwind.maria_reply": h_maria_reply, "northwind.price": h_price, "optix.model_check": h_model_check,
         "northwind.tom_call": h_tom_call, "northwind.onepager": h_onepager, "crestline.onepager": h_onepager,
         "crestline.send_onepager": h_send_onepager, "crestline.clash": h_clash, "crestline.demo_progress": h_demo,
         "internal.reimburse_weilin": h_reimburse, "internal.deploy_alerts_doc": h_deploy_alerts,
+        "jordan_lee.reply": h_jordan_reply, "harbor_point.vlan_reply": h_vlan_reply,
+        "harbor_point.start_time_reply": h_start_time, "bayview.casestudy": h_casestudy,
+        "ridgeline.site_visit": h_ridge_visit, "ridgeline.price": h_ridge_price, "cedar.numbers_refs": h_cedar,
     }
 
+    LIVE = ("open", "in_progress", "waiting_owner")
+    AI_DONE = {"northwind.maria_reply"}  # earlier runs marked these done on drafting; drafted != sent, so re-evaluate
+
     def tick(self) -> int:
-        mine = [p for p in self.st["promises"].values() if p["owner"] == self.id and p["status"] in ("open", "waiting_owner")]
+        mine = [p for p in self.st["promises"].values() if p["owner"] == self.id
+                and (p["status"] in self.LIVE or (p["status"] == "done" and p["slot"] in self.AI_DONE))]
         mine.sort(key=lambda p: (p["due"] or "9999", SLOTS.get(p["slot"], {}).get("prio", 99)))
         n = 0
         for p in mine:
-            h = self.HANDLERS.get(p["slot"])
+            h = self.h_updated if p.get("supersedes") else self.HANDLERS.get(p["slot"])
             if not h:
                 continue
             try:
-                want = h(self, p)
+                want = h(p) if p.get('supersedes') else h(self, p)
             except Exception as e:
                 print(f"persona {self.id} {p['slot']}: {type(e).__name__}: {str(e)[:160]}", file=sys.stderr)
                 continue
@@ -256,7 +343,13 @@ class Persona:
         return n
 
 
-def sync_linear(st: dict, at: str) -> int:
+LINEAR_NOTES = {
+    "ZAP-110": ("harbor_point.cam3_relocation", "photo received (WA01); Raj proposes 2 m left onto column", ["WA01"]),
+    "ZAP-111": ("harbor_point.ip_range", "IPs received (E04); VLAN question open", ["E04"]),
+}
+
+
+def sync_linear(st: dict, at: str, srcmap: dict | None = None) -> int:
     """Working-copy Linear: assign unassigned issues to the routed owner; close duplicates. Idempotent."""
     import json
     cur = {t["id"]: t for t in json.loads((ledger.H / "linear.json").read_text())}
@@ -278,6 +371,18 @@ def sync_linear(st: dict, at: str) -> int:
             if ch:
                 n += 1
                 ledger.record_action(p["id"], p["owner"], f"linear-{issue}", None, at, changes=ch)
+    keys = ledger.action_keys()
+    for issue, (slot, note, cite) in LINEAR_NOTES.items():
+        p = ledger.head(st, slot_id(slot))
+        if not p or f"{p['id']}:linear-note-{issue}" in keys:
+            continue
+        if srcmap and (probs := acts.verify_text(note, srcmap, cite)):
+            print(f"linear note {issue} rejected: {probs}", file=sys.stderr)
+            continue
+        ch = acts.linear_update(issue, note=note)
+        ledger.set_status(st, p["id"], p["status"], note=note)
+        ledger.record_action(p["id"], p["owner"], f"linear-note-{issue}", None, at, changes=ch, cite=cite)
+        n += 1
     return n
 
 

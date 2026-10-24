@@ -155,7 +155,7 @@ def extract_one(src: Source, now: datetime) -> dict:
     except (anthropic.RateLimitError, anthropic.InternalServerError):  # not BadRequest: that is a bug, surface it
         model = FALLBACK
         raw = _call(model, src, now)
-    rec = {"source_id": src.id, "model": model, "mentions": _clean(src, raw)}
+    rec = {"source_id": src.id, "model": model, "test": src.id.startswith("T-"), "mentions": _clean(src, raw)}
     _write_cache(src.id, rec)
     return rec
 
