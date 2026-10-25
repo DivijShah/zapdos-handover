@@ -1,7 +1,7 @@
 # Handover: Dana Brooks (dana)
 _AI shift note, written by the Zapdemo AI for Dana Brooks. Clock: Sat 24 Oct 2026 15:00 CDT._
 
-Open: 6 · Done: 1
+Open: 5 · Done: 2
 
 ## Questions for you
 - Send the reschedule draft to Farah? Wei Lin is double-booked: Harbor Point Yard install 2026-11-03 14:00-16:30 vs Crestline Data Centers call 2026-11-03 15:00-15:45 (SGT). Draft is in the outbox; nothing has been sent. _(from dana's AI; re 601a2158f7)_
@@ -18,9 +18,6 @@ Open: 6 · Done: 1
 - **Book Cedar call: Rachel with an engineer** · due - · open · sources: C06, E08
   - Requested by Rachel; not yet booked.
   - Rachel asks for a 20-minute call with an engineer; not yet booked.
-- **Reply to Omar: acknowledge his site-visit and price request** · due - · open · sources: E09, C07, S012
-  - Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him
-  - flag: dependency
 - **Ridgeline site visit Tue 27 / Wed 28 AM** · due - · waiting_owner · sources: C07, S012, E09
   - Site visit requested for next week; nothing booked yet.
   - Dana will check calendars for a Ridgeline site visit next week; not yet booked.
@@ -44,7 +41,10 @@ Open: 6 · Done: 1
 ## Done
 - Crestline engineer call (3 Nov 15:00 SGT) · sources: C03, S002, CAL02
   - latest: Call with Dana and Wei Lin is on the calendar for 3 Nov 15:00-15:45 (+08:00).
+- Reply to Omar: acknowledge his site-visit and price request · sources: E09, C07, S012 · outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md
+  - latest: Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him
 - **Sent by Dana Brooks's AI**: Next call with Tom Reyes → maria.gomez@northwind-cold.example · `outbox/sent/20261024-1500-dana-tom-call-reask-maria.md` · re Book next call with Tom Reyes (Northwind) · sources: E03, C01, L-ZAP-104
+- **Sent by Dana Brooks's AI**: Re: Site visit → omar.haddad@ridgeline-castings.example · `outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md` · re Reply to Omar: acknowledge his site-visit and price request · sources: E09, C07, S012, T
 
 ## Superseded
 - none

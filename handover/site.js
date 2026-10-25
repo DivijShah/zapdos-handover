@@ -1,6 +1,30 @@
 window.SITE = {
  "feed": [
   {
+   "key": "a:d744b69d5d:send",
+   "time": "19:11:55",
+   "persona": "dana",
+   "kind": "sent",
+   "text": "sent reply-omar-ridgeline",
+   "cites": [
+    "E09",
+    "C07",
+    "S012"
+   ]
+  },
+  {
+   "key": "a:d744b69d5d:email",
+   "time": "19:11:55",
+   "persona": "dana",
+   "kind": "act",
+   "text": "drafted reply-omar-ridgeline",
+   "cites": [
+    "E09",
+    "C07",
+    "S012"
+   ]
+  },
+  {
    "key": "q:75e69c64ec",
    "time": "",
    "persona": "sam",
@@ -183,28 +207,6 @@ window.SITE = {
     "C10",
     "L-ZAP-121",
     "CAL01"
-   ]
-  },
-  {
-   "key": "a:b68f7dc802:send",
-   "time": "",
-   "persona": "priya",
-   "kind": "sent",
-   "text": "sent reply-lisa-case-study",
-   "cites": [
-    "E14",
-    "C08"
-   ]
-  },
-  {
-   "key": "a:6a5790396f:send",
-   "time": "",
-   "persona": "weilin",
-   "kind": "sent",
-   "text": "sent reply-ken-ips-vlan",
-   "cites": [
-    "E04",
-    "E02"
    ]
   }
  ],
@@ -898,6 +900,47 @@ window.SITE = {
       ]
      },
      {
+      "file": "outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md",
+      "state": "sent",
+      "cites": [
+       "E09",
+       "C07",
+       "S012"
+      ],
+      "facts": [
+       {
+        "fact": "omar.haddad@ridgeline-castings.example",
+        "src": "E09",
+        "line": "From: omar.haddad@ridgeline-castings.example",
+        "uncited": false
+       },
+       {
+        "fact": "Omar",
+        "src": "C07",
+        "line": "Attendees: Dana Brooks, Omar Haddad (Plant Manager, Ridgeline Castings, Texas)",
+        "uncited": false
+       },
+       {
+        "fact": "Dana",
+        "src": "C07",
+        "line": "Attendees: Dana Brooks, Omar Haddad (Plant Manager, Ridgeline Castings, Texas)",
+        "uncited": false
+       },
+       {
+        "fact": "Brooks",
+        "src": "C07",
+        "line": "Attendees: Dana Brooks, Omar Haddad (Plant Manager, Ridgeline Castings, Texas)",
+        "uncited": false
+       },
+       {
+        "fact": "Sam",
+        "src": "C07",
+        "line": "- Pricing comes from Sam.",
+        "uncited": false
+       }
+      ]
+     },
+     {
       "file": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md",
       "state": "sent",
       "cites": [
@@ -1182,7 +1225,7 @@ window.SITE = {
     ]
    }
   ],
-  "checked": 109,
+  "checked": 114,
   "unsourced": 0,
   "uncited": 0
  },
@@ -1191,14 +1234,14 @@ window.SITE = {
  "footer": {
   "sources": 70,
   "promises": 31,
-  "sent": 6,
+  "sent": 7,
   "asked": 13
  },
  "stats": {
-  "open": 11,
+  "open": 10,
   "in_progress": 5,
   "waiting_owner": 11,
-  "done": 4,
+  "done": 5,
   "superseded": 0,
   "questions": 11
  },
@@ -1206,7 +1249,7 @@ window.SITE = {
   "type": "send",
   "persona": "dana",
   "at": "2026-10-24T15:00:00-05:00",
-  "path": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md"
+  "path": "outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md"
  },
  "clock": "2026-10-24T15:00:00-05:00",
  "people": [
@@ -1652,27 +1695,6 @@ window.SITE = {
      "due_src": null
     },
     {
-     "id": "d744b69d5d",
-     "title": "Reply to Omar: acknowledge his site-visit and price request",
-     "due": "",
-     "overdue": false,
-     "status": "open",
-     "sources": [
-      "E09",
-      "C07",
-      "S012"
-     ],
-     "notes": [
-      "Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him"
-     ],
-     "flags": [
-      "dependency"
-     ],
-     "updated": false,
-     "new_fact": null,
-     "due_src": null
-    },
-    {
      "id": "91ae534556",
      "title": "Send Crestline one-pager to Farah",
      "due": "",
@@ -1732,27 +1754,7 @@ window.SITE = {
      "due_src": null
     }
    ],
-   "handed": [
-    {
-     "id": "d744b69d5d",
-     "title": "Reply to Omar: acknowledge his site-visit and price request",
-     "due": "",
-     "overdue": false,
-     "status": "open",
-     "sources": [
-      "E09",
-      "C07",
-      "S012"
-     ],
-     "notes": [
-      "Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him"
-     ],
-     "flags": [
-      "dependency"
-     ],
-     "handed": "dependency"
-    }
-   ],
+   "handed": [],
    "done": [
     {
      "id": "aec4099af8",
@@ -1786,6 +1788,24 @@ window.SITE = {
      ],
      "flags": [],
      "path": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md"
+    },
+    {
+     "id": "d744b69d5d:send",
+     "title": "SENT: Re: Site visit",
+     "due": "",
+     "overdue": false,
+     "status": "sent",
+     "sources": [
+      "E09",
+      "C07",
+      "S012",
+      "T"
+     ],
+     "notes": [
+      "→ omar.haddad@ridgeline-castings.example  ·  outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md"
+     ],
+     "flags": [],
+     "path": "outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md"
     }
    ],
    "superseded": [],
@@ -1878,6 +1898,15 @@ window.SITE = {
    "subject": "facts",
    "sources": "",
    "path": "outbox/deploy-alerts-known-facts.md"
+  },
+  {
+   "file": "outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md",
+   "sent": true,
+   "kind": "md",
+   "to": "omar.haddad@ridgeline-castings.example",
+   "subject": "Re: Site visit",
+   "sources": "E09, C07, S012, T",
+   "path": "outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md"
   },
   {
    "file": "outbox/sent/20261024-1500-dana-tom-call-reask-maria.md",

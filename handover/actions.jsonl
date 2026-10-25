@@ -34,3 +34,5 @@
 {"key":"601a2158f7:email","promise_id":"601a2158f7","persona":"dana","type":"email","path":"outbox/20261024-1500-dana-reschedule-crestline-call.md","at":"2026-10-24T15:00:00-05:00"}
 {"key":"35efac7f1f:email","promise_id":"35efac7f1f","persona":"dana","type":"email","path":"outbox/20261024-1500-dana-tom-call-reask-maria.md","at":"2026-10-24T15:00:00-05:00"}
 {"key":"35efac7f1f:send","promise_id":"35efac7f1f","persona":"dana","type":"send","path":"outbox/sent/20261024-1500-dana-tom-call-reask-maria.md","at":"2026-10-24T15:00:00-05:00","to":"maria.gomez@northwind-cold.example","subject":"Next call with Tom Reyes","cite":["E03","C01","L-ZAP-104"]}
+{"key":"d744b69d5d:email","promise_id":"d744b69d5d","persona":"dana","type":"email","path":"outbox/20261024-1500-dana-reply-omar-ridgeline.md","at":"2026-10-24T15:00:00-05:00","ts":"2026-10-24T19:11:55"}
+{"key":"d744b69d5d:send","promise_id":"d744b69d5d","persona":"dana","type":"send","path":"outbox/sent/20261024-1500-dana-reply-omar-ridgeline.md","at":"2026-10-24T15:00:00-05:00","to":"omar.haddad@ridgeline-castings.example","subject":"Re: Site visit","cite":["E09","C07","S012","T"],"ts":"2026-10-24T19:11:55"}

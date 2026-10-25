@@ -189,3 +189,4 @@
 {"op":"update","id":"35efac7f1f","status":"in_progress"}
 {"op":"update","id":"8cadc92446","add_sources":["E10"],"ts":"2026-10-24T18:31:58"}
 {"op":"create","id":"d744b69d5d","slot":"ridgeline.reply","deliverable":"Reply to Omar: acknowledge his site-visit and price request","kind":"reply","counterparty":"ridgeline","owner":"dana","due":null,"due_at":null,"status":"open","sources":["E09","C07","S012"],"created_from":"dependency","notes":["Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him"],"flags":["dependency"],"ts":"2026-10-24T19:11:47"}
+{"op":"update","id":"d744b69d5d","status":"done","ts":"2026-10-24T19:11:55"}
