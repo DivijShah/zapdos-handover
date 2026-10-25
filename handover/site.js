@@ -1190,12 +1190,12 @@ window.SITE = {
  "rejected_total": 0,
  "footer": {
   "sources": 70,
-  "promises": 30,
+  "promises": 31,
   "sent": 6,
   "asked": 13
  },
  "stats": {
-  "open": 10,
+  "open": 11,
   "in_progress": 5,
   "waiting_owner": 11,
   "done": 4,
@@ -1652,6 +1652,27 @@ window.SITE = {
      "due_src": null
     },
     {
+     "id": "d744b69d5d",
+     "title": "Reply to Omar: acknowledge his site-visit and price request",
+     "due": "",
+     "overdue": false,
+     "status": "open",
+     "sources": [
+      "E09",
+      "C07",
+      "S012"
+     ],
+     "notes": [
+      "Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him"
+     ],
+     "flags": [
+      "dependency"
+     ],
+     "updated": false,
+     "new_fact": null,
+     "due_src": null
+    },
+    {
      "id": "91ae534556",
      "title": "Send Crestline one-pager to Farah",
      "due": "",
@@ -1711,7 +1732,27 @@ window.SITE = {
      "due_src": null
     }
    ],
-   "handed": [],
+   "handed": [
+    {
+     "id": "d744b69d5d",
+     "title": "Reply to Omar: acknowledge his site-visit and price request",
+     "due": "",
+     "overdue": false,
+     "status": "open",
+     "sources": [
+      "E09",
+      "C07",
+      "S012"
+     ],
+     "notes": [
+      "Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him"
+     ],
+     "flags": [
+      "dependency"
+     ],
+     "handed": "dependency"
+    }
+   ],
    "done": [
     {
      "id": "aec4099af8",
