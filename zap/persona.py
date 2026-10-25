@@ -329,7 +329,20 @@ class Persona:
                     if sent else "The reply draft in the outbox promises one; nothing has been sent."), ids)
         return "waiting_owner"
 
+    def h_ridge_reply(self, p):
+        """Holding acknowledgement to Omar: no time, no price, no attendee. Sent under the send policy if it passes."""
+        ids = ["E09", "C07", "S012"]
+        ok = self.email(p, "email", "reply-omar-ridgeline", "omar.haddad",
+                        "Reply to Omar's email E09. Thank him for the site-visit request. Say Dana will come back to him about visit times "
+                        "and that the price range comes from Sam. Do NOT state any day, date, time, price or amount, and do not name who "
+                        "will attend. Do not offer or confirm anything.", ids, no_money=True)
+        if ok and self.autosend(p, ["E09"]):
+            return "done"
+        return "waiting_owner"
+
     def h_ridge_visit(self, p):
+        ledger.ensure_slot(self.st, "ridgeline.reply", ["E09", "C07", "S012"], self.at,
+                           "Omar asked for a site visit and a ballpark price (E09); nobody has acknowledged him")
         self.ask(p, "dana", "ridgeline-attendee",
                  "Who from Zapdemo attends the Ridgeline site visit on Tuesday or Wednesday morning? Omar asked (E09). The pack does not "
                  "say who goes; Wei Lin is the engineer.", ["E09", "S012"])
@@ -387,7 +400,7 @@ class Persona:
         "internal.reimburse_weilin": h_reimburse, "internal.deploy_alerts_doc": h_deploy_alerts,
         "jordan_lee.reply": h_jordan_reply, "harbor_point.vlan_reply": h_vlan_reply,
         "harbor_point.start_time_reply": h_start_time, "bayview.casestudy": h_casestudy,
-        "ridgeline.site_visit": h_ridge_visit, "ridgeline.price": h_ridge_price, "cedar.numbers_refs": h_cedar,
+        "ridgeline.site_visit": h_ridge_visit, "ridgeline.reply": h_ridge_reply, "ridgeline.price": h_ridge_price, "cedar.numbers_refs": h_cedar,
     }
 
     UPDATED = {"northwind.tom_call": h_tom_updated}

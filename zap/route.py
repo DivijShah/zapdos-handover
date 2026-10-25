@@ -41,6 +41,8 @@ _S = [
     ("cedar.engineer_call", "booking", "Book Cedar call: Rachel with an engineer",
      "20-minute investor call with an engineer; done once it is booked", None),
     ("ridgeline.price", "price", "Ridgeline ballpark price range for Omar", "Price range owed to Ridgeline (Omar)", None),
+    ("ridgeline.reply", "reply", "Reply to Omar: acknowledge his site-visit and price request",
+     "Holding acknowledgement to Omar Haddad (Ridgeline); not a visit time and not a price", "lead follow-ups"),
     ("ridgeline.site_visit", "booking", "Ridgeline site visit Tue 27 / Wed 28 AM",
      "Book the Ridgeline site visit and reply to Omar; done once booked", None),
     ("bayview.glare", "pilot", "Bayview night glare false alerts (cams 2, 5)",
